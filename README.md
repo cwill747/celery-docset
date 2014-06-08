@@ -11,7 +11,7 @@ $ pip install doc2dash
 
 Move to a directory of choice and execute the following commands:
 ```bash
-$ git clone https://github.com/gcmt/jinja2-dash-docset.git
+$ git clone https://github.com/gcmt/jinja2-docset.git
 $ cd jinja2-docset
 $ ./generate.sh
 ```
