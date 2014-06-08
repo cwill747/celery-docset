@@ -393,4 +393,11 @@ a.footnote-reference:hover {
 
 a:hover tt {
     background: #EEE;
+}div.bodywrapper {
+    margin: 0;
+}
+.logo {
+  height: 57px;
+  float: left;
+  margin-right: 20px;
 }
