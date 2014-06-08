@@ -1,0 +1,206 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Introduction &mdash; Jinja2 2.7.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/jinja.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.7.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Jinja2 2.7.2 documentation" href="index.html" />
+    <link rel="next" title="API" href="api.html" />
+    <link rel="prev" title="Welcome to Jinja2" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="api.html" title="API"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to Jinja2"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Jinja2 2.7.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>This is the documentation for the Jinja2 general purpose templating language.
+Jinja2 is a library for Python that is designed to be flexible, fast and secure.</p>
+<p>If you have any exposure to other text-based template languages, such as Smarty or
+Django, you should feel right at home with Jinja2.  It&#8217;s both designer and
+developer friendly by sticking to Python&#8217;s principles and adding functionality
+useful for templating environments.</p>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<p>Jinja2 works with Python 2.6.x, 2.7.x and &gt;= 3.3.  If you are using Python
+3.2 you can use an older release of Jinja2 (2.6) as support for Python 3.2
+was dropped in Jinja2 version 2.7.</p>
+<p>If you wish to use the <a class="reference internal" href="api.html#jinja2.PackageLoader" title="jinja2.PackageLoader"><tt class="xref py py-class docutils literal"><span class="pre">PackageLoader</span></tt></a> class, you will also
+need setuptools or distribute installed at runtime.</p>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>You have multiple ways to install Jinja2.  If you are unsure what to do, go
+with the Python egg or tarball.</p>
+<div class="section" id="as-a-python-egg-via-easy-install">
+<h3>As a Python egg (via easy_install)<a class="headerlink" href="#as-a-python-egg-via-easy-install" title="Permalink to this headline">¶</a></h3>
+<p>You can install the most recent Jinja2 version using <a class="reference external" href="http://peak.telecommunity.com/DevCenter/EasyInstall">easy_install</a> or <a class="reference external" href="http://pypi.python.org/pypi/pip">pip</a>:</p>
+<div class="highlight-python"><pre>easy_install Jinja2
+pip install Jinja2</pre>
+</div>
+<p>This will install a Jinja2 egg in your Python installation&#8217;s site-packages
+directory.</p>
+<p>(If you are installing from the Windows command line omit the <cite>sudo</cite> and make
+sure to run the command as user with administrator rights)</p>
+</div>
+<div class="section" id="from-the-tarball-release">
+<h3>From the tarball release<a class="headerlink" href="#from-the-tarball-release" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Download the most recent tarball from the <a class="reference external" href="http://pypi.python.org/pypi/Jinja2">download page</a></li>
+<li>Unpack the tarball</li>
+<li><tt class="docutils literal"><span class="pre">sudo</span> <span class="pre">python</span> <span class="pre">setup.py</span> <span class="pre">install</span></tt></li>
+</ol>
+<p>Note that you either have to have setuptools or <a class="reference external" href="http://pypi.python.org/pypi/distribute">distribute</a> installed;
+the latter is preferred.</p>
+<p>This will install Jinja2 into your Python installation&#8217;s site-packages directory.</p>
+</div>
+<div class="section" id="installing-the-development-version">
+<h3>Installing the development version<a class="headerlink" href="#installing-the-development-version" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Install <a class="reference external" href="http://git-scm.org/">git</a></li>
+<li><tt class="docutils literal"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">git://github.com/mitsuhiko/jinja2.git</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">cd</span> <span class="pre">jinja2</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">ln</span> <span class="pre">-s</span> <span class="pre">jinja2</span> <span class="pre">/usr/lib/python2.X/site-packages</span></tt></li>
+</ol>
+<p>As an alternative to steps 4 you can also do <tt class="docutils literal"><span class="pre">python</span> <span class="pre">setup.py</span> <span class="pre">develop</span></tt>
+which will install the package via distribute in development mode.  This also
+has the advantage that the C extensions are compiled.</p>
+</div>
+<div class="section" id="markupsafe-dependency">
+<h3>MarkupSafe Dependency<a class="headerlink" href="#markupsafe-dependency" title="Permalink to this headline">¶</a></h3>
+<p>As of version 2.7 Jinja2 depends on the <a class="reference external" href="http://pypi.python.org/pypi/MarkupSafe">MarkupSafe</a> module.  If you
+install Jinja2 via <cite>pip</cite> or <cite>easy_install</cite> it will be installed
+automatically for you.</p>
+</div>
+</div>
+<div class="section" id="basic-api-usage">
+<h2>Basic API Usage<a class="headerlink" href="#basic-api-usage" title="Permalink to this headline">¶</a></h2>
+<p>This section gives you a brief introduction to the Python API for Jinja2
+templates.</p>
+<p>The most basic way to create a template and render it is through
+<a class="reference internal" href="api.html#jinja2.Template" title="jinja2.Template"><tt class="xref py py-class docutils literal"><span class="pre">Template</span></tt></a>.  This however is not the recommended way to
+work with it if your templates are not loaded from strings but the file
+system or another data source:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">jinja2</span> <span class="kn">import</span> <span class="n">Template</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">template</span> <span class="o">=</span> <span class="n">Template</span><span class="p">(</span><span class="s">&#39;Hello {{ name }}!&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;John Doe&#39;</span><span class="p">)</span>
+<span class="go">u&#39;Hello John Doe!&#39;</span>
+</pre></div>
+</div>
+<p>By creating an instance of <a class="reference internal" href="api.html#jinja2.Template" title="jinja2.Template"><tt class="xref py py-class docutils literal"><span class="pre">Template</span></tt></a> you get back a new template
+object that provides a method called <a class="reference internal" href="api.html#jinja2.Template.render" title="jinja2.Template.render"><tt class="xref py py-meth docutils literal"><span class="pre">render()</span></tt></a> which when
+called with a dict or keyword arguments expands the template.  The dict
+or keywords arguments passed to the template are the so-called &#8220;context&#8221;
+of the template.</p>
+<p>What you can see here is that Jinja2 is using unicode internally and the
+return value is an unicode string.  So make sure that your application is
+indeed using unicode internally.</p>
+</div>
+<div class="section" id="experimental-python-3-support">
+<h2>Experimental Python 3 Support<a class="headerlink" href="#experimental-python-3-support" title="Permalink to this headline">¶</a></h2>
+<p>Jinja 2.7 brings experimental support for Python &gt;=3.3.  It means that all
+unittests pass on the new version, but there might still be small bugs in
+there and behavior might be inconsistent.  If you notice any bugs, please
+provide feedback in the <a class="reference external" href="http://github.com/mitsuhiko/jinja2/issues">Jinja bug tracker</a>.</p>
+<p>Also please keep in mind that the documentation is written with Python 2
+in mind, you will have to adapt the shown code examples to Python 3 syntax
+for yourself.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><p class="logo"><a href="index.html">
+  <img class="logo" src="_static/jinja-small.png" alt="Logo"/>
+</a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Introduction</a><ul>
+<li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li><a class="reference internal" href="#installation">Installation</a><ul>
+<li><a class="reference internal" href="#as-a-python-egg-via-easy-install">As a Python egg (via easy_install)</a></li>
+<li><a class="reference internal" href="#from-the-tarball-release">From the tarball release</a></li>
+<li><a class="reference internal" href="#installing-the-development-version">Installing the development version</a></li>
+<li><a class="reference internal" href="#markupsafe-dependency">MarkupSafe Dependency</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#basic-api-usage">Basic API Usage</a></li>
+<li><a class="reference internal" href="#experimental-python-3-support">Experimental Python 3 Support</a></li>
+</ul>
+</li>
+</ul>
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to Jinja2</a></li>
+      <li>Next: <a href="api.html" title="next chapter">API</a></li>
+  </ul></li>
+</ul>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/intro.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2008, Armin Ronacher.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+    </div>
+  </body>
+</html>
