@@ -23,7 +23,7 @@ tar xf jinja-docs.zip
 
 echo -e "Generating docset with doc2dash..."
 
-doc2dash -n jinja2 --destination ./dist ./jinja-docs
+doc2dash -f -n jinja2 --destination ./dist ./jinja-docs
 
 # #
 # Update info.plist
