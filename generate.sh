@@ -52,7 +52,27 @@ sed -i ".bkp" '/<div class="sphinxsidebar">/,/<div class="clearer"><\/div>/d' $J
 
 cat >> "$JINJA_DOCS_ROOT/_static/jinja.css" << EOF
 div.bodywrapper {
-    margin: 0;
+  margin: 0;
+}
+EOF
+
+# format page titles
+
+sed -i ".bkp" "s/—/\&mdash;/" $JINJA_DOCS_ROOT/*.html
+sed -i ".bkp" "s@<title>\(.*\)&mdash;.*</title>@<title>\1</title>@" $JINJA_DOCS_ROOT/*.html
+
+# fluid layout
+
+cat >> "$JINJA_DOCS_ROOT/_static/jinja.css" << EOF
+div.document {
+  width: 100%;
+}
+
+div.footer {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 20px 0 10px;
+  padding: 0 10px;
 }
 EOF
 
