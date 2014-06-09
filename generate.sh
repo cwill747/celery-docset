@@ -105,6 +105,12 @@ rm $JINJA_DOCS_ROOT/searchindex.js
 rm -rf jinja-docs.zip jinja-docs
 
 # #
+# Create compressed archive
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+tar --exclude='.DS_Store' -czf ./dist/jinja2.tgz ./dist/jinja2.docset
+
+# #
 # Success!
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
