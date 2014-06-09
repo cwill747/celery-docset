@@ -12,7 +12,7 @@ set -e
 # Get the Jinja documentation
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-echo -e "Fetching the Jinja2 documentation from jinja.pocoo.org/docs/jinja-docs.zip..."
+echo -e "Fetching the Jinja2 documentation from http://jinja.pocoo.org/docs..."
 
 curl -O http://jinja.pocoo.org/docs/jinja-docs.zip
 tar xf jinja-docs.zip
@@ -89,3 +89,4 @@ rm -rf jinja-docs.zip jinja-docs
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 echo -e "Jinja2 docset successfully generated at ./dist/jinja2.docset"
+echo -e "Execute ./install.sh to install the docset..."
