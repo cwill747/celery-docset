@@ -14,7 +14,7 @@ set -e
 
 echo -e "Fetching the Jinja2 documentation from http://jinja.pocoo.org/docs..."
 
-curl -O http://jinja.pocoo.org/docs/jinja-docs.zip
+curl -Os http://jinja.pocoo.org/docs/jinja-docs.zip
 tar xf jinja-docs.zip
 
 # #
