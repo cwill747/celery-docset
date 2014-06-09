@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
-<title>Template Designer Documentation — Jinja2 2.7.2 documentation</title>
+<title>Template Designer Documentation </title>
 <link href="_static/jinja.css" rel="stylesheet" type="text/css"/>
 <link href="_static/pygments.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript">
@@ -1868,8 +1868,8 @@ as translatable.  To mark a section as translatable you can use <cite>trans</cit
 <div class="highlight-html+jinja"><div class="highlight"><pre><span class="nt">&lt;p&gt;</span><span class="cp">{%</span> <span class="k">trans</span> <span class="cp">%}</span>Hello <span class="cp">{{</span> <span class="nv">user</span> <span class="cp">}}</span>!<span class="cp">{%</span> <span class="k">endtrans</span> <span class="cp">%}</span><span class="nt">&lt;/p&gt;</span>
 </pre></div>
 </div>
-<p>To translate a template expression — say, using template filters or just
-accessing an attribute of an object — you need to bind the expression to a
+<p>To translate a template expression &mdash; say, using template filters or just
+accessing an attribute of an object &mdash; you need to bind the expression to a
 name for use within the translation block:</p>
 <div class="highlight-html+jinja"><div class="highlight"><pre><span class="nt">&lt;p&gt;</span><span class="cp">{%</span> <span class="k">trans</span> <span class="nv">user</span><span class="o">=</span><span class="nv">user.username</span> <span class="cp">%}</span>Hello <span class="cp">{{</span> <span class="nv">user</span> <span class="cp">}}</span>!<span class="cp">{%</span> <span class="k">endtrans</span> <span class="cp">%}</span><span class="nt">&lt;/p&gt;</span>
 </pre></div>
