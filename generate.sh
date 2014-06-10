@@ -107,9 +107,7 @@ rm -rf jinja-docs.zip jinja-docs
 # Create compressed archive
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-cd ./dist
-tar --exclude='.DS_Store' -czf jinja2.tgz jinja2.docset
-cd ..
+tar --exclude='.DS_Store' -C ./dist -czf ./dist/jinja2.tgz jinja2.docset
 
 # #
 # Success!
