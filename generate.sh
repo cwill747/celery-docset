@@ -78,8 +78,7 @@ EOF
 
 # add the jinja logo to the index page
 
-#sed -i ".bkp" '/<div class="section" id="welcome-to-jinja2">/a <img class="logo" src="_static\/jinja-small.png" alt="Logo">' $JINJA_DOCS_ROOT/index.html
-sed -i ".bkp" 's/<div class="section" id="welcome-to-jinja2">/<div class="section" id="welcome-to-jinja2"><img class="logo" src="_static\/jinja-small.png" alt="Logo">/' $JINJA_DOCS_ROOT/index.html
+sed -i ".bkp" 's@\(^.*id="welcome-to-jinja2".*$\)@\1<img class="logo" src="_static/jinja-small.png">@' $JINJA_DOCS_ROOT/index.html
 
 cat >> "$JINJA_DOCS_ROOT/_static/jinja.css" << EOF
 .logo {
