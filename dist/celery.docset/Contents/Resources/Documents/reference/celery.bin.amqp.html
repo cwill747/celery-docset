@@ -1,0 +1,315 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>celery.bin.amqp — Celery 3.1.23 documentation</title>
+<link href="../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.23',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+<script src="../_static/jquery.js" type="text/javascript"></script>
+<script src="../_static/underscore.js" type="text/javascript"></script>
+<script src="../_static/doctools.js" type="text/javascript"></script>
+<link href="../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="index.html" rel="up" title="API Reference"/>
+<link href="celery.bin.multi.html" rel="next" title="celery.bin.multi"/>
+<link href="celery.bin.events.html" rel="prev" title="celery.bin.events"/>
+</head>
+<body role="document">
+<div aria-label="related navigation" class="related" role="navigation">
+<h3>Navigation</h3>
+<ul>
+<li class="right" style="margin-right: 10px">
+<a accesskey="I" href="../genindex.html" title="General Index">index</a></li>
+<li class="right">
+<a href="../py-modindex.html" title="Python Module Index">modules</a> |</li>
+<li class="right">
+<a accesskey="N" href="celery.bin.multi.html" title="celery.bin.multi">next</a> |</li>
+<li class="right">
+<a accesskey="P" href="celery.bin.events.html" title="celery.bin.events">previous</a> |</li>
+<li class="nav-item nav-item-0"><a href="../index.html">Celery 3.1.23 documentation</a> »</li>
+<li class="nav-item nav-item-1"><a accesskey="U" href="index.html">API Reference</a> »</li>
+</ul>
+</div>
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
+<div class="deck">
+<p>
+        This document describes the current stable version of Celery (3.1). For development docs,
+        <a href="http://docs.celeryproject.org/en/master/reference/celery.bin.amqp.html">go here</a>.
+        </p>
+</div>
+<div class="section" id="celery-bin-amqp"><a name="//apple_ref/cpp/Module/celery.bin.amqp"></a>
+<h1>celery.bin.amqp<a class="headerlink" href="#celery-bin-amqp" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-celery.bin.amqp"></span><p>The <strong class="program">celery amqp</strong> command.</p>
+<dl class="class">
+<dt id="celery.bin.amqp.AMQPAdmin"><a name="//apple_ref/cpp/Class/celery.bin.amqp.AMQPAdmin"></a>
+<em class="property">class </em><code class="descclassname">celery.bin.amqp.</code><code class="descname">AMQPAdmin</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/amqp.html#AMQPAdmin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.amqp.AMQPAdmin" title="Permalink to this definition">¶</a></dt>
+<dd><p>The celery <strong class="program">celery amqp</strong> utility.</p>
+<dl class="attribute">
+<dt id="celery.bin.amqp.AMQPAdmin.Shell"><a name="//apple_ref/cpp/Attribute/celery.bin.amqp.AMQPAdmin.Shell"></a>
+<code class="descname">Shell</code><a class="headerlink" href="#celery.bin.amqp.AMQPAdmin.Shell" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#celery.bin.amqp.AMQShell" title="celery.bin.amqp.AMQShell"><code class="xref py py-class docutils literal"><span class="pre">AMQShell</span></code></a></p>
+</dd></dl>
+<dl class="method">
+<dt id="celery.bin.amqp.AMQPAdmin.connect"><a name="//apple_ref/cpp/Method/celery.bin.amqp.AMQPAdmin.connect"></a>
+<code class="descname">connect</code><span class="sig-paren">(</span><em>conn=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/amqp.html#AMQPAdmin.connect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.amqp.AMQPAdmin.connect" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.amqp.AMQPAdmin.note"><a name="//apple_ref/cpp/Method/celery.bin.amqp.AMQPAdmin.note"></a>
+<code class="descname">note</code><span class="sig-paren">(</span><em>m</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/amqp.html#AMQPAdmin.note"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.amqp.AMQPAdmin.note" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.amqp.AMQPAdmin.run"><a name="//apple_ref/cpp/Method/celery.bin.amqp.AMQPAdmin.run"></a>
+<code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/amqp.html#AMQPAdmin.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.amqp.AMQPAdmin.run" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</dd></dl>
+<dl class="class">
+<dt id="celery.bin.amqp.AMQShell"><a name="//apple_ref/cpp/Class/celery.bin.amqp.AMQShell"></a>
+<em class="property">class </em><code class="descclassname">celery.bin.amqp.</code><code class="descname">AMQShell</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/amqp.html#AMQShell"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.amqp.AMQShell" title="Permalink to this definition">¶</a></dt>
+<dd><p>AMQP API Shell.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name"></col>
+<col class="field-body"></col>
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>connect</strong> – Function used to connect to the server, must return
+connection object.</li>
+<li><strong>silent</strong> – If <code class="xref py py-const docutils literal"><span class="pre">True</span></code>, the commands won’t have annoying
+output not relevant when running in non-shell mode.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="celery.bin.amqp.AMQShell.amqp"><a name="//apple_ref/cpp/Attribute/celery.bin.amqp.AMQShell.amqp"></a>
+<code class="descname">amqp</code><a class="headerlink" href="#celery.bin.amqp.AMQShell.amqp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mapping of AMQP API commands and their <a class="reference internal" href="#celery.bin.amqp.Spec" title="celery.bin.amqp.Spec"><code class="xref py py-class docutils literal"><span class="pre">Spec</span></code></a>.</p>
+</dd></dl>
+<dl class="attribute">
+<dt>
+<code class="descname">amqp</code><em class="property"> = {u'queue.declare': &lt;celery.bin.amqp.Spec object at 0x10c6cc4d0&gt;, u'queue.purge': &lt;celery.bin.amqp.Spec object at 0x10c6ccf10&gt;, u'exchange.delete': &lt;celery.bin.amqp.Spec object at 0x10c6cca50&gt;, u'basic.publish': &lt;celery.bin.amqp.Spec object at 0x10c6ccdd0&gt;, u'basic.ack': &lt;celery.bin.amqp.Spec object at 0x10c6cc390&gt;, u'exchange.declare': &lt;celery.bin.amqp.Spec object at 0x10c6ccd90&gt;, u'queue.delete': &lt;celery.bin.amqp.Spec object at 0x10c6cc0d0&gt;, u'queue.bind': &lt;celery.bin.amqp.Spec object at 0x10c6ccfd0&gt;, u'basic.get': &lt;celery.bin.amqp.Spec object at 0x10c6ccf50&gt;}</em></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.bin.amqp.AMQShell.builtins"><a name="//apple_ref/cpp/Attribute/celery.bin.amqp.AMQShell.builtins"></a>
+<code class="descname">builtins</code><em class="property"> = {u'exit': u'do_exit', u'EOF': u'do_exit', u'help': u'do_help'}</em><a class="headerlink" href="#celery.bin.amqp.AMQShell.builtins" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.bin.amqp.AMQShell.chan"><a name="//apple_ref/cpp/Attribute/celery.bin.amqp.AMQShell.chan"></a>
+<code class="descname">chan</code><em class="property"> = None</em><a class="headerlink" href="#celery.bin.amqp.AMQShell.chan" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.amqp.AMQShell.completenames"><a name="//apple_ref/cpp/Method/celery.bin.amqp.AMQShell.completenames"></a>
+<code class="descname">completenames</code><span class="sig-paren">(</span><em>text</em>, <em>*ignored</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/amqp.html#AMQShell.completenames"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.amqp.AMQShell.completenames" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all commands starting with <cite>text</cite>, for tab-completion.</p>
+</dd></dl>
+<dl class="attribute">
+<dt id="celery.bin.amqp.AMQShell.conn"><a name="//apple_ref/cpp/Attribute/celery.bin.amqp.AMQShell.conn"></a>
+<code class="descname">conn</code><em class="property"> = None</em><a class="headerlink" href="#celery.bin.amqp.AMQShell.conn" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.bin.amqp.AMQShell.counter"><a name="//apple_ref/cpp/Attribute/celery.bin.amqp.AMQShell.counter"></a>
+<code class="descname">counter</code><em class="property"> = 1</em><a class="headerlink" href="#celery.bin.amqp.AMQShell.counter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.amqp.AMQShell.default"><a name="//apple_ref/cpp/Method/celery.bin.amqp.AMQShell.default"></a>
+<code class="descname">default</code><span class="sig-paren">(</span><em>line</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/amqp.html#AMQShell.default"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.amqp.AMQShell.default" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.amqp.AMQShell.dispatch"><a name="//apple_ref/cpp/Method/celery.bin.amqp.AMQShell.dispatch"></a>
+<code class="descname">dispatch</code><span class="sig-paren">(</span><em>cmd</em>, <em>argline</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/amqp.html#AMQShell.dispatch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.amqp.AMQShell.dispatch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dispatch and execute the command.</p>
+<p>Lookup order is: <a class="reference internal" href="#celery.bin.amqp.AMQShell.builtins" title="celery.bin.amqp.AMQShell.builtins"><code class="xref py py-attr docutils literal"><span class="pre">builtins</span></code></a> -&gt; <a class="reference internal" href="#celery.bin.amqp.amqp" title="celery.bin.amqp.amqp"><code class="xref py py-attr docutils literal"><span class="pre">amqp</span></code></a>.</p>
+</dd></dl>
+<dl class="method">
+<dt id="celery.bin.amqp.AMQShell.display_command_help"><a name="//apple_ref/cpp/Method/celery.bin.amqp.AMQShell.display_command_help"></a>
+<code class="descname">display_command_help</code><span class="sig-paren">(</span><em>cmd</em>, <em>short=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/amqp.html#AMQShell.display_command_help"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.amqp.AMQShell.display_command_help" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.amqp.AMQShell.do_exit"><a name="//apple_ref/cpp/Method/celery.bin.amqp.AMQShell.do_exit"></a>
+<code class="descname">do_exit</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/amqp.html#AMQShell.do_exit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.amqp.AMQShell.do_exit" title="Permalink to this definition">¶</a></dt>
+<dd><p>The <cite>‘exit’</cite> command.</p>
+</dd></dl>
+<dl class="method">
+<dt id="celery.bin.amqp.AMQShell.do_help"><a name="//apple_ref/cpp/Method/celery.bin.amqp.AMQShell.do_help"></a>
+<code class="descname">do_help</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/amqp.html#AMQShell.do_help"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.amqp.AMQShell.do_help" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.amqp.AMQShell.get_amqp_api_command"><a name="//apple_ref/cpp/Method/celery.bin.amqp.AMQShell.get_amqp_api_command"></a>
+<code class="descname">get_amqp_api_command</code><span class="sig-paren">(</span><em>cmd</em>, <em>arglist</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/amqp.html#AMQShell.get_amqp_api_command"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.amqp.AMQShell.get_amqp_api_command" title="Permalink to this definition">¶</a></dt>
+<dd><p>With a command name and a list of arguments, convert the arguments
+to Python values and find the corresponding method on the AMQP channel
+object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name"></col>
+<col class="field-body"></col>
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">tuple of <cite>(method, processed_args)</cite>.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+<dl class="method">
+<dt id="celery.bin.amqp.AMQShell.get_names"><a name="//apple_ref/cpp/Method/celery.bin.amqp.AMQShell.get_names"></a>
+<code class="descname">get_names</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/amqp.html#AMQShell.get_names"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.amqp.AMQShell.get_names" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.bin.amqp.AMQShell.identchars"><a name="//apple_ref/cpp/Attribute/celery.bin.amqp.AMQShell.identchars"></a>
+<code class="descname">identchars</code><em class="property"> = u'.'</em><a class="headerlink" href="#celery.bin.amqp.AMQShell.identchars" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.bin.amqp.AMQShell.inc_counter"><a name="//apple_ref/cpp/Attribute/celery.bin.amqp.AMQShell.inc_counter"></a>
+<code class="descname">inc_counter</code><em class="property"> = count(2)</em><a class="headerlink" href="#celery.bin.amqp.AMQShell.inc_counter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.bin.amqp.AMQShell.needs_reconnect"><a name="//apple_ref/cpp/Attribute/celery.bin.amqp.AMQShell.needs_reconnect"></a>
+<code class="descname">needs_reconnect</code><em class="property"> = False</em><a class="headerlink" href="#celery.bin.amqp.AMQShell.needs_reconnect" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.amqp.AMQShell.note"><a name="//apple_ref/cpp/Method/celery.bin.amqp.AMQShell.note"></a>
+<code class="descname">note</code><span class="sig-paren">(</span><em>m</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/amqp.html#AMQShell.note"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.amqp.AMQShell.note" title="Permalink to this definition">¶</a></dt>
+<dd><p>Say something to the user. Disabled if <code class="xref py py-attr docutils literal"><span class="pre">silent</span></code>.</p>
+</dd></dl>
+<dl class="method">
+<dt id="celery.bin.amqp.AMQShell.onecmd"><a name="//apple_ref/cpp/Method/celery.bin.amqp.AMQShell.onecmd"></a>
+<code class="descname">onecmd</code><span class="sig-paren">(</span><em>line</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/amqp.html#AMQShell.onecmd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.amqp.AMQShell.onecmd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse line and execute command.</p>
+</dd></dl>
+<dl class="method">
+<dt id="celery.bin.amqp.AMQShell.parseline"><a name="//apple_ref/cpp/Method/celery.bin.amqp.AMQShell.parseline"></a>
+<code class="descname">parseline</code><span class="sig-paren">(</span><em>line</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/amqp.html#AMQShell.parseline"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.amqp.AMQShell.parseline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse input line.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name"></col>
+<col class="field-body"></col>
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">tuple of three items:
+<cite>(command_name, arglist, original_line)</cite></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+<dl class="attribute">
+<dt id="celery.bin.amqp.AMQShell.prompt"><a name="//apple_ref/cpp/Attribute/celery.bin.amqp.AMQShell.prompt"></a>
+<code class="descname">prompt</code><a class="headerlink" href="#celery.bin.amqp.AMQShell.prompt" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.bin.amqp.AMQShell.prompt_fmt"><a name="//apple_ref/cpp/Attribute/celery.bin.amqp.AMQShell.prompt_fmt"></a>
+<code class="descname">prompt_fmt</code><em class="property"> = u'{self.counter}&gt; '</em><a class="headerlink" href="#celery.bin.amqp.AMQShell.prompt_fmt" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.amqp.AMQShell.respond"><a name="//apple_ref/cpp/Method/celery.bin.amqp.AMQShell.respond"></a>
+<code class="descname">respond</code><span class="sig-paren">(</span><em>retval</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/amqp.html#AMQShell.respond"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.amqp.AMQShell.respond" title="Permalink to this definition">¶</a></dt>
+<dd><p>What to do with the return value of a command.</p>
+</dd></dl>
+<dl class="method">
+<dt id="celery.bin.amqp.AMQShell.say"><a name="//apple_ref/cpp/Method/celery.bin.amqp.AMQShell.say"></a>
+<code class="descname">say</code><span class="sig-paren">(</span><em>m</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/amqp.html#AMQShell.say"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.amqp.AMQShell.say" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</dd></dl>
+<dl class="class">
+<dt id="celery.bin.amqp.Spec"><a name="//apple_ref/cpp/Class/celery.bin.amqp.Spec"></a>
+<em class="property">class </em><code class="descclassname">celery.bin.amqp.</code><code class="descname">Spec</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/amqp.html#Spec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.amqp.Spec" title="Permalink to this definition">¶</a></dt>
+<dd><p>AMQP Command specification.</p>
+<p>Used to convert arguments to Python values and display various help
+and tooltips.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name"></col>
+<col class="field-body"></col>
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>args</strong> – see <code class="xref py py-attr docutils literal"><span class="pre">args</span></code>.</li>
+<li><strong>returns</strong> – see <code class="xref py py-attr docutils literal"><span class="pre">returns</span></code>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="celery.bin.amqp.Spec.coerce"><a name="//apple_ref/cpp/Method/celery.bin.amqp.Spec.coerce"></a>
+<code class="descname">coerce</code><span class="sig-paren">(</span><em>index</em>, <em>value</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/amqp.html#Spec.coerce"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.amqp.Spec.coerce" title="Permalink to this definition">¶</a></dt>
+<dd><p>Coerce value for argument at index.</p>
+</dd></dl>
+<dl class="method">
+<dt id="celery.bin.amqp.Spec.format_arg"><a name="//apple_ref/cpp/Method/celery.bin.amqp.Spec.format_arg"></a>
+<code class="descname">format_arg</code><span class="sig-paren">(</span><em>name</em>, <em>type</em>, <em>default_value=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/amqp.html#Spec.format_arg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.amqp.Spec.format_arg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.amqp.Spec.format_response"><a name="//apple_ref/cpp/Method/celery.bin.amqp.Spec.format_response"></a>
+<code class="descname">format_response</code><span class="sig-paren">(</span><em>response</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/amqp.html#Spec.format_response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.amqp.Spec.format_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Format the return value of this command in a human-friendly way.</p>
+</dd></dl>
+<dl class="method">
+<dt id="celery.bin.amqp.Spec.format_signature"><a name="//apple_ref/cpp/Method/celery.bin.amqp.Spec.format_signature"></a>
+<code class="descname">format_signature</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/amqp.html#Spec.format_signature"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.amqp.Spec.format_signature" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.amqp.Spec.str_args_to_python"><a name="//apple_ref/cpp/Method/celery.bin.amqp.Spec.str_args_to_python"></a>
+<code class="descname">str_args_to_python</code><span class="sig-paren">(</span><em>arglist</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/amqp.html#Spec.str_args_to_python"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.amqp.Spec.str_args_to_python" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process list of string arguments to values according to spec.</p>
+<p>e.g:</p>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">spec</span> <span class="o">=</span> <span class="n">Spec</span><span class="p">([(</span><span class="s1">'queue'</span><span class="p">,</span> <span class="nb">str</span><span class="p">),</span> <span class="p">(</span><span class="s1">'if_unused'</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spec</span><span class="o">.</span><span class="n">str_args_to_python</span><span class="p">(</span><span class="s1">'pobox'</span><span class="p">,</span> <span class="s1">'true'</span><span class="p">)</span>
+<span class="go">('pobox', True)</span>
+</pre></div>
+</div>
+</dd></dl>
+</dd></dl>
+<dl class="class">
+<dt id="celery.bin.amqp.amqp"><a name="//apple_ref/cpp/Class/celery.bin.amqp.amqp"></a>
+<em class="property">class </em><code class="descclassname">celery.bin.amqp.</code><code class="descname">amqp</code><span class="sig-paren">(</span><em>app=None</em>, <em>get_app=None</em>, <em>no_color=False</em>, <em>stdout=None</em>, <em>stderr=None</em>, <em>quiet=False</em>, <em>on_error=None</em>, <em>on_usage_error=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/amqp.html#amqp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.amqp.amqp" title="Permalink to this definition">¶</a></dt>
+<dd><p>AMQP Administration Shell.</p>
+<p>Also works for non-amqp transports (but not ones that
+store declarations in memory).</p>
+<p>Examples:</p>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">celery</span> <span class="n">amqp</span>
+    <span class="n">start</span> <span class="n">shell</span> <span class="n">mode</span>
+<span class="n">celery</span> <span class="n">amqp</span> <span class="n">help</span>
+    <span class="n">show</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">commands</span>
+
+<span class="n">celery</span> <span class="n">amqp</span> <span class="n">exchange</span><span class="o">.</span><span class="n">delete</span> <span class="n">name</span>
+<span class="n">celery</span> <span class="n">amqp</span> <span class="n">queue</span><span class="o">.</span><span class="n">delete</span> <span class="n">queue</span>
+<span class="n">celery</span> <span class="n">amqp</span> <span class="n">queue</span><span class="o">.</span><span class="n">delete</span> <span class="n">queue</span> <span class="n">yes</span> <span class="n">yes</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="celery.bin.amqp.amqp.run"><a name="//apple_ref/cpp/Method/celery.bin.amqp.amqp.run"></a>
+<code class="descname">run</code><span class="sig-paren">(</span><em>*args</em>, <em>**options</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/amqp.html#amqp.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.amqp.amqp.run" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</dd></dl>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div aria-label="related navigation" class="related" role="navigation">
+<h3>Navigation</h3>
+<ul>
+<li class="right" style="margin-right: 10px">
+<a href="../genindex.html" title="General Index">index</a></li>
+<li class="right">
+<a href="../py-modindex.html" title="Python Module Index">modules</a> |</li>
+<li class="right">
+<a href="celery.bin.multi.html" title="celery.bin.multi">next</a> |</li>
+<li class="right">
+<a href="celery.bin.events.html" title="celery.bin.events">previous</a> |</li>
+<li class="nav-item nav-item-0"><a href="../index.html">Celery 3.1.23 documentation</a> »</li>
+<li class="nav-item nav-item-1"><a href="index.html">API Reference</a> »</li>
+</ul>
+</div>
+<div class="footer" role="contentinfo">
+        © <a href="../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
+    </div>
+</body>
+</html>

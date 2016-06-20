@@ -1,0 +1,376 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>celery.beat — Celery 3.1.23 documentation</title>
+<link href="../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.23',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+<script src="../_static/jquery.js" type="text/javascript"></script>
+<script src="../_static/underscore.js" type="text/javascript"></script>
+<script src="../_static/doctools.js" type="text/javascript"></script>
+<link href="../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="index.html" rel="up" title="API Reference"/>
+<link href="celery.apps.worker.html" rel="next" title="celery.apps.worker"/>
+<link href="celery.events.state.html" rel="prev" title="celery.events.state"/>
+</head>
+<body role="document">
+<div aria-label="related navigation" class="related" role="navigation">
+<h3>Navigation</h3>
+<ul>
+<li class="right" style="margin-right: 10px">
+<a accesskey="I" href="../genindex.html" title="General Index">index</a></li>
+<li class="right">
+<a href="../py-modindex.html" title="Python Module Index">modules</a> |</li>
+<li class="right">
+<a accesskey="N" href="celery.apps.worker.html" title="celery.apps.worker">next</a> |</li>
+<li class="right">
+<a accesskey="P" href="celery.events.state.html" title="celery.events.state">previous</a> |</li>
+<li class="nav-item nav-item-0"><a href="../index.html">Celery 3.1.23 documentation</a> »</li>
+<li class="nav-item nav-item-1"><a accesskey="U" href="index.html">API Reference</a> »</li>
+</ul>
+</div>
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
+<div class="deck">
+<p>
+        This document describes the current stable version of Celery (3.1). For development docs,
+        <a href="http://docs.celeryproject.org/en/master/reference/celery.beat.html">go here</a>.
+        </p>
+</div>
+<div class="section" id="celery-beat"><a name="//apple_ref/cpp/Module/celery.beat"></a>
+<h1>celery.beat<a class="headerlink" href="#celery-beat" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#id1" id="id2">celery.beat</a></li>
+</ul>
+</div>
+<span class="target" id="module-celery.beat"></span><div class="section" id="id1">
+<h2><a class="toc-backref" href="#id2">celery.beat</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>The periodic task scheduler.</p>
+<dl class="exception">
+<dt id="celery.beat.SchedulingError"><a name="//apple_ref/cpp/Exception/celery.beat.SchedulingError"></a>
+<em class="property">exception </em><code class="descclassname">celery.beat.</code><code class="descname">SchedulingError</code><a class="reference internal" href="../_modules/celery/beat.html#SchedulingError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.beat.SchedulingError" title="Permalink to this definition">¶</a></dt>
+<dd><p>An error occured while scheduling a task.</p>
+</dd></dl>
+<dl class="class">
+<dt id="celery.beat.ScheduleEntry"><a name="//apple_ref/cpp/Class/celery.beat.ScheduleEntry"></a>
+<em class="property">class </em><code class="descclassname">celery.beat.</code><code class="descname">ScheduleEntry</code><span class="sig-paren">(</span><em>name=None</em>, <em>task=None</em>, <em>last_run_at=None</em>, <em>total_run_count=None</em>, <em>schedule=None</em>, <em>args=()</em>, <em>kwargs={}</em>, <em>options={}</em>, <em>relative=False</em>, <em>app=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/beat.html#ScheduleEntry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.beat.ScheduleEntry" title="Permalink to this definition">¶</a></dt>
+<dd><p>An entry in the scheduler.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name"></col>
+<col class="field-body"></col>
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>name</strong> – see <a class="reference internal" href="#celery.beat.ScheduleEntry.name" title="celery.beat.ScheduleEntry.name"><code class="xref py py-attr docutils literal"><span class="pre">name</span></code></a>.</li>
+<li><strong>schedule</strong> – see <a class="reference internal" href="#celery.beat.ScheduleEntry.schedule" title="celery.beat.ScheduleEntry.schedule"><code class="xref py py-attr docutils literal"><span class="pre">schedule</span></code></a>.</li>
+<li><strong>args</strong> – see <a class="reference internal" href="#celery.beat.ScheduleEntry.args" title="celery.beat.ScheduleEntry.args"><code class="xref py py-attr docutils literal"><span class="pre">args</span></code></a>.</li>
+<li><strong>kwargs</strong> – see <a class="reference internal" href="#celery.beat.ScheduleEntry.kwargs" title="celery.beat.ScheduleEntry.kwargs"><code class="xref py py-attr docutils literal"><span class="pre">kwargs</span></code></a>.</li>
+<li><strong>options</strong> – see <a class="reference internal" href="#celery.beat.ScheduleEntry.options" title="celery.beat.ScheduleEntry.options"><code class="xref py py-attr docutils literal"><span class="pre">options</span></code></a>.</li>
+<li><strong>last_run_at</strong> – see <a class="reference internal" href="#celery.beat.ScheduleEntry.last_run_at" title="celery.beat.ScheduleEntry.last_run_at"><code class="xref py py-attr docutils literal"><span class="pre">last_run_at</span></code></a>.</li>
+<li><strong>total_run_count</strong> – see <a class="reference internal" href="#celery.beat.ScheduleEntry.total_run_count" title="celery.beat.ScheduleEntry.total_run_count"><code class="xref py py-attr docutils literal"><span class="pre">total_run_count</span></code></a>.</li>
+<li><strong>relative</strong> – Is the time relative to when the server starts?</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="celery.beat.ScheduleEntry.args"><a name="//apple_ref/cpp/Attribute/celery.beat.ScheduleEntry.args"></a>
+<code class="descname">args</code><em class="property"> = None</em><a class="headerlink" href="#celery.beat.ScheduleEntry.args" title="Permalink to this definition">¶</a></dt>
+<dd><p>Positional arguments to apply.</p>
+</dd></dl>
+<dl class="method">
+<dt id="celery.beat.ScheduleEntry.is_due"><a name="//apple_ref/cpp/Method/celery.beat.ScheduleEntry.is_due"></a>
+<code class="descname">is_due</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/beat.html#ScheduleEntry.is_due"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.beat.ScheduleEntry.is_due" title="Permalink to this definition">¶</a></dt>
+<dd><p>See <code class="xref py py-meth docutils literal"><span class="pre">is_due()</span></code>.</p>
+</dd></dl>
+<dl class="attribute">
+<dt id="celery.beat.ScheduleEntry.kwargs"><a name="//apple_ref/cpp/Attribute/celery.beat.ScheduleEntry.kwargs"></a>
+<code class="descname">kwargs</code><em class="property"> = None</em><a class="headerlink" href="#celery.beat.ScheduleEntry.kwargs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Keyword arguments to apply.</p>
+</dd></dl>
+<dl class="attribute">
+<dt id="celery.beat.ScheduleEntry.last_run_at"><a name="//apple_ref/cpp/Attribute/celery.beat.ScheduleEntry.last_run_at"></a>
+<code class="descname">last_run_at</code><em class="property"> = None</em><a class="headerlink" href="#celery.beat.ScheduleEntry.last_run_at" title="Permalink to this definition">¶</a></dt>
+<dd><p>The time and date of when this task was last scheduled.</p>
+</dd></dl>
+<dl class="attribute">
+<dt id="celery.beat.ScheduleEntry.name"><a name="//apple_ref/cpp/Attribute/celery.beat.ScheduleEntry.name"></a>
+<code class="descname">name</code><em class="property"> = None</em><a class="headerlink" href="#celery.beat.ScheduleEntry.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The task name</p>
+</dd></dl>
+<dl class="method">
+<dt id="celery.beat.ScheduleEntry.next"><a name="//apple_ref/cpp/Method/celery.beat.ScheduleEntry.next"></a>
+<code class="descname">next</code><span class="sig-paren">(</span><em>last_run_at=None</em><span class="sig-paren">)</span><a class="headerlink" href="#celery.beat.ScheduleEntry.next" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a new instance of the same class, but with
+its date and count fields updated.</p>
+</dd></dl>
+<dl class="attribute">
+<dt id="celery.beat.ScheduleEntry.options"><a name="//apple_ref/cpp/Attribute/celery.beat.ScheduleEntry.options"></a>
+<code class="descname">options</code><em class="property"> = None</em><a class="headerlink" href="#celery.beat.ScheduleEntry.options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Task execution options.</p>
+</dd></dl>
+<dl class="attribute">
+<dt id="celery.beat.ScheduleEntry.schedule"><a name="//apple_ref/cpp/Attribute/celery.beat.ScheduleEntry.schedule"></a>
+<code class="descname">schedule</code><em class="property"> = None</em><a class="headerlink" href="#celery.beat.ScheduleEntry.schedule" title="Permalink to this definition">¶</a></dt>
+<dd><p>The schedule (run_every/crontab)</p>
+</dd></dl>
+<dl class="attribute">
+<dt id="celery.beat.ScheduleEntry.total_run_count"><a name="//apple_ref/cpp/Attribute/celery.beat.ScheduleEntry.total_run_count"></a>
+<code class="descname">total_run_count</code><em class="property"> = 0</em><a class="headerlink" href="#celery.beat.ScheduleEntry.total_run_count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Total number of times this task has been scheduled.</p>
+</dd></dl>
+<dl class="method">
+<dt id="celery.beat.ScheduleEntry.update"><a name="//apple_ref/cpp/Method/celery.beat.ScheduleEntry.update"></a>
+<code class="descname">update</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/beat.html#ScheduleEntry.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.beat.ScheduleEntry.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update values from another entry.</p>
+<p>Does only update “editable” fields (task, schedule, args, kwargs,
+options).</p>
+</dd></dl>
+</dd></dl>
+<dl class="class">
+<dt id="celery.beat.Scheduler"><a name="//apple_ref/cpp/Class/celery.beat.Scheduler"></a>
+<em class="property">class </em><code class="descclassname">celery.beat.</code><code class="descname">Scheduler</code><span class="sig-paren">(</span><em>app</em>, <em>schedule=None</em>, <em>max_interval=None</em>, <em>Publisher=None</em>, <em>lazy=False</em>, <em>sync_every_tasks=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/beat.html#Scheduler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.beat.Scheduler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Scheduler for periodic tasks.</p>
+<p>The <strong class="program">celery beat</strong> program may instantiate this class
+multiple times for introspection purposes, but then with the
+<code class="docutils literal"><span class="pre">lazy</span></code> argument set.  It is important for subclasses to
+be idempotent when this argument is set.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name"></col>
+<col class="field-body"></col>
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>schedule</strong> – see <a class="reference internal" href="#celery.beat.Scheduler.schedule" title="celery.beat.Scheduler.schedule"><code class="xref py py-attr docutils literal"><span class="pre">schedule</span></code></a>.</li>
+<li><strong>max_interval</strong> – see <a class="reference internal" href="#celery.beat.Scheduler.max_interval" title="celery.beat.Scheduler.max_interval"><code class="xref py py-attr docutils literal"><span class="pre">max_interval</span></code></a>.</li>
+<li><strong>lazy</strong> – Do not set up the schedule.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="celery.beat.Scheduler.Entry"><a name="//apple_ref/cpp/Attribute/celery.beat.Scheduler.Entry"></a>
+<code class="descname">Entry</code><a class="headerlink" href="#celery.beat.Scheduler.Entry" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#celery.beat.ScheduleEntry" title="celery.beat.ScheduleEntry"><code class="xref py py-class docutils literal"><span class="pre">ScheduleEntry</span></code></a></p>
+</dd></dl>
+<dl class="method">
+<dt id="celery.beat.Scheduler.add"><a name="//apple_ref/cpp/Method/celery.beat.Scheduler.add"></a>
+<code class="descname">add</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/beat.html#Scheduler.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.beat.Scheduler.add" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.beat.Scheduler.apply_async"><a name="//apple_ref/cpp/Method/celery.beat.Scheduler.apply_async"></a>
+<code class="descname">apply_async</code><span class="sig-paren">(</span><em>entry</em>, <em>publisher=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/beat.html#Scheduler.apply_async"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.beat.Scheduler.apply_async" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.beat.Scheduler.close"><a name="//apple_ref/cpp/Method/celery.beat.Scheduler.close"></a>
+<code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/beat.html#Scheduler.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.beat.Scheduler.close" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.beat.Scheduler.connection"><a name="//apple_ref/cpp/Attribute/celery.beat.Scheduler.connection"></a>
+<code class="descname">connection</code><a class="reference internal" href="../_modules/celery/beat.html#Scheduler.connection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.beat.Scheduler.connection" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.beat.Scheduler.get_schedule"><a name="//apple_ref/cpp/Method/celery.beat.Scheduler.get_schedule"></a>
+<code class="descname">get_schedule</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/beat.html#Scheduler.get_schedule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.beat.Scheduler.get_schedule" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.beat.Scheduler.info"><a name="//apple_ref/cpp/Attribute/celery.beat.Scheduler.info"></a>
+<code class="descname">info</code><a class="headerlink" href="#celery.beat.Scheduler.info" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.beat.Scheduler.install_default_entries"><a name="//apple_ref/cpp/Method/celery.beat.Scheduler.install_default_entries"></a>
+<code class="descname">install_default_entries</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/beat.html#Scheduler.install_default_entries"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.beat.Scheduler.install_default_entries" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.beat.Scheduler.logger"><a name="//apple_ref/cpp/Attribute/celery.beat.Scheduler.logger"></a>
+<code class="descname">logger</code><em class="property"> = &lt;celery.utils.log.ProcessAwareLogger object&gt;</em><a class="headerlink" href="#celery.beat.Scheduler.logger" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.beat.Scheduler.max_interval"><a name="//apple_ref/cpp/Attribute/celery.beat.Scheduler.max_interval"></a>
+<code class="descname">max_interval</code><em class="property"> = 300</em><a class="headerlink" href="#celery.beat.Scheduler.max_interval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maximum time to sleep between re-checking the schedule.</p>
+</dd></dl>
+<dl class="method">
+<dt id="celery.beat.Scheduler.maybe_due"><a name="//apple_ref/cpp/Method/celery.beat.Scheduler.maybe_due"></a>
+<code class="descname">maybe_due</code><span class="sig-paren">(</span><em>entry</em>, <em>publisher=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/beat.html#Scheduler.maybe_due"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.beat.Scheduler.maybe_due" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.beat.Scheduler.merge_inplace"><a name="//apple_ref/cpp/Method/celery.beat.Scheduler.merge_inplace"></a>
+<code class="descname">merge_inplace</code><span class="sig-paren">(</span><em>b</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/beat.html#Scheduler.merge_inplace"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.beat.Scheduler.merge_inplace" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.beat.Scheduler.publisher"><a name="//apple_ref/cpp/Attribute/celery.beat.Scheduler.publisher"></a>
+<code class="descname">publisher</code><a class="reference internal" href="../_modules/celery/beat.html#Scheduler.publisher"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.beat.Scheduler.publisher" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.beat.Scheduler.reserve"><a name="//apple_ref/cpp/Method/celery.beat.Scheduler.reserve"></a>
+<code class="descname">reserve</code><span class="sig-paren">(</span><em>entry</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/beat.html#Scheduler.reserve"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.beat.Scheduler.reserve" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.beat.Scheduler.schedule"><a name="//apple_ref/cpp/Attribute/celery.beat.Scheduler.schedule"></a>
+<code class="descname">schedule</code><a class="headerlink" href="#celery.beat.Scheduler.schedule" title="Permalink to this definition">¶</a></dt>
+<dd><p>The schedule dict/shelve.</p>
+</dd></dl>
+<dl class="method">
+<dt id="celery.beat.Scheduler.send_task"><a name="//apple_ref/cpp/Method/celery.beat.Scheduler.send_task"></a>
+<code class="descname">send_task</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/beat.html#Scheduler.send_task"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.beat.Scheduler.send_task" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.beat.Scheduler.set_schedule"><a name="//apple_ref/cpp/Method/celery.beat.Scheduler.set_schedule"></a>
+<code class="descname">set_schedule</code><span class="sig-paren">(</span><em>schedule</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/beat.html#Scheduler.set_schedule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.beat.Scheduler.set_schedule" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.beat.Scheduler.setup_schedule"><a name="//apple_ref/cpp/Method/celery.beat.Scheduler.setup_schedule"></a>
+<code class="descname">setup_schedule</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/beat.html#Scheduler.setup_schedule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.beat.Scheduler.setup_schedule" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.beat.Scheduler.should_sync"><a name="//apple_ref/cpp/Method/celery.beat.Scheduler.should_sync"></a>
+<code class="descname">should_sync</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/beat.html#Scheduler.should_sync"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.beat.Scheduler.should_sync" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.beat.Scheduler.sync"><a name="//apple_ref/cpp/Method/celery.beat.Scheduler.sync"></a>
+<code class="descname">sync</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/beat.html#Scheduler.sync"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.beat.Scheduler.sync" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.beat.Scheduler.sync_every"><a name="//apple_ref/cpp/Attribute/celery.beat.Scheduler.sync_every"></a>
+<code class="descname">sync_every</code><em class="property"> = 180</em><a class="headerlink" href="#celery.beat.Scheduler.sync_every" title="Permalink to this definition">¶</a></dt>
+<dd><p>How often to sync the schedule (3 minutes by default)</p>
+</dd></dl>
+<dl class="attribute">
+<dt id="celery.beat.Scheduler.sync_every_tasks"><a name="//apple_ref/cpp/Attribute/celery.beat.Scheduler.sync_every_tasks"></a>
+<code class="descname">sync_every_tasks</code><em class="property"> = None</em><a class="headerlink" href="#celery.beat.Scheduler.sync_every_tasks" title="Permalink to this definition">¶</a></dt>
+<dd><p>How many tasks can be called before a sync is forced.</p>
+</dd></dl>
+<dl class="method">
+<dt id="celery.beat.Scheduler.tick"><a name="//apple_ref/cpp/Method/celery.beat.Scheduler.tick"></a>
+<code class="descname">tick</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/beat.html#Scheduler.tick"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.beat.Scheduler.tick" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run a tick, that is one iteration of the scheduler.</p>
+<p>Executes all due tasks.</p>
+</dd></dl>
+<dl class="method">
+<dt id="celery.beat.Scheduler.update_from_dict"><a name="//apple_ref/cpp/Method/celery.beat.Scheduler.update_from_dict"></a>
+<code class="descname">update_from_dict</code><span class="sig-paren">(</span><em>dict_</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/beat.html#Scheduler.update_from_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.beat.Scheduler.update_from_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</dd></dl>
+<dl class="class">
+<dt id="celery.beat.PersistentScheduler"><a name="//apple_ref/cpp/Class/celery.beat.PersistentScheduler"></a>
+<em class="property">class </em><code class="descclassname">celery.beat.</code><code class="descname">PersistentScheduler</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/beat.html#PersistentScheduler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.beat.PersistentScheduler" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="celery.beat.PersistentScheduler.close"><a name="//apple_ref/cpp/Method/celery.beat.PersistentScheduler.close"></a>
+<code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/beat.html#PersistentScheduler.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.beat.PersistentScheduler.close" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.beat.PersistentScheduler.get_schedule"><a name="//apple_ref/cpp/Method/celery.beat.PersistentScheduler.get_schedule"></a>
+<code class="descname">get_schedule</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/beat.html#PersistentScheduler.get_schedule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.beat.PersistentScheduler.get_schedule" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.beat.PersistentScheduler.info"><a name="//apple_ref/cpp/Attribute/celery.beat.PersistentScheduler.info"></a>
+<code class="descname">info</code><a class="headerlink" href="#celery.beat.PersistentScheduler.info" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.beat.PersistentScheduler.known_suffixes"><a name="//apple_ref/cpp/Attribute/celery.beat.PersistentScheduler.known_suffixes"></a>
+<code class="descname">known_suffixes</code><em class="property"> = ('', '.db', '.dat', '.bak', '.dir')</em><a class="headerlink" href="#celery.beat.PersistentScheduler.known_suffixes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.beat.PersistentScheduler.persistence"><a name="//apple_ref/cpp/Attribute/celery.beat.PersistentScheduler.persistence"></a>
+<code class="descname">persistence</code><em class="property"> = &lt;module 'shelve' from '/usr/local/Cellar/python/2.7.11/Frameworks/Python.framework/Versions/2.7/lib/python2.7/shelve.pyc'&gt;</em><a class="headerlink" href="#celery.beat.PersistentScheduler.persistence" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.beat.PersistentScheduler.schedule"><a name="//apple_ref/cpp/Attribute/celery.beat.PersistentScheduler.schedule"></a>
+<code class="descname">schedule</code><a class="headerlink" href="#celery.beat.PersistentScheduler.schedule" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.beat.PersistentScheduler.set_schedule"><a name="//apple_ref/cpp/Method/celery.beat.PersistentScheduler.set_schedule"></a>
+<code class="descname">set_schedule</code><span class="sig-paren">(</span><em>schedule</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/beat.html#PersistentScheduler.set_schedule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.beat.PersistentScheduler.set_schedule" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.beat.PersistentScheduler.setup_schedule"><a name="//apple_ref/cpp/Method/celery.beat.PersistentScheduler.setup_schedule"></a>
+<code class="descname">setup_schedule</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/beat.html#PersistentScheduler.setup_schedule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.beat.PersistentScheduler.setup_schedule" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.beat.PersistentScheduler.sync"><a name="//apple_ref/cpp/Method/celery.beat.PersistentScheduler.sync"></a>
+<code class="descname">sync</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/beat.html#PersistentScheduler.sync"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.beat.PersistentScheduler.sync" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</dd></dl>
+<dl class="class">
+<dt id="celery.beat.Service"><a name="//apple_ref/cpp/Class/celery.beat.Service"></a>
+<em class="property">class </em><code class="descclassname">celery.beat.</code><code class="descname">Service</code><span class="sig-paren">(</span><em>app</em>, <em>max_interval=None</em>, <em>schedule_filename=None</em>, <em>scheduler_cls=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/beat.html#Service"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.beat.Service" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="celery.beat.Service.get_scheduler"><a name="//apple_ref/cpp/Method/celery.beat.Service.get_scheduler"></a>
+<code class="descname">get_scheduler</code><span class="sig-paren">(</span><em>lazy=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/beat.html#Service.get_scheduler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.beat.Service.get_scheduler" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.beat.Service.scheduler"><a name="//apple_ref/cpp/Attribute/celery.beat.Service.scheduler"></a>
+<code class="descname">scheduler</code><a class="reference internal" href="../_modules/celery/beat.html#Service.scheduler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.beat.Service.scheduler" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.beat.Service.scheduler_cls"><a name="//apple_ref/cpp/Attribute/celery.beat.Service.scheduler_cls"></a>
+<code class="descname">scheduler_cls</code><a class="headerlink" href="#celery.beat.Service.scheduler_cls" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#celery.beat.PersistentScheduler" title="celery.beat.PersistentScheduler"><code class="xref py py-class docutils literal"><span class="pre">PersistentScheduler</span></code></a></p>
+</dd></dl>
+<dl class="method">
+<dt id="celery.beat.Service.start"><a name="//apple_ref/cpp/Method/celery.beat.Service.start"></a>
+<code class="descname">start</code><span class="sig-paren">(</span><em>embedded_process=False</em>, <em>drift=-0.01</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/beat.html#Service.start"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.beat.Service.start" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.beat.Service.stop"><a name="//apple_ref/cpp/Method/celery.beat.Service.stop"></a>
+<code class="descname">stop</code><span class="sig-paren">(</span><em>wait=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/beat.html#Service.stop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.beat.Service.stop" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.beat.Service.sync"><a name="//apple_ref/cpp/Method/celery.beat.Service.sync"></a>
+<code class="descname">sync</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/beat.html#Service.sync"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.beat.Service.sync" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</dd></dl>
+<dl class="function">
+<dt id="celery.beat.EmbeddedService"><a name="//apple_ref/cpp/Function/celery.beat.EmbeddedService"></a>
+<code class="descclassname">celery.beat.</code><code class="descname">EmbeddedService</code><span class="sig-paren">(</span><em>app</em>, <em>max_interval=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/beat.html#EmbeddedService"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.beat.EmbeddedService" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return embedded clock service.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name"></col>
+<col class="field-body"></col>
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>thread</strong> – Run threaded instead of as a separate process.
+Uses <a class="reference external" href="http://docs.python.org/dev/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.6)"><code class="xref py py-mod docutils literal"><span class="pre">multiprocessing</span></code></a> by default, if available.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div aria-label="related navigation" class="related" role="navigation">
+<h3>Navigation</h3>
+<ul>
+<li class="right" style="margin-right: 10px">
+<a href="../genindex.html" title="General Index">index</a></li>
+<li class="right">
+<a href="../py-modindex.html" title="Python Module Index">modules</a> |</li>
+<li class="right">
+<a href="celery.apps.worker.html" title="celery.apps.worker">next</a> |</li>
+<li class="right">
+<a href="celery.events.state.html" title="celery.events.state">previous</a> |</li>
+<li class="nav-item nav-item-0"><a href="../index.html">Celery 3.1.23 documentation</a> »</li>
+<li class="nav-item nav-item-1"><a href="index.html">API Reference</a> »</li>
+</ul>
+</div>
+<div class="footer" role="contentinfo">
+        © <a href="../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
+    </div>
+</body>
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>celery.worker — Celery 3.1.23 documentation</title>
+<link href="../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.23',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+<script src="../_static/jquery.js" type="text/javascript"></script>
+<script src="../_static/underscore.js" type="text/javascript"></script>
+<script src="../_static/doctools.js" type="text/javascript"></script>
+<link href="../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="index.html" rel="up" title="API Reference"/>
+<link href="celery.worker.consumer.html" rel="next" title="celery.worker.consumer"/>
+<link href="celery.apps.beat.html" rel="prev" title="celery.apps.beat"/>
+</head>
+<body role="document">
+<div aria-label="related navigation" class="related" role="navigation">
+<h3>Navigation</h3>
+<ul>
+<li class="right" style="margin-right: 10px">
+<a accesskey="I" href="../genindex.html" title="General Index">index</a></li>
+<li class="right">
+<a href="../py-modindex.html" title="Python Module Index">modules</a> |</li>
+<li class="right">
+<a accesskey="N" href="celery.worker.consumer.html" title="celery.worker.consumer">next</a> |</li>
+<li class="right">
+<a accesskey="P" href="celery.apps.beat.html" title="celery.apps.beat">previous</a> |</li>
+<li class="nav-item nav-item-0"><a href="../index.html">Celery 3.1.23 documentation</a> »</li>
+<li class="nav-item nav-item-1"><a accesskey="U" href="index.html">API Reference</a> »</li>
+</ul>
+</div>
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
+<div class="deck">
+<p>
+        This document describes the current stable version of Celery (3.1). For development docs,
+        <a href="http://docs.celeryproject.org/en/master/reference/celery.worker.html">go here</a>.
+        </p>
+</div>
+<div class="section" id="celery-worker"><a name="//apple_ref/cpp/Module/celery.worker"></a>
+<h1>celery.worker<a class="headerlink" href="#celery-worker" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#id1" id="id2">celery.worker</a></li>
+</ul>
+</div>
+<span class="target" id="module-celery.worker"></span><div class="section" id="id1">
+<h2><a class="toc-backref" href="#id2">celery.worker</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="#celery.worker.WorkController" title="celery.worker.WorkController"><code class="xref py py-class docutils literal"><span class="pre">WorkController</span></code></a> can be used to instantiate in-process workers.</p>
+<p>The worker consists of several components, all managed by bootsteps
+(mod:<cite>celery.bootsteps</cite>).</p>
+<dl class="class">
+<dt id="celery.worker.WorkController"><a name="//apple_ref/cpp/Class/celery.worker.WorkController"></a>
+<em class="property">class </em><code class="descclassname">celery.worker.</code><code class="descname">WorkController</code><span class="sig-paren">(</span><em>app=None</em>, <em>hostname=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker.html#WorkController"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.WorkController" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unmanaged worker instance.</p>
+<dl class="class">
+<dt id="celery.worker.WorkController.Blueprint"><a name="//apple_ref/cpp/Class/celery.worker.WorkController.Blueprint"></a>
+<em class="property">class </em><code class="descname">Blueprint</code><span class="sig-paren">(</span><em>steps=None</em>, <em>name=None</em>, <em>app=None</em>, <em>on_start=None</em>, <em>on_close=None</em>, <em>on_stopped=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker.html#WorkController.Blueprint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.WorkController.Blueprint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Worker bootstep blueprint.</p>
+<dl class="attribute">
+<dt id="celery.worker.WorkController.Blueprint.default_steps"><a name="//apple_ref/cpp/Attribute/celery.worker.WorkController.Blueprint.default_steps"></a>
+<code class="descname">default_steps</code><em class="property"> = set(['celery.worker.components:Consumer', 'celery.worker.components:Timer', 'celery.worker.components:Queues', 'celery.worker.autoreload:WorkerComponent', 'celery.worker.components:Hub', 'celery.worker.components:Beat', 'celery.worker.components:Pool', 'celery.worker.autoscale:WorkerComponent', 'celery.worker.components:StateDB'])</em><a class="headerlink" href="#celery.worker.WorkController.Blueprint.default_steps" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.worker.WorkController.Blueprint.name"><a name="//apple_ref/cpp/Attribute/celery.worker.WorkController.Blueprint.name"></a>
+<code class="descname">name</code><em class="property"> = 'Worker'</em><a class="headerlink" href="#celery.worker.WorkController.Blueprint.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</dd></dl>
+<dl class="attribute">
+<dt id="celery.worker.WorkController.app"><a name="//apple_ref/cpp/Attribute/celery.worker.WorkController.app"></a>
+<code class="descclassname">WorkController.</code><code class="descname">app</code><em class="property"> = None</em><a class="headerlink" href="#celery.worker.WorkController.app" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.worker.WorkController.blueprint"><a name="//apple_ref/cpp/Attribute/celery.worker.WorkController.blueprint"></a>
+<code class="descclassname">WorkController.</code><code class="descname">blueprint</code><em class="property"> = None</em><a class="headerlink" href="#celery.worker.WorkController.blueprint" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.WorkController.info"><a name="//apple_ref/cpp/Method/celery.worker.WorkController.info"></a>
+<code class="descclassname">WorkController.</code><code class="descname">info</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker.html#WorkController.info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.WorkController.info" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.WorkController.on_after_init"><a name="//apple_ref/cpp/Method/celery.worker.WorkController.on_after_init"></a>
+<code class="descclassname">WorkController.</code><code class="descname">on_after_init</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker.html#WorkController.on_after_init"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.WorkController.on_after_init" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.WorkController.on_before_init"><a name="//apple_ref/cpp/Method/celery.worker.WorkController.on_before_init"></a>
+<code class="descclassname">WorkController.</code><code class="descname">on_before_init</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker.html#WorkController.on_before_init"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.WorkController.on_before_init" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.WorkController.on_close"><a name="//apple_ref/cpp/Method/celery.worker.WorkController.on_close"></a>
+<code class="descclassname">WorkController.</code><code class="descname">on_close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker.html#WorkController.on_close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.WorkController.on_close" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.WorkController.on_consumer_ready"><a name="//apple_ref/cpp/Method/celery.worker.WorkController.on_consumer_ready"></a>
+<code class="descclassname">WorkController.</code><code class="descname">on_consumer_ready</code><span class="sig-paren">(</span><em>consumer</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker.html#WorkController.on_consumer_ready"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.WorkController.on_consumer_ready" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.WorkController.on_init_blueprint"><a name="//apple_ref/cpp/Method/celery.worker.WorkController.on_init_blueprint"></a>
+<code class="descclassname">WorkController.</code><code class="descname">on_init_blueprint</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker.html#WorkController.on_init_blueprint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.WorkController.on_init_blueprint" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.WorkController.on_start"><a name="//apple_ref/cpp/Method/celery.worker.WorkController.on_start"></a>
+<code class="descclassname">WorkController.</code><code class="descname">on_start</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker.html#WorkController.on_start"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.WorkController.on_start" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.WorkController.on_stopped"><a name="//apple_ref/cpp/Method/celery.worker.WorkController.on_stopped"></a>
+<code class="descclassname">WorkController.</code><code class="descname">on_stopped</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker.html#WorkController.on_stopped"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.WorkController.on_stopped" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.worker.WorkController.pidlock"><a name="//apple_ref/cpp/Attribute/celery.worker.WorkController.pidlock"></a>
+<code class="descclassname">WorkController.</code><code class="descname">pidlock</code><em class="property"> = None</em><a class="headerlink" href="#celery.worker.WorkController.pidlock" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.worker.WorkController.pool"><a name="//apple_ref/cpp/Attribute/celery.worker.WorkController.pool"></a>
+<code class="descclassname">WorkController.</code><code class="descname">pool</code><em class="property"> = None</em><a class="headerlink" href="#celery.worker.WorkController.pool" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.WorkController.prepare_args"><a name="//apple_ref/cpp/Method/celery.worker.WorkController.prepare_args"></a>
+<code class="descclassname">WorkController.</code><code class="descname">prepare_args</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker.html#WorkController.prepare_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.WorkController.prepare_args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.WorkController.register_with_event_loop"><a name="//apple_ref/cpp/Method/celery.worker.WorkController.register_with_event_loop"></a>
+<code class="descclassname">WorkController.</code><code class="descname">register_with_event_loop</code><span class="sig-paren">(</span><em>hub</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker.html#WorkController.register_with_event_loop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.WorkController.register_with_event_loop" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.WorkController.reload"><a name="//apple_ref/cpp/Method/celery.worker.WorkController.reload"></a>
+<code class="descclassname">WorkController.</code><code class="descname">reload</code><span class="sig-paren">(</span><em>modules=None</em>, <em>reload=False</em>, <em>reloader=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker.html#WorkController.reload"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.WorkController.reload" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.WorkController.rusage"><a name="//apple_ref/cpp/Method/celery.worker.WorkController.rusage"></a>
+<code class="descclassname">WorkController.</code><code class="descname">rusage</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker.html#WorkController.rusage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.WorkController.rusage" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.worker.WorkController.semaphore"><a name="//apple_ref/cpp/Attribute/celery.worker.WorkController.semaphore"></a>
+<code class="descclassname">WorkController.</code><code class="descname">semaphore</code><em class="property"> = None</em><a class="headerlink" href="#celery.worker.WorkController.semaphore" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.WorkController.setup_defaults"><a name="//apple_ref/cpp/Method/celery.worker.WorkController.setup_defaults"></a>
+<code class="descclassname">WorkController.</code><code class="descname">setup_defaults</code><span class="sig-paren">(</span><em>concurrency=None</em>, <em>loglevel=None</em>, <em>logfile=None</em>, <em>send_events=None</em>, <em>pool_cls=None</em>, <em>consumer_cls=None</em>, <em>timer_cls=None</em>, <em>timer_precision=None</em>, <em>autoscaler_cls=None</em>, <em>autoreloader_cls=None</em>, <em>pool_putlocks=None</em>, <em>pool_restarts=None</em>, <em>force_execv=None</em>, <em>state_db=None</em>, <em>schedule_filename=None</em>, <em>scheduler_cls=None</em>, <em>task_time_limit=None</em>, <em>task_soft_time_limit=None</em>, <em>max_tasks_per_child=None</em>, <em>prefetch_multiplier=None</em>, <em>disable_rate_limits=None</em>, <em>worker_lost_wait=None</em>, <em>**_kw</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker.html#WorkController.setup_defaults"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.WorkController.setup_defaults" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.WorkController.setup_includes"><a name="//apple_ref/cpp/Method/celery.worker.WorkController.setup_includes"></a>
+<code class="descclassname">WorkController.</code><code class="descname">setup_includes</code><span class="sig-paren">(</span><em>includes</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker.html#WorkController.setup_includes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.WorkController.setup_includes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.WorkController.setup_instance"><a name="//apple_ref/cpp/Method/celery.worker.WorkController.setup_instance"></a>
+<code class="descclassname">WorkController.</code><code class="descname">setup_instance</code><span class="sig-paren">(</span><em>queues=None</em>, <em>ready_callback=None</em>, <em>pidfile=None</em>, <em>include=None</em>, <em>use_eventloop=None</em>, <em>exclude_queues=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker.html#WorkController.setup_instance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.WorkController.setup_instance" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.WorkController.setup_queues"><a name="//apple_ref/cpp/Method/celery.worker.WorkController.setup_queues"></a>
+<code class="descclassname">WorkController.</code><code class="descname">setup_queues</code><span class="sig-paren">(</span><em>include</em>, <em>exclude=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker.html#WorkController.setup_queues"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.WorkController.setup_queues" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.WorkController.should_use_eventloop"><a name="//apple_ref/cpp/Method/celery.worker.WorkController.should_use_eventloop"></a>
+<code class="descclassname">WorkController.</code><code class="descname">should_use_eventloop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker.html#WorkController.should_use_eventloop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.WorkController.should_use_eventloop" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.WorkController.signal_consumer_close"><a name="//apple_ref/cpp/Method/celery.worker.WorkController.signal_consumer_close"></a>
+<code class="descclassname">WorkController.</code><code class="descname">signal_consumer_close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker.html#WorkController.signal_consumer_close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.WorkController.signal_consumer_close" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.WorkController.start"><a name="//apple_ref/cpp/Method/celery.worker.WorkController.start"></a>
+<code class="descclassname">WorkController.</code><code class="descname">start</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker.html#WorkController.start"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.WorkController.start" title="Permalink to this definition">¶</a></dt>
+<dd><p>Starts the workers main loop.</p>
+</dd></dl>
+<dl class="attribute">
+<dt id="celery.worker.WorkController.state"><a name="//apple_ref/cpp/Attribute/celery.worker.WorkController.state"></a>
+<code class="descclassname">WorkController.</code><code class="descname">state</code><a class="headerlink" href="#celery.worker.WorkController.state" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.WorkController.stats"><a name="//apple_ref/cpp/Method/celery.worker.WorkController.stats"></a>
+<code class="descclassname">WorkController.</code><code class="descname">stats</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker.html#WorkController.stats"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.WorkController.stats" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.WorkController.stop"><a name="//apple_ref/cpp/Method/celery.worker.WorkController.stop"></a>
+<code class="descclassname">WorkController.</code><code class="descname">stop</code><span class="sig-paren">(</span><em>in_sighandler=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker.html#WorkController.stop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.WorkController.stop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Graceful shutdown of the worker server.</p>
+</dd></dl>
+<dl class="method">
+<dt id="celery.worker.WorkController.terminate"><a name="//apple_ref/cpp/Method/celery.worker.WorkController.terminate"></a>
+<code class="descclassname">WorkController.</code><code class="descname">terminate</code><span class="sig-paren">(</span><em>in_sighandler=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker.html#WorkController.terminate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.WorkController.terminate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Not so graceful shutdown of the worker server.</p>
+</dd></dl>
+</dd></dl>
+<dl class="function">
+<dt id="celery.worker.default_nodename"><a name="//apple_ref/cpp/Function/celery.worker.default_nodename"></a>
+<code class="descclassname">celery.worker.</code><code class="descname">default_nodename</code><span class="sig-paren">(</span><em>hostname</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/utils.html#default_nodename"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.default_nodename" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div aria-label="related navigation" class="related" role="navigation">
+<h3>Navigation</h3>
+<ul>
+<li class="right" style="margin-right: 10px">
+<a href="../genindex.html" title="General Index">index</a></li>
+<li class="right">
+<a href="../py-modindex.html" title="Python Module Index">modules</a> |</li>
+<li class="right">
+<a href="celery.worker.consumer.html" title="celery.worker.consumer">next</a> |</li>
+<li class="right">
+<a href="celery.apps.beat.html" title="celery.apps.beat">previous</a> |</li>
+<li class="nav-item nav-item-0"><a href="../index.html">Celery 3.1.23 documentation</a> »</li>
+<li class="nav-item nav-item-1"><a href="index.html">API Reference</a> »</li>
+</ul>
+</div>
+<div class="footer" role="contentinfo">
+        © <a href="../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
+    </div>
+</body>
+</html>

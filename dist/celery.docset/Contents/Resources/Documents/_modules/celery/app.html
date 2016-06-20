@@ -1,0 +1,234 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>celery.app &mdash; Celery 3.1.23 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/celery.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '3.1.23',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="top" title="Celery 3.1.23 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+<div class="deck">
+
+    
+        <p>
+        This document describes the current stable version of Celery (3.1). For development docs,
+        <a href="http://docs.celeryproject.org/en/master/_modules/celery/app.html">go here</a>.
+        </p>
+    
+
+</div>
+    <h1>Source code for celery.app</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    celery.app</span>
+<span class="sd">    ~~~~~~~~~~</span>
+
+<span class="sd">    Celery Application.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">celery.local</span> <span class="kn">import</span> <span class="n">Proxy</span>
+<span class="kn">from</span> <span class="nn">celery</span> <span class="kn">import</span> <span class="n">_state</span>
+<span class="kn">from</span> <span class="nn">celery._state</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">get_current_app</span> <span class="k">as</span> <span class="n">current_app</span><span class="p">,</span>
+    <span class="n">get_current_task</span> <span class="k">as</span> <span class="n">current_task</span><span class="p">,</span>
+    <span class="n">connect_on_app_finalize</span><span class="p">,</span> <span class="n">set_default_app</span><span class="p">,</span> <span class="n">_get_active_apps</span><span class="p">,</span> <span class="n">_task_stack</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">celery.utils</span> <span class="kn">import</span> <span class="n">gen_task_name</span>
+
+<span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">Celery</span><span class="p">,</span> <span class="n">AppPickler</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Celery&#39;</span><span class="p">,</span> <span class="s1">&#39;AppPickler&#39;</span><span class="p">,</span> <span class="s1">&#39;default_app&#39;</span><span class="p">,</span> <span class="s1">&#39;app_or_default&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;bugreport&#39;</span><span class="p">,</span> <span class="s1">&#39;enable_trace&#39;</span><span class="p">,</span> <span class="s1">&#39;disable_trace&#39;</span><span class="p">,</span> <span class="s1">&#39;shared_task&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;set_default_app&#39;</span><span class="p">,</span> <span class="s1">&#39;current_app&#39;</span><span class="p">,</span> <span class="s1">&#39;current_task&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;push_current_task&#39;</span><span class="p">,</span> <span class="s1">&#39;pop_current_task&#39;</span><span class="p">]</span>
+
+<span class="c1">#: Proxy always returning the app set as default.</span>
+<span class="n">default_app</span> <span class="o">=</span> <span class="n">Proxy</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">_state</span><span class="o">.</span><span class="n">default_app</span><span class="p">)</span>
+
+<span class="c1">#: Function returning the app provided or the default app if none.</span>
+<span class="c1">#:</span>
+<span class="c1">#: The environment variable :envvar:`CELERY_TRACE_APP` is used to</span>
+<span class="c1">#: trace app leaks.  When enabled an exception is raised if there</span>
+<span class="c1">#: is no active app.</span>
+<span class="n">app_or_default</span> <span class="o">=</span> <span class="bp">None</span>
+
+<span class="c1">#: The &#39;default&#39; loader is the default loader used by old applications.</span>
+<span class="c1">#: This is deprecated and should no longer be used as it&#39;s set too early</span>
+<span class="c1">#: to be affected by --loader argument.</span>
+<span class="n">default_loader</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;CELERY_LOADER&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="s1">&#39;default&#39;</span>  <span class="c1"># XXX</span>
+
+
+<span class="c1">#: Function used to push a task to the thread local stack</span>
+<span class="c1">#: keeping track of the currently executing task.</span>
+<span class="c1">#: You must remember to pop the task after.</span>
+<span class="n">push_current_task</span> <span class="o">=</span> <span class="n">_task_stack</span><span class="o">.</span><span class="n">push</span>
+
+<span class="c1">#: Function used to pop a task from the thread local stack</span>
+<span class="c1">#: keeping track of the currently executing task.</span>
+<span class="n">pop_current_task</span> <span class="o">=</span> <span class="n">_task_stack</span><span class="o">.</span><span class="n">pop</span>
+
+
+<span class="k">def</span> <span class="nf">bugreport</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">app</span> <span class="ow">or</span> <span class="n">current_app</span><span class="p">())</span><span class="o">.</span><span class="n">bugreport</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">_app_or_default</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">app</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_state</span><span class="o">.</span><span class="n">get_current_app</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">app</span>
+
+
+<span class="k">def</span> <span class="nf">_app_or_default_trace</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>  <span class="c1"># pragma: no cover</span>
+    <span class="kn">from</span> <span class="nn">traceback</span> <span class="kn">import</span> <span class="n">print_stack</span>
+    <span class="kn">from</span> <span class="nn">billiard</span> <span class="kn">import</span> <span class="n">current_process</span>
+    <span class="k">if</span> <span class="n">app</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">_state</span><span class="o">.</span><span class="n">_tls</span><span class="p">,</span> <span class="s1">&#39;current_app&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">):</span>
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;-- RETURNING TO CURRENT APP --&#39;</span><span class="p">)</span>  <span class="c1"># noqa+</span>
+            <span class="n">print_stack</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">_state</span><span class="o">.</span><span class="n">_tls</span><span class="o">.</span><span class="n">current_app</span>
+        <span class="k">if</span> <span class="n">current_process</span><span class="p">()</span><span class="o">.</span><span class="n">_name</span> <span class="o">==</span> <span class="s1">&#39;MainProcess&#39;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;DEFAULT APP&#39;</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;-- RETURNING TO DEFAULT APP --&#39;</span><span class="p">)</span>      <span class="c1"># noqa+</span>
+        <span class="n">print_stack</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">_state</span><span class="o">.</span><span class="n">default_app</span>
+    <span class="k">return</span> <span class="n">app</span>
+
+
+<div class="viewcode-block" id="enable_trace"><a class="viewcode-back" href="../../reference/celery.app.html#celery.app.enable_trace">[docs]</a><span class="k">def</span> <span class="nf">enable_trace</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">app_or_default</span>
+    <span class="n">app_or_default</span> <span class="o">=</span> <span class="n">_app_or_default_trace</span></div>
+
+
+<div class="viewcode-block" id="disable_trace"><a class="viewcode-back" href="../../reference/celery.app.html#celery.app.disable_trace">[docs]</a><span class="k">def</span> <span class="nf">disable_trace</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">app_or_default</span>
+    <span class="n">app_or_default</span> <span class="o">=</span> <span class="n">_app_or_default</span></div>
+
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;CELERY_TRACE_APP&#39;</span><span class="p">):</span>  <span class="c1"># pragma: no cover</span>
+    <span class="n">enable_trace</span><span class="p">()</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">disable_trace</span><span class="p">()</span>
+
+<span class="n">App</span> <span class="o">=</span> <span class="n">Celery</span>  <span class="c1"># XXX Compat</span>
+
+
+<span class="k">def</span> <span class="nf">shared_task</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create shared tasks (decorator).</span>
+<span class="sd">    Will return a proxy that always takes the task from the current apps</span>
+<span class="sd">    task registry.</span>
+
+<span class="sd">    This can be used by library authors to create tasks that will work</span>
+<span class="sd">    for any app environment.</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">        &gt;&gt;&gt; from celery import Celery, shared_task</span>
+<span class="sd">        &gt;&gt;&gt; @shared_task</span>
+<span class="sd">        ... def add(x, y):</span>
+<span class="sd">        ...     return x + y</span>
+
+<span class="sd">        &gt;&gt;&gt; app1 = Celery(broker=&#39;amqp://&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; add.app is app1</span>
+<span class="sd">        True</span>
+
+<span class="sd">        &gt;&gt;&gt; app2 = Celery(broker=&#39;redis://&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; add.app is app2</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">create_shared_task</span><span class="p">(</span><span class="o">**</span><span class="n">options</span><span class="p">):</span>
+
+        <span class="k">def</span> <span class="nf">__inner</span><span class="p">(</span><span class="n">fun</span><span class="p">):</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span>
+            <span class="c1"># Set as shared task so that unfinalized apps,</span>
+            <span class="c1"># and future apps will load the task.</span>
+            <span class="n">connect_on_app_finalize</span><span class="p">(</span>
+                <span class="k">lambda</span> <span class="n">app</span><span class="p">:</span> <span class="n">app</span><span class="o">.</span><span class="n">_task_from_fun</span><span class="p">(</span><span class="n">fun</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+            <span class="p">)</span>
+
+            <span class="c1"># Force all finalized apps to take this task as well.</span>
+            <span class="k">for</span> <span class="n">app</span> <span class="ow">in</span> <span class="n">_get_active_apps</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">app</span><span class="o">.</span><span class="n">finalized</span><span class="p">:</span>
+                    <span class="k">with</span> <span class="n">app</span><span class="o">.</span><span class="n">_finalize_mutex</span><span class="p">:</span>
+                        <span class="n">app</span><span class="o">.</span><span class="n">_task_from_fun</span><span class="p">(</span><span class="n">fun</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+
+            <span class="c1"># Return a proxy that always gets the task from the current</span>
+            <span class="c1"># apps task registry.</span>
+            <span class="k">def</span> <span class="nf">task_by_cons</span><span class="p">():</span>
+                <span class="n">app</span> <span class="o">=</span> <span class="n">current_app</span><span class="p">()</span>
+                <span class="k">return</span> <span class="n">app</span><span class="o">.</span><span class="n">tasks</span><span class="p">[</span>
+                    <span class="n">name</span> <span class="ow">or</span> <span class="n">gen_task_name</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">fun</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">fun</span><span class="o">.</span><span class="n">__module__</span><span class="p">)</span>
+                <span class="p">]</span>
+            <span class="k">return</span> <span class="n">Proxy</span><span class="p">(</span><span class="n">task_by_cons</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">__inner</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="nb">callable</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="k">return</span> <span class="n">create_shared_task</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">create_shared_task</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; <a href="../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
+    </div>
+  </body>
+</html>

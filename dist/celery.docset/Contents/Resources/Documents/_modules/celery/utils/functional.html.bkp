@@ -1,0 +1,411 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>celery.utils.functional &mdash; Celery 3.1.23 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/celery.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '3.1.23',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="copyright" title="Copyright" href="../../../copyright.html" />
+    <link rel="top" title="Celery 3.1.23 documentation" href="../../../index.html" />
+    <link rel="up" title="celery.utils" href="../utils.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../utils.html" accesskey="U">celery.utils</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+<div class="deck">
+
+    
+        <p>
+        This document describes the current stable version of Celery (3.1). For development docs,
+        <a href="http://docs.celeryproject.org/en/master/_modules/celery/utils/functional.html">go here</a>.
+        </p>
+    
+
+</div>
+    <h1>Source code for celery.utils.functional</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    celery.utils.functional</span>
+<span class="sd">    ~~~~~~~~~~~~~~~~~~~~~~~</span>
+
+<span class="sd">    Utilities for functions.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">islice</span>
+
+<span class="kn">from</span> <span class="nn">kombu.utils</span> <span class="kn">import</span> <span class="n">cached_property</span>
+<span class="kn">from</span> <span class="nn">kombu.utils.functional</span> <span class="kn">import</span> <span class="n">lazy</span><span class="p">,</span> <span class="n">maybe_evaluate</span><span class="p">,</span> <span class="n">is_list</span><span class="p">,</span> <span class="n">maybe_list</span>
+<span class="kn">from</span> <span class="nn">kombu.utils.compat</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+
+<span class="kn">from</span> <span class="nn">celery.five</span> <span class="kn">import</span> <span class="n">UserDict</span><span class="p">,</span> <span class="n">UserList</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="n">keys</span><span class="p">,</span> <span class="nb">range</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;LRUCache&#39;</span><span class="p">,</span> <span class="s1">&#39;is_list&#39;</span><span class="p">,</span> <span class="s1">&#39;maybe_list&#39;</span><span class="p">,</span> <span class="s1">&#39;memoize&#39;</span><span class="p">,</span> <span class="s1">&#39;mlazy&#39;</span><span class="p">,</span> <span class="s1">&#39;noop&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;first&#39;</span><span class="p">,</span> <span class="s1">&#39;firstmethod&#39;</span><span class="p">,</span> <span class="s1">&#39;chunks&#39;</span><span class="p">,</span> <span class="s1">&#39;padlist&#39;</span><span class="p">,</span> <span class="s1">&#39;mattrgetter&#39;</span><span class="p">,</span> <span class="s1">&#39;uniq&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;regen&#39;</span><span class="p">,</span> <span class="s1">&#39;dictfilter&#39;</span><span class="p">,</span> <span class="s1">&#39;lazy&#39;</span><span class="p">,</span> <span class="s1">&#39;maybe_evaluate&#39;</span><span class="p">]</span>
+
+<span class="n">IS_PYPY</span> <span class="o">=</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">sys</span><span class="p">,</span> <span class="s1">&#39;pypy_version_info&#39;</span><span class="p">)</span>
+
+<span class="n">KEYWORD_MARK</span> <span class="o">=</span> <span class="nb">object</span><span class="p">()</span>
+
+
+<span class="k">class</span> <span class="nc">DummyContext</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">exc_info</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+
+<div class="viewcode-block" id="LRUCache"><a class="viewcode-back" href="../../../internals/reference/celery.utils.functional.html#celery.datastructures.LRUCache">[docs]</a><span class="k">class</span> <span class="nc">LRUCache</span><span class="p">(</span><span class="n">UserDict</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;LRU Cache implementation using a doubly linked list to track access.</span>
+
+<span class="sd">    :keyword limit: The maximum number of keys to keep in the cache.</span>
+<span class="sd">        When a new key is inserted and the limit has been exceeded,</span>
+<span class="sd">        the *Least Recently Used* key will be discarded from the</span>
+<span class="sd">        cache.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">limit</span> <span class="o">=</span> <span class="n">limit</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mutex</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">RLock</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">mutex</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">value</span>
+
+<div class="viewcode-block" id="LRUCache.update"><a class="viewcode-back" href="../../../internals/reference/celery.utils.functional.html#celery.datastructures.LRUCache.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">mutex</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">,</span> <span class="n">limit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">limit</span>
+            <span class="n">data</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">limit</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">limit</span><span class="p">:</span>
+                <span class="c1"># pop additional items in case limit exceeded</span>
+                <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">-</span> <span class="n">limit</span><span class="p">):</span>
+                    <span class="n">data</span><span class="o">.</span><span class="n">popitem</span><span class="p">(</span><span class="n">last</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="LRUCache.popitem"><a class="viewcode-back" href="../../../internals/reference/celery.utils.functional.html#celery.datastructures.LRUCache.popitem">[docs]</a>    <span class="k">def</span> <span class="nf">popitem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">last</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">_needs_lock</span><span class="o">=</span><span class="n">IS_PYPY</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">_needs_lock</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">popitem</span><span class="p">(</span><span class="n">last</span><span class="p">)</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">mutex</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">popitem</span><span class="p">(</span><span class="n">last</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="c1"># remove least recently used key.</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">mutex</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">limit</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">limit</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_iterate_items</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_need_lock</span><span class="o">=</span><span class="n">IS_PYPY</span><span class="p">):</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">mutex</span> <span class="k">if</span> <span class="n">_need_lock</span> <span class="k">else</span> <span class="n">DummyContext</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="k">yield</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+                <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+                    <span class="k">pass</span>
+    <span class="n">iteritems</span> <span class="o">=</span> <span class="n">_iterate_items</span>
+
+    <span class="k">def</span> <span class="nf">_iterate_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_need_lock</span><span class="o">=</span><span class="n">IS_PYPY</span><span class="p">):</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">mutex</span> <span class="k">if</span> <span class="n">_need_lock</span> <span class="k">else</span> <span class="n">DummyContext</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+                <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+                    <span class="k">pass</span>
+
+    <span class="n">itervalues</span> <span class="o">=</span> <span class="n">_iterate_values</span>
+
+    <span class="k">def</span> <span class="nf">_iterate_keys</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># userdict.keys in py3k calls __getitem__</span>
+        <span class="k">return</span> <span class="n">keys</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">iterkeys</span> <span class="o">=</span> <span class="n">_iterate_keys</span>
+
+<div class="viewcode-block" id="LRUCache.incr"><a class="viewcode-back" href="../../../internals/reference/celery.utils.functional.html#celery.datastructures.LRUCache.incr">[docs]</a>    <span class="k">def</span> <span class="nf">incr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">mutex</span><span class="p">:</span>
+            <span class="c1"># this acts as memcached does- store as a string, but return a</span>
+            <span class="c1"># integer as long as it exists and we can cast it</span>
+            <span class="n">newval</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">key</span><span class="p">))</span> <span class="o">+</span> <span class="n">delta</span>
+            <span class="bp">self</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">newval</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">newval</span></div>
+
+    <span class="k">def</span> <span class="nf">__getstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+        <span class="n">d</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;mutex&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">d</span>
+
+    <span class="k">def</span> <span class="nf">__setstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span> <span class="o">=</span> <span class="n">state</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mutex</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">RLock</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+        <span class="n">keys</span> <span class="o">=</span> <span class="n">_iterate_keys</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">_iterate_values</span>
+        <span class="n">items</span> <span class="o">=</span> <span class="n">_iterate_items</span>
+    <span class="k">else</span><span class="p">:</span>  <span class="c1"># noqa</span>
+
+<div class="viewcode-block" id="LRUCache.keys"><a class="viewcode-back" href="../../../internals/reference/celery.utils.functional.html#celery.datastructures.LRUCache.keys">[docs]</a>        <span class="k">def</span> <span class="nf">keys</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_iterate_keys</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="LRUCache.values"><a class="viewcode-back" href="../../../internals/reference/celery.utils.functional.html#celery.datastructures.LRUCache.values">[docs]</a>        <span class="k">def</span> <span class="nf">values</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_iterate_values</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="LRUCache.items"><a class="viewcode-back" href="../../../internals/reference/celery.utils.functional.html#celery.datastructures.LRUCache.items">[docs]</a>        <span class="k">def</span> <span class="nf">items</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_iterate_items</span><span class="p">())</span></div></div>
+
+
+<div class="viewcode-block" id="memoize"><a class="viewcode-back" href="../../../internals/reference/celery.utils.functional.html#celery.datastructures.memoize">[docs]</a><span class="k">def</span> <span class="nf">memoize</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">keyfun</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">Cache</span><span class="o">=</span><span class="n">LRUCache</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">_memoize</span><span class="p">(</span><span class="n">fun</span><span class="p">):</span>
+        <span class="n">mutex</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
+        <span class="n">cache</span> <span class="o">=</span> <span class="n">Cache</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="n">maxsize</span><span class="p">)</span>
+
+        <span class="nd">@wraps</span><span class="p">(</span><span class="n">fun</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">_M</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">keyfun</span><span class="p">:</span>
+                <span class="n">key</span> <span class="o">=</span> <span class="n">keyfun</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">key</span> <span class="o">=</span> <span class="n">args</span> <span class="o">+</span> <span class="p">(</span><span class="n">KEYWORD_MARK</span><span class="p">,</span> <span class="p">)</span> <span class="o">+</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">with</span> <span class="n">mutex</span><span class="p">:</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="n">cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+            <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">fun</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                <span class="n">_M</span><span class="o">.</span><span class="n">misses</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">with</span> <span class="n">mutex</span><span class="p">:</span>
+                    <span class="n">cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">_M</span><span class="o">.</span><span class="n">hits</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">return</span> <span class="n">value</span>
+
+        <span class="k">def</span> <span class="nf">clear</span><span class="p">():</span>
+            <span class="sd">&quot;&quot;&quot;Clear the cache and reset cache statistics.&quot;&quot;&quot;</span>
+            <span class="n">cache</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+            <span class="n">_M</span><span class="o">.</span><span class="n">hits</span> <span class="o">=</span> <span class="n">_M</span><span class="o">.</span><span class="n">misses</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="n">_M</span><span class="o">.</span><span class="n">hits</span> <span class="o">=</span> <span class="n">_M</span><span class="o">.</span><span class="n">misses</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">_M</span><span class="o">.</span><span class="n">clear</span> <span class="o">=</span> <span class="n">clear</span>
+        <span class="n">_M</span><span class="o">.</span><span class="n">original_func</span> <span class="o">=</span> <span class="n">fun</span>
+        <span class="k">return</span> <span class="n">_M</span>
+
+    <span class="k">return</span> <span class="n">_memoize</span></div>
+
+
+<div class="viewcode-block" id="mlazy"><a class="viewcode-back" href="../../../internals/reference/celery.utils.functional.html#celery.datastructures.mlazy">[docs]</a><span class="k">class</span> <span class="nc">mlazy</span><span class="p">(</span><span class="n">lazy</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Memoized lazy evaluation.</span>
+
+<span class="sd">    The function is only evaluated once, every subsequent access</span>
+<span class="sd">    will return the same value.</span>
+
+<span class="sd">    .. attribute:: evaluated</span>
+
+<span class="sd">        Set to to :const:`True` after the object has been evaluated.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">evaluated</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="n">_value</span> <span class="o">=</span> <span class="bp">None</span>
+
+<div class="viewcode-block" id="mlazy.evaluate"><a class="viewcode-back" href="../../../internals/reference/celery.utils.functional.html#celery.datastructures.mlazy.evaluate">[docs]</a>    <span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluated</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">mlazy</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">evaluate</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">evaluated</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span></div></div>
+
+
+<div class="viewcode-block" id="noop"><a class="viewcode-back" href="../../../internals/reference/celery.utils.functional.html#celery.datastructures.noop">[docs]</a><span class="k">def</span> <span class="nf">noop</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;No operation.</span>
+
+<span class="sd">    Takes any arguments/keyword arguments and does nothing.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="first"><a class="viewcode-back" href="../../../internals/reference/celery.utils.functional.html#celery.datastructures.first">[docs]</a><span class="k">def</span> <span class="nf">first</span><span class="p">(</span><span class="n">predicate</span><span class="p">,</span> <span class="n">it</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return the first element in `iterable` that `predicate` Gives a</span>
+<span class="sd">    :const:`True` value for.</span>
+
+<span class="sd">    If `predicate` is None it will return the first item that is not None.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">next</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">it</span> <span class="k">if</span> <span class="p">(</span><span class="n">predicate</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">if</span> <span class="n">predicate</span> <span class="k">else</span> <span class="n">v</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">)),</span>
+        <span class="bp">None</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="firstmethod"><a class="viewcode-back" href="../../../internals/reference/celery.utils.functional.html#celery.datastructures.firstmethod">[docs]</a><span class="k">def</span> <span class="nf">firstmethod</span><span class="p">(</span><span class="n">method</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return a function that with a list of instances,</span>
+<span class="sd">    finds the first instance that gives a value for the given method.</span>
+
+<span class="sd">    The list can also contain lazy instances</span>
+<span class="sd">    (:class:`~kombu.utils.functional.lazy`.)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">_matcher</span><span class="p">(</span><span class="n">it</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">it</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">answer</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">maybe_evaluate</span><span class="p">(</span><span class="n">obj</span><span class="p">),</span> <span class="n">method</span><span class="p">)(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+                <span class="k">pass</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">answer</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">answer</span>
+
+    <span class="k">return</span> <span class="n">_matcher</span></div>
+
+
+<div class="viewcode-block" id="chunks"><a class="viewcode-back" href="../../../internals/reference/celery.utils.functional.html#celery.datastructures.chunks">[docs]</a><span class="k">def</span> <span class="nf">chunks</span><span class="p">(</span><span class="n">it</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Split an iterator into chunks with `n` elements each.</span>
+
+<span class="sd">    Examples</span>
+
+<span class="sd">        # n == 2</span>
+<span class="sd">        &gt;&gt;&gt; x = chunks(iter([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]), 2)</span>
+<span class="sd">        &gt;&gt;&gt; list(x)</span>
+<span class="sd">        [[0, 1], [2, 3], [4, 5], [6, 7], [8, 9], [10]]</span>
+
+<span class="sd">        # n == 3</span>
+<span class="sd">        &gt;&gt;&gt; x = chunks(iter([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]), 3)</span>
+<span class="sd">        &gt;&gt;&gt; list(x)</span>
+<span class="sd">        [[0, 1, 2], [3, 4, 5], [6, 7, 8], [9, 10]]</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># XXX This function is not used anymore, at least not by Celery itself.</span>
+    <span class="k">for</span> <span class="n">first</span> <span class="ow">in</span> <span class="n">it</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="p">[</span><span class="n">first</span><span class="p">]</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">islice</span><span class="p">(</span><span class="n">it</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="padlist"><a class="viewcode-back" href="../../../internals/reference/celery.utils.functional.html#celery.datastructures.padlist">[docs]</a><span class="k">def</span> <span class="nf">padlist</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Pad list with default elements.</span>
+
+<span class="sd">    Examples:</span>
+
+<span class="sd">        &gt;&gt;&gt; first, last, city = padlist([&#39;George&#39;, &#39;Costanza&#39;, &#39;NYC&#39;], 3)</span>
+<span class="sd">        (&#39;George&#39;, &#39;Costanza&#39;, &#39;NYC&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; first, last, city = padlist([&#39;George&#39;, &#39;Costanza&#39;], 3)</span>
+<span class="sd">        (&#39;George&#39;, &#39;Costanza&#39;, None)</span>
+<span class="sd">        &gt;&gt;&gt; first, last, city, planet = padlist(</span>
+<span class="sd">        ...     [&#39;George&#39;, &#39;Costanza&#39;, &#39;NYC&#39;], 4, default=&#39;Earth&#39;,</span>
+<span class="sd">        ... )</span>
+<span class="sd">        (&#39;George&#39;, &#39;Costanza&#39;, &#39;NYC&#39;, &#39;Earth&#39;)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">container</span><span class="p">)[:</span><span class="n">size</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">default</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">size</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">container</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="mattrgetter"><a class="viewcode-back" href="../../../internals/reference/celery.utils.functional.html#celery.datastructures.mattrgetter">[docs]</a><span class="k">def</span> <span class="nf">mattrgetter</span><span class="p">(</span><span class="o">*</span><span class="n">attrs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Like :func:`operator.itemgetter` but return :const:`None` on missing</span>
+<span class="sd">    attributes instead of raising :exc:`AttributeError`.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="k">lambda</span> <span class="n">obj</span><span class="p">:</span> <span class="nb">dict</span><span class="p">((</span><span class="n">attr</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">attr</span><span class="p">,</span> <span class="bp">None</span><span class="p">))</span>
+                            <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">attrs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="uniq"><a class="viewcode-back" href="../../../internals/reference/celery.utils.functional.html#celery.datastructures.uniq">[docs]</a><span class="k">def</span> <span class="nf">uniq</span><span class="p">(</span><span class="n">it</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return all unique elements in ``it``, preserving order.&quot;&quot;&quot;</span>
+    <span class="n">seen</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span> <span class="ow">or</span> <span class="n">obj</span> <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">it</span> <span class="k">if</span> <span class="n">obj</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="regen"><a class="viewcode-back" href="../../../internals/reference/celery.utils.functional.html#celery.datastructures.regen">[docs]</a><span class="k">def</span> <span class="nf">regen</span><span class="p">(</span><span class="n">it</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Regen takes any iterable, and if the object is an</span>
+<span class="sd">    generator it will cache the evaluated list on first access,</span>
+<span class="sd">    so that the generator can be &quot;consumed&quot; multiple times.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">it</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="n">it</span>
+    <span class="k">return</span> <span class="n">_regen</span><span class="p">(</span><span class="n">it</span><span class="p">)</span></div>
+
+
+<span class="k">class</span> <span class="nc">_regen</span><span class="p">(</span><span class="n">UserList</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+    <span class="c1"># must be subclass of list so that json can encode.</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">it</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__it</span> <span class="o">=</span> <span class="n">it</span>
+
+    <span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__length_hint__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__it</span><span class="o">.</span><span class="n">__length_hint__</span><span class="p">()</span>
+
+    <span class="nd">@cached_property</span>
+    <span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__it</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="dictfilter"><a class="viewcode-back" href="../../../internals/reference/celery.utils.functional.html#celery.datastructures.dictfilter">[docs]</a><span class="k">def</span> <span class="nf">dictfilter</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Remove all keys from dict ``d`` whose value is :const:`None`&quot;&quot;&quot;</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">kw</span> <span class="k">if</span> <span class="n">d</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span> <span class="k">if</span> <span class="n">kw</span> <span class="k">else</span> <span class="n">d</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">dict</span><span class="p">((</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">items</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../utils.html" >celery.utils</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
+    </div>
+  </body>
+</html>

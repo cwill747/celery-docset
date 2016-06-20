@@ -1,0 +1,184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>celery.bin.beat &mdash; Celery 3.1.23 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/celery.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '3.1.23',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="copyright" title="Copyright" href="../../../copyright.html" />
+    <link rel="top" title="Celery 3.1.23 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+<div class="deck">
+
+    
+        <p>
+        This document describes the current stable version of Celery (3.1). For development docs,
+        <a href="http://docs.celeryproject.org/en/master/_modules/celery/bin/beat.html">go here</a>.
+        </p>
+    
+
+</div>
+    <h1>Source code for celery.bin.beat</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">The :program:`celery beat` command.</span>
+
+<span class="sd">.. program:: celery beat</span>
+
+<span class="sd">.. seealso::</span>
+
+<span class="sd">    See :ref:`preload-options` and :ref:`daemon-options`.</span>
+
+<span class="sd">.. cmdoption:: --detach</span>
+
+<span class="sd">    Detach and run in the background as a daemon.</span>
+
+<span class="sd">.. cmdoption:: -s, --schedule</span>
+
+<span class="sd">    Path to the schedule database. Defaults to `celerybeat-schedule`.</span>
+<span class="sd">    The extension &#39;.db&#39; may be appended to the filename.</span>
+<span class="sd">    Default is {default}.</span>
+
+<span class="sd">.. cmdoption:: -S, --scheduler</span>
+
+<span class="sd">    Scheduler class to use.</span>
+<span class="sd">    Default is :class:`celery.beat.PersistentScheduler`.</span>
+
+<span class="sd">.. cmdoption:: --max-interval</span>
+
+<span class="sd">    Max seconds to sleep between schedule iterations.</span>
+
+<span class="sd">.. cmdoption:: -f, --logfile</span>
+
+<span class="sd">    Path to log file. If no logfile is specified, `stderr` is used.</span>
+
+<span class="sd">.. cmdoption:: -l, --loglevel</span>
+
+<span class="sd">    Logging level, choose between `DEBUG`, `INFO`, `WARNING`,</span>
+<span class="sd">    `ERROR`, `CRITICAL`, or `FATAL`.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
+
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+
+<span class="kn">from</span> <span class="nn">celery.platforms</span> <span class="kn">import</span> <span class="n">detached</span><span class="p">,</span> <span class="n">maybe_drop_privileges</span>
+
+<span class="kn">from</span> <span class="nn">celery.bin.base</span> <span class="kn">import</span> <span class="n">Command</span><span class="p">,</span> <span class="n">Option</span><span class="p">,</span> <span class="n">daemon_options</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;beat&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="beat"><a class="viewcode-back" href="../../../reference/celery.bin.beat.html#celery.bin.beat.beat">[docs]</a><span class="k">class</span> <span class="nc">beat</span><span class="p">(</span><span class="n">Command</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Start the beat periodic task scheduler.</span>
+
+<span class="sd">    Examples::</span>
+
+<span class="sd">        celery beat -l info</span>
+<span class="sd">        celery beat -s /var/run/celery/beat-schedule --detach</span>
+<span class="sd">        celery beat -S djcelery.schedulers.DatabaseScheduler</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">doc</span> <span class="o">=</span> <span class="n">__doc__</span>
+    <span class="n">enable_config_from_cmdline</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="n">supports_args</span> <span class="o">=</span> <span class="bp">False</span>
+
+<div class="viewcode-block" id="beat.run"><a class="viewcode-back" href="../../../reference/celery.bin.beat.html#celery.bin.beat.beat.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">detach</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">logfile</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">pidfile</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">uid</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+            <span class="n">gid</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">umask</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">working_directory</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">detach</span><span class="p">:</span>
+            <span class="n">maybe_drop_privileges</span><span class="p">(</span><span class="n">uid</span><span class="o">=</span><span class="n">uid</span><span class="p">,</span> <span class="n">gid</span><span class="o">=</span><span class="n">gid</span><span class="p">)</span>
+        <span class="n">workdir</span> <span class="o">=</span> <span class="n">working_directory</span>
+        <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="n">beat</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">Beat</span><span class="p">,</span>
+                       <span class="n">logfile</span><span class="o">=</span><span class="n">logfile</span><span class="p">,</span> <span class="n">pidfile</span><span class="o">=</span><span class="n">pidfile</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">detach</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">detached</span><span class="p">(</span><span class="n">logfile</span><span class="p">,</span> <span class="n">pidfile</span><span class="p">,</span> <span class="n">uid</span><span class="p">,</span> <span class="n">gid</span><span class="p">,</span> <span class="n">umask</span><span class="p">,</span> <span class="n">workdir</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">beat</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">beat</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="beat.get_options"><a class="viewcode-back" href="../../../reference/celery.bin.beat.html#celery.bin.beat.beat.get_options">[docs]</a>    <span class="k">def</span> <span class="nf">get_options</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">conf</span>
+
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="p">(</span><span class="n">Option</span><span class="p">(</span><span class="s1">&#39;--detach&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">),</span>
+             <span class="n">Option</span><span class="p">(</span><span class="s1">&#39;-s&#39;</span><span class="p">,</span> <span class="s1">&#39;--schedule&#39;</span><span class="p">,</span>
+                    <span class="n">default</span><span class="o">=</span><span class="n">c</span><span class="o">.</span><span class="n">CELERYBEAT_SCHEDULE_FILENAME</span><span class="p">),</span>
+             <span class="n">Option</span><span class="p">(</span><span class="s1">&#39;--max-interval&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;float&#39;</span><span class="p">),</span>
+             <span class="n">Option</span><span class="p">(</span><span class="s1">&#39;-S&#39;</span><span class="p">,</span> <span class="s1">&#39;--scheduler&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;scheduler_cls&#39;</span><span class="p">),</span>
+             <span class="n">Option</span><span class="p">(</span><span class="s1">&#39;-l&#39;</span><span class="p">,</span> <span class="s1">&#39;--loglevel&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">c</span><span class="o">.</span><span class="n">CELERYBEAT_LOG_LEVEL</span><span class="p">))</span> <span class="o">+</span>
+            <span class="n">daemon_options</span><span class="p">(</span><span class="n">default_pidfile</span><span class="o">=</span><span class="s1">&#39;celerybeat.pid&#39;</span><span class="p">)</span> <span class="o">+</span>
+            <span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">user_options</span><span class="p">[</span><span class="s1">&#39;beat&#39;</span><span class="p">])</span>
+        <span class="p">)</span></div></div>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="n">beat</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">)</span><span class="o">.</span><span class="n">execute_from_commandline</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>      <span class="c1"># pragma: no cover</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
+    </div>
+  </body>
+</html>

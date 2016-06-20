@@ -1,0 +1,595 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>celery.bin.base — Celery 3.1.23 documentation</title>
+<link href="../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.23',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+<script src="../_static/jquery.js" type="text/javascript"></script>
+<script src="../_static/underscore.js" type="text/javascript"></script>
+<script src="../_static/doctools.js" type="text/javascript"></script>
+<link href="../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="index.html" rel="up" title="API Reference"/>
+<link href="celery.bin.celery.html" rel="next" title="celery.bin.celery"/>
+<link href="celery.worker.strategy.html" rel="prev" title="celery.worker.strategy"/>
+</head>
+<body role="document">
+<div aria-label="related navigation" class="related" role="navigation">
+<h3>Navigation</h3>
+<ul>
+<li class="right" style="margin-right: 10px">
+<a accesskey="I" href="../genindex.html" title="General Index">index</a></li>
+<li class="right">
+<a href="../py-modindex.html" title="Python Module Index">modules</a> |</li>
+<li class="right">
+<a accesskey="N" href="celery.bin.celery.html" title="celery.bin.celery">next</a> |</li>
+<li class="right">
+<a accesskey="P" href="celery.worker.strategy.html" title="celery.worker.strategy">previous</a> |</li>
+<li class="nav-item nav-item-0"><a href="../index.html">Celery 3.1.23 documentation</a> »</li>
+<li class="nav-item nav-item-1"><a accesskey="U" href="index.html">API Reference</a> »</li>
+</ul>
+</div>
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
+<div class="deck">
+<p>
+        This document describes the current stable version of Celery (3.1). For development docs,
+        <a href="http://docs.celeryproject.org/en/master/reference/celery.bin.base.html">go here</a>.
+        </p>
+</div>
+<div class="section" id="celery-bin-base"><a name="//apple_ref/cpp/Module/celery.bin.base"></a>
+<h1>celery.bin.base<a class="headerlink" href="#celery-bin-base" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#preload-options" id="id3">Preload Options</a></li>
+<li><a class="reference internal" href="#daemon-options" id="id4">Daemon Options</a></li>
+</ul>
+</div>
+<span class="target" id="module-celery.bin.base"></span><div class="section" id="preload-options">
+<span id="id1"></span><h2><a class="toc-backref" href="#id3">Preload Options</a><a class="headerlink" href="#preload-options" title="Permalink to this headline">¶</a></h2>
+<p>These options are supported by all commands,
+and usually parsed before command-specific arguments.</p>
+<dl class="cmdoption">
+<dt id="cmdoption-A"><a name="//apple_ref/cpp/Option/-A"></a>
+<span id="cmdoption--app"></span><code class="descname">-A</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--app</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-A" title="Permalink to this definition">¶</a></dt>
+<dd><p>app instance to use (e.g. module.attr_name)</p>
+</dd></dl>
+<dl class="cmdoption">
+<dt id="cmdoption-b"><a name="//apple_ref/cpp/Option/-b"></a>
+<span id="cmdoption--broker"></span><code class="descname">-b</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--broker</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-b" title="Permalink to this definition">¶</a></dt>
+<dd><p>url to broker.  default is ‘amqp://guest@localhost//’</p>
+</dd></dl>
+<dl class="cmdoption">
+<dt id="cmdoption--loader"><a name="//apple_ref/cpp/Option/--loader"></a>
+<code class="descname">--loader</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption--loader" title="Permalink to this definition">¶</a></dt>
+<dd><p>name of custom loader class to use.</p>
+</dd></dl>
+<dl class="cmdoption">
+<dt id="cmdoption--config"><a name="//apple_ref/cpp/Option/--config"></a>
+<code class="descname">--config</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption--config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the configuration module</p>
+</dd></dl>
+</div>
+<div class="section" id="daemon-options">
+<span id="id2"></span><h2><a class="toc-backref" href="#id4">Daemon Options</a><a class="headerlink" href="#daemon-options" title="Permalink to this headline">¶</a></h2>
+<p>These options are supported by commands that can detach
+into the background (daemon).  They will be present
+in any command that also has a <cite>–detach</cite> option.</p>
+<dl class="cmdoption">
+<dt id="cmdoption-f">
+<span id="cmdoption--logfile"></span><code class="descname">-f</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--logfile</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-f" title="Permalink to this definition">¶</a></dt>
+<dd><p>Path to log file. If no logfile is specified, <cite>stderr</cite> is used.</p>
+</dd></dl>
+<dl class="cmdoption">
+<dt id="cmdoption--pidfile">
+<code class="descname">--pidfile</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption--pidfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optional file used to store the process pid.</p>
+<p>The program will not start if this file already exists
+and the pid is still alive.</p>
+</dd></dl>
+<dl class="cmdoption">
+<dt id="cmdoption--uid"><a name="//apple_ref/cpp/Option/--uid"></a>
+<code class="descname">--uid</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption--uid" title="Permalink to this definition">¶</a></dt>
+<dd><p>User id, or user name of the user to run as after detaching.</p>
+</dd></dl>
+<dl class="cmdoption">
+<dt id="cmdoption--gid"><a name="//apple_ref/cpp/Option/--gid"></a>
+<code class="descname">--gid</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption--gid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Group id, or group name of the main group to change to after
+detaching.</p>
+</dd></dl>
+<dl class="cmdoption">
+<dt id="cmdoption--umask"><a name="//apple_ref/cpp/Option/--umask"></a>
+<code class="descname">--umask</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption--umask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Effective umask (in octal) of the process after detaching.  Inherits
+the umask of the parent process by default.</p>
+</dd></dl>
+<dl class="cmdoption">
+<dt id="cmdoption--workdir"><a name="//apple_ref/cpp/Option/--workdir"></a>
+<code class="descname">--workdir</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption--workdir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optional directory to change to after detaching.</p>
+</dd></dl>
+<dl class="cmdoption">
+<dt id="cmdoption--executable"><a name="//apple_ref/cpp/Option/--executable"></a>
+<code class="descname">--executable</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption--executable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Executable to use for the detached process.</p>
+</dd></dl>
+<dl class="exception">
+<dt id="celery.bin.base.Error"><a name="//apple_ref/cpp/Exception/celery.bin.base.Error"></a>
+<em class="property">exception </em><code class="descclassname">celery.bin.base.</code><code class="descname">Error</code><span class="sig-paren">(</span><em>reason</em>, <em>status=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/base.html#Error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Error" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="celery.bin.base.Error.status"><a name="//apple_ref/cpp/Attribute/celery.bin.base.Error.status"></a>
+<code class="descname">status</code><em class="property"> = 1</em><a class="headerlink" href="#celery.bin.base.Error.status" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</dd></dl>
+<dl class="exception">
+<dt id="celery.bin.base.UsageError"><a name="//apple_ref/cpp/Exception/celery.bin.base.UsageError"></a>
+<em class="property">exception </em><code class="descclassname">celery.bin.base.</code><code class="descname">UsageError</code><span class="sig-paren">(</span><em>reason</em>, <em>status=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/base.html#UsageError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.UsageError" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="celery.bin.base.UsageError.status"><a name="//apple_ref/cpp/Attribute/celery.bin.base.UsageError.status"></a>
+<code class="descname">status</code><em class="property"> = 64</em><a class="headerlink" href="#celery.bin.base.UsageError.status" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</dd></dl>
+<dl class="class">
+<dt id="celery.bin.base.Extensions"><a name="//apple_ref/cpp/Class/celery.bin.base.Extensions"></a>
+<em class="property">class </em><code class="descclassname">celery.bin.base.</code><code class="descname">Extensions</code><span class="sig-paren">(</span><em>namespace</em>, <em>register</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/base.html#Extensions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Extensions" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="celery.bin.base.Extensions.add"><a name="//apple_ref/cpp/Method/celery.bin.base.Extensions.add"></a>
+<code class="descname">add</code><span class="sig-paren">(</span><em>cls</em>, <em>name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/base.html#Extensions.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Extensions.add" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.base.Extensions.load"><a name="//apple_ref/cpp/Method/celery.bin.base.Extensions.load"></a>
+<code class="descname">load</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/base.html#Extensions.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Extensions.load" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</dd></dl>
+<dl class="class">
+<dt id="celery.bin.base.HelpFormatter"><a name="//apple_ref/cpp/Class/celery.bin.base.HelpFormatter"></a>
+<em class="property">class </em><code class="descclassname">celery.bin.base.</code><code class="descname">HelpFormatter</code><span class="sig-paren">(</span><em>indent_increment=2</em>, <em>max_help_position=24</em>, <em>width=None</em>, <em>short_first=1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/base.html#HelpFormatter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.HelpFormatter" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="celery.bin.base.HelpFormatter.format_description"><a name="//apple_ref/cpp/Method/celery.bin.base.HelpFormatter.format_description"></a>
+<code class="descname">format_description</code><span class="sig-paren">(</span><em>description</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/base.html#HelpFormatter.format_description"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.HelpFormatter.format_description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.base.HelpFormatter.format_epilog"><a name="//apple_ref/cpp/Method/celery.bin.base.HelpFormatter.format_epilog"></a>
+<code class="descname">format_epilog</code><span class="sig-paren">(</span><em>epilog</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/base.html#HelpFormatter.format_epilog"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.HelpFormatter.format_epilog" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</dd></dl>
+<dl class="class">
+<dt id="celery.bin.base.Command"><a name="//apple_ref/cpp/Class/celery.bin.base.Command"></a>
+<em class="property">class </em><code class="descclassname">celery.bin.base.</code><code class="descname">Command</code><span class="sig-paren">(</span><em>app=None</em>, <em>get_app=None</em>, <em>no_color=False</em>, <em>stdout=None</em>, <em>stderr=None</em>, <em>quiet=False</em>, <em>on_error=None</em>, <em>on_usage_error=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/base.html#Command"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Command" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class for command-line applications.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name"></col>
+<col class="field-body"></col>
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>app</strong> – The current app.</li>
+<li><strong>get_app</strong> – Callable returning the current app if no app provided.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="exception">
+<dt id="celery.bin.base.Command.Error"><a name="//apple_ref/cpp/Exception/celery.bin.base.Command.Error"></a>
+<em class="property">exception </em><code class="descname">Error</code><span class="sig-paren">(</span><em>reason</em>, <em>status=None</em><span class="sig-paren">)</span><a class="headerlink" href="#celery.bin.base.Command.Error" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="celery.bin.base.Command.Error.status"><a name="//apple_ref/cpp/Attribute/celery.bin.base.Command.Error.status"></a>
+<code class="descname">status</code><em class="property"> = 1</em><a class="headerlink" href="#celery.bin.base.Command.Error.status" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</dd></dl>
+<dl class="attribute">
+<dt id="celery.bin.base.Command.Parser"><a name="//apple_ref/cpp/Attribute/celery.bin.base.Command.Parser"></a>
+<code class="descclassname">Command.</code><code class="descname">Parser</code><a class="headerlink" href="#celery.bin.base.Command.Parser" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal"><span class="pre">OptionParser</span></code></p>
+</dd></dl>
+<dl class="exception">
+<dt id="celery.bin.base.Command.UsageError"><a name="//apple_ref/cpp/Exception/celery.bin.base.Command.UsageError"></a>
+<em class="property">exception </em><code class="descclassname">Command.</code><code class="descname">UsageError</code><span class="sig-paren">(</span><em>reason</em>, <em>status=None</em><span class="sig-paren">)</span><a class="headerlink" href="#celery.bin.base.Command.UsageError" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="celery.bin.base.Command.UsageError.status"><a name="//apple_ref/cpp/Attribute/celery.bin.base.Command.UsageError.status"></a>
+<code class="descname">status</code><em class="property"> = 64</em><a class="headerlink" href="#celery.bin.base.Command.UsageError.status" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</dd></dl>
+<dl class="method">
+<dt id="celery.bin.base.Command.add_append_opt"><a name="//apple_ref/cpp/Method/celery.bin.base.Command.add_append_opt"></a>
+<code class="descclassname">Command.</code><code class="descname">add_append_opt</code><span class="sig-paren">(</span><em>acc</em>, <em>opt</em>, <em>value</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/base.html#Command.add_append_opt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Command.add_append_opt" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.bin.base.Command.args"><a name="//apple_ref/cpp/Attribute/celery.bin.base.Command.args"></a>
+<code class="descclassname">Command.</code><code class="descname">args</code><em class="property"> = u''</em><a class="headerlink" href="#celery.bin.base.Command.args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.base.Command.ask"><a name="//apple_ref/cpp/Method/celery.bin.base.Command.ask"></a>
+<code class="descclassname">Command.</code><code class="descname">ask</code><span class="sig-paren">(</span><em>q</em>, <em>choices</em>, <em>default=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/base.html#Command.ask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Command.ask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prompt user to choose from a tuple of string values.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name"></col>
+<col class="field-body"></col>
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>q</strong> – the question to ask (do not include questionark)</li>
+<li><strong>choice</strong> – tuple of possible choices, must be lowercase.</li>
+<li><strong>default</strong> – Default value if any.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>If a default is not specified the question will be repeated
+until the user gives a valid choice.</p>
+<p>Matching is done case insensitively.</p>
+</dd></dl>
+<dl class="method">
+<dt id="celery.bin.base.Command.check_args"><a name="//apple_ref/cpp/Method/celery.bin.base.Command.check_args"></a>
+<code class="descclassname">Command.</code><code class="descname">check_args</code><span class="sig-paren">(</span><em>args</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/base.html#Command.check_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Command.check_args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.bin.base.Command.colored"><a name="//apple_ref/cpp/Attribute/celery.bin.base.Command.colored"></a>
+<code class="descclassname">Command.</code><code class="descname">colored</code><a class="headerlink" href="#celery.bin.base.Command.colored" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.base.Command.create_parser"><a name="//apple_ref/cpp/Method/celery.bin.base.Command.create_parser"></a>
+<code class="descclassname">Command.</code><code class="descname">create_parser</code><span class="sig-paren">(</span><em>prog_name</em>, <em>command=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/base.html#Command.create_parser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Command.create_parser" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.bin.base.Command.description"><a name="//apple_ref/cpp/Attribute/celery.bin.base.Command.description"></a>
+<code class="descclassname">Command.</code><code class="descname">description</code><em class="property"> = u''</em><a class="headerlink" href="#celery.bin.base.Command.description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.base.Command.die"><a name="//apple_ref/cpp/Method/celery.bin.base.Command.die"></a>
+<code class="descclassname">Command.</code><code class="descname">die</code><span class="sig-paren">(</span><em>msg</em>, <em>status=1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/base.html#Command.die"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Command.die" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.bin.base.Command.doc"><a name="//apple_ref/cpp/Attribute/celery.bin.base.Command.doc"></a>
+<code class="descclassname">Command.</code><code class="descname">doc</code><em class="property"> = None</em><a class="headerlink" href="#celery.bin.base.Command.doc" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.base.Command.early_version"><a name="//apple_ref/cpp/Method/celery.bin.base.Command.early_version"></a>
+<code class="descclassname">Command.</code><code class="descname">early_version</code><span class="sig-paren">(</span><em>argv</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/base.html#Command.early_version"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Command.early_version" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.bin.base.Command.enable_config_from_cmdline"><a name="//apple_ref/cpp/Attribute/celery.bin.base.Command.enable_config_from_cmdline"></a>
+<code class="descclassname">Command.</code><code class="descname">enable_config_from_cmdline</code><em class="property"> = False</em><a class="headerlink" href="#celery.bin.base.Command.enable_config_from_cmdline" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.bin.base.Command.epilog"><a name="//apple_ref/cpp/Attribute/celery.bin.base.Command.epilog"></a>
+<code class="descclassname">Command.</code><code class="descname">epilog</code><em class="property"> = None</em><a class="headerlink" href="#celery.bin.base.Command.epilog" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.base.Command.error"><a name="//apple_ref/cpp/Method/celery.bin.base.Command.error"></a>
+<code class="descclassname">Command.</code><code class="descname">error</code><span class="sig-paren">(</span><em>s</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/base.html#Command.error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Command.error" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.base.Command.execute_from_commandline"><a name="//apple_ref/cpp/Method/celery.bin.base.Command.execute_from_commandline"></a>
+<code class="descclassname">Command.</code><code class="descname">execute_from_commandline</code><span class="sig-paren">(</span><em>argv=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/base.html#Command.execute_from_commandline"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Command.execute_from_commandline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute application from command-line.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name"></col>
+<col class="field-body"></col>
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argv</strong> – The list of command-line arguments.
+Defaults to <code class="docutils literal"><span class="pre">sys.argv</span></code>.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+<dl class="method">
+<dt id="celery.bin.base.Command.expanduser"><a name="//apple_ref/cpp/Method/celery.bin.base.Command.expanduser"></a>
+<code class="descclassname">Command.</code><code class="descname">expanduser</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/base.html#Command.expanduser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Command.expanduser" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.base.Command.find_app"><a name="//apple_ref/cpp/Method/celery.bin.base.Command.find_app"></a>
+<code class="descclassname">Command.</code><code class="descname">find_app</code><span class="sig-paren">(</span><em>app</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/base.html#Command.find_app"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Command.find_app" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.base.Command.get_cls_by_name"><a name="//apple_ref/cpp/Method/celery.bin.base.Command.get_cls_by_name"></a>
+<code class="descclassname">Command.</code><code class="descname">get_cls_by_name</code><span class="sig-paren">(</span><em>name</em>, <em>imp=&lt;function import_from_cwd&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#celery.bin.base.Command.get_cls_by_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.base.Command.get_options"><a name="//apple_ref/cpp/Method/celery.bin.base.Command.get_options"></a>
+<code class="descclassname">Command.</code><code class="descname">get_options</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/base.html#Command.get_options"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Command.get_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get supported command-line options.</p>
+</dd></dl>
+<dl class="method">
+<dt id="celery.bin.base.Command.handle_argv"><a name="//apple_ref/cpp/Method/celery.bin.base.Command.handle_argv"></a>
+<code class="descclassname">Command.</code><code class="descname">handle_argv</code><span class="sig-paren">(</span><em>prog_name</em>, <em>argv</em>, <em>command=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/base.html#Command.handle_argv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Command.handle_argv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse command-line arguments from <code class="docutils literal"><span class="pre">argv</span></code> and dispatch
+to <a class="reference internal" href="#celery.bin.base.Command.run" title="celery.bin.base.Command.run"><code class="xref py py-meth docutils literal"><span class="pre">run()</span></code></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name"></col>
+<col class="field-body"></col>
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>prog_name</strong> – The program name (<code class="docutils literal"><span class="pre">argv[0]</span></code>).</li>
+<li><strong>argv</strong> – Command arguments.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Exits with an error message if <a class="reference internal" href="#celery.bin.base.Command.supports_args" title="celery.bin.base.Command.supports_args"><code class="xref py py-attr docutils literal"><span class="pre">supports_args</span></code></a> is disabled
+and <code class="docutils literal"><span class="pre">argv</span></code> contains positional arguments.</p>
+</dd></dl>
+<dl class="method">
+<dt id="celery.bin.base.Command.host_format"><a name="//apple_ref/cpp/Method/celery.bin.base.Command.host_format"></a>
+<code class="descclassname">Command.</code><code class="descname">host_format</code><span class="sig-paren">(</span><em>s</em>, <em>**extra</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/base.html#Command.host_format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Command.host_format" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.bin.base.Command.leaf"><a name="//apple_ref/cpp/Attribute/celery.bin.base.Command.leaf"></a>
+<code class="descclassname">Command.</code><code class="descname">leaf</code><em class="property"> = True</em><a class="headerlink" href="#celery.bin.base.Command.leaf" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.base.Command.maybe_patch_concurrency"><a name="//apple_ref/cpp/Method/celery.bin.base.Command.maybe_patch_concurrency"></a>
+<code class="descclassname">Command.</code><code class="descname">maybe_patch_concurrency</code><span class="sig-paren">(</span><em>argv=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/base.html#Command.maybe_patch_concurrency"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Command.maybe_patch_concurrency" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.bin.base.Command.namespace"><a name="//apple_ref/cpp/Attribute/celery.bin.base.Command.namespace"></a>
+<code class="descclassname">Command.</code><code class="descname">namespace</code><em class="property"> = u'celery'</em><a class="headerlink" href="#celery.bin.base.Command.namespace" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.bin.base.Command.no_color"><a name="//apple_ref/cpp/Attribute/celery.bin.base.Command.no_color"></a>
+<code class="descclassname">Command.</code><code class="descname">no_color</code><a class="headerlink" href="#celery.bin.base.Command.no_color" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.base.Command.node_format"><a name="//apple_ref/cpp/Method/celery.bin.base.Command.node_format"></a>
+<code class="descclassname">Command.</code><code class="descname">node_format</code><span class="sig-paren">(</span><em>s</em>, <em>nodename</em>, <em>**extra</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/base.html#Command.node_format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Command.node_format" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.base.Command.on_concurrency_setup"><a name="//apple_ref/cpp/Method/celery.bin.base.Command.on_concurrency_setup"></a>
+<code class="descclassname">Command.</code><code class="descname">on_concurrency_setup</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/base.html#Command.on_concurrency_setup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Command.on_concurrency_setup" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.base.Command.on_error"><a name="//apple_ref/cpp/Method/celery.bin.base.Command.on_error"></a>
+<code class="descclassname">Command.</code><code class="descname">on_error</code><span class="sig-paren">(</span><em>exc</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/base.html#Command.on_error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Command.on_error" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.base.Command.on_usage_error"><a name="//apple_ref/cpp/Method/celery.bin.base.Command.on_usage_error"></a>
+<code class="descclassname">Command.</code><code class="descname">on_usage_error</code><span class="sig-paren">(</span><em>exc</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/base.html#Command.on_usage_error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Command.on_usage_error" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.bin.base.Command.option_list"><a name="//apple_ref/cpp/Attribute/celery.bin.base.Command.option_list"></a>
+<code class="descclassname">Command.</code><code class="descname">option_list</code><em class="property"> = ()</em><a class="headerlink" href="#celery.bin.base.Command.option_list" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.base.Command.out"><a name="//apple_ref/cpp/Method/celery.bin.base.Command.out"></a>
+<code class="descclassname">Command.</code><code class="descname">out</code><span class="sig-paren">(</span><em>s</em>, <em>fh=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/base.html#Command.out"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Command.out" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.base.Command.parse_doc"><a name="//apple_ref/cpp/Method/celery.bin.base.Command.parse_doc"></a>
+<code class="descclassname">Command.</code><code class="descname">parse_doc</code><span class="sig-paren">(</span><em>doc</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/base.html#Command.parse_doc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Command.parse_doc" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.base.Command.parse_options"><a name="//apple_ref/cpp/Method/celery.bin.base.Command.parse_options"></a>
+<code class="descclassname">Command.</code><code class="descname">parse_options</code><span class="sig-paren">(</span><em>prog_name</em>, <em>arguments</em>, <em>command=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/base.html#Command.parse_options"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Command.parse_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse the available options.</p>
+</dd></dl>
+<dl class="method">
+<dt id="celery.bin.base.Command.parse_preload_options"><a name="//apple_ref/cpp/Method/celery.bin.base.Command.parse_preload_options"></a>
+<code class="descclassname">Command.</code><code class="descname">parse_preload_options</code><span class="sig-paren">(</span><em>args</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/base.html#Command.parse_preload_options"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Command.parse_preload_options" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.bin.base.Command.preload_options"><a name="//apple_ref/cpp/Attribute/celery.bin.base.Command.preload_options"></a>
+<code class="descclassname">Command.</code><code class="descname">preload_options</code><em class="property"> = (&lt;Option at 0x10c7a4ea8: -A/--app&gt;, &lt;Option at 0x10d69a098: -b/--broker&gt;, &lt;Option at 0x10b8dd128: --loader&gt;, &lt;Option at 0x10b8ce3b0: --config&gt;, &lt;Option at 0x10d31dbd8: --workdir&gt;, &lt;Option at 0x10d31dea8: -C/--no-color&gt;, &lt;Option at 0x10d31d7a0: -q/--quiet&gt;)</em><a class="headerlink" href="#celery.bin.base.Command.preload_options" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.base.Command.prepare_args"><a name="//apple_ref/cpp/Method/celery.bin.base.Command.prepare_args"></a>
+<code class="descclassname">Command.</code><code class="descname">prepare_args</code><span class="sig-paren">(</span><em>options</em>, <em>args</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/base.html#Command.prepare_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Command.prepare_args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.base.Command.prepare_parser"><a name="//apple_ref/cpp/Method/celery.bin.base.Command.prepare_parser"></a>
+<code class="descclassname">Command.</code><code class="descname">prepare_parser</code><span class="sig-paren">(</span><em>parser</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/base.html#Command.prepare_parser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Command.prepare_parser" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.base.Command.preparse_options"><a name="//apple_ref/cpp/Method/celery.bin.base.Command.preparse_options"></a>
+<code class="descclassname">Command.</code><code class="descname">preparse_options</code><span class="sig-paren">(</span><em>args</em>, <em>options</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/base.html#Command.preparse_options"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Command.preparse_options" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.base.Command.pretty"><a name="//apple_ref/cpp/Method/celery.bin.base.Command.pretty"></a>
+<code class="descclassname">Command.</code><code class="descname">pretty</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/base.html#Command.pretty"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Command.pretty" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.base.Command.pretty_dict_ok_error"><a name="//apple_ref/cpp/Method/celery.bin.base.Command.pretty_dict_ok_error"></a>
+<code class="descclassname">Command.</code><code class="descname">pretty_dict_ok_error</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/base.html#Command.pretty_dict_ok_error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Command.pretty_dict_ok_error" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.base.Command.pretty_list"><a name="//apple_ref/cpp/Method/celery.bin.base.Command.pretty_list"></a>
+<code class="descclassname">Command.</code><code class="descname">pretty_list</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/base.html#Command.pretty_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Command.pretty_list" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.base.Command.process_cmdline_config"><a name="//apple_ref/cpp/Method/celery.bin.base.Command.process_cmdline_config"></a>
+<code class="descclassname">Command.</code><code class="descname">process_cmdline_config</code><span class="sig-paren">(</span><em>argv</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/base.html#Command.process_cmdline_config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Command.process_cmdline_config" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.bin.base.Command.prog_name"><a name="//apple_ref/cpp/Attribute/celery.bin.base.Command.prog_name"></a>
+<code class="descclassname">Command.</code><code class="descname">prog_name</code><em class="property"> = u'celery'</em><a class="headerlink" href="#celery.bin.base.Command.prog_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.bin.base.Command.respects_app_option"><a name="//apple_ref/cpp/Attribute/celery.bin.base.Command.respects_app_option"></a>
+<code class="descclassname">Command.</code><code class="descname">respects_app_option</code><em class="property"> = True</em><a class="headerlink" href="#celery.bin.base.Command.respects_app_option" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.base.Command.run"><a name="//apple_ref/cpp/Method/celery.bin.base.Command.run"></a>
+<code class="descclassname">Command.</code><code class="descname">run</code><span class="sig-paren">(</span><em>*args</em>, <em>**options</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/base.html#Command.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Command.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is the body of the command called by <a class="reference internal" href="#celery.bin.base.Command.handle_argv" title="celery.bin.base.Command.handle_argv"><code class="xref py py-meth docutils literal"><span class="pre">handle_argv()</span></code></a>.</p>
+</dd></dl>
+<dl class="method">
+<dt id="celery.bin.base.Command.run_from_argv"><a name="//apple_ref/cpp/Method/celery.bin.base.Command.run_from_argv"></a>
+<code class="descclassname">Command.</code><code class="descname">run_from_argv</code><span class="sig-paren">(</span><em>prog_name</em>, <em>argv=None</em>, <em>command=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/base.html#Command.run_from_argv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Command.run_from_argv" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.base.Command.say_chat"><a name="//apple_ref/cpp/Method/celery.bin.base.Command.say_chat"></a>
+<code class="descclassname">Command.</code><code class="descname">say_chat</code><span class="sig-paren">(</span><em>direction</em>, <em>title</em>, <em>body=u''</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/base.html#Command.say_chat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Command.say_chat" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.base.Command.say_remote_command_reply"><a name="//apple_ref/cpp/Method/celery.bin.base.Command.say_remote_command_reply"></a>
+<code class="descclassname">Command.</code><code class="descname">say_remote_command_reply</code><span class="sig-paren">(</span><em>replies</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/base.html#Command.say_remote_command_reply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Command.say_remote_command_reply" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.base.Command.setup_app_from_commandline"><a name="//apple_ref/cpp/Method/celery.bin.base.Command.setup_app_from_commandline"></a>
+<code class="descclassname">Command.</code><code class="descname">setup_app_from_commandline</code><span class="sig-paren">(</span><em>argv</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/base.html#Command.setup_app_from_commandline"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Command.setup_app_from_commandline" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.bin.base.Command.show_body"><a name="//apple_ref/cpp/Attribute/celery.bin.base.Command.show_body"></a>
+<code class="descclassname">Command.</code><code class="descname">show_body</code><em class="property"> = True</em><a class="headerlink" href="#celery.bin.base.Command.show_body" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.bin.base.Command.show_reply"><a name="//apple_ref/cpp/Attribute/celery.bin.base.Command.show_reply"></a>
+<code class="descclassname">Command.</code><code class="descname">show_reply</code><em class="property"> = True</em><a class="headerlink" href="#celery.bin.base.Command.show_reply" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.bin.base.Command.supports_args"><a name="//apple_ref/cpp/Attribute/celery.bin.base.Command.supports_args"></a>
+<code class="descclassname">Command.</code><code class="descname">supports_args</code><em class="property"> = True</em><a class="headerlink" href="#celery.bin.base.Command.supports_args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.base.Command.symbol_by_name"><a name="//apple_ref/cpp/Method/celery.bin.base.Command.symbol_by_name"></a>
+<code class="descclassname">Command.</code><code class="descname">symbol_by_name</code><span class="sig-paren">(</span><em>name</em>, <em>imp=&lt;function import_from_cwd&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/base.html#Command.symbol_by_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Command.symbol_by_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.base.Command.usage"><a name="//apple_ref/cpp/Method/celery.bin.base.Command.usage"></a>
+<code class="descclassname">Command.</code><code class="descname">usage</code><span class="sig-paren">(</span><em>command</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/base.html#Command.usage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Command.usage" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.base.Command.verify_args"><a name="//apple_ref/cpp/Method/celery.bin.base.Command.verify_args"></a>
+<code class="descclassname">Command.</code><code class="descname">verify_args</code><span class="sig-paren">(</span><em>given</em>, <em>_index=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/base.html#Command.verify_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Command.verify_args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.bin.base.Command.version"><a name="//apple_ref/cpp/Attribute/celery.bin.base.Command.version"></a>
+<code class="descclassname">Command.</code><code class="descname">version</code><em class="property"> = '3.1.23 (Cipater)'</em><a class="headerlink" href="#celery.bin.base.Command.version" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.base.Command.with_pool_option"><a name="//apple_ref/cpp/Method/celery.bin.base.Command.with_pool_option"></a>
+<code class="descclassname">Command.</code><code class="descname">with_pool_option</code><span class="sig-paren">(</span><em>argv</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/base.html#Command.with_pool_option"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Command.with_pool_option" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return tuple of <code class="docutils literal"><span class="pre">(short_opts,</span> <span class="pre">long_opts)</span></code> if the command
+supports a pool argument, and used to monkey patch eventlet/gevent
+environments as early as possible.</p>
+<dl class="docutils">
+<dt>E.g::</dt>
+<dd>has_pool_option = ([‘-P’], [‘–pool’])</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+<dl class="class">
+<dt id="celery.bin.base.Option"><a name="//apple_ref/cpp/Class/celery.bin.base.Option"></a>
+<em class="property">class </em><code class="descclassname">celery.bin.base.</code><code class="descname">Option</code><span class="sig-paren">(</span><em>*opts</em>, <em>**attrs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/optparse.html#Option"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Option" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Instance attributes:</dt>
+<dd><p class="first">_short_opts : [string]
+_long_opts : [string]</p>
+<p class="last">action : string
+type : string
+dest : string
+default : any
+nargs : int
+const : any
+choices : [string]
+callback : function
+callback_args : (any*)
+callback_kwargs : { string : any }
+help : string
+metavar : string</p>
+</dd>
+</dl>
+<dl class="attribute">
+<dt id="celery.bin.base.Option.ACTIONS"><a name="//apple_ref/cpp/Attribute/celery.bin.base.Option.ACTIONS"></a>
+<code class="descname">ACTIONS</code><em class="property"> = ('store', 'store_const', 'store_true', 'store_false', 'append', 'append_const', 'count', 'callback', 'help', 'version')</em><a class="headerlink" href="#celery.bin.base.Option.ACTIONS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.bin.base.Option.ALWAYS_TYPED_ACTIONS"><a name="//apple_ref/cpp/Attribute/celery.bin.base.Option.ALWAYS_TYPED_ACTIONS"></a>
+<code class="descname">ALWAYS_TYPED_ACTIONS</code><em class="property"> = ('store', 'append')</em><a class="headerlink" href="#celery.bin.base.Option.ALWAYS_TYPED_ACTIONS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.bin.base.Option.ATTRS"><a name="//apple_ref/cpp/Attribute/celery.bin.base.Option.ATTRS"></a>
+<code class="descname">ATTRS</code><em class="property"> = ['action', 'type', 'dest', 'default', 'nargs', 'const', 'choices', 'callback', 'callback_args', 'callback_kwargs', 'help', 'metavar']</em><a class="headerlink" href="#celery.bin.base.Option.ATTRS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.bin.base.Option.CHECK_METHODS"><a name="//apple_ref/cpp/Attribute/celery.bin.base.Option.CHECK_METHODS"></a>
+<code class="descname">CHECK_METHODS</code><em class="property"> = [&lt;function _check_action at 0x106f6bc80&gt;, &lt;function _check_type at 0x106f6bcf8&gt;, &lt;function _check_choice at 0x106f6bd70&gt;, &lt;function _check_dest at 0x106f6bde8&gt;, &lt;function _check_const at 0x106f6be60&gt;, &lt;function _check_nargs at 0x106f6bed8&gt;, &lt;function _check_callback at 0x106f6bf50&gt;]</em><a class="headerlink" href="#celery.bin.base.Option.CHECK_METHODS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.bin.base.Option.CONST_ACTIONS"><a name="//apple_ref/cpp/Attribute/celery.bin.base.Option.CONST_ACTIONS"></a>
+<code class="descname">CONST_ACTIONS</code><em class="property"> = ('store_const', 'append_const')</em><a class="headerlink" href="#celery.bin.base.Option.CONST_ACTIONS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.bin.base.Option.STORE_ACTIONS"><a name="//apple_ref/cpp/Attribute/celery.bin.base.Option.STORE_ACTIONS"></a>
+<code class="descname">STORE_ACTIONS</code><em class="property"> = ('store', 'store_const', 'store_true', 'store_false', 'append', 'append_const', 'count')</em><a class="headerlink" href="#celery.bin.base.Option.STORE_ACTIONS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.bin.base.Option.TYPED_ACTIONS"><a name="//apple_ref/cpp/Attribute/celery.bin.base.Option.TYPED_ACTIONS"></a>
+<code class="descname">TYPED_ACTIONS</code><em class="property"> = ('store', 'append', 'callback')</em><a class="headerlink" href="#celery.bin.base.Option.TYPED_ACTIONS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.bin.base.Option.TYPES"><a name="//apple_ref/cpp/Attribute/celery.bin.base.Option.TYPES"></a>
+<code class="descname">TYPES</code><em class="property"> = ('string', 'int', 'long', 'float', 'complex', 'choice')</em><a class="headerlink" href="#celery.bin.base.Option.TYPES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.bin.base.Option.TYPE_CHECKER"><a name="//apple_ref/cpp/Attribute/celery.bin.base.Option.TYPE_CHECKER"></a>
+<code class="descname">TYPE_CHECKER</code><em class="property"> = {'int': &lt;function check_builtin at 0x106f6b938&gt;, 'float': &lt;function check_builtin at 0x106f6b938&gt;, 'complex': &lt;function check_builtin at 0x106f6b938&gt;, 'long': &lt;function check_builtin at 0x106f6b938&gt;, 'choice': &lt;function check_choice at 0x106f6b9b0&gt;}</em><a class="headerlink" href="#celery.bin.base.Option.TYPE_CHECKER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.base.Option.check_value"><a name="//apple_ref/cpp/Method/celery.bin.base.Option.check_value"></a>
+<code class="descname">check_value</code><span class="sig-paren">(</span><em>opt</em>, <em>value</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/optparse.html#Option.check_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Option.check_value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.base.Option.convert_value"><a name="//apple_ref/cpp/Method/celery.bin.base.Option.convert_value"></a>
+<code class="descname">convert_value</code><span class="sig-paren">(</span><em>opt</em>, <em>value</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/optparse.html#Option.convert_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Option.convert_value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.base.Option.get_opt_string"><a name="//apple_ref/cpp/Method/celery.bin.base.Option.get_opt_string"></a>
+<code class="descname">get_opt_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/optparse.html#Option.get_opt_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Option.get_opt_string" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.base.Option.process"><a name="//apple_ref/cpp/Method/celery.bin.base.Option.process"></a>
+<code class="descname">process</code><span class="sig-paren">(</span><em>opt</em>, <em>value</em>, <em>values</em>, <em>parser</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/optparse.html#Option.process"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Option.process" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.base.Option.take_action"><a name="//apple_ref/cpp/Method/celery.bin.base.Option.take_action"></a>
+<code class="descname">take_action</code><span class="sig-paren">(</span><em>action</em>, <em>dest</em>, <em>opt</em>, <em>value</em>, <em>values</em>, <em>parser</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/optparse.html#Option.take_action"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Option.take_action" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.bin.base.Option.takes_value"><a name="//apple_ref/cpp/Method/celery.bin.base.Option.takes_value"></a>
+<code class="descname">takes_value</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/optparse.html#Option.takes_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.Option.takes_value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</dd></dl>
+<dl class="function">
+<dt id="celery.bin.base.daemon_options"><a name="//apple_ref/cpp/Function/celery.bin.base.daemon_options"></a>
+<code class="descclassname">celery.bin.base.</code><code class="descname">daemon_options</code><span class="sig-paren">(</span><em>default_pidfile=None</em>, <em>default_logfile=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/bin/base.html#daemon_options"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.bin.base.daemon_options" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div aria-label="related navigation" class="related" role="navigation">
+<h3>Navigation</h3>
+<ul>
+<li class="right" style="margin-right: 10px">
+<a href="../genindex.html" title="General Index">index</a></li>
+<li class="right">
+<a href="../py-modindex.html" title="Python Module Index">modules</a> |</li>
+<li class="right">
+<a href="celery.bin.celery.html" title="celery.bin.celery">next</a> |</li>
+<li class="right">
+<a href="celery.worker.strategy.html" title="celery.worker.strategy">previous</a> |</li>
+<li class="nav-item nav-item-0"><a href="../index.html">Celery 3.1.23 documentation</a> »</li>
+<li class="nav-item nav-item-1"><a href="index.html">API Reference</a> »</li>
+</ul>
+</div>
+<div class="footer" role="contentinfo">
+        © <a href="../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
+    </div>
+</body>
+</html>

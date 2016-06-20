@@ -1,0 +1,208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>celery.contrib.abortable — Celery 3.1.23 documentation</title>
+<link href="../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.23',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+<script src="../_static/jquery.js" type="text/javascript"></script>
+<script src="../_static/underscore.js" type="text/javascript"></script>
+<script src="../_static/doctools.js" type="text/javascript"></script>
+<link href="../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="index.html" rel="up" title="API Reference"/>
+<link href="celery.contrib.batches.html" rel="next" title="celery.contrib.batches"/>
+<link href="celery.states.html" rel="prev" title="celery.states"/>
+</head>
+<body role="document">
+<div aria-label="related navigation" class="related" role="navigation">
+<h3>Navigation</h3>
+<ul>
+<li class="right" style="margin-right: 10px">
+<a accesskey="I" href="../genindex.html" title="General Index">index</a></li>
+<li class="right">
+<a href="../py-modindex.html" title="Python Module Index">modules</a> |</li>
+<li class="right">
+<a accesskey="N" href="celery.contrib.batches.html" title="celery.contrib.batches">next</a> |</li>
+<li class="right">
+<a accesskey="P" href="celery.states.html" title="celery.states">previous</a> |</li>
+<li class="nav-item nav-item-0"><a href="../index.html">Celery 3.1.23 documentation</a> »</li>
+<li class="nav-item nav-item-1"><a accesskey="U" href="index.html">API Reference</a> »</li>
+</ul>
+</div>
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
+<div class="deck">
+<p>
+        This document describes the current stable version of Celery (3.1). For development docs,
+        <a href="http://docs.celeryproject.org/en/master/reference/celery.contrib.abortable.html">go here</a>.
+        </p>
+</div>
+<div class="section" id="celery-contrib-abortable"><a name="//apple_ref/cpp/Module/celery.contrib.abortable"></a>
+<h1>celery.contrib.abortable<a class="headerlink" href="#celery-contrib-abortable" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#abortable-tasks-overview" id="id1">Abortable tasks overview</a><ul>
+<li><a class="reference internal" href="#usage-example" id="id2">Usage example</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<span class="target" id="module-celery.contrib.abortable"></span><div class="section" id="abortable-tasks-overview">
+<h2><a class="toc-backref" href="#id1">Abortable tasks overview</a><a class="headerlink" href="#abortable-tasks-overview" title="Permalink to this headline">¶</a></h2>
+<p>For long-running <code class="xref py py-class docutils literal"><span class="pre">Task</span></code>‘s, it can be desirable to support
+aborting during execution. Of course, these tasks should be built to
+support abortion specifically.</p>
+<p>The <a class="reference internal" href="#celery.contrib.abortable.AbortableTask" title="celery.contrib.abortable.AbortableTask"><code class="xref py py-class docutils literal"><span class="pre">AbortableTask</span></code></a> serves as a base class for all <code class="xref py py-class docutils literal"><span class="pre">Task</span></code>
+objects that should support abortion by producers.</p>
+<ul class="simple">
+<li>Producers may invoke the <code class="xref py py-meth docutils literal"><span class="pre">abort()</span></code> method on
+<a class="reference internal" href="#celery.contrib.abortable.AbortableAsyncResult" title="celery.contrib.abortable.AbortableAsyncResult"><code class="xref py py-class docutils literal"><span class="pre">AbortableAsyncResult</span></code></a> instances, to request abortion.</li>
+<li>Consumers (workers) should periodically check (and honor!) the
+<code class="xref py py-meth docutils literal"><span class="pre">is_aborted()</span></code> method at controlled points in their task’s
+<code class="xref py py-meth docutils literal"><span class="pre">run()</span></code> method. The more often, the better.</li>
+</ul>
+<p>The necessary intermediate communication is dealt with by the
+<a class="reference internal" href="#celery.contrib.abortable.AbortableTask" title="celery.contrib.abortable.AbortableTask"><code class="xref py py-class docutils literal"><span class="pre">AbortableTask</span></code></a> implementation.</p>
+<div class="section" id="usage-example">
+<h3><a class="toc-backref" href="#id2">Usage example</a><a class="headerlink" href="#usage-example" title="Permalink to this headline">¶</a></h3>
+<p>In the consumer:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
+
+<span class="kn">from</span> <span class="nn">celery.contrib.abortable</span> <span class="kn">import</span> <span class="n">AbortableTask</span>
+<span class="kn">from</span> <span class="nn">celery.utils.log</span> <span class="kn">import</span> <span class="n">get_task_logger</span>
+
+<span class="kn">from</span> <span class="nn">proj.celery</span> <span class="kn">import</span> <span class="n">app</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+
+<span class="nd">@app.task</span><span class="p">(</span><span class="n">bind</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">base</span><span class="o">=</span><span class="n">AbortableTask</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">long_running_task</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+        <span class="c1"># check after every 5 iterations...</span>
+        <span class="c1"># (or alternatively, check when some timer is due)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">5</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_aborted</span><span class="p">():</span>
+                <span class="c1"># respect aborted state, and terminate gracefully.</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">'Task aborted'</span><span class="p">)</span>
+                <span class="k">return</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">do_something_expensive</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">'Task complete'</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">results</span>
+</pre></div>
+</div>
+<p>In the producer:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
+
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">from</span> <span class="nn">proj.tasks</span> <span class="kn">import</span> <span class="n">MyLongRunningTask</span>
+
+<span class="k">def</span> <span class="nf">myview</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="c1"># result is of type AbortableAsyncResult</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">long_running_task</span><span class="o">.</span><span class="n">delay</span><span class="p">()</span>
+
+    <span class="c1"># abort the task after 10 seconds</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">result</span><span class="o">.</span><span class="n">abort</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>After the <cite>result.abort()</cite> call, the task execution is not
+aborted immediately. In fact, it is not guaranteed to abort at all. Keep
+checking <cite>result.state</cite> status, or call <cite>result.get(timeout=)</cite> to
+have it block until the task is finished.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In order to abort tasks, there needs to be communication between the
+producer and the consumer.  This is currently implemented through the
+database backend.  Therefore, this class will only work with the
+database backends.</p>
+</div>
+<dl class="class">
+<dt id="celery.contrib.abortable.AbortableAsyncResult"><a name="//apple_ref/cpp/Class/celery.contrib.abortable.AbortableAsyncResult"></a>
+<em class="property">class </em><code class="descclassname">celery.contrib.abortable.</code><code class="descname">AbortableAsyncResult</code><span class="sig-paren">(</span><em>id</em>, <em>backend=None</em>, <em>task_name=None</em>, <em>app=None</em>, <em>parent=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/contrib/abortable.html#AbortableAsyncResult"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.contrib.abortable.AbortableAsyncResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents a abortable result.</p>
+<p>Specifically, this gives the <cite>AsyncResult</cite> a <a class="reference internal" href="#celery.contrib.abortable.AbortableAsyncResult.abort" title="celery.contrib.abortable.AbortableAsyncResult.abort"><code class="xref py py-meth docutils literal"><span class="pre">abort()</span></code></a> method,
+which sets the state of the underlying Task to <cite>‘ABORTED’</cite>.</p>
+<dl class="method">
+<dt id="celery.contrib.abortable.AbortableAsyncResult.abort"><a name="//apple_ref/cpp/Method/celery.contrib.abortable.AbortableAsyncResult.abort"></a>
+<code class="descname">abort</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/contrib/abortable.html#AbortableAsyncResult.abort"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.contrib.abortable.AbortableAsyncResult.abort" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the state of the task to <code class="xref py py-const docutils literal"><span class="pre">ABORTED</span></code>.</p>
+<p>Abortable tasks monitor their state at regular intervals and
+terminate execution if so.</p>
+<p>Be aware that invoking this method does not guarantee when the
+task will be aborted (or even if the task will be aborted at
+all).</p>
+</dd></dl>
+<dl class="method">
+<dt id="celery.contrib.abortable.AbortableAsyncResult.is_aborted"><a name="//apple_ref/cpp/Method/celery.contrib.abortable.AbortableAsyncResult.is_aborted"></a>
+<code class="descname">is_aborted</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/contrib/abortable.html#AbortableAsyncResult.is_aborted"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.contrib.abortable.AbortableAsyncResult.is_aborted" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return <code class="xref py py-const docutils literal"><span class="pre">True</span></code> if the task is (being) aborted.</p>
+</dd></dl>
+</dd></dl>
+<dl class="class">
+<dt id="celery.contrib.abortable.AbortableTask"><a name="//apple_ref/cpp/Class/celery.contrib.abortable.AbortableTask"></a>
+<em class="property">class </em><code class="descclassname">celery.contrib.abortable.</code><code class="descname">AbortableTask</code><a class="reference internal" href="../_modules/celery/contrib/abortable.html#AbortableTask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.contrib.abortable.AbortableTask" title="Permalink to this definition">¶</a></dt>
+<dd><p>A celery task that serves as a base class for all <code class="xref py py-class docutils literal"><span class="pre">Task</span></code>‘s
+that support aborting during execution.</p>
+<p>All subclasses of <a class="reference internal" href="#celery.contrib.abortable.AbortableTask" title="celery.contrib.abortable.AbortableTask"><code class="xref py py-class docutils literal"><span class="pre">AbortableTask</span></code></a> must call the
+<a class="reference internal" href="#celery.contrib.abortable.AbortableTask.is_aborted" title="celery.contrib.abortable.AbortableTask.is_aborted"><code class="xref py py-meth docutils literal"><span class="pre">is_aborted()</span></code></a> method periodically and act accordingly when
+the call evaluates to <code class="xref py py-const docutils literal"><span class="pre">True</span></code>.</p>
+<dl class="method">
+<dt id="celery.contrib.abortable.AbortableTask.AsyncResult"><a name="//apple_ref/cpp/Method/celery.contrib.abortable.AbortableTask.AsyncResult"></a>
+<code class="descname">AsyncResult</code><span class="sig-paren">(</span><em>task_id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/contrib/abortable.html#AbortableTask.AsyncResult"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.contrib.abortable.AbortableTask.AsyncResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the accompanying AbortableAsyncResult instance.</p>
+</dd></dl>
+<dl class="method">
+<dt id="celery.contrib.abortable.AbortableTask.is_aborted"><a name="//apple_ref/cpp/Method/celery.contrib.abortable.AbortableTask.is_aborted"></a>
+<code class="descname">is_aborted</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/contrib/abortable.html#AbortableTask.is_aborted"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.contrib.abortable.AbortableTask.is_aborted" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks against the backend whether this
+<a class="reference internal" href="#celery.contrib.abortable.AbortableAsyncResult" title="celery.contrib.abortable.AbortableAsyncResult"><code class="xref py py-class docutils literal"><span class="pre">AbortableAsyncResult</span></code></a> is <code class="xref py py-const docutils literal"><span class="pre">ABORTED</span></code>.</p>
+<p>Always return <code class="xref py py-const docutils literal"><span class="pre">False</span></code> in case the <cite>task_id</cite> parameter
+refers to a regular (non-abortable) <code class="xref py py-class docutils literal"><span class="pre">Task</span></code>.</p>
+<p>Be aware that invoking this method will cause a hit in the
+backend (for example a database query), so find a good balance
+between calling it regularly (for responsiveness), but not too
+often (for performance).</p>
+</dd></dl>
+</dd></dl>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div aria-label="related navigation" class="related" role="navigation">
+<h3>Navigation</h3>
+<ul>
+<li class="right" style="margin-right: 10px">
+<a href="../genindex.html" title="General Index">index</a></li>
+<li class="right">
+<a href="../py-modindex.html" title="Python Module Index">modules</a> |</li>
+<li class="right">
+<a href="celery.contrib.batches.html" title="celery.contrib.batches">next</a> |</li>
+<li class="right">
+<a href="celery.states.html" title="celery.states">previous</a> |</li>
+<li class="nav-item nav-item-0"><a href="../index.html">Celery 3.1.23 documentation</a> »</li>
+<li class="nav-item nav-item-1"><a href="index.html">API Reference</a> »</li>
+</ul>
+</div>
+<div class="footer" role="contentinfo">
+        © <a href="../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
+    </div>
+</body>
+</html>

@@ -1,0 +1,454 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>celery.app.control — Celery 3.1.23 documentation</title>
+<link href="../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.23',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+<script src="../_static/jquery.js" type="text/javascript"></script>
+<script src="../_static/underscore.js" type="text/javascript"></script>
+<script src="../_static/doctools.js" type="text/javascript"></script>
+<link href="../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="index.html" rel="up" title="API Reference"/>
+<link href="celery.app.registry.html" rel="next" title="celery.app.registry"/>
+<link href="celery.app.defaults.html" rel="prev" title="celery.app.defaults"/>
+</head>
+<body role="document">
+<div aria-label="related navigation" class="related" role="navigation">
+<h3>Navigation</h3>
+<ul>
+<li class="right" style="margin-right: 10px">
+<a accesskey="I" href="../genindex.html" title="General Index">index</a></li>
+<li class="right">
+<a href="../py-modindex.html" title="Python Module Index">modules</a> |</li>
+<li class="right">
+<a accesskey="N" href="celery.app.registry.html" title="celery.app.registry">next</a> |</li>
+<li class="right">
+<a accesskey="P" href="celery.app.defaults.html" title="celery.app.defaults">previous</a> |</li>
+<li class="nav-item nav-item-0"><a href="../index.html">Celery 3.1.23 documentation</a> »</li>
+<li class="nav-item nav-item-1"><a accesskey="U" href="index.html">API Reference</a> »</li>
+</ul>
+</div>
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
+<div class="deck">
+<p>
+        This document describes the current stable version of Celery (3.1). For development docs,
+        <a href="http://docs.celeryproject.org/en/master/reference/celery.app.control.html">go here</a>.
+        </p>
+</div>
+<div class="section" id="celery-app-control"><a name="//apple_ref/cpp/Module/celery.app.control"></a>
+<h1>celery.app.control<a class="headerlink" href="#celery-app-control" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#id1" id="id2">celery.app.control</a></li>
+</ul>
+</div>
+<span class="target" id="module-celery.app.control"></span><div class="section" id="id1">
+<h2><a class="toc-backref" href="#id2">celery.app.control</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>Client for worker remote control commands.
+Server implementation is in <a class="reference internal" href="../internals/reference/celery.worker.control.html#module-celery.worker.control" title="celery.worker.control"><code class="xref py py-mod docutils literal"><span class="pre">celery.worker.control</span></code></a>.</p>
+<dl class="class">
+<dt id="celery.app.control.Inspect"><a name="//apple_ref/cpp/Class/celery.app.control.Inspect"></a>
+<em class="property">class </em><code class="descclassname">celery.app.control.</code><code class="descname">Inspect</code><span class="sig-paren">(</span><em>destination=None</em>, <em>timeout=1</em>, <em>callback=None</em>, <em>connection=None</em>, <em>app=None</em>, <em>limit=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/app/control.html#Inspect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.app.control.Inspect" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="celery.app.control.Inspect.active"><a name="//apple_ref/cpp/Method/celery.app.control.Inspect.active"></a>
+<code class="descname">active</code><span class="sig-paren">(</span><em>safe=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/app/control.html#Inspect.active"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.app.control.Inspect.active" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.app.control.Inspect.active_queues"><a name="//apple_ref/cpp/Method/celery.app.control.Inspect.active_queues"></a>
+<code class="descname">active_queues</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/app/control.html#Inspect.active_queues"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.app.control.Inspect.active_queues" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.app.control.Inspect.app"><a name="//apple_ref/cpp/Attribute/celery.app.control.Inspect.app"></a>
+<code class="descname">app</code><em class="property"> = None</em><a class="headerlink" href="#celery.app.control.Inspect.app" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.app.control.Inspect.clock"><a name="//apple_ref/cpp/Method/celery.app.control.Inspect.clock"></a>
+<code class="descname">clock</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/app/control.html#Inspect.clock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.app.control.Inspect.clock" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.app.control.Inspect.conf"><a name="//apple_ref/cpp/Method/celery.app.control.Inspect.conf"></a>
+<code class="descname">conf</code><span class="sig-paren">(</span><em>with_defaults=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/app/control.html#Inspect.conf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.app.control.Inspect.conf" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.app.control.Inspect.hello"><a name="//apple_ref/cpp/Method/celery.app.control.Inspect.hello"></a>
+<code class="descname">hello</code><span class="sig-paren">(</span><em>from_node</em>, <em>revoked=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/app/control.html#Inspect.hello"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.app.control.Inspect.hello" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.app.control.Inspect.memdump"><a name="//apple_ref/cpp/Method/celery.app.control.Inspect.memdump"></a>
+<code class="descname">memdump</code><span class="sig-paren">(</span><em>samples=10</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/app/control.html#Inspect.memdump"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.app.control.Inspect.memdump" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.app.control.Inspect.memsample"><a name="//apple_ref/cpp/Method/celery.app.control.Inspect.memsample"></a>
+<code class="descname">memsample</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/app/control.html#Inspect.memsample"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.app.control.Inspect.memsample" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.app.control.Inspect.objgraph"><a name="//apple_ref/cpp/Method/celery.app.control.Inspect.objgraph"></a>
+<code class="descname">objgraph</code><span class="sig-paren">(</span><em>type='Request'</em>, <em>n=200</em>, <em>max_depth=10</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/app/control.html#Inspect.objgraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.app.control.Inspect.objgraph" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.app.control.Inspect.ping"><a name="//apple_ref/cpp/Method/celery.app.control.Inspect.ping"></a>
+<code class="descname">ping</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/app/control.html#Inspect.ping"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.app.control.Inspect.ping" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.app.control.Inspect.query_task"><a name="//apple_ref/cpp/Method/celery.app.control.Inspect.query_task"></a>
+<code class="descname">query_task</code><span class="sig-paren">(</span><em>ids</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/app/control.html#Inspect.query_task"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.app.control.Inspect.query_task" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.app.control.Inspect.registered"><a name="//apple_ref/cpp/Method/celery.app.control.Inspect.registered"></a>
+<code class="descname">registered</code><span class="sig-paren">(</span><em>*taskinfoitems</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/app/control.html#Inspect.registered"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.app.control.Inspect.registered" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.app.control.Inspect.registered_tasks"><a name="//apple_ref/cpp/Method/celery.app.control.Inspect.registered_tasks"></a>
+<code class="descname">registered_tasks</code><span class="sig-paren">(</span><em>*taskinfoitems</em><span class="sig-paren">)</span><a class="headerlink" href="#celery.app.control.Inspect.registered_tasks" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.app.control.Inspect.report"><a name="//apple_ref/cpp/Method/celery.app.control.Inspect.report"></a>
+<code class="descname">report</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/app/control.html#Inspect.report"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.app.control.Inspect.report" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.app.control.Inspect.reserved"><a name="//apple_ref/cpp/Method/celery.app.control.Inspect.reserved"></a>
+<code class="descname">reserved</code><span class="sig-paren">(</span><em>safe=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/app/control.html#Inspect.reserved"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.app.control.Inspect.reserved" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.app.control.Inspect.revoked"><a name="//apple_ref/cpp/Method/celery.app.control.Inspect.revoked"></a>
+<code class="descname">revoked</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/app/control.html#Inspect.revoked"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.app.control.Inspect.revoked" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.app.control.Inspect.scheduled"><a name="//apple_ref/cpp/Method/celery.app.control.Inspect.scheduled"></a>
+<code class="descname">scheduled</code><span class="sig-paren">(</span><em>safe=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/app/control.html#Inspect.scheduled"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.app.control.Inspect.scheduled" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.app.control.Inspect.stats"><a name="//apple_ref/cpp/Method/celery.app.control.Inspect.stats"></a>
+<code class="descname">stats</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/app/control.html#Inspect.stats"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.app.control.Inspect.stats" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</dd></dl>
+<dl class="class">
+<dt id="celery.app.control.Control"><a name="//apple_ref/cpp/Class/celery.app.control.Control"></a>
+<em class="property">class </em><code class="descclassname">celery.app.control.</code><code class="descname">Control</code><span class="sig-paren">(</span><em>app=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/app/control.html#Control"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.app.control.Control" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="class">
+<dt id="celery.app.control.Control.Mailbox"><a name="//apple_ref/cpp/Class/celery.app.control.Control.Mailbox"></a>
+<em class="property">class </em><code class="descname">Mailbox</code><span class="sig-paren">(</span><em>namespace</em>, <em>type='direct'</em>, <em>connection=None</em>, <em>clock=None</em>, <em>accept=None</em>, <em>serializer=None</em><span class="sig-paren">)</span><a class="headerlink" href="#celery.app.control.Control.Mailbox" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="celery.app.control.Control.Mailbox.Node"><a name="//apple_ref/cpp/Method/celery.app.control.Control.Mailbox.Node"></a>
+<code class="descname">Node</code><span class="sig-paren">(</span><em>hostname=None</em>, <em>state=None</em>, <em>channel=None</em>, <em>handlers=None</em><span class="sig-paren">)</span><a class="headerlink" href="#celery.app.control.Control.Mailbox.Node" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.app.control.Control.Mailbox.abcast"><a name="//apple_ref/cpp/Method/celery.app.control.Control.Mailbox.abcast"></a>
+<code class="descname">abcast</code><span class="sig-paren">(</span><em>command</em>, <em>kwargs={}</em><span class="sig-paren">)</span><a class="headerlink" href="#celery.app.control.Control.Mailbox.abcast" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.app.control.Control.Mailbox.accept"><a name="//apple_ref/cpp/Attribute/celery.app.control.Control.Mailbox.accept"></a>
+<code class="descname">accept</code><em class="property"> = ['json']</em><a class="headerlink" href="#celery.app.control.Control.Mailbox.accept" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.app.control.Control.Mailbox.call"><a name="//apple_ref/cpp/Method/celery.app.control.Control.Mailbox.call"></a>
+<code class="descname">call</code><span class="sig-paren">(</span><em>destination</em>, <em>command</em>, <em>kwargs={}</em>, <em>timeout=None</em>, <em>callback=None</em>, <em>channel=None</em><span class="sig-paren">)</span><a class="headerlink" href="#celery.app.control.Control.Mailbox.call" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.app.control.Control.Mailbox.cast"><a name="//apple_ref/cpp/Method/celery.app.control.Control.Mailbox.cast"></a>
+<code class="descname">cast</code><span class="sig-paren">(</span><em>destination</em>, <em>command</em>, <em>kwargs={}</em><span class="sig-paren">)</span><a class="headerlink" href="#celery.app.control.Control.Mailbox.cast" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.app.control.Control.Mailbox.connection"><a name="//apple_ref/cpp/Attribute/celery.app.control.Control.Mailbox.connection"></a>
+<code class="descname">connection</code><em class="property"> = None</em><a class="headerlink" href="#celery.app.control.Control.Mailbox.connection" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.app.control.Control.Mailbox.exchange"><a name="//apple_ref/cpp/Attribute/celery.app.control.Control.Mailbox.exchange"></a>
+<code class="descname">exchange</code><em class="property"> = None</em><a class="headerlink" href="#celery.app.control.Control.Mailbox.exchange" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.app.control.Control.Mailbox.exchange_fmt"><a name="//apple_ref/cpp/Attribute/celery.app.control.Control.Mailbox.exchange_fmt"></a>
+<code class="descname">exchange_fmt</code><em class="property"> = '%s.pidbox'</em><a class="headerlink" href="#celery.app.control.Control.Mailbox.exchange_fmt" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.app.control.Control.Mailbox.get_queue"><a name="//apple_ref/cpp/Method/celery.app.control.Control.Mailbox.get_queue"></a>
+<code class="descname">get_queue</code><span class="sig-paren">(</span><em>hostname</em><span class="sig-paren">)</span><a class="headerlink" href="#celery.app.control.Control.Mailbox.get_queue" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.app.control.Control.Mailbox.get_reply_queue"><a name="//apple_ref/cpp/Method/celery.app.control.Control.Mailbox.get_reply_queue"></a>
+<code class="descname">get_reply_queue</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#celery.app.control.Control.Mailbox.get_reply_queue" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.app.control.Control.Mailbox.multi_call"><a name="//apple_ref/cpp/Method/celery.app.control.Control.Mailbox.multi_call"></a>
+<code class="descname">multi_call</code><span class="sig-paren">(</span><em>command</em>, <em>kwargs={}</em>, <em>timeout=1</em>, <em>limit=None</em>, <em>callback=None</em>, <em>channel=None</em><span class="sig-paren">)</span><a class="headerlink" href="#celery.app.control.Control.Mailbox.multi_call" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.app.control.Control.Mailbox.namespace"><a name="//apple_ref/cpp/Attribute/celery.app.control.Control.Mailbox.namespace"></a>
+<code class="descname">namespace</code><em class="property"> = None</em><a class="headerlink" href="#celery.app.control.Control.Mailbox.namespace" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.app.control.Control.Mailbox.node_cls"><a name="//apple_ref/cpp/Attribute/celery.app.control.Control.Mailbox.node_cls"></a>
+<code class="descname">node_cls</code><a class="headerlink" href="#celery.app.control.Control.Mailbox.node_cls" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#celery.app.control.Control.Mailbox.Node" title="celery.app.control.Control.Mailbox.Node"><code class="xref py py-class docutils literal"><span class="pre">Node</span></code></a></p>
+</dd></dl>
+<dl class="attribute">
+<dt id="celery.app.control.Control.Mailbox.oid"><a name="//apple_ref/cpp/Attribute/celery.app.control.Control.Mailbox.oid"></a>
+<code class="descname">oid</code><a class="headerlink" href="#celery.app.control.Control.Mailbox.oid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.app.control.Control.Mailbox.reply_exchange"><a name="//apple_ref/cpp/Attribute/celery.app.control.Control.Mailbox.reply_exchange"></a>
+<code class="descname">reply_exchange</code><em class="property"> = None</em><a class="headerlink" href="#celery.app.control.Control.Mailbox.reply_exchange" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.app.control.Control.Mailbox.reply_exchange_fmt"><a name="//apple_ref/cpp/Attribute/celery.app.control.Control.Mailbox.reply_exchange_fmt"></a>
+<code class="descname">reply_exchange_fmt</code><em class="property"> = 'reply.%s.pidbox'</em><a class="headerlink" href="#celery.app.control.Control.Mailbox.reply_exchange_fmt" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.app.control.Control.Mailbox.reply_queue"><a name="//apple_ref/cpp/Attribute/celery.app.control.Control.Mailbox.reply_queue"></a>
+<code class="descname">reply_queue</code><a class="headerlink" href="#celery.app.control.Control.Mailbox.reply_queue" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.app.control.Control.Mailbox.serializer"><a name="//apple_ref/cpp/Attribute/celery.app.control.Control.Mailbox.serializer"></a>
+<code class="descname">serializer</code><em class="property"> = None</em><a class="headerlink" href="#celery.app.control.Control.Mailbox.serializer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.app.control.Control.Mailbox.type"><a name="//apple_ref/cpp/Attribute/celery.app.control.Control.Mailbox.type"></a>
+<code class="descname">type</code><em class="property"> = 'direct'</em><a class="headerlink" href="#celery.app.control.Control.Mailbox.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</dd></dl>
+<dl class="method">
+<dt id="celery.app.control.Control.add_consumer"><a name="//apple_ref/cpp/Method/celery.app.control.Control.add_consumer"></a>
+<code class="descclassname">Control.</code><code class="descname">add_consumer</code><span class="sig-paren">(</span><em>queue</em>, <em>exchange=None</em>, <em>exchange_type='direct'</em>, <em>routing_key=None</em>, <em>options=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/app/control.html#Control.add_consumer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.app.control.Control.add_consumer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tell all (or specific) workers to start consuming from a new queue.</p>
+<p>Only the queue name is required as if only the queue is specified
+then the exchange/routing key will be set to the same name (
+like automatic queues do).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This command does not respect the default queue/exchange
+options in the configuration.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name"></col>
+<col class="field-body"></col>
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>queue</strong> – Name of queue to start consuming from.</li>
+<li><strong>exchange</strong> – Optional name of exchange.</li>
+<li><strong>exchange_type</strong> – Type of exchange (defaults to ‘direct’)
+command to, when empty broadcast to all workers.</li>
+<li><strong>routing_key</strong> – Optional routing key.</li>
+<li><strong>options</strong> – Additional options as supported
+by <code class="xref py py-meth docutils literal"><span class="pre">kombu.entitiy.Queue.from_dict()</span></code>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>See <a class="reference internal" href="#celery.app.control.Control.broadcast" title="celery.app.control.Control.broadcast"><code class="xref py py-meth docutils literal"><span class="pre">broadcast()</span></code></a> for supported keyword arguments.</p>
+</dd></dl>
+<dl class="method">
+<dt id="celery.app.control.Control.autoscale"><a name="//apple_ref/cpp/Method/celery.app.control.Control.autoscale"></a>
+<code class="descclassname">Control.</code><code class="descname">autoscale</code><span class="sig-paren">(</span><em>max</em>, <em>min</em>, <em>destination=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/app/control.html#Control.autoscale"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.app.control.Control.autoscale" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change worker(s) autoscale setting.</p>
+<p>Supports the same arguments as <a class="reference internal" href="#celery.app.control.Control.broadcast" title="celery.app.control.Control.broadcast"><code class="xref py py-meth docutils literal"><span class="pre">broadcast()</span></code></a>.</p>
+</dd></dl>
+<dl class="method">
+<dt id="celery.app.control.Control.broadcast"><a name="//apple_ref/cpp/Method/celery.app.control.Control.broadcast"></a>
+<code class="descclassname">Control.</code><code class="descname">broadcast</code><span class="sig-paren">(</span><em>command</em>, <em>arguments=None</em>, <em>destination=None</em>, <em>connection=None</em>, <em>reply=False</em>, <em>timeout=1</em>, <em>limit=None</em>, <em>callback=None</em>, <em>channel=None</em>, <em>**extra_kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/app/control.html#Control.broadcast"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.app.control.Control.broadcast" title="Permalink to this definition">¶</a></dt>
+<dd><p>Broadcast a control command to the celery workers.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name"></col>
+<col class="field-body"></col>
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>command</strong> – Name of command to send.</li>
+<li><strong>arguments</strong> – Keyword arguments for the command.</li>
+<li><strong>destination</strong> – If set, a list of the hosts to send the
+command to, when empty broadcast to all workers.</li>
+<li><strong>connection</strong> – Custom broker connection to use, if not set,
+a connection will be established automatically.</li>
+<li><strong>reply</strong> – Wait for and return the reply.</li>
+<li><strong>timeout</strong> – Timeout in seconds to wait for the reply.</li>
+<li><strong>limit</strong> – Limit number of replies.</li>
+<li><strong>callback</strong> – Callback called immediately for each reply
+received.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+<dl class="method">
+<dt id="celery.app.control.Control.cancel_consumer"><a name="//apple_ref/cpp/Method/celery.app.control.Control.cancel_consumer"></a>
+<code class="descclassname">Control.</code><code class="descname">cancel_consumer</code><span class="sig-paren">(</span><em>queue</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/app/control.html#Control.cancel_consumer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.app.control.Control.cancel_consumer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tell all (or specific) workers to stop consuming from <code class="docutils literal"><span class="pre">queue</span></code>.</p>
+<p>Supports the same keyword arguments as <a class="reference internal" href="#celery.app.control.Control.broadcast" title="celery.app.control.Control.broadcast"><code class="xref py py-meth docutils literal"><span class="pre">broadcast()</span></code></a>.</p>
+</dd></dl>
+<dl class="method">
+<dt id="celery.app.control.Control.disable_events"><a name="//apple_ref/cpp/Method/celery.app.control.Control.disable_events"></a>
+<code class="descclassname">Control.</code><code class="descname">disable_events</code><span class="sig-paren">(</span><em>destination=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/app/control.html#Control.disable_events"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.app.control.Control.disable_events" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tell all (or specific) workers to disable events.</p>
+</dd></dl>
+<dl class="method">
+<dt id="celery.app.control.Control.discard_all"><a name="//apple_ref/cpp/Method/celery.app.control.Control.discard_all"></a>
+<code class="descclassname">Control.</code><code class="descname">discard_all</code><span class="sig-paren">(</span><em>connection=None</em><span class="sig-paren">)</span><a class="headerlink" href="#celery.app.control.Control.discard_all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Discard all waiting tasks.</p>
+<p>This will ignore all tasks waiting for execution, and they will
+be deleted from the messaging server.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name"></col>
+<col class="field-body"></col>
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the number of tasks discarded.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+<dl class="method">
+<dt id="celery.app.control.Control.election"><a name="//apple_ref/cpp/Method/celery.app.control.Control.election"></a>
+<code class="descclassname">Control.</code><code class="descname">election</code><span class="sig-paren">(</span><em>id</em>, <em>topic</em>, <em>action=None</em>, <em>connection=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/app/control.html#Control.election"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.app.control.Control.election" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.app.control.Control.enable_events"><a name="//apple_ref/cpp/Method/celery.app.control.Control.enable_events"></a>
+<code class="descclassname">Control.</code><code class="descname">enable_events</code><span class="sig-paren">(</span><em>destination=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/app/control.html#Control.enable_events"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.app.control.Control.enable_events" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tell all (or specific) workers to enable events.</p>
+</dd></dl>
+<dl class="attribute">
+<dt id="celery.app.control.Control.inspect"><a name="//apple_ref/cpp/Attribute/celery.app.control.Control.inspect"></a>
+<code class="descclassname">Control.</code><code class="descname">inspect</code><a class="reference internal" href="../_modules/celery/app/control.html#Control.inspect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.app.control.Control.inspect" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.app.control.Control.ping"><a name="//apple_ref/cpp/Method/celery.app.control.Control.ping"></a>
+<code class="descclassname">Control.</code><code class="descname">ping</code><span class="sig-paren">(</span><em>destination=None</em>, <em>timeout=1</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/app/control.html#Control.ping"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.app.control.Control.ping" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ping all (or specific) workers.</p>
+<p>Will return the list of answers.</p>
+<p>See <a class="reference internal" href="#celery.app.control.Control.broadcast" title="celery.app.control.Control.broadcast"><code class="xref py py-meth docutils literal"><span class="pre">broadcast()</span></code></a> for supported keyword arguments.</p>
+</dd></dl>
+<dl class="method">
+<dt id="celery.app.control.Control.pool_grow"><a name="//apple_ref/cpp/Method/celery.app.control.Control.pool_grow"></a>
+<code class="descclassname">Control.</code><code class="descname">pool_grow</code><span class="sig-paren">(</span><em>n=1</em>, <em>destination=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/app/control.html#Control.pool_grow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.app.control.Control.pool_grow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tell all (or specific) workers to grow the pool by <code class="docutils literal"><span class="pre">n</span></code>.</p>
+<p>Supports the same arguments as <a class="reference internal" href="#celery.app.control.Control.broadcast" title="celery.app.control.Control.broadcast"><code class="xref py py-meth docutils literal"><span class="pre">broadcast()</span></code></a>.</p>
+</dd></dl>
+<dl class="method">
+<dt id="celery.app.control.Control.pool_shrink"><a name="//apple_ref/cpp/Method/celery.app.control.Control.pool_shrink"></a>
+<code class="descclassname">Control.</code><code class="descname">pool_shrink</code><span class="sig-paren">(</span><em>n=1</em>, <em>destination=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/app/control.html#Control.pool_shrink"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.app.control.Control.pool_shrink" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tell all (or specific) workers to shrink the pool by <code class="docutils literal"><span class="pre">n</span></code>.</p>
+<p>Supports the same arguments as <a class="reference internal" href="#celery.app.control.Control.broadcast" title="celery.app.control.Control.broadcast"><code class="xref py py-meth docutils literal"><span class="pre">broadcast()</span></code></a>.</p>
+</dd></dl>
+<dl class="method">
+<dt id="celery.app.control.Control.purge"><a name="//apple_ref/cpp/Method/celery.app.control.Control.purge"></a>
+<code class="descclassname">Control.</code><code class="descname">purge</code><span class="sig-paren">(</span><em>connection=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/app/control.html#Control.purge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.app.control.Control.purge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Discard all waiting tasks.</p>
+<p>This will ignore all tasks waiting for execution, and they will
+be deleted from the messaging server.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name"></col>
+<col class="field-body"></col>
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the number of tasks discarded.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+<dl class="method">
+<dt id="celery.app.control.Control.rate_limit"><a name="//apple_ref/cpp/Method/celery.app.control.Control.rate_limit"></a>
+<code class="descclassname">Control.</code><code class="descname">rate_limit</code><span class="sig-paren">(</span><em>task_name</em>, <em>rate_limit</em>, <em>destination=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/app/control.html#Control.rate_limit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.app.control.Control.rate_limit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tell all (or specific) workers to set a new rate limit
+for task by type.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name"></col>
+<col class="field-body"></col>
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>task_name</strong> – Name of task to change rate limit for.</li>
+<li><strong>rate_limit</strong> – The rate limit as tasks per second, or a rate limit
+string (<cite>‘100/m’</cite>, etc.
+see <code class="xref py py-attr docutils literal"><span class="pre">celery.task.base.Task.rate_limit</span></code> for
+more information).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>See <a class="reference internal" href="#celery.app.control.Control.broadcast" title="celery.app.control.Control.broadcast"><code class="xref py py-meth docutils literal"><span class="pre">broadcast()</span></code></a> for supported keyword arguments.</p>
+</dd></dl>
+<dl class="method">
+<dt id="celery.app.control.Control.revoke"><a name="//apple_ref/cpp/Method/celery.app.control.Control.revoke"></a>
+<code class="descclassname">Control.</code><code class="descname">revoke</code><span class="sig-paren">(</span><em>task_id</em>, <em>destination=None</em>, <em>terminate=False</em>, <em>signal='SIGTERM'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/app/control.html#Control.revoke"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.app.control.Control.revoke" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tell all (or specific) workers to revoke a task by id.</p>
+<p>If a task is revoked, the workers will ignore the task and
+not execute it after all.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name"></col>
+<col class="field-body"></col>
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>task_id</strong> – Id of the task to revoke.</li>
+<li><strong>terminate</strong> – Also terminate the process currently working
+on the task (if any).</li>
+<li><strong>signal</strong> – Name of signal to send to process if terminate.
+Default is TERM.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>See <a class="reference internal" href="#celery.app.control.Control.broadcast" title="celery.app.control.Control.broadcast"><code class="xref py py-meth docutils literal"><span class="pre">broadcast()</span></code></a> for supported keyword arguments.</p>
+</dd></dl>
+<dl class="method">
+<dt id="celery.app.control.Control.time_limit"><a name="//apple_ref/cpp/Method/celery.app.control.Control.time_limit"></a>
+<code class="descclassname">Control.</code><code class="descname">time_limit</code><span class="sig-paren">(</span><em>task_name</em>, <em>soft=None</em>, <em>hard=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/app/control.html#Control.time_limit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.app.control.Control.time_limit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tell all (or specific) workers to set time limits for
+a task by type.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name"></col>
+<col class="field-body"></col>
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>task_name</strong> – Name of task to change time limits for.</li>
+<li><strong>soft</strong> – New soft time limit (in seconds).</li>
+<li><strong>hard</strong> – New hard time limit (in seconds).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Any additional keyword arguments are passed on to <a class="reference internal" href="#celery.app.control.Control.broadcast" title="celery.app.control.Control.broadcast"><code class="xref py py-meth docutils literal"><span class="pre">broadcast()</span></code></a>.</p>
+</dd></dl>
+</dd></dl>
+<dl class="function">
+<dt id="celery.app.control.flatten_reply"><a name="//apple_ref/cpp/Function/celery.app.control.flatten_reply"></a>
+<code class="descclassname">celery.app.control.</code><code class="descname">flatten_reply</code><span class="sig-paren">(</span><em>reply</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/app/control.html#flatten_reply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.app.control.flatten_reply" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div aria-label="related navigation" class="related" role="navigation">
+<h3>Navigation</h3>
+<ul>
+<li class="right" style="margin-right: 10px">
+<a href="../genindex.html" title="General Index">index</a></li>
+<li class="right">
+<a href="../py-modindex.html" title="Python Module Index">modules</a> |</li>
+<li class="right">
+<a href="celery.app.registry.html" title="celery.app.registry">next</a> |</li>
+<li class="right">
+<a href="celery.app.defaults.html" title="celery.app.defaults">previous</a> |</li>
+<li class="nav-item nav-item-0"><a href="../index.html">Celery 3.1.23 documentation</a> »</li>
+<li class="nav-item nav-item-1"><a href="index.html">API Reference</a> »</li>
+</ul>
+</div>
+<div class="footer" role="contentinfo">
+        © <a href="../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
+    </div>
+</body>
+</html>

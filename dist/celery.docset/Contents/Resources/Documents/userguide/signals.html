@@ -1,0 +1,831 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Signals &mdash; Celery 3.1.23 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/celery.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.23',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="top" title="Celery 3.1.23 documentation" href="../index.html" />
+    <link rel="up" title="User Guide" href="index.html" />
+    <link rel="next" title="Extensions and Bootsteps" href="extending.html" />
+    <link rel="prev" title="Concurrency with Eventlet" href="concurrency/eventlet.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="extending.html" title="Extensions and Bootsteps"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="concurrency/eventlet.html" title="Concurrency with Eventlet"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">User Guide</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+<div class="deck">
+
+    
+        <p>
+        This document describes the current stable version of Celery (3.1). For development docs,
+        <a href="http://docs.celeryproject.org/en/master/userguide/signals.html">go here</a>.
+        </p>
+    
+
+</div>
+    <div class="section" id="signals">
+<span id="id1"></span><h1>Signals<a class="headerlink" href="#signals" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#basics" id="id3">Basics</a></li>
+<li><a class="reference internal" href="#signal-ref" id="id4">Signals</a><ul>
+<li><a class="reference internal" href="#task-signals" id="id5">Task Signals</a><ul>
+<li><a class="reference internal" href="#before-task-publish" id="id6">before_task_publish</a></li>
+<li><a class="reference internal" href="#after-task-publish" id="id7">after_task_publish</a></li>
+<li><a class="reference internal" href="#task-prerun" id="id8">task_prerun</a></li>
+<li><a class="reference internal" href="#task-postrun" id="id9">task_postrun</a></li>
+<li><a class="reference internal" href="#task-retry" id="id10">task_retry</a></li>
+<li><a class="reference internal" href="#task-success" id="id11">task_success</a></li>
+<li><a class="reference internal" href="#task-failure" id="id12">task_failure</a></li>
+<li><a class="reference internal" href="#task-revoked" id="id13">task_revoked</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#app-signals" id="id14">App Signals</a><ul>
+<li><a class="reference internal" href="#import-modules" id="id15">import_modules</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#worker-signals" id="id16">Worker Signals</a><ul>
+<li><a class="reference internal" href="#celeryd-after-setup" id="id17">celeryd_after_setup</a></li>
+<li><a class="reference internal" href="#celeryd-init" id="id18">celeryd_init</a></li>
+<li><a class="reference internal" href="#worker-init" id="id19">worker_init</a></li>
+<li><a class="reference internal" href="#worker-ready" id="id20">worker_ready</a></li>
+<li><a class="reference internal" href="#worker-process-init" id="id21">worker_process_init</a></li>
+<li><a class="reference internal" href="#worker-process-shutdown" id="id22">worker_process_shutdown</a></li>
+<li><a class="reference internal" href="#worker-shutdown" id="id23">worker_shutdown</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#beat-signals" id="id24">Beat Signals</a><ul>
+<li><a class="reference internal" href="#beat-init" id="id25">beat_init</a></li>
+<li><a class="reference internal" href="#beat-embedded-init" id="id26">beat_embedded_init</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#eventlet-signals" id="id27">Eventlet Signals</a><ul>
+<li><a class="reference internal" href="#eventlet-pool-started" id="id28">eventlet_pool_started</a></li>
+<li><a class="reference internal" href="#eventlet-pool-preshutdown" id="id29">eventlet_pool_preshutdown</a></li>
+<li><a class="reference internal" href="#eventlet-pool-postshutdown" id="id30">eventlet_pool_postshutdown</a></li>
+<li><a class="reference internal" href="#eventlet-pool-apply" id="id31">eventlet_pool_apply</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#logging-signals" id="id32">Logging Signals</a><ul>
+<li><a class="reference internal" href="#setup-logging" id="id33">setup_logging</a></li>
+<li><a class="reference internal" href="#after-setup-logger" id="id34">after_setup_logger</a></li>
+<li><a class="reference internal" href="#after-setup-task-logger" id="id35">after_setup_task_logger</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#command-signals" id="id36">Command signals</a><ul>
+<li><a class="reference internal" href="#user-preload-options" id="id37">user_preload_options</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#deprecated-signals" id="id38">Deprecated Signals</a><ul>
+<li><a class="reference internal" href="#task-sent" id="id39">task_sent</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<p>Signals allows decoupled applications to receive notifications when
+certain actions occur elsewhere in the application.</p>
+<p>Celery ships with many signals that your application can hook into
+to augment behavior of certain actions.</p>
+<div class="section" id="basics">
+<span id="signal-basics"></span><h2><a class="toc-backref" href="#id3">Basics</a><a class="headerlink" href="#basics" title="Permalink to this headline">¶</a></h2>
+<p>Several kinds of events trigger signals, you can connect to these signals
+to perform actions as they trigger.</p>
+<p>Example connecting to the <a class="reference internal" href="#std:signal-after_task_publish"><code class="xref std std-signal docutils literal"><span class="pre">after_task_publish</span></code></a> signal:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">celery.signals</span> <span class="kn">import</span> <span class="n">after_task_publish</span>
+
+<span class="nd">@after_task_publish.connect</span>
+<span class="k">def</span> <span class="nf">task_sent_handler</span><span class="p">(</span><span class="n">sender</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;after_task_publish for task id {body[id]}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">body</span><span class="o">=</span><span class="n">body</span><span class="p">,</span>
+    <span class="p">))</span>
+</pre></div>
+</div>
+<p>Some signals also have a sender which you can filter by. For example the
+<a class="reference internal" href="#std:signal-after_task_publish"><code class="xref std std-signal docutils literal"><span class="pre">after_task_publish</span></code></a> signal uses the task name as a sender, so by
+providing the <code class="docutils literal"><span class="pre">sender</span></code> argument to
+<a class="reference internal" href="../internals/reference/celery.utils.dispatch.signal.html#celery.utils.dispatch.signal.Signal.connect" title="celery.utils.dispatch.signal.Signal.connect"><code class="xref py py-class docutils literal"><span class="pre">connect</span></code></a> you can
+connect your handler to be called every time a task with name <cite>&#8220;proj.tasks.add&#8221;</cite>
+is published:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="nd">@after_task_publish.connect</span><span class="p">(</span><span class="n">sender</span><span class="o">=</span><span class="s1">&#39;proj.tasks.add&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">task_sent_handler</span><span class="p">(</span><span class="n">sender</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;after_task_publish for task id {body[id]}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">body</span><span class="o">=</span><span class="n">body</span><span class="p">,</span>
+    <span class="p">))</span>
+</pre></div>
+</div>
+<p>Signals use the same implementation as django.core.dispatch. As a result other
+keyword parameters (e.g. signal) are passed to all signal handlers by default.</p>
+<p>The best practice for signal handlers is to accept arbitrary keyword
+arguments (i.e. <code class="docutils literal"><span class="pre">**kwargs</span></code>).  That way new celery versions can add additional
+arguments without breaking user code.</p>
+</div>
+<div class="section" id="signal-ref">
+<span id="id2"></span><h2><a class="toc-backref" href="#id4">Signals</a><a class="headerlink" href="#signal-ref" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="task-signals">
+<h3><a class="toc-backref" href="#id5">Task Signals</a><a class="headerlink" href="#task-signals" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="before-task-publish">
+<span id="std:signal-before_task_publish"></span><h4><a class="toc-backref" href="#id6">before_task_publish</a><a class="headerlink" href="#before-task-publish" title="Permalink to this headline">¶</a></h4>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 3.1.</span></p>
+</div>
+<p>Dispatched before a task is published.
+Note that this is executed in the process sending the task.</p>
+<p>Sender is the name of the task being sent.</p>
+<p>Provides arguments:</p>
+<ul>
+<li><p class="first">body</p>
+<blockquote>
+<div><p>Task message body.</p>
+<p>This is a mapping containing the task message fields
+(see <a class="reference internal" href="../internals/protocol.html#task-message-protocol-v1"><span>Task Messages</span></a>).</p>
+</div></blockquote>
+</li>
+<li><p class="first">exchange</p>
+<blockquote>
+<div><p>Name of the exchange to send to or a <a class="reference external" href="http://kombu.readthedocs.org/en/latest/reference/kombu.html#kombu.Exchange" title="(in Kombu v3.0)"><code class="xref py py-class docutils literal"><span class="pre">Exchange</span></code></a> object.</p>
+</div></blockquote>
+</li>
+<li><p class="first">routing_key</p>
+<blockquote>
+<div><p>Routing key to use when sending the message.</p>
+</div></blockquote>
+</li>
+<li><p class="first">headers</p>
+<blockquote>
+<div><p>Application headers mapping (can be modified).</p>
+</div></blockquote>
+</li>
+<li><p class="first">properties</p>
+<blockquote>
+<div><p>Message properties (can be modified)</p>
+</div></blockquote>
+</li>
+<li><p class="first">declare</p>
+<blockquote>
+<div><p>List of entities (<a class="reference external" href="http://kombu.readthedocs.org/en/latest/reference/kombu.html#kombu.Exchange" title="(in Kombu v3.0)"><code class="xref py py-class docutils literal"><span class="pre">Exchange</span></code></a>,
+<a class="reference external" href="http://kombu.readthedocs.org/en/latest/reference/kombu.html#kombu.Queue" title="(in Kombu v3.0)"><code class="xref py py-class docutils literal"><span class="pre">Queue</span></code></a> or :class:~`kombu.binding` to declare before
+publishing the message.  Can be modified.</p>
+</div></blockquote>
+</li>
+<li><p class="first">retry_policy</p>
+<blockquote>
+<div><p>Mapping of retry options.  Can be any argument to
+<a class="reference external" href="http://kombu.readthedocs.org/en/latest/reference/kombu.html#kombu.Connection.ensure" title="(in Kombu v3.0)"><code class="xref py py-meth docutils literal"><span class="pre">kombu.Connection.ensure()</span></code></a> and can be modified.</p>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="after-task-publish">
+<span id="std:signal-after_task_publish"></span><h4><a class="toc-backref" href="#id7">after_task_publish</a><a class="headerlink" href="#after-task-publish" title="Permalink to this headline">¶</a></h4>
+<p>Dispatched when a task has been sent to the broker.
+Note that this is executed in the process that sent the task.</p>
+<p>Sender is the name of the task being sent.</p>
+<p>Provides arguments:</p>
+<ul>
+<li><p class="first">body</p>
+<blockquote>
+<div><p>The task message body, see <a class="reference internal" href="../internals/protocol.html#task-message-protocol-v1"><span>Task Messages</span></a>
+for a reference of possible fields that can be defined.</p>
+</div></blockquote>
+</li>
+<li><p class="first">exchange</p>
+<blockquote>
+<div><p>Name of the exchange or <a class="reference external" href="http://kombu.readthedocs.org/en/latest/reference/kombu.html#kombu.Exchange" title="(in Kombu v3.0)"><code class="xref py py-class docutils literal"><span class="pre">Exchange</span></code></a> object used.</p>
+</div></blockquote>
+</li>
+<li><p class="first">routing_key</p>
+<blockquote>
+<div><p>Routing key used.</p>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="task-prerun">
+<span id="std:signal-task_prerun"></span><h4><a class="toc-backref" href="#id8">task_prerun</a><a class="headerlink" href="#task-prerun" title="Permalink to this headline">¶</a></h4>
+<p>Dispatched before a task is executed.</p>
+<p>Sender is the task object being executed.</p>
+<p>Provides arguments:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>task_id</dt>
+<dd><p class="first last">Id of the task to be executed.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>task</dt>
+<dd><p class="first last">The task being executed.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>args</dt>
+<dd><p class="first last">the tasks positional arguments.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>kwargs</dt>
+<dd><p class="first last">The tasks keyword arguments.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="task-postrun">
+<span id="std:signal-task_postrun"></span><h4><a class="toc-backref" href="#id9">task_postrun</a><a class="headerlink" href="#task-postrun" title="Permalink to this headline">¶</a></h4>
+<p>Dispatched after a task has been executed.</p>
+<p>Sender is the task object executed.</p>
+<p>Provides arguments:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>task_id</dt>
+<dd><p class="first last">Id of the task to be executed.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>task</dt>
+<dd><p class="first last">The task being executed.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>args</dt>
+<dd><p class="first last">The tasks positional arguments.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>kwargs</dt>
+<dd><p class="first last">The tasks keyword arguments.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>retval</dt>
+<dd><p class="first last">The return value of the task.</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">state</p>
+<blockquote>
+<div><p>Name of the resulting state.</p>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="task-retry">
+<span id="std:signal-task_retry"></span><h4><a class="toc-backref" href="#id10">task_retry</a><a class="headerlink" href="#task-retry" title="Permalink to this headline">¶</a></h4>
+<p>Dispatched when a task will be retried.</p>
+<p>Sender is the task object.</p>
+<p>Provides arguments:</p>
+<ul>
+<li><p class="first">request</p>
+<blockquote>
+<div><p>The current task request.</p>
+</div></blockquote>
+</li>
+<li><p class="first">reason</p>
+<blockquote>
+<div><p>Reason for retry (usually an exception instance, but can always be
+coerced to <a class="reference external" href="http://docs.python.org/dev/library/stdtypes.html#str" title="(in Python v3.6)"><code class="xref py py-class docutils literal"><span class="pre">str</span></code></a>).</p>
+</div></blockquote>
+</li>
+<li><p class="first">einfo</p>
+<blockquote>
+<div><p>Detailed exception information, including traceback
+(a <code class="xref py py-class docutils literal"><span class="pre">billiard.einfo.ExceptionInfo</span></code> object).</p>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="task-success">
+<span id="std:signal-task_success"></span><h4><a class="toc-backref" href="#id11">task_success</a><a class="headerlink" href="#task-success" title="Permalink to this headline">¶</a></h4>
+<p>Dispatched when a task succeeds.</p>
+<p>Sender is the task object executed.</p>
+<p>Provides arguments</p>
+<ul>
+<li><dl class="first docutils">
+<dt>result</dt>
+<dd><p class="first last">Return value of the task.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="task-failure">
+<span id="std:signal-task_failure"></span><h4><a class="toc-backref" href="#id12">task_failure</a><a class="headerlink" href="#task-failure" title="Permalink to this headline">¶</a></h4>
+<p>Dispatched when a task fails.</p>
+<p>Sender is the task object executed.</p>
+<p>Provides arguments:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>task_id</dt>
+<dd><p class="first last">Id of the task.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>exception</dt>
+<dd><p class="first last">Exception instance raised.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>args</dt>
+<dd><p class="first last">Positional arguments the task was called with.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>kwargs</dt>
+<dd><p class="first last">Keyword arguments the task was called with.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>traceback</dt>
+<dd><p class="first last">Stack trace object.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>einfo</dt>
+<dd><p class="first last">The <a class="reference internal" href="../internals/reference/celery.datastructures.html#celery.datastructures.ExceptionInfo" title="celery.datastructures.ExceptionInfo"><code class="xref py py-class docutils literal"><span class="pre">celery.datastructures.ExceptionInfo</span></code></a> instance.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="task-revoked">
+<span id="std:signal-task_revoked"></span><h4><a class="toc-backref" href="#id13">task_revoked</a><a class="headerlink" href="#task-revoked" title="Permalink to this headline">¶</a></h4>
+<p>Dispatched when a task is revoked/terminated by the worker.</p>
+<p>Sender is the task object revoked/terminated.</p>
+<p>Provides arguments:</p>
+<ul>
+<li><p class="first">request</p>
+<blockquote>
+<div><p>This is a <a class="reference internal" href="../reference/celery.worker.job.html#celery.worker.job.Request" title="celery.worker.job.Request"><code class="xref py py-class docutils literal"><span class="pre">Request</span></code></a> instance, and not
+<code class="docutils literal"><span class="pre">task.request</span></code>.   When using the prefork pool this signal
+is dispatched in the parent process, so <code class="docutils literal"><span class="pre">task.request</span></code> is not available
+and should not be used.  Use this object instead, which should have many
+of the same fields.</p>
+</div></blockquote>
+</li>
+<li><dl class="first docutils">
+<dt>terminated</dt>
+<dd><p class="first last">Set to <code class="xref py py-const docutils literal"><span class="pre">True</span></code> if the task was terminated.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>signum</dt>
+<dd><p class="first last">Signal number used to terminate the task. If this is <code class="xref py py-const docutils literal"><span class="pre">None</span></code> and
+terminated is <code class="xref py py-const docutils literal"><span class="pre">True</span></code> then <code class="xref std std-sig docutils literal"><span class="pre">TERM</span></code> should be assumed.</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">expired
+Set to <code class="xref py py-const docutils literal"><span class="pre">True</span></code> if the task expired.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="app-signals">
+<h3><a class="toc-backref" href="#id14">App Signals</a><a class="headerlink" href="#app-signals" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="import-modules">
+<span id="std:signal-import_modules"></span><h4><a class="toc-backref" href="#id15">import_modules</a><a class="headerlink" href="#import-modules" title="Permalink to this headline">¶</a></h4>
+<p>This signal is sent when a program (worker, beat, shell) etc, asks
+for modules in the <a class="reference internal" href="../configuration.html#std:setting-CELERY_INCLUDE"><code class="xref std std-setting docutils literal"><span class="pre">CELERY_INCLUDE</span></code></a> and <a class="reference internal" href="../configuration.html#std:setting-CELERY_IMPORTS"><code class="xref std std-setting docutils literal"><span class="pre">CELERY_IMPORTS</span></code></a>
+settings to be imported.</p>
+<p>Sender is the app instance.</p>
+</div>
+</div>
+<div class="section" id="worker-signals">
+<h3><a class="toc-backref" href="#id16">Worker Signals</a><a class="headerlink" href="#worker-signals" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="celeryd-after-setup">
+<span id="std:signal-celeryd_after_setup"></span><h4><a class="toc-backref" href="#id17">celeryd_after_setup</a><a class="headerlink" href="#celeryd-after-setup" title="Permalink to this headline">¶</a></h4>
+<p>This signal is sent after the worker instance is set up,
+but before it calls run.  This means that any queues from the <code class="xref std std-option docutils literal"><span class="pre">-Q</span></code>
+option is enabled, logging has been set up and so on.</p>
+<p>It can be used to e.g. add custom queues that should always be consumed
+from, disregarding the <code class="xref std std-option docutils literal"><span class="pre">-Q</span></code> option.  Here&#8217;s an example
+that sets up a direct queue for each worker, these queues can then be
+used to route a task to any specific worker:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">celery.signals</span> <span class="kn">import</span> <span class="n">celeryd_after_setup</span>
+
+<span class="nd">@celeryd_after_setup.connect</span>
+<span class="k">def</span> <span class="nf">setup_direct_queue</span><span class="p">(</span><span class="n">sender</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">queue_name</span> <span class="o">=</span> <span class="s1">&#39;{0}.dq&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sender</span><span class="p">)</span>  <span class="c1"># sender is the nodename of the worker</span>
+    <span class="n">instance</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">amqp</span><span class="o">.</span><span class="n">queues</span><span class="o">.</span><span class="n">select_add</span><span class="p">(</span><span class="n">queue_name</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Provides arguments:</p>
+<ul>
+<li><p class="first">sender
+Hostname of the worker.</p>
+</li>
+<li><dl class="first docutils">
+<dt>instance</dt>
+<dd><p class="first last">This is the <a class="reference internal" href="../reference/celery.apps.worker.html#celery.apps.worker.Worker" title="celery.apps.worker.Worker"><code class="xref py py-class docutils literal"><span class="pre">celery.apps.worker.Worker</span></code></a> instance to be initialized.
+Note that only the <a class="reference internal" href="extending.html#app" title="app"><code class="xref py py-attr docutils literal"><span class="pre">app</span></code></a> and <a class="reference internal" href="extending.html#hostname" title="hostname"><code class="xref py py-attr docutils literal"><span class="pre">hostname</span></code></a> (nodename) attributes have been
+set so far, and the rest of <code class="docutils literal"><span class="pre">__init__</span></code> has not been executed.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>conf</dt>
+<dd><p class="first last">The configuration of the current app.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="celeryd-init">
+<span id="std:signal-celeryd_init"></span><h4><a class="toc-backref" href="#id18">celeryd_init</a><a class="headerlink" href="#celeryd-init" title="Permalink to this headline">¶</a></h4>
+<p>This is the first signal sent when <strong class="program">celery worker</strong> starts up.
+The <code class="docutils literal"><span class="pre">sender</span></code> is the host name of the worker, so this signal can be used
+to setup worker specific configuration:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">celery.signals</span> <span class="kn">import</span> <span class="n">celeryd_init</span>
+
+<span class="nd">@celeryd_init.connect</span><span class="p">(</span><span class="n">sender</span><span class="o">=</span><span class="s1">&#39;worker12@example.com&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">configure_worker12</span><span class="p">(</span><span class="n">conf</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">conf</span><span class="o">.</span><span class="n">CELERY_DEFAULT_RATE_LIMIT</span> <span class="o">=</span> <span class="s1">&#39;10/m&#39;</span>
+</pre></div>
+</div>
+<p>or to set up configuration for multiple workers you can omit specifying a
+sender when you connect:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">celery.signals</span> <span class="kn">import</span> <span class="n">celeryd_init</span>
+
+<span class="nd">@celeryd_init.connect</span>
+<span class="k">def</span> <span class="nf">configure_workers</span><span class="p">(</span><span class="n">sender</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">conf</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">sender</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;worker1@example.com&#39;</span><span class="p">,</span> <span class="s1">&#39;worker2@example.com&#39;</span><span class="p">):</span>
+        <span class="n">conf</span><span class="o">.</span><span class="n">CELERY_DEFAULT_RATE_LIMIT</span> <span class="o">=</span> <span class="s1">&#39;10/m&#39;</span>
+    <span class="k">if</span> <span class="n">sender</span> <span class="o">==</span> <span class="s1">&#39;worker3@example.com&#39;</span><span class="p">:</span>
+        <span class="n">conf</span><span class="o">.</span><span class="n">CELERYD_PREFETCH_MULTIPLIER</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>Provides arguments:</p>
+<ul>
+<li><p class="first">sender
+Nodename of the worker.</p>
+</li>
+<li><dl class="first docutils">
+<dt>instance</dt>
+<dd><p class="first last">This is the <a class="reference internal" href="../reference/celery.apps.worker.html#celery.apps.worker.Worker" title="celery.apps.worker.Worker"><code class="xref py py-class docutils literal"><span class="pre">celery.apps.worker.Worker</span></code></a> instance to be initialized.
+Note that only the <a class="reference internal" href="extending.html#app" title="app"><code class="xref py py-attr docutils literal"><span class="pre">app</span></code></a> and <a class="reference internal" href="extending.html#hostname" title="hostname"><code class="xref py py-attr docutils literal"><span class="pre">hostname</span></code></a> (nodename) attributes have been
+set so far, and the rest of <code class="docutils literal"><span class="pre">__init__</span></code> has not been executed.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>conf</dt>
+<dd><p class="first last">The configuration of the current app.</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">options</p>
+<blockquote>
+<div><p>Options passed to the worker from command-line arguments (including
+defaults).</p>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="worker-init">
+<span id="std:signal-worker_init"></span><h4><a class="toc-backref" href="#id19">worker_init</a><a class="headerlink" href="#worker-init" title="Permalink to this headline">¶</a></h4>
+<p>Dispatched before the worker is started.</p>
+</div>
+<div class="section" id="worker-ready">
+<span id="std:signal-worker_ready"></span><h4><a class="toc-backref" href="#id20">worker_ready</a><a class="headerlink" href="#worker-ready" title="Permalink to this headline">¶</a></h4>
+<p>Dispatched when the worker is ready to accept work.</p>
+</div>
+<div class="section" id="worker-process-init">
+<span id="std:signal-worker_process_init"></span><h4><a class="toc-backref" href="#id21">worker_process_init</a><a class="headerlink" href="#worker-process-init" title="Permalink to this headline">¶</a></h4>
+<p>Dispatched in all pool child processes when they start.</p>
+<p>Note that handlers attached to this signal must not be blocking
+for more than 4 seconds, or the process will be killed assuming
+it failed to start.</p>
+</div>
+<div class="section" id="worker-process-shutdown">
+<span id="std:signal-worker_process_shutdown"></span><h4><a class="toc-backref" href="#id22">worker_process_shutdown</a><a class="headerlink" href="#worker-process-shutdown" title="Permalink to this headline">¶</a></h4>
+<p>Dispatched in all pool child processes just before they exit.</p>
+<p>Note: There is no guarantee that this signal will be dispatched,
+similarly to finally blocks it&#8217;s impossible to guarantee that handlers
+will be called at shutdown, and if called it may be interrupted during.</p>
+<p>Provides arguments:</p>
+<ul>
+<li><p class="first">pid</p>
+<blockquote>
+<div><p>The pid of the child process that is about to shutdown.</p>
+</div></blockquote>
+</li>
+<li><p class="first">exitcode</p>
+<blockquote>
+<div><p>The exitcode that will be used when the child process exits.</p>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="worker-shutdown">
+<span id="std:signal-worker_shutdown"></span><h4><a class="toc-backref" href="#id23">worker_shutdown</a><a class="headerlink" href="#worker-shutdown" title="Permalink to this headline">¶</a></h4>
+<p>Dispatched when the worker is about to shut down.</p>
+</div>
+</div>
+<div class="section" id="beat-signals">
+<h3><a class="toc-backref" href="#id24">Beat Signals</a><a class="headerlink" href="#beat-signals" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="beat-init">
+<span id="std:signal-beat_init"></span><h4><a class="toc-backref" href="#id25">beat_init</a><a class="headerlink" href="#beat-init" title="Permalink to this headline">¶</a></h4>
+<p>Dispatched when <strong class="program">celery beat</strong> starts (either standalone or embedded).
+Sender is the <a class="reference internal" href="../reference/celery.beat.html#celery.beat.Service" title="celery.beat.Service"><code class="xref py py-class docutils literal"><span class="pre">celery.beat.Service</span></code></a> instance.</p>
+</div>
+<div class="section" id="beat-embedded-init">
+<span id="std:signal-beat_embedded_init"></span><h4><a class="toc-backref" href="#id26">beat_embedded_init</a><a class="headerlink" href="#beat-embedded-init" title="Permalink to this headline">¶</a></h4>
+<p>Dispatched in addition to the <a class="reference internal" href="#std:signal-beat_init"><code class="xref std std-signal docutils literal"><span class="pre">beat_init</span></code></a> signal when <strong class="program">celery
+beat</strong> is started as an embedded process.  Sender is the
+<a class="reference internal" href="../reference/celery.beat.html#celery.beat.Service" title="celery.beat.Service"><code class="xref py py-class docutils literal"><span class="pre">celery.beat.Service</span></code></a> instance.</p>
+</div>
+</div>
+<div class="section" id="eventlet-signals">
+<h3><a class="toc-backref" href="#id27">Eventlet Signals</a><a class="headerlink" href="#eventlet-signals" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="eventlet-pool-started">
+<span id="std:signal-eventlet_pool_started"></span><h4><a class="toc-backref" href="#id28">eventlet_pool_started</a><a class="headerlink" href="#eventlet-pool-started" title="Permalink to this headline">¶</a></h4>
+<p>Sent when the eventlet pool has been started.</p>
+<p>Sender is the <a class="reference internal" href="../internals/reference/celery.concurrency.eventlet.html#celery.concurrency.eventlet.TaskPool" title="celery.concurrency.eventlet.TaskPool"><code class="xref py py-class docutils literal"><span class="pre">celery.concurrency.eventlet.TaskPool</span></code></a> instance.</p>
+</div>
+<div class="section" id="eventlet-pool-preshutdown">
+<span id="std:signal-eventlet_pool_preshutdown"></span><h4><a class="toc-backref" href="#id29">eventlet_pool_preshutdown</a><a class="headerlink" href="#eventlet-pool-preshutdown" title="Permalink to this headline">¶</a></h4>
+<p>Sent when the worker shutdown, just before the eventlet pool
+is requested to wait for remaining workers.</p>
+<p>Sender is the <a class="reference internal" href="../internals/reference/celery.concurrency.eventlet.html#celery.concurrency.eventlet.TaskPool" title="celery.concurrency.eventlet.TaskPool"><code class="xref py py-class docutils literal"><span class="pre">celery.concurrency.eventlet.TaskPool</span></code></a> instance.</p>
+</div>
+<div class="section" id="eventlet-pool-postshutdown">
+<span id="std:signal-eventlet_pool_postshutdown"></span><h4><a class="toc-backref" href="#id30">eventlet_pool_postshutdown</a><a class="headerlink" href="#eventlet-pool-postshutdown" title="Permalink to this headline">¶</a></h4>
+<p>Sent when the pool has been joined and the worker is ready to shutdown.</p>
+<p>Sender is the <a class="reference internal" href="../internals/reference/celery.concurrency.eventlet.html#celery.concurrency.eventlet.TaskPool" title="celery.concurrency.eventlet.TaskPool"><code class="xref py py-class docutils literal"><span class="pre">celery.concurrency.eventlet.TaskPool</span></code></a> instance.</p>
+</div>
+<div class="section" id="eventlet-pool-apply">
+<span id="std:signal-eventlet_pool_apply"></span><h4><a class="toc-backref" href="#id31">eventlet_pool_apply</a><a class="headerlink" href="#eventlet-pool-apply" title="Permalink to this headline">¶</a></h4>
+<p>Sent whenever a task is applied to the pool.</p>
+<p>Sender is the <a class="reference internal" href="../internals/reference/celery.concurrency.eventlet.html#celery.concurrency.eventlet.TaskPool" title="celery.concurrency.eventlet.TaskPool"><code class="xref py py-class docutils literal"><span class="pre">celery.concurrency.eventlet.TaskPool</span></code></a> instance.</p>
+<p>Provides arguments:</p>
+<ul>
+<li><p class="first">target</p>
+<blockquote>
+<div><p>The target function.</p>
+</div></blockquote>
+</li>
+<li><p class="first">args</p>
+<blockquote>
+<div><p>Positional arguments.</p>
+</div></blockquote>
+</li>
+<li><p class="first">kwargs</p>
+<blockquote>
+<div><p>Keyword arguments.</p>
+</div></blockquote>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="logging-signals">
+<h3><a class="toc-backref" href="#id32">Logging Signals</a><a class="headerlink" href="#logging-signals" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="setup-logging">
+<span id="std:signal-setup_logging"></span><h4><a class="toc-backref" href="#id33">setup_logging</a><a class="headerlink" href="#setup-logging" title="Permalink to this headline">¶</a></h4>
+<p>Celery won&#8217;t configure the loggers if this signal is connected,
+so you can use this to completely override the logging configuration
+with your own.</p>
+<p>If you would like to augment the logging configuration setup by
+Celery then you can use the <a class="reference internal" href="#std:signal-after_setup_logger"><code class="xref std std-signal docutils literal"><span class="pre">after_setup_logger</span></code></a> and
+<a class="reference internal" href="#std:signal-after_setup_task_logger"><code class="xref std std-signal docutils literal"><span class="pre">after_setup_task_logger</span></code></a> signals.</p>
+<p>Provides arguments:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>loglevel</dt>
+<dd><p class="first last">The level of the logging object.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>logfile</dt>
+<dd><p class="first last">The name of the logfile.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>format</dt>
+<dd><p class="first last">The log format string.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>colorize</dt>
+<dd><p class="first last">Specify if log messages are colored or not.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="after-setup-logger">
+<span id="std:signal-after_setup_logger"></span><h4><a class="toc-backref" href="#id34">after_setup_logger</a><a class="headerlink" href="#after-setup-logger" title="Permalink to this headline">¶</a></h4>
+<p>Sent after the setup of every global logger (not task loggers).
+Used to augment logging configuration.</p>
+<p>Provides arguments:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>logger</dt>
+<dd><p class="first last">The logger object.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>loglevel</dt>
+<dd><p class="first last">The level of the logging object.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>logfile</dt>
+<dd><p class="first last">The name of the logfile.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>format</dt>
+<dd><p class="first last">The log format string.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>colorize</dt>
+<dd><p class="first last">Specify if log messages are colored or not.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="after-setup-task-logger">
+<span id="std:signal-after_setup_task_logger"></span><h4><a class="toc-backref" href="#id35">after_setup_task_logger</a><a class="headerlink" href="#after-setup-task-logger" title="Permalink to this headline">¶</a></h4>
+<p>Sent after the setup of every single task logger.
+Used to augment logging configuration.</p>
+<p>Provides arguments:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>logger</dt>
+<dd><p class="first last">The logger object.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>loglevel</dt>
+<dd><p class="first last">The level of the logging object.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>logfile</dt>
+<dd><p class="first last">The name of the logfile.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>format</dt>
+<dd><p class="first last">The log format string.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>colorize</dt>
+<dd><p class="first last">Specify if log messages are colored or not.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="command-signals">
+<h3><a class="toc-backref" href="#id36">Command signals</a><a class="headerlink" href="#command-signals" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="user-preload-options">
+<span id="std:signal-user_preload_options"></span><h4><a class="toc-backref" href="#id37">user_preload_options</a><a class="headerlink" href="#user-preload-options" title="Permalink to this headline">¶</a></h4>
+<p>This signal is sent after any of the Celery command line programs
+are finished parsing the user preload options.</p>
+<p>It can be used to add additional command-line arguments to the
+<strong class="program">celery</strong> umbrella command:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">celery</span> <span class="kn">import</span> <span class="n">Celery</span>
+<span class="kn">from</span> <span class="nn">celery</span> <span class="kn">import</span> <span class="n">signals</span>
+<span class="kn">from</span> <span class="nn">celery.bin.base</span> <span class="kn">import</span> <span class="n">Option</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Celery</span><span class="p">()</span>
+<span class="n">app</span><span class="o">.</span><span class="n">user_options</span><span class="p">[</span><span class="s1">&#39;preload&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Option</span><span class="p">(</span>
+    <span class="s1">&#39;--monitoring&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span>
+    <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Enable our external monitoring utility, blahblah&#39;</span><span class="p">,</span>
+<span class="p">))</span>
+
+<span class="nd">@signals.user_preload_options.connect</span>
+<span class="k">def</span> <span class="nf">handle_preload_options</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">options</span><span class="p">[</span><span class="s1">&#39;monitoring&#39;</span><span class="p">]:</span>
+        <span class="n">enable_monitoring</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Sender is the <a class="reference internal" href="../reference/celery.bin.base.html#celery.bin.base.Command" title="celery.bin.base.Command"><code class="xref py py-class docutils literal"><span class="pre">Command</span></code></a> instance, which depends
+on what program was called (e.g. for the umbrella command it will be
+a <a class="reference internal" href="../reference/celery.bin.celery.html#celery.bin.celery.CeleryCommand" title="celery.bin.celery.CeleryCommand"><code class="xref py py-class docutils literal"><span class="pre">CeleryCommand</span></code></a>) object).</p>
+<p>Provides arguments:</p>
+<ul>
+<li><p class="first">app</p>
+<blockquote>
+<div><p>The app instance.</p>
+</div></blockquote>
+</li>
+<li><p class="first">options</p>
+<blockquote>
+<div><p>Mapping of the parsed user preload options (with default values).</p>
+</div></blockquote>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="deprecated-signals">
+<h3><a class="toc-backref" href="#id38">Deprecated Signals</a><a class="headerlink" href="#deprecated-signals" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="task-sent">
+<span id="std:signal-task_sent"></span><h4><a class="toc-backref" href="#id39">task_sent</a><a class="headerlink" href="#task-sent" title="Permalink to this headline">¶</a></h4>
+<p>This signal is deprecated, please use <a class="reference internal" href="#std:signal-after_task_publish"><code class="xref std std-signal docutils literal"><span class="pre">after_task_publish</span></code></a> instead.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="extending.html" title="Extensions and Bootsteps"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="concurrency/eventlet.html" title="Concurrency with Eventlet"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >User Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; <a href="../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
+    </div>
+  </body>
+</html>

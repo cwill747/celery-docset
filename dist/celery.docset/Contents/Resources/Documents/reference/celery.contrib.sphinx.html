@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>celery.contrib.sphinx — Celery 3.1.23 documentation</title>
+<link href="../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.23',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+<script src="../_static/jquery.js" type="text/javascript"></script>
+<script src="../_static/underscore.js" type="text/javascript"></script>
+<script src="../_static/doctools.js" type="text/javascript"></script>
+<link href="../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="index.html" rel="up" title="API Reference"/>
+<link href="celery.contrib.rdb.html" rel="next" title="celery.contrib.rdb"/>
+<link href="celery.contrib.migrate.html" rel="prev" title="celery.contrib.migrate"/>
+</head>
+<body role="document">
+<div aria-label="related navigation" class="related" role="navigation">
+<h3>Navigation</h3>
+<ul>
+<li class="right" style="margin-right: 10px">
+<a accesskey="I" href="../genindex.html" title="General Index">index</a></li>
+<li class="right">
+<a href="../py-modindex.html" title="Python Module Index">modules</a> |</li>
+<li class="right">
+<a accesskey="N" href="celery.contrib.rdb.html" title="celery.contrib.rdb">next</a> |</li>
+<li class="right">
+<a accesskey="P" href="celery.contrib.migrate.html" title="celery.contrib.migrate">previous</a> |</li>
+<li class="nav-item nav-item-0"><a href="../index.html">Celery 3.1.23 documentation</a> »</li>
+<li class="nav-item nav-item-1"><a accesskey="U" href="index.html">API Reference</a> »</li>
+</ul>
+</div>
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
+<div class="deck">
+<p>
+        This document describes the current stable version of Celery (3.1). For development docs,
+        <a href="http://docs.celeryproject.org/en/master/reference/celery.contrib.sphinx.html">go here</a>.
+        </p>
+</div>
+<span class="target" id="module-celery.contrib.sphinx"></span><div class="section" id="celery-contrib-sphinx"><a name="//apple_ref/cpp/Module/celery.contrib.sphinx"></a>
+<h1>celery.contrib.sphinx<a class="headerlink" href="#celery-contrib-sphinx" title="Permalink to this headline">¶</a></h1>
+<p>Sphinx documentation plugin</p>
+<p><strong>Usage</strong></p>
+<p>Add the extension to your <code class="file docutils literal"><span class="pre">docs/conf.py</span></code> configuration module:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">extensions</span> <span class="o">=</span> <span class="p">(</span><span class="o">...</span><span class="p">,</span>
+              <span class="s1">'celery.contrib.sphinx'</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If you would like to change the prefix for tasks in reference documentation
+then you can change the <code class="docutils literal"><span class="pre">celery_task_prefix</span></code> configuration value:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">celery_task_prefix</span> <span class="o">=</span> <span class="s1">'(task)'</span>  <span class="c1"># &lt; default</span>
+</pre></div>
+</div>
+<p>With the extension installed <cite>autodoc</cite> will automatically find
+task decorated objects and generate the correct (as well as
+add a <code class="docutils literal"><span class="pre">(task)</span></code> prefix), and you can also refer to the tasks
+using <cite>:task:proj.tasks.add</cite> syntax.</p>
+<p>Use <code class="docutils literal"><span class="pre">..</span> <span class="pre">autotask::</span></code> to manually document a task.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div aria-label="related navigation" class="related" role="navigation">
+<h3>Navigation</h3>
+<ul>
+<li class="right" style="margin-right: 10px">
+<a href="../genindex.html" title="General Index">index</a></li>
+<li class="right">
+<a href="../py-modindex.html" title="Python Module Index">modules</a> |</li>
+<li class="right">
+<a href="celery.contrib.rdb.html" title="celery.contrib.rdb">next</a> |</li>
+<li class="right">
+<a href="celery.contrib.migrate.html" title="celery.contrib.migrate">previous</a> |</li>
+<li class="nav-item nav-item-0"><a href="../index.html">Celery 3.1.23 documentation</a> »</li>
+<li class="nav-item nav-item-1"><a href="index.html">API Reference</a> »</li>
+</ul>
+</div>
+<div class="footer" role="contentinfo">
+        © <a href="../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
+    </div>
+</body>
+</html>

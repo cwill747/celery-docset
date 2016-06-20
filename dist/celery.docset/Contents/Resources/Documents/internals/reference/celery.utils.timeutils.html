@@ -1,0 +1,228 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>celery.utils.timeutils — Celery 3.1.23 documentation</title>
+<link href="../../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '3.1.23',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+<script src="../../_static/jquery.js" type="text/javascript"></script>
+<script src="../../_static/underscore.js" type="text/javascript"></script>
+<script src="../../_static/doctools.js" type="text/javascript"></script>
+<link href="../../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="index.html" rel="up" title="Internal Module Reference"/>
+<link href="celery.utils.iso8601.html" rel="next" title="celery.utils.iso8601"/>
+<link href="celery.utils.term.html" rel="prev" title="celery.utils.term"/>
+</head>
+<body role="document">
+<div aria-label="related navigation" class="related" role="navigation">
+<h3>Navigation</h3>
+<ul>
+<li class="right" style="margin-right: 10px">
+<a accesskey="I" href="../../genindex.html" title="General Index">index</a></li>
+<li class="right">
+<a href="../../py-modindex.html" title="Python Module Index">modules</a> |</li>
+<li class="right">
+<a accesskey="N" href="celery.utils.iso8601.html" title="celery.utils.iso8601">next</a> |</li>
+<li class="right">
+<a accesskey="P" href="celery.utils.term.html" title="celery.utils.term">previous</a> |</li>
+<li class="nav-item nav-item-0"><a href="../../index.html">Celery 3.1.23 documentation</a> »</li>
+<li class="nav-item nav-item-1"><a href="../index.html">Internals</a> »</li>
+<li class="nav-item nav-item-2"><a accesskey="U" href="index.html">Internal Module Reference</a> »</li>
+</ul>
+</div>
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
+<div class="deck">
+<p>
+        This document describes the current stable version of Celery (3.1). For development docs,
+        <a href="http://docs.celeryproject.org/en/master/internals/reference/celery.utils.timeutils.html">go here</a>.
+        </p>
+</div>
+<div class="section" id="celery-utils-timeutils"><a name="//apple_ref/cpp/Module/celery.utils.timeutils"></a>
+<h1>celery.utils.timeutils<a class="headerlink" href="#celery-utils-timeutils" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#id1" id="id2">celery.utils.timeutils</a></li>
+</ul>
+</div>
+<span class="target" id="module-celery.utils.timeutils"></span><div class="section" id="id1">
+<h2><a class="toc-backref" href="#id2">celery.utils.timeutils</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>This module contains various utilities related to dates and times.</p>
+<dl class="class">
+<dt id="celery.utils.timeutils.LocalTimezone"><a name="//apple_ref/cpp/Class/celery.utils.timeutils.LocalTimezone"></a>
+<em class="property">class </em><code class="descclassname">celery.utils.timeutils.</code><code class="descname">LocalTimezone</code><a class="reference internal" href="../../_modules/celery/utils/timeutils.html#LocalTimezone"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.utils.timeutils.LocalTimezone" title="Permalink to this definition">¶</a></dt>
+<dd><p>Local time implementation taken from Python’s docs.</p>
+<p>Used only when UTC is not enabled.</p>
+<dl class="method">
+<dt id="celery.utils.timeutils.LocalTimezone.dst"><a name="//apple_ref/cpp/Method/celery.utils.timeutils.LocalTimezone.dst"></a>
+<code class="descname">dst</code><span class="sig-paren">(</span><em>dt</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/utils/timeutils.html#LocalTimezone.dst"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.utils.timeutils.LocalTimezone.dst" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.utils.timeutils.LocalTimezone.tzname"><a name="//apple_ref/cpp/Method/celery.utils.timeutils.LocalTimezone.tzname"></a>
+<code class="descname">tzname</code><span class="sig-paren">(</span><em>dt</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/utils/timeutils.html#LocalTimezone.tzname"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.utils.timeutils.LocalTimezone.tzname" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.utils.timeutils.LocalTimezone.utcoffset"><a name="//apple_ref/cpp/Method/celery.utils.timeutils.LocalTimezone.utcoffset"></a>
+<code class="descname">utcoffset</code><span class="sig-paren">(</span><em>dt</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/utils/timeutils.html#LocalTimezone.utcoffset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.utils.timeutils.LocalTimezone.utcoffset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</dd></dl>
+<dl class="function">
+<dt id="celery.utils.timeutils.maybe_timedelta"><a name="//apple_ref/cpp/Function/celery.utils.timeutils.maybe_timedelta"></a>
+<code class="descclassname">celery.utils.timeutils.</code><code class="descname">maybe_timedelta</code><span class="sig-paren">(</span><em>delta</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/utils/timeutils.html#maybe_timedelta"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.utils.timeutils.maybe_timedelta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Coerces integer to timedelta if <cite>delta</cite> is an integer.</p>
+</dd></dl>
+<dl class="function">
+<dt id="celery.utils.timeutils.timedelta_seconds"><a name="//apple_ref/cpp/Function/celery.utils.timeutils.timedelta_seconds"></a>
+<code class="descclassname">celery.utils.timeutils.</code><code class="descname">timedelta_seconds</code><span class="sig-paren">(</span><em>delta</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/kombu/utils/compat.html#timedelta_seconds"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.utils.timeutils.timedelta_seconds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert <a class="reference external" href="http://docs.python.org/dev/library/datetime.html#datetime.timedelta" title="(in Python v3.6)"><code class="xref py py-class docutils literal"><span class="pre">datetime.timedelta</span></code></a> to seconds.</p>
+<p>Doesn’t account for negative values.</p>
+</dd></dl>
+<dl class="function">
+<dt id="celery.utils.timeutils.delta_resolution"><a name="//apple_ref/cpp/Function/celery.utils.timeutils.delta_resolution"></a>
+<code class="descclassname">celery.utils.timeutils.</code><code class="descname">delta_resolution</code><span class="sig-paren">(</span><em>dt</em>, <em>delta</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/utils/timeutils.html#delta_resolution"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.utils.timeutils.delta_resolution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Round a datetime to the resolution of a timedelta.</p>
+<p>If the timedelta is in days, the datetime will be rounded
+to the nearest days, if the timedelta is in hours the datetime
+will be rounded to the nearest hour, and so on until seconds
+which will just return the original datetime.</p>
+</dd></dl>
+<dl class="function">
+<dt id="celery.utils.timeutils.remaining"><a name="//apple_ref/cpp/Function/celery.utils.timeutils.remaining"></a>
+<code class="descclassname">celery.utils.timeutils.</code><code class="descname">remaining</code><span class="sig-paren">(</span><em>start</em>, <em>ends_in</em>, <em>now=None</em>, <em>relative=False</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/utils/timeutils.html#remaining"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.utils.timeutils.remaining" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the remaining time for a start date and a timedelta.</p>
+<p>e.g. “how many seconds left for 30 seconds after start?”</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name"></col>
+<col class="field-body"></col>
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>start</strong> – Start <a class="reference external" href="http://docs.python.org/dev/library/datetime.html#datetime.datetime" title="(in Python v3.6)"><code class="xref py py-class docutils literal"><span class="pre">datetime</span></code></a>.</li>
+<li><strong>ends_in</strong> – The end delta as a <a class="reference external" href="http://docs.python.org/dev/library/datetime.html#datetime.timedelta" title="(in Python v3.6)"><code class="xref py py-class docutils literal"><span class="pre">timedelta</span></code></a>.</li>
+<li><strong>relative</strong> – If enabled the end time will be
+calculated using <a class="reference internal" href="#celery.utils.timeutils.delta_resolution" title="celery.utils.timeutils.delta_resolution"><code class="xref py py-func docutils literal"><span class="pre">delta_resolution()</span></code></a> (i.e. rounded to the
+resolution of <cite>ends_in</cite>).</li>
+<li><strong>now</strong> – Function returning the current time and date,
+defaults to <code class="xref py py-func docutils literal"><span class="pre">datetime.utcnow()</span></code>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+<dl class="function">
+<dt id="celery.utils.timeutils.rate"><a name="//apple_ref/cpp/Function/celery.utils.timeutils.rate"></a>
+<code class="descclassname">celery.utils.timeutils.</code><code class="descname">rate</code><span class="sig-paren">(</span><em>rate</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/utils/timeutils.html#rate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.utils.timeutils.rate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse rate strings, such as <cite>“100/m”</cite>, <cite>“2/h”</cite> or <cite>“0.5/s”</cite>
+and convert them to seconds.</p>
+</dd></dl>
+<dl class="function">
+<dt id="celery.utils.timeutils.weekday"><a name="//apple_ref/cpp/Function/celery.utils.timeutils.weekday"></a>
+<code class="descclassname">celery.utils.timeutils.</code><code class="descname">weekday</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/utils/timeutils.html#weekday"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.utils.timeutils.weekday" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the position of a weekday (0 - 7, where 0 is Sunday).</p>
+<p>Example:</p>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">weekday</span><span class="p">(</span><span class="s1">'sunday'</span><span class="p">),</span> <span class="n">weekday</span><span class="p">(</span><span class="s1">'sun'</span><span class="p">),</span> <span class="n">weekday</span><span class="p">(</span><span class="s1">'mon'</span><span class="p">)</span>
+<span class="go">(0, 0, 1)</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="function">
+<dt id="celery.utils.timeutils.humanize_seconds"><a name="//apple_ref/cpp/Function/celery.utils.timeutils.humanize_seconds"></a>
+<code class="descclassname">celery.utils.timeutils.</code><code class="descname">humanize_seconds</code><span class="sig-paren">(</span><em>secs</em>, <em>prefix=''</em>, <em>sep=''</em>, <em>now='now'</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/utils/timeutils.html#humanize_seconds"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.utils.timeutils.humanize_seconds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Show seconds in human form, e.g. 60 is “1 minute”, 7200 is “2
+hours”.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name"></col>
+<col class="field-body"></col>
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>prefix</strong> – Can be used to add a preposition to the output,
+e.g. ‘in’ will give ‘in 1 second’, but add nothing to ‘now’.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+<dl class="function">
+<dt id="celery.utils.timeutils.maybe_iso8601"><a name="//apple_ref/cpp/Function/celery.utils.timeutils.maybe_iso8601"></a>
+<code class="descclassname">celery.utils.timeutils.</code><code class="descname">maybe_iso8601</code><span class="sig-paren">(</span><em>dt</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/utils/timeutils.html#maybe_iso8601"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.utils.timeutils.maybe_iso8601" title="Permalink to this definition">¶</a></dt>
+<dd><p><cite>Either datetime | str -&gt; datetime or None -&gt; None</cite></p>
+</dd></dl>
+<dl class="function">
+<dt id="celery.utils.timeutils.is_naive"><a name="//apple_ref/cpp/Function/celery.utils.timeutils.is_naive"></a>
+<code class="descclassname">celery.utils.timeutils.</code><code class="descname">is_naive</code><span class="sig-paren">(</span><em>dt</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/utils/timeutils.html#is_naive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.utils.timeutils.is_naive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return <code class="xref py py-const docutils literal"><span class="pre">True</span></code> if the datetime is naive
+(does not have timezone information).</p>
+</dd></dl>
+<dl class="function">
+<dt id="celery.utils.timeutils.make_aware"><a name="//apple_ref/cpp/Function/celery.utils.timeutils.make_aware"></a>
+<code class="descclassname">celery.utils.timeutils.</code><code class="descname">make_aware</code><span class="sig-paren">(</span><em>dt</em>, <em>tz</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/utils/timeutils.html#make_aware"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.utils.timeutils.make_aware" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the timezone for a datetime object.</p>
+</dd></dl>
+<dl class="function">
+<dt id="celery.utils.timeutils.localize"><a name="//apple_ref/cpp/Function/celery.utils.timeutils.localize"></a>
+<code class="descclassname">celery.utils.timeutils.</code><code class="descname">localize</code><span class="sig-paren">(</span><em>dt</em>, <em>tz</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/utils/timeutils.html#localize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.utils.timeutils.localize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert aware datetime to another timezone.</p>
+</dd></dl>
+<dl class="function">
+<dt id="celery.utils.timeutils.to_utc"><a name="//apple_ref/cpp/Function/celery.utils.timeutils.to_utc"></a>
+<code class="descclassname">celery.utils.timeutils.</code><code class="descname">to_utc</code><span class="sig-paren">(</span><em>dt</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/utils/timeutils.html#to_utc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.utils.timeutils.to_utc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts naive datetime to UTC</p>
+</dd></dl>
+<dl class="function">
+<dt id="celery.utils.timeutils.maybe_make_aware"><a name="//apple_ref/cpp/Function/celery.utils.timeutils.maybe_make_aware"></a>
+<code class="descclassname">celery.utils.timeutils.</code><code class="descname">maybe_make_aware</code><span class="sig-paren">(</span><em>dt</em>, <em>tz=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/utils/timeutils.html#maybe_make_aware"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.utils.timeutils.maybe_make_aware" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="class">
+<dt id="celery.utils.timeutils.ffwd"><a name="//apple_ref/cpp/Class/celery.utils.timeutils.ffwd"></a>
+<em class="property">class </em><code class="descclassname">celery.utils.timeutils.</code><code class="descname">ffwd</code><span class="sig-paren">(</span><em>year=None</em>, <em>month=None</em>, <em>weeks=0</em>, <em>weekday=None</em>, <em>day=None</em>, <em>hour=None</em>, <em>minute=None</em>, <em>second=None</em>, <em>microsecond=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/utils/timeutils.html#ffwd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.utils.timeutils.ffwd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Version of relativedelta that only supports addition.</p>
+</dd></dl>
+<dl class="function">
+<dt id="celery.utils.timeutils.utcoffset"><a name="//apple_ref/cpp/Function/celery.utils.timeutils.utcoffset"></a>
+<code class="descclassname">celery.utils.timeutils.</code><code class="descname">utcoffset</code><span class="sig-paren">(</span><em>time=&lt;module 'time' from '/Users/scwill/envs/doc2dash/lib/python2.7/lib-dynload/time.so'&gt;</em>, <em>localtime=&lt;built-in function localtime&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/utils/timeutils.html#utcoffset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.utils.timeutils.utcoffset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="function">
+<dt id="celery.utils.timeutils.adjust_timestamp"><a name="//apple_ref/cpp/Function/celery.utils.timeutils.adjust_timestamp"></a>
+<code class="descclassname">celery.utils.timeutils.</code><code class="descname">adjust_timestamp</code><span class="sig-paren">(</span><em>ts</em>, <em>offset</em>, <em>here=&lt;function utcoffset&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/utils/timeutils.html#adjust_timestamp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.utils.timeutils.adjust_timestamp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="function">
+<dt id="celery.utils.timeutils.maybe_s_to_ms"><a name="//apple_ref/cpp/Function/celery.utils.timeutils.maybe_s_to_ms"></a>
+<code class="descclassname">celery.utils.timeutils.</code><code class="descname">maybe_s_to_ms</code><span class="sig-paren">(</span><em>v</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/utils/timeutils.html#maybe_s_to_ms"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.utils.timeutils.maybe_s_to_ms" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div aria-label="related navigation" class="related" role="navigation">
+<h3>Navigation</h3>
+<ul>
+<li class="right" style="margin-right: 10px">
+<a href="../../genindex.html" title="General Index">index</a></li>
+<li class="right">
+<a href="../../py-modindex.html" title="Python Module Index">modules</a> |</li>
+<li class="right">
+<a href="celery.utils.iso8601.html" title="celery.utils.iso8601">next</a> |</li>
+<li class="right">
+<a href="celery.utils.term.html" title="celery.utils.term">previous</a> |</li>
+<li class="nav-item nav-item-0"><a href="../../index.html">Celery 3.1.23 documentation</a> »</li>
+<li class="nav-item nav-item-1"><a href="../index.html">Internals</a> »</li>
+<li class="nav-item nav-item-2"><a href="index.html">Internal Module Reference</a> »</li>
+</ul>
+</div>
+<div class="footer" role="contentinfo">
+        © <a href="../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
+    </div>
+</body>
+</html>

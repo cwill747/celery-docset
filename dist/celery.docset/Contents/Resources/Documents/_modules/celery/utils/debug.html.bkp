@@ -1,0 +1,246 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>celery.utils.debug &mdash; Celery 3.1.23 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/celery.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '3.1.23',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="copyright" title="Copyright" href="../../../copyright.html" />
+    <link rel="top" title="Celery 3.1.23 documentation" href="../../../index.html" />
+    <link rel="up" title="celery.utils" href="../utils.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../utils.html" accesskey="U">celery.utils</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+<div class="deck">
+
+    
+        <p>
+        This document describes the current stable version of Celery (3.1). For development docs,
+        <a href="http://docs.celeryproject.org/en/master/_modules/celery/utils/debug.html">go here</a>.
+        </p>
+    
+
+</div>
+    <h1>Source code for celery.utils.debug</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    celery.utils.debug</span>
+<span class="sd">    ~~~~~~~~~~~~~~~~~~</span>
+
+<span class="sd">    Utilities for debugging memory usage.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">contextlib</span> <span class="kn">import</span> <span class="n">contextmanager</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+
+<span class="kn">from</span> <span class="nn">celery.five</span> <span class="kn">import</span> <span class="nb">range</span>
+<span class="kn">from</span> <span class="nn">celery.platforms</span> <span class="kn">import</span> <span class="n">signals</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">psutil</span> <span class="kn">import</span> <span class="n">Process</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">Process</span> <span class="o">=</span> <span class="bp">None</span>  <span class="c1"># noqa</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;blockdetection&#39;</span><span class="p">,</span> <span class="s1">&#39;sample_mem&#39;</span><span class="p">,</span> <span class="s1">&#39;memdump&#39;</span><span class="p">,</span> <span class="s1">&#39;sample&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;humanbytes&#39;</span><span class="p">,</span> <span class="s1">&#39;mem_rss&#39;</span><span class="p">,</span> <span class="s1">&#39;ps&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">UNITS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="mf">40.0</span><span class="p">,</span> <span class="s1">&#39;TB&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="mf">30.0</span><span class="p">,</span> <span class="s1">&#39;GB&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="mf">20.0</span><span class="p">,</span> <span class="s1">&#39;MB&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="mf">10.0</span><span class="p">,</span> <span class="s1">&#39;kB&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="s1">&#39;{0!d}b&#39;</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="n">_process</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="n">_mem_sample</span> <span class="o">=</span> <span class="p">[]</span>
+
+
+<span class="k">def</span> <span class="nf">_on_blocking</span><span class="p">(</span><span class="n">signum</span><span class="p">,</span> <span class="n">frame</span><span class="p">):</span>
+    <span class="kn">import</span> <span class="nn">inspect</span>
+    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+        <span class="s1">&#39;Blocking detection timed-out at: {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">inspect</span><span class="o">.</span><span class="n">getframeinfo</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+
+<span class="nd">@contextmanager</span>
+<span class="k">def</span> <span class="nf">blockdetection</span><span class="p">(</span><span class="n">timeout</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A timeout context using ``SIGALRM`` that can be used to detect blocking</span>
+<span class="sd">    functions.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">timeout</span><span class="p">:</span>
+        <span class="k">yield</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">old_handler</span> <span class="o">=</span> <span class="n">signals</span><span class="p">[</span><span class="s1">&#39;ALRM&#39;</span><span class="p">]</span>
+        <span class="n">old_handler</span> <span class="o">=</span> <span class="bp">None</span> <span class="k">if</span> <span class="n">old_handler</span> <span class="o">==</span> <span class="n">_on_blocking</span> <span class="k">else</span> <span class="n">old_handler</span>
+
+        <span class="n">signals</span><span class="p">[</span><span class="s1">&#39;ALRM&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_on_blocking</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="n">signals</span><span class="o">.</span><span class="n">arm_alarm</span><span class="p">(</span><span class="n">timeout</span><span class="p">)</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">old_handler</span><span class="p">:</span>
+                <span class="n">signals</span><span class="p">[</span><span class="s1">&#39;ALRM&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">old_handler</span>
+            <span class="n">signals</span><span class="o">.</span><span class="n">reset_alarm</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="sample_mem"><a class="viewcode-back" href="../../../reference/celery.utils.debug.html#celery.utils.debug.sample_mem">[docs]</a><span class="k">def</span> <span class="nf">sample_mem</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Sample RSS memory usage.</span>
+
+<span class="sd">    Statistics can then be output by calling :func:`memdump`.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">current_rss</span> <span class="o">=</span> <span class="n">mem_rss</span><span class="p">()</span>
+    <span class="n">_mem_sample</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_rss</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">current_rss</span></div>
+
+
+<span class="k">def</span> <span class="nf">_memdump</span><span class="p">(</span><span class="n">samples</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">S</span> <span class="o">=</span> <span class="n">_mem_sample</span>
+    <span class="n">prev</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">S</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">S</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">samples</span> <span class="k">else</span> <span class="n">sample</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">samples</span><span class="p">)</span>
+    <span class="n">_mem_sample</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="kn">import</span> <span class="nn">gc</span>
+    <span class="n">gc</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+    <span class="n">after_collect</span> <span class="o">=</span> <span class="n">mem_rss</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">prev</span><span class="p">,</span> <span class="n">after_collect</span>
+
+
+<div class="viewcode-block" id="memdump"><a class="viewcode-back" href="../../../reference/celery.utils.debug.html#celery.utils.debug.memdump">[docs]</a><span class="k">def</span> <span class="nf">memdump</span><span class="p">(</span><span class="n">samples</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Dump memory statistics.</span>
+
+<span class="sd">    Will print a sample of all RSS memory samples added by</span>
+<span class="sd">    calling :func:`sample_mem`, and in addition print</span>
+<span class="sd">    used RSS memory after :func:`gc.collect`.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">say</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="k">print</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="nb">file</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">ps</span><span class="p">()</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">say</span><span class="p">(</span><span class="s1">&#39;- rss: (psutil not installed).&#39;</span><span class="p">)</span>
+        <span class="k">return</span>
+    <span class="n">prev</span><span class="p">,</span> <span class="n">after_collect</span> <span class="o">=</span> <span class="n">_memdump</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">prev</span><span class="p">:</span>
+        <span class="n">say</span><span class="p">(</span><span class="s1">&#39;- rss (sample):&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">mem</span> <span class="ow">in</span> <span class="n">prev</span><span class="p">:</span>
+            <span class="n">say</span><span class="p">(</span><span class="s1">&#39;-    &gt; {0},&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mem</span><span class="p">))</span>
+    <span class="n">say</span><span class="p">(</span><span class="s1">&#39;- rss (end): {0}.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">after_collect</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="sample"><a class="viewcode-back" href="../../../reference/celery.utils.debug.html#celery.utils.debug.sample">[docs]</a><span class="k">def</span> <span class="nf">sample</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Given a list `x` a sample of length ``n`` of that list is returned.</span>
+
+<span class="sd">    E.g. if `n` is 10, and `x` has 100 items, a list of every 10th</span>
+<span class="sd">    item is returned.</span>
+
+<span class="sd">    ``k`` can be used as offset.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">j</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">//</span> <span class="n">n</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="n">x</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="n">k</span> <span class="o">+=</span> <span class="n">j</span></div>
+
+
+<span class="k">def</span> <span class="nf">hfloat</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Convert float to value suitable for humans.</span>
+
+<span class="sd">    :keyword p: Float precision.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">i</span> <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">f</span> <span class="k">else</span> <span class="s1">&#39;{0:.{p}}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">humanbytes</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Convert bytes to human-readable form (e.g. kB, MB).&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">next</span><span class="p">(</span>
+        <span class="s1">&#39;{0}{1}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hfloat</span><span class="p">(</span><span class="n">s</span> <span class="o">/</span> <span class="n">div</span> <span class="k">if</span> <span class="n">div</span> <span class="k">else</span> <span class="n">s</span><span class="p">),</span> <span class="n">unit</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">div</span><span class="p">,</span> <span class="n">unit</span> <span class="ow">in</span> <span class="n">UNITS</span> <span class="k">if</span> <span class="n">s</span> <span class="o">&gt;=</span> <span class="n">div</span>
+    <span class="p">)</span>
+
+
+<div class="viewcode-block" id="mem_rss"><a class="viewcode-back" href="../../../reference/celery.utils.debug.html#celery.utils.debug.mem_rss">[docs]</a><span class="k">def</span> <span class="nf">mem_rss</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Return RSS memory usage as a humanized string.&quot;&quot;&quot;</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">ps</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">p</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">humanbytes</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">get_memory_info</span><span class="p">()</span><span class="o">.</span><span class="n">rss</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ps"><a class="viewcode-back" href="../../../reference/celery.utils.debug.html#celery.utils.debug.ps">[docs]</a><span class="k">def</span> <span class="nf">ps</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Return the global :class:`psutil.Process` instance,</span>
+<span class="sd">    or :const:`None` if :mod:`psutil` is not installed.&quot;&quot;&quot;</span>
+    <span class="k">global</span> <span class="n">_process</span>
+    <span class="k">if</span> <span class="n">_process</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">Process</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">_process</span> <span class="o">=</span> <span class="n">Process</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getpid</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">_process</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../utils.html" >celery.utils</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Celery - Distributed Task Queue </title>
+    
+    <link rel="stylesheet" href="_static/celery.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '3.1.23',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="copyright" title="Copyright" href="copyright.html" />
+    <link rel="top" title="Celery 3.1.23 documentation" href="#" />
+    <link rel="next" title="Copyright" href="copyright.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="copyright.html" title="Copyright"
+             accesskey="N">next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">Celery 3.1.23 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+<div class="deck">
+
+    
+        <p>
+        This document describes the current stable version of Celery (3.1). For development docs,
+        <a href="http://docs.celeryproject.org/en/master/index.html">go here</a>.
+        </p>
+    
+
+</div>
+    <div class="section" id="celery-distributed-task-queue">
+<h1>Celery - Distributed Task Queue<a class="headerlink" href="#celery-distributed-task-queue" title="Permalink to this headline">¶</a></h1>
+<p>Celery is a simple, flexible and reliable distributed system to
+process vast amounts of messages, while providing operations with
+the tools required to maintain such a system.</p>
+<p>It&#8217;s a task queue with focus on real-time processing, while also
+supporting task scheduling.</p>
+<p>Celery has a large and diverse community of users and contributors,
+you should come join us <a class="reference internal" href="getting-started/resources.html#irc-channel"><span>on IRC</span></a>
+or <a class="reference internal" href="getting-started/resources.html#mailing-list"><span>our mailing-list</span></a>.</p>
+<p>Celery is Open Source and licensed under the <a class="reference external" href="http://www.opensource.org/licenses/BSD-3-Clause">BSD License</a>.</p>
+<div class="section" id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>If you are new to Celery you can get started by following
+the <a class="reference internal" href="getting-started/first-steps-with-celery.html#first-steps"><span>First Steps with Celery</span></a> tutorial.</li>
+<li>You can also check out the <a class="reference internal" href="faq.html#faq"><span>FAQ</span></a>.</li>
+</ul>
+</div>
+<div class="section" id="contents">
+<h2>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="copyright.html">Copyright</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting-started/index.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="getting-started/introduction.html">Introduction to Celery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting-started/brokers/index.html">Brokers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting-started/first-steps-with-celery.html">First Steps with Celery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting-started/next-steps.html">Next Steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting-started/resources.html">Resources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="userguide/index.html">User Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="userguide/application.html">Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="userguide/tasks.html">Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="userguide/calling.html">Calling Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="userguide/canvas.html">Canvas: Designing Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="userguide/workers.html">Workers Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="userguide/periodic-tasks.html">Periodic Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="userguide/remote-tasks.html">HTTP Callback Tasks (Webhooks)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="userguide/routing.html">Routing Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="userguide/monitoring.html">Monitoring and Management Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="userguide/security.html">Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="userguide/optimizing.html">Optimizing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="userguide/concurrency/index.html">Concurrency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="userguide/signals.html">Signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="userguide/extending.html">Extensions and Bootsteps</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration and defaults</a></li>
+<li class="toctree-l1"><a class="reference internal" href="django/index.html">Django</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="community.html">Community Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="whatsnew-3.1.html">What&#8217;s new in Celery 3.1 (Cipater)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="whatsnew-3.0.html">What&#8217;s new in Celery 3.0 (Chiastic Slide)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="whatsnew-2.5.html">What&#8217;s new in Celery 2.5</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="internals/index.html">Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history/index.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><span>Index</span></a></li>
+<li><a class="reference internal" href="py-modindex.html"><span>Module Index</span></a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="copyright.html" title="Copyright"
+             >next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">Celery 3.1.23 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; <a href="copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
+    </div>
+  </body>
+</html>

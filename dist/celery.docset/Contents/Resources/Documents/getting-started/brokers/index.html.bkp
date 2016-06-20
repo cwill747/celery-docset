@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Brokers &mdash; Celery 3.1.23 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/celery.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '3.1.23',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="top" title="Celery 3.1.23 documentation" href="../../index.html" />
+    <link rel="up" title="Getting Started" href="../index.html" />
+    <link rel="next" title="Using RabbitMQ" href="rabbitmq.html" />
+    <link rel="prev" title="Introduction to Celery" href="../introduction.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="rabbitmq.html" title="Using RabbitMQ"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../introduction.html" title="Introduction to Celery"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Getting Started</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+<div class="deck">
+
+    
+        <p>
+        This document describes the current stable version of Celery (3.1). For development docs,
+        <a href="http://docs.celeryproject.org/en/master/getting-started/brokers/index.html">go here</a>.
+        </p>
+    
+
+</div>
+    <div class="section" id="brokers">
+<span id="id1"></span><h1>Brokers<a class="headerlink" href="#brokers" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Release:</th><td class="field-body">3.1</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Date:</th><td class="field-body">June 19, 2016</td>
+</tr>
+</tbody>
+</table>
+<p>Celery supports several message transport alternatives.</p>
+<div class="section" id="broker-instructions">
+<span id="broker-toc"></span><h2>Broker Instructions<a class="headerlink" href="#broker-instructions" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="rabbitmq.html">Using RabbitMQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="redis.html">Using Redis</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="experimental-transports">
+<h2>Experimental Transports<a class="headerlink" href="#experimental-transports" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sqlalchemy.html">Using SQLAlchemy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="django.html">Using the Django Database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mongodb.html">Using MongoDB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sqs.html">Using Amazon SQS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="couchdb.html">Using CouchDB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beanstalk.html">Using Beanstalk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ironmq.html">Using IronMQ</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="broker-overview">
+<span id="id2"></span><h2>Broker Overview<a class="headerlink" href="#broker-overview" title="Permalink to this headline">¶</a></h2>
+<p>This is comparison table of the different transports supports,
+more information can be found in the documentation for each
+individual transport (see <a class="reference internal" href="#broker-toc"><span>Broker Instructions</span></a>).</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="22%" />
+<col width="25%" />
+<col width="31%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Name</strong></td>
+<td><strong>Status</strong></td>
+<td><strong>Monitoring</strong></td>
+<td><strong>Remote Control</strong></td>
+</tr>
+<tr class="row-even"><td><em>RabbitMQ</em></td>
+<td>Stable</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td><em>Redis</em></td>
+<td>Stable</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr class="row-even"><td><em>Mongo DB</em></td>
+<td>Experimental</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td><em>Beanstalk</em></td>
+<td>Experimental</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr class="row-even"><td><em>Amazon SQS</em></td>
+<td>Experimental</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td><em>Couch DB</em></td>
+<td>Experimental</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr class="row-even"><td><em>Zookeeper</em></td>
+<td>Experimental</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td><em>Django DB</em></td>
+<td>Experimental</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr class="row-even"><td><em>SQLAlchemy</em></td>
+<td>Experimental</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td><em>Iron MQ</em></td>
+<td>3rd party</td>
+<td>No</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p>Experimental brokers may be functional but they do not have
+dedicated maintainers.</p>
+<p>Missing monitor support means that the transport does not
+implement events, and as such Flower, <cite>celery events</cite>, <cite>celerymon</cite>
+and other event-based monitoring tools will not work.</p>
+<p>Remote control means the ability to inspect and manage workers
+at runtime using the <cite>celery inspect</cite> and <cite>celery control</cite> commands
+(and other tools using the remote control API).</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="rabbitmq.html" title="Using RabbitMQ"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../introduction.html" title="Introduction to Celery"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Getting Started</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; <a href="../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
+    </div>
+  </body>
+</html>

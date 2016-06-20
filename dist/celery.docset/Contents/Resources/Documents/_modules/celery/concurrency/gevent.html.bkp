@@ -1,0 +1,222 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>celery.concurrency.gevent &mdash; Celery 3.1.23 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/celery.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '3.1.23',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="copyright" title="Copyright" href="../../../copyright.html" />
+    <link rel="top" title="Celery 3.1.23 documentation" href="../../../index.html" />
+    <link rel="up" title="celery.concurrency" href="../concurrency.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../concurrency.html" accesskey="U">celery.concurrency</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+<div class="deck">
+
+    
+        <p>
+        This document describes the current stable version of Celery (3.1). For development docs,
+        <a href="http://docs.celeryproject.org/en/master/_modules/celery/concurrency/gevent.html">go here</a>.
+        </p>
+    
+
+</div>
+    <h1>Source code for celery.concurrency.gevent</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    celery.concurrency.gevent</span>
+<span class="sd">    ~~~~~~~~~~~~~~~~~~~~~~~~~</span>
+
+<span class="sd">    gevent pool implementation.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
+
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">gevent</span> <span class="kn">import</span> <span class="n">Timeout</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+    <span class="n">Timeout</span> <span class="o">=</span> <span class="bp">None</span>  <span class="c1"># noqa</span>
+
+<span class="kn">from</span> <span class="nn">celery.utils</span> <span class="kn">import</span> <span class="n">timer2</span>
+
+<span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">apply_target</span><span class="p">,</span> <span class="n">BasePool</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;TaskPool&#39;</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">apply_timeout</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(),</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{},</span> <span class="n">callback</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                  <span class="n">accept_callback</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">pid</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                  <span class="n">timeout_callback</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">Timeout</span><span class="o">=</span><span class="n">Timeout</span><span class="p">,</span>
+                  <span class="n">apply_target</span><span class="o">=</span><span class="n">apply_target</span><span class="p">,</span> <span class="o">**</span><span class="n">rest</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">Timeout</span><span class="p">(</span><span class="n">timeout</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">apply_target</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">,</span> <span class="n">callback</span><span class="p">,</span>
+                                <span class="n">accept_callback</span><span class="p">,</span> <span class="n">pid</span><span class="p">,</span>
+                                <span class="n">propagate</span><span class="o">=</span><span class="p">(</span><span class="n">Timeout</span><span class="p">,</span> <span class="p">),</span> <span class="o">**</span><span class="n">rest</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">Timeout</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">timeout_callback</span><span class="p">(</span><span class="bp">False</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">Schedule</span><span class="p">(</span><span class="n">timer2</span><span class="o">.</span><span class="n">Schedule</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">gevent.greenlet</span> <span class="kn">import</span> <span class="n">Greenlet</span><span class="p">,</span> <span class="n">GreenletExit</span>
+
+        <span class="k">class</span> <span class="nc">_Greenlet</span><span class="p">(</span><span class="n">Greenlet</span><span class="p">):</span>
+            <span class="n">cancel</span> <span class="o">=</span> <span class="n">Greenlet</span><span class="o">.</span><span class="n">kill</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_Greenlet</span> <span class="o">=</span> <span class="n">_Greenlet</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_GreenletExit</span> <span class="o">=</span> <span class="n">GreenletExit</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Schedule</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_queue</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_enter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">eta</span><span class="p">,</span> <span class="n">priority</span><span class="p">,</span> <span class="n">entry</span><span class="p">):</span>
+        <span class="n">secs</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">eta</span> <span class="o">-</span> <span class="n">time</span><span class="p">(),</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Greenlet</span><span class="o">.</span><span class="n">spawn_later</span><span class="p">(</span><span class="n">secs</span><span class="p">,</span> <span class="n">entry</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_queue</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+        <span class="n">g</span><span class="o">.</span><span class="n">link</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_entry_exit</span><span class="p">)</span>
+        <span class="n">g</span><span class="o">.</span><span class="n">entry</span> <span class="o">=</span> <span class="n">entry</span>
+        <span class="n">g</span><span class="o">.</span><span class="n">eta</span> <span class="o">=</span> <span class="n">eta</span>
+        <span class="n">g</span><span class="o">.</span><span class="n">priority</span> <span class="o">=</span> <span class="n">priority</span>
+        <span class="n">g</span><span class="o">.</span><span class="n">canceled</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="k">return</span> <span class="n">g</span>
+
+    <span class="k">def</span> <span class="nf">_entry_exit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">g</span><span class="o">.</span><span class="n">kill</span><span class="p">()</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_queue</span><span class="o">.</span><span class="n">discard</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">queue</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_queue</span>
+        <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">queue</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span><span class="o">.</span><span class="n">kill</span><span class="p">()</span>
+            <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                <span class="k">pass</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">queue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_queue</span>
+
+
+<span class="k">class</span> <span class="nc">Timer</span><span class="p">(</span><span class="n">timer2</span><span class="o">.</span><span class="n">Timer</span><span class="p">):</span>
+    <span class="n">Schedule</span> <span class="o">=</span> <span class="n">Schedule</span>
+
+    <span class="k">def</span> <span class="nf">ensure_started</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">schedule</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+
+<div class="viewcode-block" id="TaskPool"><a class="viewcode-back" href="../../../internals/reference/celery.concurrency.gevent.html#celery.concurrency.gevent.TaskPool">[docs]</a><span class="k">class</span> <span class="nc">TaskPool</span><span class="p">(</span><span class="n">BasePool</span><span class="p">):</span>
+    <span class="n">Timer</span> <span class="o">=</span> <span class="n">Timer</span>
+
+    <span class="n">signal_safe</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="n">is_green</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="n">task_join_will_block</span> <span class="o">=</span> <span class="bp">False</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">gevent</span> <span class="kn">import</span> <span class="n">spawn_raw</span>
+        <span class="kn">from</span> <span class="nn">gevent.pool</span> <span class="kn">import</span> <span class="n">Pool</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Pool</span> <span class="o">=</span> <span class="n">Pool</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">spawn_n</span> <span class="o">=</span> <span class="n">spawn_raw</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;timeout&#39;</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">TaskPool</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<div class="viewcode-block" id="TaskPool.on_start"><a class="viewcode-back" href="../../../internals/reference/celery.concurrency.gevent.html#celery.concurrency.gevent.TaskPool.on_start">[docs]</a>    <span class="k">def</span> <span class="nf">on_start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pool</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Pool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">limit</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_quick_put</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pool</span><span class="o">.</span><span class="n">spawn</span></div>
+
+<div class="viewcode-block" id="TaskPool.on_stop"><a class="viewcode-back" href="../../../internals/reference/celery.concurrency.gevent.html#celery.concurrency.gevent.TaskPool.on_stop">[docs]</a>    <span class="k">def</span> <span class="nf">on_stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pool</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_pool</span><span class="o">.</span><span class="n">join</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="TaskPool.on_apply"><a class="viewcode-back" href="../../../internals/reference/celery.concurrency.gevent.html#celery.concurrency.gevent.TaskPool.on_apply">[docs]</a>    <span class="k">def</span> <span class="nf">on_apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                 <span class="n">accept_callback</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                 <span class="n">timeout_callback</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">_</span><span class="p">):</span>
+        <span class="n">timeout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span> <span class="k">if</span> <span class="n">timeout</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="n">timeout</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_quick_put</span><span class="p">(</span><span class="n">apply_timeout</span> <span class="k">if</span> <span class="n">timeout</span> <span class="k">else</span> <span class="n">apply_target</span><span class="p">,</span>
+                               <span class="n">target</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">,</span> <span class="n">callback</span><span class="p">,</span> <span class="n">accept_callback</span><span class="p">,</span>
+                               <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span>
+                               <span class="n">timeout_callback</span><span class="o">=</span><span class="n">timeout_callback</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TaskPool.grow"><a class="viewcode-back" href="../../../internals/reference/celery.concurrency.gevent.html#celery.concurrency.gevent.TaskPool.grow">[docs]</a>    <span class="k">def</span> <span class="nf">grow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pool</span><span class="o">.</span><span class="n">_semaphore</span><span class="o">.</span><span class="n">counter</span> <span class="o">+=</span> <span class="n">n</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pool</span><span class="o">.</span><span class="n">size</span> <span class="o">+=</span> <span class="n">n</span></div>
+
+<div class="viewcode-block" id="TaskPool.shrink"><a class="viewcode-back" href="../../../internals/reference/celery.concurrency.gevent.html#celery.concurrency.gevent.TaskPool.shrink">[docs]</a>    <span class="k">def</span> <span class="nf">shrink</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pool</span><span class="o">.</span><span class="n">_semaphore</span><span class="o">.</span><span class="n">counter</span> <span class="o">-=</span> <span class="n">n</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pool</span><span class="o">.</span><span class="n">size</span> <span class="o">-=</span> <span class="n">n</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">num_processes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pool</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../concurrency.html" >celery.concurrency</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
+    </div>
+  </body>
+</html>

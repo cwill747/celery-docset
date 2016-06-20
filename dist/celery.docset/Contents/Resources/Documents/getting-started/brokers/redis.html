@@ -1,0 +1,223 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Using Redis &mdash; Celery 3.1.23 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/celery.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '3.1.23',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="top" title="Celery 3.1.23 documentation" href="../../index.html" />
+    <link rel="up" title="Brokers" href="index.html" />
+    <link rel="next" title="Using SQLAlchemy" href="sqlalchemy.html" />
+    <link rel="prev" title="Using RabbitMQ" href="rabbitmq.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="sqlalchemy.html" title="Using SQLAlchemy"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="rabbitmq.html" title="Using RabbitMQ"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Getting Started</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U">Brokers</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+<div class="deck">
+
+    
+        <p>
+        This document describes the current stable version of Celery (3.1). For development docs,
+        <a href="http://docs.celeryproject.org/en/master/getting-started/brokers/redis.html">go here</a>.
+        </p>
+    
+
+</div>
+    <div class="section" id="using-redis">
+<span id="broker-redis"></span><h1>Using Redis<a class="headerlink" href="#using-redis" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="installation">
+<span id="broker-redis-installation"></span><h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>For the Redis support you have to install additional dependencies.
+You can install both Celery and these dependencies in one go using
+the <code class="docutils literal"><span class="pre">celery[redis]</span></code> <a class="reference internal" href="../introduction.html#bundles"><span>bundle</span></a>:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ pip install -U celery<span class="o">[</span>redis<span class="o">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="configuration">
+<span id="broker-redis-configuration"></span><h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>Configuration is easy, just configure the location of
+your Redis database:</p>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">BROKER_URL</span> <span class="o">=</span> <span class="s1">&#39;redis://localhost:6379/0&#39;</span>
+</pre></div>
+</div>
+<p>Where the URL is in the format of:</p>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">redis</span><span class="p">:</span><span class="o">//</span><span class="p">:</span><span class="n">password</span><span class="nd">@hostname</span><span class="p">:</span><span class="n">port</span><span class="o">/</span><span class="n">db_number</span>
+</pre></div>
+</div>
+<p>all fields after the scheme are optional, and will default to localhost on port 6379,
+using database 0.</p>
+<p>If a unix socket connection should be used, the URL needs to be in the format:</p>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">redis</span><span class="o">+</span><span class="n">socket</span><span class="p">:</span><span class="o">///</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">redis</span><span class="o">.</span><span class="n">sock</span>
+</pre></div>
+</div>
+<div class="section" id="visibility-timeout">
+<span id="redis-visibility-timeout"></span><h3>Visibility Timeout<a class="headerlink" href="#visibility-timeout" title="Permalink to this headline">¶</a></h3>
+<p>The visibility timeout defines the number of seconds to wait
+for the worker to acknowledge the task before the message is redelivered
+to another worker.  Be sure to see <a class="reference internal" href="#redis-caveats"><span>Caveats</span></a> below.</p>
+<p>This option is set via the <a class="reference internal" href="../../configuration.html#std:setting-BROKER_TRANSPORT_OPTIONS"><code class="xref std std-setting docutils literal"><span class="pre">BROKER_TRANSPORT_OPTIONS</span></code></a> setting:</p>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">BROKER_TRANSPORT_OPTIONS</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;visibility_timeout&#39;</span><span class="p">:</span> <span class="mi">3600</span><span class="p">}</span>  <span class="c1"># 1 hour.</span>
+</pre></div>
+</div>
+<p>The default visibility timeout for Redis is 1 hour.</p>
+</div>
+<div class="section" id="results">
+<span id="redis-results-configuration"></span><h3>Results<a class="headerlink" href="#results" title="Permalink to this headline">¶</a></h3>
+<p>If you also want to store the state and return values of tasks in Redis,
+you should configure these settings:</p>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">CELERY_RESULT_BACKEND</span> <span class="o">=</span> <span class="s1">&#39;redis://localhost:6379/0&#39;</span>
+</pre></div>
+</div>
+<p>For a complete list of options supported by the Redis result backend, see
+<a class="reference internal" href="../../configuration.html#conf-redis-result-backend"><span>Redis backend settings</span></a></p>
+</div>
+</div>
+<div class="section" id="caveats">
+<span id="redis-caveats"></span><h2>Caveats<a class="headerlink" href="#caveats" title="Permalink to this headline">¶</a></h2>
+<ul id="redis-caveat-fanout-prefix">
+<li><p class="first">Broadcast messages will be seen by all virtual hosts by default.</p>
+<blockquote>
+<div><p>You have to set a transport option to prefix the messages so that
+they will only be received by the active virtual host:</p>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">BROKER_TRANSPORT_OPTIONS</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;fanout_prefix&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Note that you will not be able to communicate with workers running older
+versions or workers that does not have this setting enabled.</p>
+<p>This setting will be the default in the future, so better to migrate
+sooner rather than later.</p>
+</div></blockquote>
+</li>
+</ul>
+<ul id="redis-caveat-fanout-patterns">
+<li><p class="first">Workers will receive all task related events by default.</p>
+<blockquote>
+<div><p>To avoid this you must set the <code class="docutils literal"><span class="pre">fanout_patterns</span></code> fanout option so that
+the workers may only subscribe to worker related events:</p>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">BROKER_TRANSPORT_OPTIONS</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;fanout_patterns&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Note that this change is backward incompatible so all workers in the
+cluster must have this option enabled, or else they will not be able to
+communicate.</p>
+<p>This option will be enabled by default in the future.</p>
+</div></blockquote>
+</li>
+<li><p class="first">If a task is not acknowledged within the <a class="reference internal" href="#redis-visibility-timeout"><span>Visibility Timeout</span></a>
+the task will be redelivered to another worker and executed.</p>
+<blockquote>
+<div><p>This causes problems with ETA/countdown/retry tasks where the
+time to execute exceeds the visibility timeout; in fact if that
+happens it will be executed again, and again in a loop.</p>
+<p>So you have to increase the visibility timeout to match
+the time of the longest ETA you are planning to use.</p>
+<p>Note that Celery will redeliver messages at worker shutdown,
+so having a long visibility timeout will only delay the redelivery
+of &#8216;lost&#8217; tasks in the event of a power failure or forcefully terminated
+workers.</p>
+<p>Periodic tasks will not be affected by the visibility timeout,
+as this is a concept separate from ETA/countdown.</p>
+<p>You can increase this timeout by configuring a transport option
+with the same name:</p>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">BROKER_TRANSPORT_OPTIONS</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;visibility_timeout&#39;</span><span class="p">:</span> <span class="mi">43200</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>The value must be an int describing the number of seconds.</p>
+</div></blockquote>
+</li>
+<li><p class="first">Monitoring events (as used by flower and other tools) are global
+and is not affected by the virtual host setting.</p>
+<blockquote>
+<div><p>This is caused by a limitation in Redis.  The Redis PUB/SUB channels
+are global and not affected by the database number.</p>
+</div></blockquote>
+</li>
+<li><p class="first">Redis may evict keys from the database in some situations</p>
+<blockquote>
+<div><p>If you experience an error like:</p>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">InconsistencyError</span><span class="p">,</span> <span class="n">Probably</span> <span class="n">the</span> <span class="n">key</span> <span class="p">(</span><span class="s1">&#39;_kombu.binding.celery&#39;</span><span class="p">)</span> <span class="n">has</span> <span class="n">been</span>
+<span class="n">removed</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">Redis</span> <span class="n">database</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>you may want to configure the redis-server to not evict keys by setting
+the <code class="docutils literal"><span class="pre">timeout</span></code> parameter to 0.</p>
+</div></blockquote>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="sqlalchemy.html" title="Using SQLAlchemy"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="rabbitmq.html" title="Using RabbitMQ"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Getting Started</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" >Brokers</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; <a href="../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
+    </div>
+  </body>
+</html>

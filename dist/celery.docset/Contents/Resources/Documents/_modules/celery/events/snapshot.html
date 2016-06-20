@@ -1,0 +1,200 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>celery.events.snapshot &mdash; Celery 3.1.23 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/celery.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '3.1.23',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="copyright" title="Copyright" href="../../../copyright.html" />
+    <link rel="top" title="Celery 3.1.23 documentation" href="../../../index.html" />
+    <link rel="up" title="celery.events" href="../events.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../events.html" accesskey="U">celery.events</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+<div class="deck">
+
+    
+        <p>
+        This document describes the current stable version of Celery (3.1). For development docs,
+        <a href="http://docs.celeryproject.org/en/master/_modules/celery/events/snapshot.html">go here</a>.
+        </p>
+    
+
+</div>
+    <h1>Source code for celery.events.snapshot</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    celery.events.snapshot</span>
+<span class="sd">    ~~~~~~~~~~~~~~~~~~~~~~</span>
+
+<span class="sd">    Consuming the events as a stream is not always suitable</span>
+<span class="sd">    so this module implements a system to take snapshots of the</span>
+<span class="sd">    state of a cluster at regular intervals.  There is a full</span>
+<span class="sd">    implementation of this writing the snapshots to a database</span>
+<span class="sd">    in :mod:`djcelery.snapshots` in the `django-celery` distribution.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
+
+<span class="kn">from</span> <span class="nn">kombu.utils.limits</span> <span class="kn">import</span> <span class="n">TokenBucket</span>
+
+<span class="kn">from</span> <span class="nn">celery</span> <span class="kn">import</span> <span class="n">platforms</span>
+<span class="kn">from</span> <span class="nn">celery.app</span> <span class="kn">import</span> <span class="n">app_or_default</span>
+<span class="kn">from</span> <span class="nn">celery.utils.timer2</span> <span class="kn">import</span> <span class="n">Timer</span>
+<span class="kn">from</span> <span class="nn">celery.utils.dispatch</span> <span class="kn">import</span> <span class="n">Signal</span>
+<span class="kn">from</span> <span class="nn">celery.utils.imports</span> <span class="kn">import</span> <span class="n">instantiate</span>
+<span class="kn">from</span> <span class="nn">celery.utils.log</span> <span class="kn">import</span> <span class="n">get_logger</span>
+<span class="kn">from</span> <span class="nn">celery.utils.timeutils</span> <span class="kn">import</span> <span class="n">rate</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Polaroid&#39;</span><span class="p">,</span> <span class="s1">&#39;evcam&#39;</span><span class="p">]</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="s1">&#39;celery.evcam&#39;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="Polaroid"><a class="viewcode-back" href="../../../internals/reference/celery.events.snapshot.html#celery.events.snapshot.Polaroid">[docs]</a><span class="k">class</span> <span class="nc">Polaroid</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">timer</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">shutter_signal</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="n">providing_args</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;state&#39;</span><span class="p">,</span> <span class="p">))</span>
+    <span class="n">cleanup_signal</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">()</span>
+    <span class="n">clear_after</span> <span class="o">=</span> <span class="bp">False</span>
+
+    <span class="n">_tref</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">_ctref</span> <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">maxrate</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                 <span class="n">cleanup_freq</span><span class="o">=</span><span class="mf">3600.0</span><span class="p">,</span> <span class="n">timer</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="n">app_or_default</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">state</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">freq</span> <span class="o">=</span> <span class="n">freq</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cleanup_freq</span> <span class="o">=</span> <span class="n">cleanup_freq</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timer</span> <span class="o">=</span> <span class="n">timer</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">timer</span> <span class="ow">or</span> <span class="n">Timer</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">logger</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">maxrate</span> <span class="o">=</span> <span class="n">maxrate</span> <span class="ow">and</span> <span class="n">TokenBucket</span><span class="p">(</span><span class="n">rate</span><span class="p">(</span><span class="n">maxrate</span><span class="p">))</span>
+
+<div class="viewcode-block" id="Polaroid.install"><a class="viewcode-back" href="../../../internals/reference/celery.events.snapshot.html#celery.events.snapshot.Polaroid.install">[docs]</a>    <span class="k">def</span> <span class="nf">install</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tref</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">timer</span><span class="o">.</span><span class="n">call_repeatedly</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">freq</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">capture</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ctref</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">timer</span><span class="o">.</span><span class="n">call_repeatedly</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cleanup_freq</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cleanup</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="Polaroid.on_shutter"><a class="viewcode-back" href="../../../internals/reference/celery.events.snapshot.html#celery.events.snapshot.Polaroid.on_shutter">[docs]</a>    <span class="k">def</span> <span class="nf">on_shutter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="Polaroid.on_cleanup"><a class="viewcode-back" href="../../../internals/reference/celery.events.snapshot.html#celery.events.snapshot.Polaroid.on_cleanup">[docs]</a>    <span class="k">def</span> <span class="nf">on_cleanup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="Polaroid.cleanup"><a class="viewcode-back" href="../../../internals/reference/celery.events.snapshot.html#celery.events.snapshot.Polaroid.cleanup">[docs]</a>    <span class="k">def</span> <span class="nf">cleanup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Cleanup: Running...&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cleanup_signal</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">on_cleanup</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Polaroid.shutter"><a class="viewcode-back" href="../../../internals/reference/celery.events.snapshot.html#celery.events.snapshot.Polaroid.shutter">[docs]</a>    <span class="k">def</span> <span class="nf">shutter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">maxrate</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">maxrate</span><span class="o">.</span><span class="n">can_consume</span><span class="p">():</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Shutter: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">shutter_signal</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">on_shutter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Polaroid.capture"><a class="viewcode-back" href="../../../internals/reference/celery.events.snapshot.html#celery.events.snapshot.Polaroid.capture">[docs]</a>    <span class="k">def</span> <span class="nf">capture</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">freeze_while</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shutter</span><span class="p">,</span> <span class="n">clear_after</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">clear_after</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Polaroid.cancel"><a class="viewcode-back" href="../../../internals/reference/celery.events.snapshot.html#celery.events.snapshot.Polaroid.cancel">[docs]</a>    <span class="k">def</span> <span class="nf">cancel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tref</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_tref</span><span class="p">()</span>  <span class="c1"># flush all received events.</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_tref</span><span class="o">.</span><span class="n">cancel</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ctref</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ctref</span><span class="o">.</span><span class="n">cancel</span><span class="p">()</span></div>
+
+    <span class="k">def</span> <span class="nf">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">install</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">exc_info</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cancel</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="evcam"><a class="viewcode-back" href="../../../internals/reference/celery.events.snapshot.html#celery.events.snapshot.evcam">[docs]</a><span class="k">def</span> <span class="nf">evcam</span><span class="p">(</span><span class="n">camera</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">maxrate</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">loglevel</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+          <span class="n">logfile</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">pidfile</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">timer</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">app_or_default</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">pidfile</span><span class="p">:</span>
+        <span class="n">platforms</span><span class="o">.</span><span class="n">create_pidlock</span><span class="p">(</span><span class="n">pidfile</span><span class="p">)</span>
+
+    <span class="n">app</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">setup_logging_subsystem</span><span class="p">(</span><span class="n">loglevel</span><span class="p">,</span> <span class="n">logfile</span><span class="p">)</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;-&gt; evcam: Taking snapshots with {0} (every {1} secs.)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">camera</span><span class="p">,</span> <span class="n">freq</span><span class="p">))</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">State</span><span class="p">()</span>
+    <span class="n">cam</span> <span class="o">=</span> <span class="n">instantiate</span><span class="p">(</span><span class="n">camera</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="n">freq</span><span class="p">,</span>
+                      <span class="n">maxrate</span><span class="o">=</span><span class="n">maxrate</span><span class="p">,</span> <span class="n">timer</span><span class="o">=</span><span class="n">timer</span><span class="p">)</span>
+    <span class="n">cam</span><span class="o">.</span><span class="n">install</span><span class="p">()</span>
+    <span class="n">conn</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">connection</span><span class="p">()</span>
+    <span class="n">recv</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">Receiver</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">handlers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;*&#39;</span><span class="p">:</span> <span class="n">state</span><span class="o">.</span><span class="n">event</span><span class="p">})</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">recv</span><span class="o">.</span><span class="n">capture</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">SystemExit</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">cam</span><span class="o">.</span><span class="n">cancel</span><span class="p">()</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../events.html" >celery.events</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>celery.utils.threads — Celery 3.1.23 documentation</title>
+<link href="../../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '3.1.23',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+<script src="../../_static/jquery.js" type="text/javascript"></script>
+<script src="../../_static/underscore.js" type="text/javascript"></script>
+<script src="../../_static/doctools.js" type="text/javascript"></script>
+<link href="../../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="index.html" rel="up" title="Internal Module Reference"/>
+<link href="celery.utils.timer2.html" rel="next" title="celery.utils.timer2"/>
+<link href="celery.utils.sysinfo.html" rel="prev" title="celery.utils.sysinfo"/>
+</head>
+<body role="document">
+<div aria-label="related navigation" class="related" role="navigation">
+<h3>Navigation</h3>
+<ul>
+<li class="right" style="margin-right: 10px">
+<a accesskey="I" href="../../genindex.html" title="General Index">index</a></li>
+<li class="right">
+<a href="../../py-modindex.html" title="Python Module Index">modules</a> |</li>
+<li class="right">
+<a accesskey="N" href="celery.utils.timer2.html" title="celery.utils.timer2">next</a> |</li>
+<li class="right">
+<a accesskey="P" href="celery.utils.sysinfo.html" title="celery.utils.sysinfo">previous</a> |</li>
+<li class="nav-item nav-item-0"><a href="../../index.html">Celery 3.1.23 documentation</a> »</li>
+<li class="nav-item nav-item-1"><a href="../index.html">Internals</a> »</li>
+<li class="nav-item nav-item-2"><a accesskey="U" href="index.html">Internal Module Reference</a> »</li>
+</ul>
+</div>
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
+<div class="deck">
+<p>
+        This document describes the current stable version of Celery (3.1). For development docs,
+        <a href="http://docs.celeryproject.org/en/master/internals/reference/celery.utils.threads.html">go here</a>.
+        </p>
+</div>
+<div class="section" id="celery-utils-threads"><a name="//apple_ref/cpp/Module/celery.utils.threads"></a>
+<h1>celery.utils.threads<a class="headerlink" href="#celery-utils-threads" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#id1" id="id2">celery.utils.threads</a></li>
+</ul>
+</div>
+<span class="target" id="module-celery.utils.threads"></span><div class="section" id="id1">
+<h2><a class="toc-backref" href="#id2">celery.utils.threads</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>Threading utilities.</p>
+<dl class="class">
+<dt id="celery.utils.threads.bgThread"><a name="//apple_ref/cpp/Class/celery.utils.threads.bgThread"></a>
+<em class="property">class </em><code class="descclassname">celery.utils.threads.</code><code class="descname">bgThread</code><span class="sig-paren">(</span><em>name=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/utils/threads.html#bgThread"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.utils.threads.bgThread" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="celery.utils.threads.bgThread.body"><a name="//apple_ref/cpp/Method/celery.utils.threads.bgThread.body"></a>
+<code class="descname">body</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/utils/threads.html#bgThread.body"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.utils.threads.bgThread.body" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.utils.threads.bgThread.on_crash"><a name="//apple_ref/cpp/Method/celery.utils.threads.bgThread.on_crash"></a>
+<code class="descname">on_crash</code><span class="sig-paren">(</span><em>msg</em>, <em>*fmt</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/utils/threads.html#bgThread.on_crash"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.utils.threads.bgThread.on_crash" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.utils.threads.bgThread.run"><a name="//apple_ref/cpp/Method/celery.utils.threads.bgThread.run"></a>
+<code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/utils/threads.html#bgThread.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.utils.threads.bgThread.run" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.utils.threads.bgThread.stop"><a name="//apple_ref/cpp/Method/celery.utils.threads.bgThread.stop"></a>
+<code class="descname">stop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/utils/threads.html#bgThread.stop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.utils.threads.bgThread.stop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Graceful shutdown.</p>
+</dd></dl>
+</dd></dl>
+<dl class="class">
+<dt id="celery.utils.threads.Local"><a name="//apple_ref/cpp/Class/celery.utils.threads.Local"></a>
+<em class="property">class </em><code class="descclassname">celery.utils.threads.</code><code class="descname">Local</code><a class="reference internal" href="../../_modules/celery/utils/threads.html#Local"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.utils.threads.Local" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.utils.threads.LocalStack"><a name="//apple_ref/cpp/Attribute/celery.utils.threads.LocalStack"></a>
+<code class="descclassname">celery.utils.threads.</code><code class="descname">LocalStack</code><a class="headerlink" href="#celery.utils.threads.LocalStack" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal"><span class="pre">_LocalStack</span></code></p>
+</dd></dl>
+<dl class="class">
+<dt id="celery.utils.threads.LocalManager"><a name="//apple_ref/cpp/Class/celery.utils.threads.LocalManager"></a>
+<em class="property">class </em><code class="descclassname">celery.utils.threads.</code><code class="descname">LocalManager</code><span class="sig-paren">(</span><em>locals=None</em>, <em>ident_func=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/utils/threads.html#LocalManager"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.utils.threads.LocalManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Local objects cannot manage themselves. For that you need a local
+manager.  You can pass a local manager multiple locals or add them
+later by appending them to <cite>manager.locals</cite>.  Everytime the manager
+cleans up it, will clean up all the data left in the locals for this
+context.</p>
+<p>The <cite>ident_func</cite> parameter can be added to override the default ident
+function for the wrapped locals.</p>
+<dl class="method">
+<dt id="celery.utils.threads.LocalManager.cleanup"><a name="//apple_ref/cpp/Method/celery.utils.threads.LocalManager.cleanup"></a>
+<code class="descname">cleanup</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/utils/threads.html#LocalManager.cleanup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.utils.threads.LocalManager.cleanup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Manually clean up the data in the locals for this context.</p>
+<p>Call this at the end of the request or use <cite>make_middleware()</cite>.</p>
+</dd></dl>
+<dl class="method">
+<dt id="celery.utils.threads.LocalManager.get_ident"><a name="//apple_ref/cpp/Method/celery.utils.threads.LocalManager.get_ident"></a>
+<code class="descname">get_ident</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/utils/threads.html#LocalManager.get_ident"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.utils.threads.LocalManager.get_ident" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the context identifier the local objects use internally
+for this context.  You cannot override this method to change the
+behavior but use it to link other context local objects (such as
+SQLAlchemy’s scoped sessions) to the Werkzeug locals.</p>
+</dd></dl>
+</dd></dl>
+<dl class="function">
+<dt id="celery.utils.threads.get_ident"><a name="//apple_ref/cpp/Function/celery.utils.threads.get_ident"></a>
+<code class="descclassname">celery.utils.threads.</code><code class="descname">get_ident</code><span class="sig-paren">(</span><span class="sig-paren">)</span> → integer<a class="headerlink" href="#celery.utils.threads.get_ident" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a non-zero integer that uniquely identifies the current thread
+amongst other threads that exist simultaneously.
+This may be used to identify per-thread resources.
+Even though on some platforms threads identities may appear to be
+allocated consecutive numbers starting at 1, this behavior should not
+be relied upon, and the number should be seen purely as a magic cookie.
+A thread’s identity may be reused for another thread after it exits.</p>
+</dd></dl>
+<dl class="function">
+<dt id="celery.utils.threads.default_socket_timeout"><a name="//apple_ref/cpp/Function/celery.utils.threads.default_socket_timeout"></a>
+<code class="descclassname">celery.utils.threads.</code><code class="descname">default_socket_timeout</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/utils/threads.html#default_socket_timeout"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.utils.threads.default_socket_timeout" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div aria-label="related navigation" class="related" role="navigation">
+<h3>Navigation</h3>
+<ul>
+<li class="right" style="margin-right: 10px">
+<a href="../../genindex.html" title="General Index">index</a></li>
+<li class="right">
+<a href="../../py-modindex.html" title="Python Module Index">modules</a> |</li>
+<li class="right">
+<a href="celery.utils.timer2.html" title="celery.utils.timer2">next</a> |</li>
+<li class="right">
+<a href="celery.utils.sysinfo.html" title="celery.utils.sysinfo">previous</a> |</li>
+<li class="nav-item nav-item-0"><a href="../../index.html">Celery 3.1.23 documentation</a> »</li>
+<li class="nav-item nav-item-1"><a href="../index.html">Internals</a> »</li>
+<li class="nav-item nav-item-2"><a href="index.html">Internal Module Reference</a> »</li>
+</ul>
+</div>
+<div class="footer" role="contentinfo">
+        © <a href="../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
+    </div>
+</body>
+</html>

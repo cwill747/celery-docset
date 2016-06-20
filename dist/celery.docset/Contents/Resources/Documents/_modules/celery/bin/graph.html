@@ -1,0 +1,275 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>celery.bin.graph &mdash; Celery 3.1.23 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/celery.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '3.1.23',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="copyright" title="Copyright" href="../../../copyright.html" />
+    <link rel="top" title="Celery 3.1.23 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+<div class="deck">
+
+    
+        <p>
+        This document describes the current stable version of Celery (3.1). For development docs,
+        <a href="http://docs.celeryproject.org/en/master/_modules/celery/bin/graph.html">go here</a>.
+        </p>
+    
+
+</div>
+    <h1>Source code for celery.bin.graph</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">The :program:`celery graph` command.</span>
+
+<span class="sd">.. program:: celery graph</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">unicode_literals</span>
+
+<span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>
+
+<span class="kn">from</span> <span class="nn">celery.datastructures</span> <span class="kn">import</span> <span class="n">DependencyGraph</span><span class="p">,</span> <span class="n">GraphFormatter</span>
+<span class="kn">from</span> <span class="nn">celery.five</span> <span class="kn">import</span> <span class="n">items</span>
+
+<span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">Command</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;graph&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="graph"><a class="viewcode-back" href="../../../reference/celery.bin.graph.html#celery.bin.graph.graph">[docs]</a><span class="k">class</span> <span class="nc">graph</span><span class="p">(</span><span class="n">Command</span><span class="p">):</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;&lt;TYPE&gt; [arguments]</span>
+<span class="s2">            .....  bootsteps [worker] [consumer]</span>
+<span class="s2">            .....  workers   [enumerate]</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="graph.run"><a class="viewcode-back" href="../../../reference/celery.bin.graph.html#celery.bin.graph.graph.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">what</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">map</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;bootsteps&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">bootsteps</span><span class="p">,</span> <span class="s1">&#39;workers&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">workers</span><span class="p">}</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">what</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="bp">self</span><span class="o">.</span><span class="n">UsageError</span><span class="p">(</span><span class="s1">&#39;missing type&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">what</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">map</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="bp">self</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="s1">&#39;no graph {0} in {1}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">what</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">)))</span>
+        <span class="k">return</span> <span class="nb">map</span><span class="p">[</span><span class="n">what</span><span class="p">](</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="graph.bootsteps"><a class="viewcode-back" href="../../../reference/celery.bin.graph.html#celery.bin.graph.graph.bootsteps">[docs]</a>    <span class="k">def</span> <span class="nf">bootsteps</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">worker</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">WorkController</span><span class="p">()</span>
+        <span class="n">include</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">arg</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span> <span class="ow">or</span> <span class="p">[</span><span class="s1">&#39;worker&#39;</span><span class="p">,</span> <span class="s1">&#39;consumer&#39;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="s1">&#39;worker&#39;</span> <span class="ow">in</span> <span class="n">include</span><span class="p">:</span>
+            <span class="n">graph</span> <span class="o">=</span> <span class="n">worker</span><span class="o">.</span><span class="n">blueprint</span><span class="o">.</span><span class="n">graph</span>
+            <span class="k">if</span> <span class="s1">&#39;consumer&#39;</span> <span class="ow">in</span> <span class="n">include</span><span class="p">:</span>
+                <span class="n">worker</span><span class="o">.</span><span class="n">blueprint</span><span class="o">.</span><span class="n">connect_with</span><span class="p">(</span><span class="n">worker</span><span class="o">.</span><span class="n">consumer</span><span class="o">.</span><span class="n">blueprint</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">graph</span> <span class="o">=</span> <span class="n">worker</span><span class="o">.</span><span class="n">consumer</span><span class="o">.</span><span class="n">blueprint</span><span class="o">.</span><span class="n">graph</span>
+        <span class="n">graph</span><span class="o">.</span><span class="n">to_dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="graph.workers"><a class="viewcode-back" href="../../../reference/celery.bin.graph.html#celery.bin.graph.graph.workers">[docs]</a>    <span class="k">def</span> <span class="nf">workers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+        <span class="k">def</span> <span class="nf">simplearg</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">maybe_list</span><span class="p">(</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)(</span><span class="n">arg</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)))</span>
+
+        <span class="k">def</span> <span class="nf">maybe_list</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="p">(</span><span class="n">l</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">l</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">sep</span><span class="p">)</span> <span class="k">if</span> <span class="n">sep</span> <span class="ow">in</span> <span class="n">l</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">else</span> <span class="n">l</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="n">args</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">simplearg</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">)</span>
+        <span class="n">generic</span> <span class="o">=</span> <span class="s1">&#39;generic&#39;</span> <span class="ow">in</span> <span class="n">args</span>
+
+        <span class="k">def</span> <span class="nf">generic_label</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+            <span class="k">return</span> <span class="s1">&#39;{0} ({1}://)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">node</span><span class="p">)</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span>
+                                         <span class="n">node</span><span class="o">.</span><span class="n">_label</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;://&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="k">class</span> <span class="nc">Node</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+            <span class="n">force_label</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="n">scheme</span> <span class="o">=</span> <span class="p">{}</span>
+
+            <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_label</span> <span class="o">=</span> <span class="n">label</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="n">pos</span>
+
+            <span class="k">def</span> <span class="nf">label</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_label</span>
+
+            <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="p">()</span>
+
+        <span class="k">class</span> <span class="nc">Thread</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+            <span class="n">scheme</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;fillcolor&#39;</span><span class="p">:</span> <span class="s1">&#39;lightcyan4&#39;</span><span class="p">,</span> <span class="s1">&#39;fontcolor&#39;</span><span class="p">:</span> <span class="s1">&#39;yellow&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;shape&#39;</span><span class="p">:</span> <span class="s1">&#39;oval&#39;</span><span class="p">,</span> <span class="s1">&#39;fontsize&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;width&#39;</span><span class="p">:</span> <span class="mf">0.3</span><span class="p">,</span>
+                      <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;black&#39;</span><span class="p">}</span>
+
+            <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_label</span> <span class="o">=</span> <span class="s1">&#39;thr-{0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">tids</span><span class="p">))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">real_label</span> <span class="o">=</span> <span class="n">label</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">class</span> <span class="nc">Formatter</span><span class="p">(</span><span class="n">GraphFormatter</span><span class="p">):</span>
+
+            <span class="k">def</span> <span class="nf">label</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">obj</span> <span class="ow">and</span> <span class="n">obj</span><span class="o">.</span><span class="n">label</span><span class="p">()</span>
+
+            <span class="k">def</span> <span class="nf">node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+                <span class="n">scheme</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">scheme</span><span class="p">)</span> <span class="k">if</span> <span class="n">obj</span><span class="o">.</span><span class="n">pos</span> <span class="k">else</span> <span class="n">obj</span><span class="o">.</span><span class="n">scheme</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">Thread</span><span class="p">):</span>
+                    <span class="n">scheme</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">real_label</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">draw_node</span><span class="p">(</span>
+                    <span class="n">obj</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">node_scheme</span><span class="p">,</span> <span class="o">**</span><span class="n">scheme</span><span class="p">),</span>
+                <span class="p">)</span>
+
+            <span class="k">def</span> <span class="nf">terminal_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">draw_node</span><span class="p">(</span>
+                    <span class="n">obj</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">term_scheme</span><span class="p">,</span> <span class="o">**</span><span class="n">obj</span><span class="o">.</span><span class="n">scheme</span><span class="p">),</span>
+                <span class="p">)</span>
+
+            <span class="k">def</span> <span class="nf">edge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="o">**</span><span class="n">attrs</span><span class="p">):</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">Thread</span><span class="p">):</span>
+                    <span class="n">attrs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">arrowhead</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">arrowtail</span><span class="o">=</span><span class="s1">&#39;tee&#39;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">draw_edge</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_scheme</span><span class="p">,</span> <span class="n">attrs</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">subscript</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">S</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;0&#39;</span><span class="p">:</span> <span class="s1">&#39;₀&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">:</span> <span class="s1">&#39;₁&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">:</span> <span class="s1">&#39;₂&#39;</span><span class="p">,</span> <span class="s1">&#39;3&#39;</span><span class="p">:</span> <span class="s1">&#39;₃&#39;</span><span class="p">,</span> <span class="s1">&#39;4&#39;</span><span class="p">:</span> <span class="s1">&#39;₄&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;5&#39;</span><span class="p">:</span> <span class="s1">&#39;₅&#39;</span><span class="p">,</span> <span class="s1">&#39;6&#39;</span><span class="p">:</span> <span class="s1">&#39;₆&#39;</span><span class="p">,</span> <span class="s1">&#39;7&#39;</span><span class="p">:</span> <span class="s1">&#39;₇&#39;</span><span class="p">,</span> <span class="s1">&#39;8&#39;</span><span class="p">:</span> <span class="s1">&#39;₈&#39;</span><span class="p">,</span> <span class="s1">&#39;9&#39;</span><span class="p">:</span> <span class="s1">&#39;₉&#39;</span><span class="p">}</span>
+            <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span>
+
+        <span class="k">class</span> <span class="nc">Worker</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+            <span class="k">pass</span>
+
+        <span class="k">class</span> <span class="nc">Backend</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+            <span class="n">scheme</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;shape&#39;</span><span class="p">:</span> <span class="s1">&#39;folder&#39;</span><span class="p">,</span> <span class="s1">&#39;width&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+                      <span class="s1">&#39;height&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;fillcolor&#39;</span><span class="p">:</span> <span class="s1">&#39;peachpuff3&#39;</span><span class="p">,</span> <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;peachpuff4&#39;</span><span class="p">}</span>
+
+            <span class="k">def</span> <span class="nf">label</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">generic_label</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="k">if</span> <span class="n">generic</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_label</span>
+
+        <span class="k">class</span> <span class="nc">Broker</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+            <span class="n">scheme</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;shape&#39;</span><span class="p">:</span> <span class="s1">&#39;circle&#39;</span><span class="p">,</span> <span class="s1">&#39;fillcolor&#39;</span><span class="p">:</span> <span class="s1">&#39;cadetblue3&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;cadetblue4&#39;</span><span class="p">,</span> <span class="s1">&#39;height&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+
+            <span class="k">def</span> <span class="nf">label</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">generic_label</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="k">if</span> <span class="n">generic</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_label</span>
+
+        <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">count</span>
+        <span class="n">tids</span> <span class="o">=</span> <span class="n">count</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">Wmax</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;wmax&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">Tmax</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;tmax&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">maybe_abbr</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="n">Wmax</span><span class="p">):</span>
+            <span class="n">size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+            <span class="n">abbr</span> <span class="o">=</span> <span class="nb">max</span> <span class="ow">and</span> <span class="n">size</span> <span class="o">&gt;</span> <span class="nb">max</span>
+            <span class="k">if</span> <span class="s1">&#39;enumerate&#39;</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+                <span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;{0}{1}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">subscript</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+                     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">obj</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">l</span><span class="p">)]</span>
+            <span class="k">if</span> <span class="n">abbr</span><span class="p">:</span>
+                <span class="n">l</span> <span class="o">=</span> <span class="n">l</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="nb">max</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">l</span><span class="p">[</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]]</span>
+                <span class="n">l</span><span class="p">[</span><span class="nb">max</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;{0}⎨…{1}⎬&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">name</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">subscript</span><span class="p">(</span><span class="n">size</span> <span class="o">-</span> <span class="p">(</span><span class="nb">max</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)))</span>
+            <span class="k">return</span> <span class="n">l</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">workers</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s1">&#39;nodes&#39;</span><span class="p">]</span>
+            <span class="n">threads</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;threads&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">[]</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="n">replies</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">control</span><span class="o">.</span><span class="n">inspect</span><span class="p">()</span><span class="o">.</span><span class="n">stats</span><span class="p">()</span>
+            <span class="n">workers</span><span class="p">,</span> <span class="n">threads</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">worker</span><span class="p">,</span> <span class="n">reply</span> <span class="ow">in</span> <span class="n">items</span><span class="p">(</span><span class="n">replies</span><span class="p">):</span>
+                <span class="n">workers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">worker</span><span class="p">)</span>
+                <span class="n">threads</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reply</span><span class="p">[</span><span class="s1">&#39;pool&#39;</span><span class="p">][</span><span class="s1">&#39;max-concurrency&#39;</span><span class="p">])</span>
+
+        <span class="n">wlen</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">workers</span><span class="p">)</span>
+        <span class="n">backend</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;backend&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">CELERY_RESULT_BACKEND</span><span class="p">)</span>
+        <span class="n">threads_for</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">workers</span> <span class="o">=</span> <span class="n">maybe_abbr</span><span class="p">(</span><span class="n">workers</span><span class="p">,</span> <span class="s1">&#39;Worker&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">Wmax</span> <span class="ow">and</span> <span class="n">wlen</span> <span class="o">&gt;</span> <span class="n">Wmax</span><span class="p">:</span>
+            <span class="n">threads</span> <span class="o">=</span> <span class="n">threads</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">threads</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">threads</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">threads</span><span class="p">):</span>
+            <span class="n">threads_for</span><span class="p">[</span><span class="n">workers</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">maybe_abbr</span><span class="p">(</span>
+                <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">threads</span><span class="p">))),</span> <span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="n">Tmax</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="n">broker</span> <span class="o">=</span> <span class="n">Broker</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;broker&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">connection</span><span class="p">()</span><span class="o">.</span><span class="n">as_uri</span><span class="p">()))</span>
+        <span class="n">backend</span> <span class="o">=</span> <span class="n">Backend</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span> <span class="k">if</span> <span class="n">backend</span> <span class="k">else</span> <span class="bp">None</span>
+        <span class="n">graph</span> <span class="o">=</span> <span class="n">DependencyGraph</span><span class="p">(</span><span class="n">formatter</span><span class="o">=</span><span class="n">Formatter</span><span class="p">())</span>
+        <span class="n">graph</span><span class="o">.</span><span class="n">add_arc</span><span class="p">(</span><span class="n">broker</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">backend</span><span class="p">:</span>
+            <span class="n">graph</span><span class="o">.</span><span class="n">add_arc</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span>
+        <span class="n">curworker</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">worker</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">workers</span><span class="p">):</span>
+            <span class="n">worker</span> <span class="o">=</span> <span class="n">Worker</span><span class="p">(</span><span class="n">worker</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="n">i</span><span class="p">)</span>
+            <span class="n">graph</span><span class="o">.</span><span class="n">add_arc</span><span class="p">(</span><span class="n">worker</span><span class="p">)</span>
+            <span class="n">graph</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">worker</span><span class="p">,</span> <span class="n">broker</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">backend</span><span class="p">:</span>
+                <span class="n">graph</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">worker</span><span class="p">,</span> <span class="n">backend</span><span class="p">)</span>
+            <span class="n">threads</span> <span class="o">=</span> <span class="n">threads_for</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">worker</span><span class="o">.</span><span class="n">_label</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">threads</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">thread</span> <span class="ow">in</span> <span class="n">threads</span><span class="p">:</span>
+                    <span class="n">thread</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">thread</span><span class="p">)</span>
+                    <span class="n">graph</span><span class="o">.</span><span class="n">add_arc</span><span class="p">(</span><span class="n">thread</span><span class="p">)</span>
+                    <span class="n">graph</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">thread</span><span class="p">,</span> <span class="n">worker</span><span class="p">)</span>
+
+            <span class="n">curworker</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="n">graph</span><span class="o">.</span><span class="n">to_dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
+    </div>
+  </body>
+</html>

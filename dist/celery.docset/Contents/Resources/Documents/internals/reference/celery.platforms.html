@@ -1,0 +1,354 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>celery.platforms — Celery 3.1.23 documentation</title>
+<link href="../../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '3.1.23',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+<script src="../../_static/jquery.js" type="text/javascript"></script>
+<script src="../../_static/underscore.js" type="text/javascript"></script>
+<script src="../../_static/doctools.js" type="text/javascript"></script>
+<link href="../../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="index.html" rel="up" title="Internal Module Reference"/>
+<link href="celery._state.html" rel="next" title="celery._state"/>
+<link href="celery.utils.dispatch.saferef.html" rel="prev" title="celery.utils.dispatch.saferef"/>
+</head>
+<body role="document">
+<div aria-label="related navigation" class="related" role="navigation">
+<h3>Navigation</h3>
+<ul>
+<li class="right" style="margin-right: 10px">
+<a accesskey="I" href="../../genindex.html" title="General Index">index</a></li>
+<li class="right">
+<a href="../../py-modindex.html" title="Python Module Index">modules</a> |</li>
+<li class="right">
+<a accesskey="N" href="celery._state.html" title="celery._state">next</a> |</li>
+<li class="right">
+<a accesskey="P" href="celery.utils.dispatch.saferef.html" title="celery.utils.dispatch.saferef">previous</a> |</li>
+<li class="nav-item nav-item-0"><a href="../../index.html">Celery 3.1.23 documentation</a> »</li>
+<li class="nav-item nav-item-1"><a href="../index.html">Internals</a> »</li>
+<li class="nav-item nav-item-2"><a accesskey="U" href="index.html">Internal Module Reference</a> »</li>
+</ul>
+</div>
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
+<div class="deck">
+<p>
+        This document describes the current stable version of Celery (3.1). For development docs,
+        <a href="http://docs.celeryproject.org/en/master/internals/reference/celery.platforms.html">go here</a>.
+        </p>
+</div>
+<div class="section" id="celery-platforms"><a name="//apple_ref/cpp/Module/celery.platforms"></a>
+<h1>celery.platforms<a class="headerlink" href="#celery-platforms" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#id1" id="id2">celery.platforms</a></li>
+</ul>
+</div>
+<span class="target" id="module-celery.platforms"></span><div class="section" id="id1">
+<h2><a class="toc-backref" href="#id2">celery.platforms</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>Utilities dealing with platform specifics: signals, daemonization,
+users, groups, and so on.</p>
+<dl class="function">
+<dt id="celery.platforms.pyimplementation"><a name="//apple_ref/cpp/Function/celery.platforms.pyimplementation"></a>
+<code class="descclassname">celery.platforms.</code><code class="descname">pyimplementation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/platforms.html#pyimplementation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.platforms.pyimplementation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return string identifying the current Python implementation.</p>
+</dd></dl>
+<dl class="exception">
+<dt id="celery.platforms.LockFailed"><a name="//apple_ref/cpp/Exception/celery.platforms.LockFailed"></a>
+<em class="property">exception </em><code class="descclassname">celery.platforms.</code><code class="descname">LockFailed</code><a class="reference internal" href="../../_modules/celery/platforms.html#LockFailed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.platforms.LockFailed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raised if a pidlock can’t be acquired.</p>
+</dd></dl>
+<dl class="function">
+<dt id="celery.platforms.get_fdmax"><a name="//apple_ref/cpp/Function/celery.platforms.get_fdmax"></a>
+<code class="descclassname">celery.platforms.</code><code class="descname">get_fdmax</code><span class="sig-paren">(</span><em>default=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/platforms.html#get_fdmax"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.platforms.get_fdmax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the maximum number of open file descriptors
+on this system.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name"></col>
+<col class="field-body"></col>
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>default</strong> – Value returned if there’s no file
+descriptor limit.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+<dl class="class">
+<dt id="celery.platforms.Pidfile"><a name="//apple_ref/cpp/Class/celery.platforms.Pidfile"></a>
+<em class="property">class </em><code class="descclassname">celery.platforms.</code><code class="descname">Pidfile</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/platforms.html#Pidfile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.platforms.Pidfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is the type returned by <a class="reference internal" href="#celery.platforms.create_pidlock" title="celery.platforms.create_pidlock"><code class="xref py py-func docutils literal"><span class="pre">create_pidlock()</span></code></a>.</p>
+<p>TIP: Use the <a class="reference internal" href="#celery.platforms.create_pidlock" title="celery.platforms.create_pidlock"><code class="xref py py-func docutils literal"><span class="pre">create_pidlock()</span></code></a> function instead,
+which is more convenient and also removes stale pidfiles (when
+the process holding the lock is no longer running).</p>
+<dl class="method">
+<dt id="celery.platforms.Pidfile.acquire"><a name="//apple_ref/cpp/Method/celery.platforms.Pidfile.acquire"></a>
+<code class="descname">acquire</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/platforms.html#Pidfile.acquire"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.platforms.Pidfile.acquire" title="Permalink to this definition">¶</a></dt>
+<dd><p>Acquire lock.</p>
+</dd></dl>
+<dl class="method">
+<dt id="celery.platforms.Pidfile.is_locked"><a name="//apple_ref/cpp/Method/celery.platforms.Pidfile.is_locked"></a>
+<code class="descname">is_locked</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/platforms.html#Pidfile.is_locked"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.platforms.Pidfile.is_locked" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return true if the pid lock exists.</p>
+</dd></dl>
+<dl class="attribute">
+<dt id="celery.platforms.Pidfile.path"><a name="//apple_ref/cpp/Attribute/celery.platforms.Pidfile.path"></a>
+<code class="descname">path</code><em class="property"> = None</em><a class="headerlink" href="#celery.platforms.Pidfile.path" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.platforms.Pidfile.read_pid"><a name="//apple_ref/cpp/Method/celery.platforms.Pidfile.read_pid"></a>
+<code class="descname">read_pid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/platforms.html#Pidfile.read_pid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.platforms.Pidfile.read_pid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read and return the current pid.</p>
+</dd></dl>
+<dl class="method">
+<dt id="celery.platforms.Pidfile.release"><a name="//apple_ref/cpp/Method/celery.platforms.Pidfile.release"></a>
+<code class="descname">release</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/platforms.html#Pidfile.release"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.platforms.Pidfile.release" title="Permalink to this definition">¶</a></dt>
+<dd><p>Release lock.</p>
+</dd></dl>
+<dl class="method">
+<dt id="celery.platforms.Pidfile.remove"><a name="//apple_ref/cpp/Method/celery.platforms.Pidfile.remove"></a>
+<code class="descname">remove</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/platforms.html#Pidfile.remove"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.platforms.Pidfile.remove" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove the lock.</p>
+</dd></dl>
+<dl class="method">
+<dt id="celery.platforms.Pidfile.remove_if_stale"><a name="//apple_ref/cpp/Method/celery.platforms.Pidfile.remove_if_stale"></a>
+<code class="descname">remove_if_stale</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/platforms.html#Pidfile.remove_if_stale"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.platforms.Pidfile.remove_if_stale" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove the lock if the process is not running.
+(does not respond to signals).</p>
+</dd></dl>
+<dl class="method">
+<dt id="celery.platforms.Pidfile.write_pid"><a name="//apple_ref/cpp/Method/celery.platforms.Pidfile.write_pid"></a>
+<code class="descname">write_pid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/platforms.html#Pidfile.write_pid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.platforms.Pidfile.write_pid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</dd></dl>
+<dl class="function">
+<dt id="celery.platforms.create_pidlock"><a name="//apple_ref/cpp/Function/celery.platforms.create_pidlock"></a>
+<code class="descclassname">celery.platforms.</code><code class="descname">create_pidlock</code><span class="sig-paren">(</span><em>pidfile</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/platforms.html#create_pidlock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.platforms.create_pidlock" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create and verify pidfile.</p>
+<p>If the pidfile already exists the program exits with an error message,
+however if the process it refers to is not running anymore, the pidfile
+is deleted and the program continues.</p>
+<p>This function will automatically install an <a class="reference external" href="http://docs.python.org/dev/library/atexit.html#module-atexit" title="(in Python v3.6)"><code class="xref py py-mod docutils literal"><span class="pre">atexit</span></code></a> handler
+to release the lock at exit, you can skip this by calling
+<code class="xref py py-func docutils literal"><span class="pre">_create_pidlock()</span></code> instead.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name"></col>
+<col class="field-body"></col>
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><a class="reference internal" href="#celery.platforms.Pidfile" title="celery.platforms.Pidfile"><code class="xref py py-class docutils literal"><span class="pre">Pidfile</span></code></a>.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pidlock</span> <span class="o">=</span> <span class="n">create_pidlock</span><span class="p">(</span><span class="s1">'/var/run/app.pid'</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="function">
+<dt id="celery.platforms.close_open_fds"><a name="//apple_ref/cpp/Function/celery.platforms.close_open_fds"></a>
+<code class="descclassname">celery.platforms.</code><code class="descname">close_open_fds</code><span class="sig-paren">(</span><em>keep=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/platforms.html#close_open_fds"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.platforms.close_open_fds" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="class">
+<dt id="celery.platforms.DaemonContext"><a name="//apple_ref/cpp/Class/celery.platforms.DaemonContext"></a>
+<em class="property">class </em><code class="descclassname">celery.platforms.</code><code class="descname">DaemonContext</code><span class="sig-paren">(</span><em>pidfile=None</em>, <em>workdir=None</em>, <em>umask=None</em>, <em>fake=False</em>, <em>after_chdir=None</em>, <em>after_forkers=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/platforms.html#DaemonContext"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.platforms.DaemonContext" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="celery.platforms.DaemonContext.close"><a name="//apple_ref/cpp/Method/celery.platforms.DaemonContext.close"></a>
+<code class="descname">close</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/platforms.html#DaemonContext.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.platforms.DaemonContext.close" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.platforms.DaemonContext.open"><a name="//apple_ref/cpp/Method/celery.platforms.DaemonContext.open"></a>
+<code class="descname">open</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/platforms.html#DaemonContext.open"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.platforms.DaemonContext.open" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.platforms.DaemonContext.redirect_to_null"><a name="//apple_ref/cpp/Method/celery.platforms.DaemonContext.redirect_to_null"></a>
+<code class="descname">redirect_to_null</code><span class="sig-paren">(</span><em>fd</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/platforms.html#DaemonContext.redirect_to_null"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.platforms.DaemonContext.redirect_to_null" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</dd></dl>
+<dl class="function">
+<dt id="celery.platforms.detached"><a name="//apple_ref/cpp/Function/celery.platforms.detached"></a>
+<code class="descclassname">celery.platforms.</code><code class="descname">detached</code><span class="sig-paren">(</span><em>logfile=None</em>, <em>pidfile=None</em>, <em>uid=None</em>, <em>gid=None</em>, <em>umask=0</em>, <em>workdir=None</em>, <em>fake=False</em>, <em>**opts</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/platforms.html#detached"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.platforms.detached" title="Permalink to this definition">¶</a></dt>
+<dd><p>Detach the current process in the background (daemonize).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name"></col>
+<col class="field-body"></col>
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>logfile</strong> – Optional log file.  The ability to write to this file
+will be verified before the process is detached.</li>
+<li><strong>pidfile</strong> – Optional pidfile.  The pidfile will not be created,
+as this is the responsibility of the child.  But the process will
+exit if the pid lock exists and the pid written is still running.</li>
+<li><strong>uid</strong> – Optional user id or user name to change
+effective privileges to.</li>
+<li><strong>gid</strong> – Optional group id or group name to change effective
+privileges to.</li>
+<li><strong>umask</strong> – Optional umask that will be effective in the child process.</li>
+<li><strong>workdir</strong> – Optional new working directory.</li>
+<li><strong>fake</strong> – Don’t actually detach, intented for debugging purposes.</li>
+<li><strong>**opts</strong> – Ignored.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">celery.platforms</span> <span class="kn">import</span> <span class="n">detached</span><span class="p">,</span> <span class="n">create_pidlock</span>
+
+<span class="k">with</span> <span class="n">detached</span><span class="p">(</span><span class="n">logfile</span><span class="o">=</span><span class="s1">'/var/log/app.log'</span><span class="p">,</span> <span class="n">pidfile</span><span class="o">=</span><span class="s1">'/var/run/app.pid'</span><span class="p">,</span>
+              <span class="n">uid</span><span class="o">=</span><span class="s1">'nobody'</span><span class="p">):</span>
+    <span class="c1"># Now in detached child process with effective user set to nobody,</span>
+    <span class="c1"># and we know that our logfile can be written to, and that</span>
+    <span class="c1"># the pidfile is not locked.</span>
+    <span class="n">pidlock</span> <span class="o">=</span> <span class="n">create_pidlock</span><span class="p">(</span><span class="s1">'/var/run/app.pid'</span><span class="p">)</span>
+
+    <span class="c1"># Run the program</span>
+    <span class="n">program</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">logfile</span><span class="o">=</span><span class="s1">'/var/log/app.log'</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="function">
+<dt id="celery.platforms.parse_uid"><a name="//apple_ref/cpp/Function/celery.platforms.parse_uid"></a>
+<code class="descclassname">celery.platforms.</code><code class="descname">parse_uid</code><span class="sig-paren">(</span><em>uid</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/platforms.html#parse_uid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.platforms.parse_uid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse user id.</p>
+<p>uid can be an integer (uid) or a string (user name), if a user name
+the uid is taken from the system user registry.</p>
+</dd></dl>
+<dl class="function">
+<dt id="celery.platforms.parse_gid"><a name="//apple_ref/cpp/Function/celery.platforms.parse_gid"></a>
+<code class="descclassname">celery.platforms.</code><code class="descname">parse_gid</code><span class="sig-paren">(</span><em>gid</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/platforms.html#parse_gid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.platforms.parse_gid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse group id.</p>
+<p>gid can be an integer (gid) or a string (group name), if a group name
+the gid is taken from the system group registry.</p>
+</dd></dl>
+<dl class="function">
+<dt id="celery.platforms.setgroups"><a name="//apple_ref/cpp/Function/celery.platforms.setgroups"></a>
+<code class="descclassname">celery.platforms.</code><code class="descname">setgroups</code><span class="sig-paren">(</span><em>groups</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/platforms.html#setgroups"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.platforms.setgroups" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set active groups from a list of group ids.</p>
+</dd></dl>
+<dl class="function">
+<dt id="celery.platforms.initgroups"><a name="//apple_ref/cpp/Function/celery.platforms.initgroups"></a>
+<code class="descclassname">celery.platforms.</code><code class="descname">initgroups</code><span class="sig-paren">(</span><em>uid</em>, <em>gid</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/platforms.html#initgroups"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.platforms.initgroups" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compat version of <a class="reference external" href="http://docs.python.org/dev/library/os.html#os.initgroups" title="(in Python v3.6)"><code class="xref py py-func docutils literal"><span class="pre">os.initgroups()</span></code></a> which was first
+added to Python 2.7.</p>
+</dd></dl>
+<dl class="function">
+<dt id="celery.platforms.setgid"><a name="//apple_ref/cpp/Function/celery.platforms.setgid"></a>
+<code class="descclassname">celery.platforms.</code><code class="descname">setgid</code><span class="sig-paren">(</span><em>gid</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/platforms.html#setgid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.platforms.setgid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Version of <a class="reference external" href="http://docs.python.org/dev/library/os.html#os.setgid" title="(in Python v3.6)"><code class="xref py py-func docutils literal"><span class="pre">os.setgid()</span></code></a> supporting group names.</p>
+</dd></dl>
+<dl class="function">
+<dt id="celery.platforms.setuid"><a name="//apple_ref/cpp/Function/celery.platforms.setuid"></a>
+<code class="descclassname">celery.platforms.</code><code class="descname">setuid</code><span class="sig-paren">(</span><em>uid</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/platforms.html#setuid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.platforms.setuid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Version of <a class="reference external" href="http://docs.python.org/dev/library/os.html#os.setuid" title="(in Python v3.6)"><code class="xref py py-func docutils literal"><span class="pre">os.setuid()</span></code></a> supporting usernames.</p>
+</dd></dl>
+<dl class="function">
+<dt id="celery.platforms.maybe_drop_privileges"><a name="//apple_ref/cpp/Function/celery.platforms.maybe_drop_privileges"></a>
+<code class="descclassname">celery.platforms.</code><code class="descname">maybe_drop_privileges</code><span class="sig-paren">(</span><em>uid=None</em>, <em>gid=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/platforms.html#maybe_drop_privileges"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.platforms.maybe_drop_privileges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change process privileges to new user/group.</p>
+<p>If UID and GID is specified, the real user/group is changed.</p>
+<p>If only UID is specified, the real user is changed, and the group is
+changed to the users primary group.</p>
+<p>If only GID is specified, only the group is changed.</p>
+</dd></dl>
+<dl class="function">
+<dt id="celery.platforms.set_process_title"><a name="//apple_ref/cpp/Function/celery.platforms.set_process_title"></a>
+<code class="descclassname">celery.platforms.</code><code class="descname">set_process_title</code><span class="sig-paren">(</span><em>progname</em>, <em>info=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/platforms.html#set_process_title"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.platforms.set_process_title" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the ps name for the currently running process.</p>
+<p>Only works if <code class="xref py py-mod docutils literal"><span class="pre">setproctitle</span></code> is installed.</p>
+</dd></dl>
+<dl class="function">
+<dt id="celery.platforms.set_mp_process_title"><a name="//apple_ref/cpp/Function/celery.platforms.set_mp_process_title"></a>
+<code class="descclassname">celery.platforms.</code><code class="descname">set_mp_process_title</code><span class="sig-paren">(</span><em>progname</em>, <em>info=None</em>, <em>hostname=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/platforms.html#set_mp_process_title"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.platforms.set_mp_process_title" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the ps name using the multiprocessing process name.</p>
+<p>Only works if <code class="xref py py-mod docutils literal"><span class="pre">setproctitle</span></code> is installed.</p>
+</dd></dl>
+<dl class="function">
+<dt id="celery.platforms.get_errno_name"><a name="//apple_ref/cpp/Function/celery.platforms.get_errno_name"></a>
+<code class="descclassname">celery.platforms.</code><code class="descname">get_errno_name</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/platforms.html#get_errno_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.platforms.get_errno_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get errno for string, e.g. <code class="docutils literal"><span class="pre">ENOENT</span></code>.</p>
+</dd></dl>
+<dl class="function">
+<dt id="celery.platforms.ignore_errno"><a name="//apple_ref/cpp/Function/celery.platforms.ignore_errno"></a>
+<code class="descclassname">celery.platforms.</code><code class="descname">ignore_errno</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/platforms.html#ignore_errno"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.platforms.ignore_errno" title="Permalink to this definition">¶</a></dt>
+<dd><p>Context manager to ignore specific POSIX error codes.</p>
+<p>Takes a list of error codes to ignore, which can be either
+the name of the code, or the code integer itself:</p>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">ignore_errno</span><span class="p">(</span><span class="s1">'ENOENT'</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'foo'</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="n">fh</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">ignore_errno</span><span class="p">(</span><span class="n">errno</span><span class="o">.</span><span class="n">ENOENT</span><span class="p">,</span> <span class="n">errno</span><span class="o">.</span><span class="n">EPERM</span><span class="p">):</span>
+<span class="gp">... </span>   <span class="k">pass</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name"></col>
+<col class="field-body"></col>
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>types</strong> – A tuple of exceptions to ignore (when the errno matches),
+defaults to <a class="reference external" href="http://docs.python.org/dev/library/exceptions.html#Exception" title="(in Python v3.6)"><code class="xref py py-exc docutils literal"><span class="pre">Exception</span></code></a>.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+<dl class="function">
+<dt id="celery.platforms.fd_by_path"><a name="//apple_ref/cpp/Function/celery.platforms.fd_by_path"></a>
+<code class="descclassname">celery.platforms.</code><code class="descname">fd_by_path</code><span class="sig-paren">(</span><em>paths</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/platforms.html#fd_by_path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.platforms.fd_by_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of fds.</p>
+<p>This method returns list of fds corresponding to
+file paths passed in paths variable.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name"></col>
+<col class="field-body"></col>
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>paths</strong> – List of file paths go get fd for.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">:list:.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">keep</span> <span class="o">=</span> <span class="n">fd_by_path</span><span class="p">([</span><span class="s1">'/dev/urandom'</span><span class="p">,</span>
+                   <span class="s1">'/my/precious/'</span><span class="p">])</span>
+</pre></div>
+</div>
+</dd></dl>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div aria-label="related navigation" class="related" role="navigation">
+<h3>Navigation</h3>
+<ul>
+<li class="right" style="margin-right: 10px">
+<a href="../../genindex.html" title="General Index">index</a></li>
+<li class="right">
+<a href="../../py-modindex.html" title="Python Module Index">modules</a> |</li>
+<li class="right">
+<a href="celery._state.html" title="celery._state">next</a> |</li>
+<li class="right">
+<a href="celery.utils.dispatch.saferef.html" title="celery.utils.dispatch.saferef">previous</a> |</li>
+<li class="nav-item nav-item-0"><a href="../../index.html">Celery 3.1.23 documentation</a> »</li>
+<li class="nav-item nav-item-1"><a href="../index.html">Internals</a> »</li>
+<li class="nav-item nav-item-2"><a href="index.html">Internal Module Reference</a> »</li>
+</ul>
+</div>
+<div class="footer" role="contentinfo">
+        © <a href="../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
+    </div>
+</body>
+</html>

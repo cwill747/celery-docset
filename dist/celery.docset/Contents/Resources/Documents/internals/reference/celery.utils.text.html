@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>celery.utils.text — Celery 3.1.23 documentation</title>
+<link href="../../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '3.1.23',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+<script src="../../_static/jquery.js" type="text/javascript"></script>
+<script src="../../_static/underscore.js" type="text/javascript"></script>
+<script src="../../_static/doctools.js" type="text/javascript"></script>
+<link href="../../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="index.html" rel="up" title="Internal Module Reference"/>
+<link href="celery.utils.dispatch.html" rel="next" title="celery.utils.dispatch"/>
+<link href="celery.utils.log.html" rel="prev" title="celery.utils.log"/>
+</head>
+<body role="document">
+<div aria-label="related navigation" class="related" role="navigation">
+<h3>Navigation</h3>
+<ul>
+<li class="right" style="margin-right: 10px">
+<a accesskey="I" href="../../genindex.html" title="General Index">index</a></li>
+<li class="right">
+<a href="../../py-modindex.html" title="Python Module Index">modules</a> |</li>
+<li class="right">
+<a accesskey="N" href="celery.utils.dispatch.html" title="celery.utils.dispatch">next</a> |</li>
+<li class="right">
+<a accesskey="P" href="celery.utils.log.html" title="celery.utils.log">previous</a> |</li>
+<li class="nav-item nav-item-0"><a href="../../index.html">Celery 3.1.23 documentation</a> »</li>
+<li class="nav-item nav-item-1"><a href="../index.html">Internals</a> »</li>
+<li class="nav-item nav-item-2"><a accesskey="U" href="index.html">Internal Module Reference</a> »</li>
+</ul>
+</div>
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
+<div class="deck">
+<p>
+        This document describes the current stable version of Celery (3.1). For development docs,
+        <a href="http://docs.celeryproject.org/en/master/internals/reference/celery.utils.text.html">go here</a>.
+        </p>
+</div>
+<div class="section" id="celery-utils-text"><a name="//apple_ref/cpp/Module/celery.utils.text"></a>
+<h1>celery.utils.text<a class="headerlink" href="#celery-utils-text" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#id1" id="id2">celery.utils.text</a></li>
+</ul>
+</div>
+<span class="target" id="module-celery.utils.text"></span><div class="section" id="id1">
+<h2><a class="toc-backref" href="#id2">celery.utils.text</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>Text formatting utilities</p>
+<dl class="function">
+<dt id="celery.utils.text.dedent_initial"><a name="//apple_ref/cpp/Function/celery.utils.text.dedent_initial"></a>
+<code class="descclassname">celery.utils.text.</code><code class="descname">dedent_initial</code><span class="sig-paren">(</span><em>s</em>, <em>n=4</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/utils/text.html#dedent_initial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.utils.text.dedent_initial" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="function">
+<dt id="celery.utils.text.dedent"><a name="//apple_ref/cpp/Function/celery.utils.text.dedent"></a>
+<code class="descclassname">celery.utils.text.</code><code class="descname">dedent</code><span class="sig-paren">(</span><em>s</em>, <em>n=4</em>, <em>sep='\n'</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/utils/text.html#dedent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.utils.text.dedent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="function">
+<dt id="celery.utils.text.fill_paragraphs"><a name="//apple_ref/cpp/Function/celery.utils.text.fill_paragraphs"></a>
+<code class="descclassname">celery.utils.text.</code><code class="descname">fill_paragraphs</code><span class="sig-paren">(</span><em>s</em>, <em>width</em>, <em>sep='\n'</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/utils/text.html#fill_paragraphs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.utils.text.fill_paragraphs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="function">
+<dt id="celery.utils.text.join"><a name="//apple_ref/cpp/Function/celery.utils.text.join"></a>
+<code class="descclassname">celery.utils.text.</code><code class="descname">join</code><span class="sig-paren">(</span><em>l</em>, <em>sep='\n'</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/utils/text.html#join"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.utils.text.join" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="function">
+<dt id="celery.utils.text.ensure_2lines"><a name="//apple_ref/cpp/Function/celery.utils.text.ensure_2lines"></a>
+<code class="descclassname">celery.utils.text.</code><code class="descname">ensure_2lines</code><span class="sig-paren">(</span><em>s</em>, <em>sep='\n'</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/utils/text.html#ensure_2lines"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.utils.text.ensure_2lines" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="function">
+<dt id="celery.utils.text.abbr"><a name="//apple_ref/cpp/Function/celery.utils.text.abbr"></a>
+<code class="descclassname">celery.utils.text.</code><code class="descname">abbr</code><span class="sig-paren">(</span><em>S</em>, <em>max</em>, <em>ellipsis='...'</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/utils/text.html#abbr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.utils.text.abbr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="function">
+<dt id="celery.utils.text.abbrtask"><a name="//apple_ref/cpp/Function/celery.utils.text.abbrtask"></a>
+<code class="descclassname">celery.utils.text.</code><code class="descname">abbrtask</code><span class="sig-paren">(</span><em>S</em>, <em>max</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/utils/text.html#abbrtask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.utils.text.abbrtask" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="function">
+<dt id="celery.utils.text.indent"><a name="//apple_ref/cpp/Function/celery.utils.text.indent"></a>
+<code class="descclassname">celery.utils.text.</code><code class="descname">indent</code><span class="sig-paren">(</span><em>t</em>, <em>indent=0</em>, <em>sep='\n'</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/utils/text.html#indent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.utils.text.indent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Indent text.</p>
+</dd></dl>
+<dl class="function">
+<dt id="celery.utils.text.truncate"><a name="//apple_ref/cpp/Function/celery.utils.text.truncate"></a>
+<code class="descclassname">celery.utils.text.</code><code class="descname">truncate</code><span class="sig-paren">(</span><em>text</em>, <em>maxlen=128</em>, <em>suffix='...'</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/utils/text.html#truncate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.utils.text.truncate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Truncates text to a maximum number of characters.</p>
+</dd></dl>
+<dl class="function">
+<dt id="celery.utils.text.pluralize"><a name="//apple_ref/cpp/Function/celery.utils.text.pluralize"></a>
+<code class="descclassname">celery.utils.text.</code><code class="descname">pluralize</code><span class="sig-paren">(</span><em>n</em>, <em>text</em>, <em>suffix='s'</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/utils/text.html#pluralize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.utils.text.pluralize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="function">
+<dt id="celery.utils.text.pretty"><a name="//apple_ref/cpp/Function/celery.utils.text.pretty"></a>
+<code class="descclassname">celery.utils.text.</code><code class="descname">pretty</code><span class="sig-paren">(</span><em>value</em>, <em>width=80</em>, <em>nl_width=80</em>, <em>sep='\n'</em>, <em>**kw</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/utils/text.html#pretty"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.utils.text.pretty" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div aria-label="related navigation" class="related" role="navigation">
+<h3>Navigation</h3>
+<ul>
+<li class="right" style="margin-right: 10px">
+<a href="../../genindex.html" title="General Index">index</a></li>
+<li class="right">
+<a href="../../py-modindex.html" title="Python Module Index">modules</a> |</li>
+<li class="right">
+<a href="celery.utils.dispatch.html" title="celery.utils.dispatch">next</a> |</li>
+<li class="right">
+<a href="celery.utils.log.html" title="celery.utils.log">previous</a> |</li>
+<li class="nav-item nav-item-0"><a href="../../index.html">Celery 3.1.23 documentation</a> »</li>
+<li class="nav-item nav-item-1"><a href="../index.html">Internals</a> »</li>
+<li class="nav-item nav-item-2"><a href="index.html">Internal Module Reference</a> »</li>
+</ul>
+</div>
+<div class="footer" role="contentinfo">
+        © <a href="../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
+    </div>
+</body>
+</html>

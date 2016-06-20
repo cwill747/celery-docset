@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>celery.utils.iso8601 — Celery 3.1.23 documentation</title>
+<link href="../../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '3.1.23',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+<script src="../../_static/jquery.js" type="text/javascript"></script>
+<script src="../../_static/underscore.js" type="text/javascript"></script>
+<script src="../../_static/doctools.js" type="text/javascript"></script>
+<link href="../../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="index.html" rel="up" title="Internal Module Reference"/>
+<link href="celery.utils.compat.html" rel="next" title="celery.utils.compat"/>
+<link href="celery.utils.timeutils.html" rel="prev" title="celery.utils.timeutils"/>
+</head>
+<body role="document">
+<div aria-label="related navigation" class="related" role="navigation">
+<h3>Navigation</h3>
+<ul>
+<li class="right" style="margin-right: 10px">
+<a accesskey="I" href="../../genindex.html" title="General Index">index</a></li>
+<li class="right">
+<a href="../../py-modindex.html" title="Python Module Index">modules</a> |</li>
+<li class="right">
+<a accesskey="N" href="celery.utils.compat.html" title="celery.utils.compat">next</a> |</li>
+<li class="right">
+<a accesskey="P" href="celery.utils.timeutils.html" title="celery.utils.timeutils">previous</a> |</li>
+<li class="nav-item nav-item-0"><a href="../../index.html">Celery 3.1.23 documentation</a> »</li>
+<li class="nav-item nav-item-1"><a href="../index.html">Internals</a> »</li>
+<li class="nav-item nav-item-2"><a accesskey="U" href="index.html">Internal Module Reference</a> »</li>
+</ul>
+</div>
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
+<div class="deck">
+<p>
+        This document describes the current stable version of Celery (3.1). For development docs,
+        <a href="http://docs.celeryproject.org/en/master/internals/reference/celery.utils.iso8601.html">go here</a>.
+        </p>
+</div>
+<div class="section" id="celery-utils-iso8601"><a name="//apple_ref/cpp/Module/celery.utils.iso8601"></a>
+<h1>celery.utils.iso8601<a class="headerlink" href="#celery-utils-iso8601" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-celery.utils.iso8601"></span><p>Originally taken from pyiso8601 (<a class="reference external" href="http://code.google.com/p/pyiso8601/">http://code.google.com/p/pyiso8601/</a>)</p>
+<p>Modified to match the behavior of dateutil.parser:</p>
+<blockquote>
+<div><ul class="simple">
+<li>raise ValueError instead of ParseError</li>
+<li>return naive datetimes by default</li>
+<li>uses pytz.FixedOffset</li>
+</ul>
+</div></blockquote>
+<p>This is the original License:</p>
+<p>Copyright (c) 2007 Michael Twomey</p>
+<p>Permission is hereby granted, free of charge, to any person obtaining a
+copy of this software and associated documentation files (the
+“Software”), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:</p>
+<p>The above copyright notice and this permission notice shall be included
+in all copies or substantial portions of the Software.</p>
+<p>THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS
+OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+<dl class="function">
+<dt id="celery.utils.iso8601.parse_iso8601"><a name="//apple_ref/cpp/Function/celery.utils.iso8601.parse_iso8601"></a>
+<code class="descclassname">celery.utils.iso8601.</code><code class="descname">parse_iso8601</code><span class="sig-paren">(</span><em>datestring</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/utils/iso8601.html#parse_iso8601"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.utils.iso8601.parse_iso8601" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse and convert ISO 8601 string into a datetime object</p>
+</dd></dl>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div aria-label="related navigation" class="related" role="navigation">
+<h3>Navigation</h3>
+<ul>
+<li class="right" style="margin-right: 10px">
+<a href="../../genindex.html" title="General Index">index</a></li>
+<li class="right">
+<a href="../../py-modindex.html" title="Python Module Index">modules</a> |</li>
+<li class="right">
+<a href="celery.utils.compat.html" title="celery.utils.compat">next</a> |</li>
+<li class="right">
+<a href="celery.utils.timeutils.html" title="celery.utils.timeutils">previous</a> |</li>
+<li class="nav-item nav-item-0"><a href="../../index.html">Celery 3.1.23 documentation</a> »</li>
+<li class="nav-item nav-item-1"><a href="../index.html">Internals</a> »</li>
+<li class="nav-item nav-item-2"><a href="index.html">Internal Module Reference</a> »</li>
+</ul>
+</div>
+<div class="footer" role="contentinfo">
+        © <a href="../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
+    </div>
+</body>
+</html>

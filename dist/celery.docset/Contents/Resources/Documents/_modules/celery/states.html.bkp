@@ -1,0 +1,237 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>celery.states &mdash; Celery 3.1.23 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/celery.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '3.1.23',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="top" title="Celery 3.1.23 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+<div class="deck">
+
+    
+        <p>
+        This document describes the current stable version of Celery (3.1). For development docs,
+        <a href="http://docs.celeryproject.org/en/master/_modules/celery/states.html">go here</a>.
+        </p>
+    
+
+</div>
+    <h1>Source code for celery.states</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">celery.states</span>
+<span class="sd">=============</span>
+
+<span class="sd">Built-in task states.</span>
+
+<span class="sd">.. _states:</span>
+
+<span class="sd">States</span>
+<span class="sd">------</span>
+
+<span class="sd">See :ref:`task-states`.</span>
+
+<span class="sd">.. _statesets:</span>
+
+<span class="sd">Sets</span>
+<span class="sd">----</span>
+
+<span class="sd">.. state:: READY_STATES</span>
+
+<span class="sd">READY_STATES</span>
+<span class="sd">~~~~~~~~~~~~</span>
+
+<span class="sd">Set of states meaning the task result is ready (has been executed).</span>
+
+<span class="sd">.. state:: UNREADY_STATES</span>
+
+<span class="sd">UNREADY_STATES</span>
+<span class="sd">~~~~~~~~~~~~~~</span>
+
+<span class="sd">Set of states meaning the task result is not ready (has not been executed).</span>
+
+<span class="sd">.. state:: EXCEPTION_STATES</span>
+
+<span class="sd">EXCEPTION_STATES</span>
+<span class="sd">~~~~~~~~~~~~~~~~</span>
+
+<span class="sd">Set of states meaning the task returned an exception.</span>
+
+<span class="sd">.. state:: PROPAGATE_STATES</span>
+
+<span class="sd">PROPAGATE_STATES</span>
+<span class="sd">~~~~~~~~~~~~~~~~</span>
+
+<span class="sd">Set of exception states that should propagate exceptions to the user.</span>
+
+<span class="sd">.. state:: ALL_STATES</span>
+
+<span class="sd">ALL_STATES</span>
+<span class="sd">~~~~~~~~~~</span>
+
+<span class="sd">Set of all possible states.</span>
+
+
+<span class="sd">Misc.</span>
+<span class="sd">-----</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;PENDING&#39;</span><span class="p">,</span> <span class="s1">&#39;RECEIVED&#39;</span><span class="p">,</span> <span class="s1">&#39;STARTED&#39;</span><span class="p">,</span> <span class="s1">&#39;SUCCESS&#39;</span><span class="p">,</span> <span class="s1">&#39;FAILURE&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;REVOKED&#39;</span><span class="p">,</span> <span class="s1">&#39;RETRY&#39;</span><span class="p">,</span> <span class="s1">&#39;IGNORED&#39;</span><span class="p">,</span> <span class="s1">&#39;READY_STATES&#39;</span><span class="p">,</span> <span class="s1">&#39;UNREADY_STATES&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;EXCEPTION_STATES&#39;</span><span class="p">,</span> <span class="s1">&#39;PROPAGATE_STATES&#39;</span><span class="p">,</span> <span class="s1">&#39;precedence&#39;</span><span class="p">,</span> <span class="s1">&#39;state&#39;</span><span class="p">]</span>
+
+<span class="c1">#: State precedence.</span>
+<span class="c1">#: None represents the precedence of an unknown state.</span>
+<span class="c1">#: Lower index means higher precedence.</span>
+<span class="n">PRECEDENCE</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SUCCESS&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;FAILURE&#39;</span><span class="p">,</span>
+              <span class="bp">None</span><span class="p">,</span>
+              <span class="s1">&#39;REVOKED&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;STARTED&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;RECEIVED&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;RETRY&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;PENDING&#39;</span><span class="p">]</span>
+
+<span class="c1">#: Hash lookup of PRECEDENCE to index</span>
+<span class="n">PRECEDENCE_LOOKUP</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">PRECEDENCE</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">PRECEDENCE</span><span class="p">))))</span>
+<span class="n">NONE_PRECEDENCE</span> <span class="o">=</span> <span class="n">PRECEDENCE_LOOKUP</span><span class="p">[</span><span class="bp">None</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="precedence"><a class="viewcode-back" href="../../reference/celery.states.html#celery.states.precedence">[docs]</a><span class="k">def</span> <span class="nf">precedence</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get the precedence index for state.</span>
+
+<span class="sd">    Lower index means higher precedence.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">PRECEDENCE_LOOKUP</span><span class="p">[</span><span class="n">state</span><span class="p">]</span>
+    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">NONE_PRECEDENCE</span></div>
+
+
+<div class="viewcode-block" id="state"><a class="viewcode-back" href="../../reference/celery.states.html#celery.states.state">[docs]</a><span class="k">class</span> <span class="nc">state</span><span class="p">(</span><span class="nb">str</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;State is a subclass of :class:`str`, implementing comparison</span>
+<span class="sd">    methods adhering to state precedence rules::</span>
+
+<span class="sd">        &gt;&gt;&gt; from celery.states import state, PENDING, SUCCESS</span>
+
+<span class="sd">        &gt;&gt;&gt; state(PENDING) &lt; state(SUCCESS)</span>
+<span class="sd">        True</span>
+
+<span class="sd">    Any custom state is considered to be lower than :state:`FAILURE` and</span>
+<span class="sd">    :state:`SUCCESS`, but higher than any of the other built-in states::</span>
+
+<span class="sd">        &gt;&gt;&gt; state(&#39;PROGRESS&#39;) &gt; state(STARTED)</span>
+<span class="sd">        True</span>
+
+<span class="sd">        &gt;&gt;&gt; state(&#39;PROGRESS&#39;) &gt; state(&#39;SUCCESS&#39;)</span>
+<span class="sd">        False</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">compare</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">fun</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">fun</span><span class="p">(</span><span class="n">precedence</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="n">precedence</span><span class="p">(</span><span class="n">other</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">__gt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">precedence</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">precedence</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__ge__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">precedence</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">precedence</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">precedence</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">precedence</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__le__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">precedence</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">precedence</span><span class="p">(</span><span class="n">other</span><span class="p">)</span></div>
+
+<span class="c1">#: Task state is unknown (assumed pending since you know the id).</span>
+<span class="n">PENDING</span> <span class="o">=</span> <span class="s1">&#39;PENDING&#39;</span>
+<span class="c1">#: Task was received by a worker.</span>
+<span class="n">RECEIVED</span> <span class="o">=</span> <span class="s1">&#39;RECEIVED&#39;</span>
+<span class="c1">#: Task was started by a worker (:setting:`CELERY_TRACK_STARTED`).</span>
+<span class="n">STARTED</span> <span class="o">=</span> <span class="s1">&#39;STARTED&#39;</span>
+<span class="c1">#: Task succeeded</span>
+<span class="n">SUCCESS</span> <span class="o">=</span> <span class="s1">&#39;SUCCESS&#39;</span>
+<span class="c1">#: Task failed</span>
+<span class="n">FAILURE</span> <span class="o">=</span> <span class="s1">&#39;FAILURE&#39;</span>
+<span class="c1">#: Task was revoked.</span>
+<span class="n">REVOKED</span> <span class="o">=</span> <span class="s1">&#39;REVOKED&#39;</span>
+<span class="c1">#: Task is waiting for retry.</span>
+<span class="n">RETRY</span> <span class="o">=</span> <span class="s1">&#39;RETRY&#39;</span>
+<span class="n">IGNORED</span> <span class="o">=</span> <span class="s1">&#39;IGNORED&#39;</span>
+<span class="n">REJECTED</span> <span class="o">=</span> <span class="s1">&#39;REJECTED&#39;</span>
+
+<span class="n">READY_STATES</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">([</span><span class="n">SUCCESS</span><span class="p">,</span> <span class="n">FAILURE</span><span class="p">,</span> <span class="n">REVOKED</span><span class="p">])</span>
+<span class="n">UNREADY_STATES</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">([</span><span class="n">PENDING</span><span class="p">,</span> <span class="n">RECEIVED</span><span class="p">,</span> <span class="n">STARTED</span><span class="p">,</span> <span class="n">RETRY</span><span class="p">])</span>
+<span class="n">EXCEPTION_STATES</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">([</span><span class="n">RETRY</span><span class="p">,</span> <span class="n">FAILURE</span><span class="p">,</span> <span class="n">REVOKED</span><span class="p">])</span>
+<span class="n">PROPAGATE_STATES</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">([</span><span class="n">FAILURE</span><span class="p">,</span> <span class="n">REVOKED</span><span class="p">])</span>
+
+<span class="n">ALL_STATES</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">([</span><span class="n">PENDING</span><span class="p">,</span> <span class="n">RECEIVED</span><span class="p">,</span> <span class="n">STARTED</span><span class="p">,</span>
+                        <span class="n">SUCCESS</span><span class="p">,</span> <span class="n">FAILURE</span><span class="p">,</span> <span class="n">RETRY</span><span class="p">,</span> <span class="n">REVOKED</span><span class="p">])</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; <a href="../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
+    </div>
+  </body>
+</html>

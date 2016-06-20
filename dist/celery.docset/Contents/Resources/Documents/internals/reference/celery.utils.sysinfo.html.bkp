@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>celery.utils.sysinfo — Celery 3.1.23 documentation</title>
+<link href="../../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '3.1.23',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+<script src="../../_static/jquery.js" type="text/javascript"></script>
+<script src="../../_static/underscore.js" type="text/javascript"></script>
+<script src="../../_static/doctools.js" type="text/javascript"></script>
+<link href="../../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="index.html" rel="up" title="Internal Module Reference"/>
+<link href="celery.utils.threads.html" rel="next" title="celery.utils.threads"/>
+<link href="celery.utils.serialization.html" rel="prev" title="celery.utils.serialization"/>
+</head>
+<body role="document">
+<div aria-label="related navigation" class="related" role="navigation">
+<h3>Navigation</h3>
+<ul>
+<li class="right" style="margin-right: 10px">
+<a accesskey="I" href="../../genindex.html" title="General Index">index</a></li>
+<li class="right">
+<a href="../../py-modindex.html" title="Python Module Index">modules</a> |</li>
+<li class="right">
+<a accesskey="N" href="celery.utils.threads.html" title="celery.utils.threads">next</a> |</li>
+<li class="right">
+<a accesskey="P" href="celery.utils.serialization.html" title="celery.utils.serialization">previous</a> |</li>
+<li class="nav-item nav-item-0"><a href="../../index.html">Celery 3.1.23 documentation</a> »</li>
+<li class="nav-item nav-item-1"><a href="../index.html">Internals</a> »</li>
+<li class="nav-item nav-item-2"><a accesskey="U" href="index.html">Internal Module Reference</a> »</li>
+</ul>
+</div>
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
+<div class="deck">
+<p>
+        This document describes the current stable version of Celery (3.1). For development docs,
+        <a href="http://docs.celeryproject.org/en/master/internals/reference/celery.utils.sysinfo.html">go here</a>.
+        </p>
+</div>
+<div class="section" id="celery-utils-sysinfo"><a name="//apple_ref/cpp/Module/celery.utils.sysinfo"></a>
+<h1>celery.utils.sysinfo<a class="headerlink" href="#celery-utils-sysinfo" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-celery.utils.sysinfo"></span><dl class="function">
+<dt id="celery.utils.sysinfo.load_average"><a name="//apple_ref/cpp/Function/celery.utils.sysinfo.load_average"></a>
+<code class="descclassname">celery.utils.sysinfo.</code><code class="descname">load_average</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/utils/sysinfo.html#load_average"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.utils.sysinfo.load_average" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="class">
+<dt id="celery.utils.sysinfo.df"><a name="//apple_ref/cpp/Class/celery.utils.sysinfo.df"></a>
+<em class="property">class </em><code class="descclassname">celery.utils.sysinfo.</code><code class="descname">df</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/celery/utils/sysinfo.html#df"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.utils.sysinfo.df" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="celery.utils.sysinfo.df.available"><a name="//apple_ref/cpp/Attribute/celery.utils.sysinfo.df.available"></a>
+<code class="descname">available</code><a class="headerlink" href="#celery.utils.sysinfo.df.available" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.utils.sysinfo.df.capacity"><a name="//apple_ref/cpp/Attribute/celery.utils.sysinfo.df.capacity"></a>
+<code class="descname">capacity</code><a class="headerlink" href="#celery.utils.sysinfo.df.capacity" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.utils.sysinfo.df.stat"><a name="//apple_ref/cpp/Attribute/celery.utils.sysinfo.df.stat"></a>
+<code class="descname">stat</code><a class="reference internal" href="../../_modules/celery/utils/sysinfo.html#df.stat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.utils.sysinfo.df.stat" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.utils.sysinfo.df.total_blocks"><a name="//apple_ref/cpp/Attribute/celery.utils.sysinfo.df.total_blocks"></a>
+<code class="descname">total_blocks</code><a class="headerlink" href="#celery.utils.sysinfo.df.total_blocks" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</dd></dl>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div aria-label="related navigation" class="related" role="navigation">
+<h3>Navigation</h3>
+<ul>
+<li class="right" style="margin-right: 10px">
+<a href="../../genindex.html" title="General Index">index</a></li>
+<li class="right">
+<a href="../../py-modindex.html" title="Python Module Index">modules</a> |</li>
+<li class="right">
+<a href="celery.utils.threads.html" title="celery.utils.threads">next</a> |</li>
+<li class="right">
+<a href="celery.utils.serialization.html" title="celery.utils.serialization">previous</a> |</li>
+<li class="nav-item nav-item-0"><a href="../../index.html">Celery 3.1.23 documentation</a> »</li>
+<li class="nav-item nav-item-1"><a href="../index.html">Internals</a> »</li>
+<li class="nav-item nav-item-2"><a href="index.html">Internal Module Reference</a> »</li>
+</ul>
+</div>
+<div class="footer" role="contentinfo">
+        © <a href="../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
+    </div>
+</body>
+</html>

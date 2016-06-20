@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Glossary </title>
+    
+    <link rel="stylesheet" href="_static/celery.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '3.1.23',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="copyright" title="Copyright" href="copyright.html" />
+    <link rel="top" title="Celery 3.1.23 documentation" href="index.html" />
+    <link rel="prev" title="Change history for Celery 1.0" href="history/changelog-1.0.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="history/changelog-1.0.html" title="Change history for Celery 1.0"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Celery 3.1.23 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+<div class="deck">
+
+    
+        <p>
+        This document describes the current stable version of Celery (3.1). For development docs,
+        <a href="http://docs.celeryproject.org/en/master/glossary.html">go here</a>.
+        </p>
+    
+
+</div>
+    <div class="section" id="glossary">
+<span id="id1"></span><h1>Glossary<a class="headerlink" href="#glossary" title="Permalink to this headline">¶</a></h1>
+<dl class="glossary docutils">
+<dt id="term-ack">ack</dt>
+<dd>Short for <a class="reference internal" href="#term-acknowledged"><span class="xref std std-term">acknowledged</span></a>.</dd>
+<dt id="term-acknowledged">acknowledged</dt>
+<dd>Workers acknowledge messages to signify that a message has been
+handled.  Failing to acknowledge a message
+will cause the message to be redelivered.   Exactly when a
+transaction is considered a failure varies by transport.  In AMQP the
+transaction fails when the connection/channel is closed (or lost),
+but in Redis/SQS the transaction times out after a configurable amount
+of time (the <code class="docutils literal"><span class="pre">visibility_timeout</span></code>).</dd>
+<dt id="term-apply">apply</dt>
+<dd>Originally a synonym to <a class="reference internal" href="#term-calling"><span class="xref std std-term">call</span></a> but used to signify
+that a function is executed by the current process.</dd>
+<dt id="term-billiard">billiard</dt>
+<dd>Fork of the Python multiprocessing library containing improvements
+required by Celery.</dd>
+<dt id="term-calling">calling</dt>
+<dd>Sends a task message so that the task function is
+<a class="reference internal" href="#term-executing"><span class="xref std std-term">executed</span></a> by a worker.</dd>
+<dt id="term-cipater">cipater</dt>
+<dd>Celery release 3.1 named after song by Autechre
+(<a class="reference external" href="http://www.youtube.com/watch?v=OHsaqUr_33Y">http://www.youtube.com/watch?v=OHsaqUr_33Y</a>)</dd>
+<dt id="term-context">context</dt>
+<dd>The context of a task contains information like the id of the task,
+it&#8217;s arguments and what queue it was delivered to.
+It can be accessed as the tasks <code class="docutils literal"><span class="pre">request</span></code> attribute.
+See <a class="reference internal" href="userguide/tasks.html#task-request-info"><span>Context</span></a></dd>
+<dt id="term-executing">executing</dt>
+<dd>Workers <em>execute</em> task <a class="reference internal" href="#term-request"><span class="xref std std-term">requests</span></a>.</dd>
+<dt id="term-idempotent">idempotent</dt>
+<dd>Idempotence is a mathematical property that describes a function that
+can be called multiple times without changing the result.
+Practically it means that a function can be repeated many times without
+unintented effects, but not necessarily side-effect free in the pure
+sense (compare to <a class="reference internal" href="#term-nullipotent"><span class="xref std std-term">nullipotent</span></a>).</dd>
+<dt id="term-kombu">kombu</dt>
+<dd>Python messaging library used by Celery to send and receive messages.</dd>
+<dt id="term-nullipotent">nullipotent</dt>
+<dd>describes a function that will have the same effect, and give the same
+result, even if called zero or multiple times (side-effect free).
+A stronger version of <a class="reference internal" href="#term-idempotent"><span class="xref std std-term">idempotent</span></a>.</dd>
+<dt id="term-prefetch-count">prefetch count</dt>
+<dd>Maximum number of unacknowledged messages a consumer can hold and if
+exceeded the transport should not deliver any more messages to that
+consumer.  See <a class="reference internal" href="userguide/optimizing.html#optimizing-prefetch-limit"><span>Prefetch Limits</span></a>.</dd>
+<dt id="term-prefetch-multiplier">prefetch multiplier</dt>
+<dd>The <a class="reference internal" href="#term-prefetch-count"><span class="xref std std-term">prefetch count</span></a> is configured by using the
+<a class="reference internal" href="configuration.html#std:setting-CELERYD_PREFETCH_MULTIPLIER"><code class="xref std std-setting docutils literal"><span class="pre">CELERYD_PREFETCH_MULTIPLIER</span></code></a> setting, which is multiplied
+by the number of pool slots (threads/processes/greenthreads).</dd>
+<dt id="term-reentrant">reentrant</dt>
+<dd>describes a function that can be interrupted in the middle of
+execution (e.g. by hardware interrupt or signal) and then safely
+called again later.  Reentrancy is not the same as
+<a class="reference internal" href="#term-idempotent"><span class="xref std std-term">idempotence</span></a> as the return value does not have to
+be the same given the same inputs, and a reentrant function may have
+side effects as long as it can be interrupted;  An idempotent function
+is always reentrant, but the reverse may not be true.</dd>
+<dt id="term-request">request</dt>
+<dd>Task messages are converted to <em>requests</em> within the worker.
+The request information is also available as the task&#8217;s
+<a class="reference internal" href="#term-context"><span class="xref std std-term">context</span></a> (the <code class="docutils literal"><span class="pre">task.request</span></code> attribute).</dd>
+</dl>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="history/changelog-1.0.html" title="Change history for Celery 1.0"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Celery 3.1.23 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; <a href="copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>celery.contrib.methods &mdash; Celery 3.1.23 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/celery.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '3.1.23',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="copyright" title="Copyright" href="../../../copyright.html" />
+    <link rel="top" title="Celery 3.1.23 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+<div class="deck">
+
+    
+        <p>
+        This document describes the current stable version of Celery (3.1). For development docs,
+        <a href="http://docs.celeryproject.org/en/master/_modules/celery/contrib/methods.html">go here</a>.
+        </p>
+    
+
+</div>
+    <h1>Source code for celery.contrib.methods</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">celery.contrib.methods</span>
+<span class="sd">======================</span>
+
+<span class="sd">Task decorator that supports creating tasks out of methods.</span>
+
+<span class="sd">Examples</span>
+<span class="sd">--------</span>
+
+<span class="sd">.. code-block:: python</span>
+
+<span class="sd">    from celery.contrib.methods import task</span>
+
+<span class="sd">    class X(object):</span>
+
+<span class="sd">        @task()</span>
+<span class="sd">        def add(self, x, y):</span>
+<span class="sd">                return x + y</span>
+
+<span class="sd">or with any task decorator:</span>
+
+<span class="sd">.. code-block:: python</span>
+
+<span class="sd">    from celery.contrib.methods import task_method</span>
+
+<span class="sd">    class X(object):</span>
+
+<span class="sd">        @app.task(filter=task_method)</span>
+<span class="sd">        def add(self, x, y):</span>
+<span class="sd">            return x + y</span>
+
+<span class="sd">.. note::</span>
+
+<span class="sd">    The task must use the new Task base class (:class:`celery.Task`),</span>
+<span class="sd">    and the old base class using classmethods (``celery.task.Task``,</span>
+<span class="sd">    ``celery.task.base.Task``).</span>
+
+<span class="sd">    This means that you have to use the task decorator from a Celery app</span>
+<span class="sd">    instance, and not the old-API:</span>
+
+<span class="sd">    .. code-block:: python</span>
+
+
+<span class="sd">        from celery import task       # BAD</span>
+<span class="sd">        from celery.task import task  # ALSO BAD</span>
+
+<span class="sd">        # GOOD:</span>
+<span class="sd">        app = Celery(...)</span>
+
+<span class="sd">        @app.task(filter=task_method)</span>
+<span class="sd">        def foo(self): pass</span>
+
+<span class="sd">        # ALSO GOOD:</span>
+<span class="sd">        from celery import current_app</span>
+
+<span class="sd">        @current_app.task(filter=task_method)</span>
+<span class="sd">        def foo(self): pass</span>
+
+<span class="sd">        # ALSO GOOD:</span>
+<span class="sd">        from celery import shared_task</span>
+
+<span class="sd">        @shared_task(filter=task_method)</span>
+<span class="sd">        def foo(self): pass</span>
+
+<span class="sd">Caveats</span>
+<span class="sd">-------</span>
+
+<span class="sd">- Automatic naming won&#39;t be able to know what the class name is.</span>
+
+<span class="sd">    The name will still be module_name + task_name,</span>
+<span class="sd">    so two methods with the same name in the same module will collide</span>
+<span class="sd">    so that only one task can run:</span>
+
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">        class A(object):</span>
+
+<span class="sd">            @task()</span>
+<span class="sd">            def add(self, x, y):</span>
+<span class="sd">                return x + y</span>
+
+<span class="sd">        class B(object):</span>
+
+<span class="sd">            @task()</span>
+<span class="sd">            def add(self, x, y):</span>
+<span class="sd">                return x + y</span>
+
+<span class="sd">    would have to be written as:</span>
+
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">        class A(object):</span>
+<span class="sd">            @task(name=&#39;A.add&#39;)</span>
+<span class="sd">            def add(self, x, y):</span>
+<span class="sd">                return x + y</span>
+
+<span class="sd">        class B(object):</span>
+<span class="sd">            @task(name=&#39;B.add&#39;)</span>
+<span class="sd">            def add(self, x, y):</span>
+<span class="sd">                return x + y</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
+
+<span class="kn">from</span> <span class="nn">celery</span> <span class="kn">import</span> <span class="n">current_app</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;task_method&#39;</span><span class="p">,</span> <span class="s1">&#39;task&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="task_method"><a class="viewcode-back" href="../../../reference/celery.contrib.methods.html#celery.contrib.methods.task_method">[docs]</a><span class="k">class</span> <span class="nc">task_method</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">task</span> <span class="o">=</span> <span class="n">task</span>
+
+    <span class="k">def</span> <span class="nf">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">obj</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">task</span>
+        <span class="n">task</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">__class__</span><span class="p">()</span>
+        <span class="n">task</span><span class="o">.</span><span class="n">__self__</span> <span class="o">=</span> <span class="n">obj</span>
+        <span class="k">return</span> <span class="n">task</span></div>
+
+
+<div class="viewcode-block" id="task"><a class="viewcode-back" href="../../../reference/celery.contrib.methods.html#celery.contrib.methods.task">[docs]</a><span class="k">def</span> <span class="nf">task</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">current_app</span><span class="o">.</span><span class="n">task</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="nb">filter</span><span class="o">=</span><span class="n">task_method</span><span class="p">))</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
+    </div>
+  </body>
+</html>

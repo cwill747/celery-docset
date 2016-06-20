@@ -1,0 +1,497 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>celery.worker.consumer — Celery 3.1.23 documentation</title>
+<link href="../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.23',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+<script src="../_static/jquery.js" type="text/javascript"></script>
+<script src="../_static/underscore.js" type="text/javascript"></script>
+<script src="../_static/doctools.js" type="text/javascript"></script>
+<link href="../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="index.html" rel="up" title="API Reference"/>
+<link href="celery.worker.job.html" rel="next" title="celery.worker.job"/>
+<link href="celery.worker.html" rel="prev" title="celery.worker"/>
+</head>
+<body role="document">
+<div aria-label="related navigation" class="related" role="navigation">
+<h3>Navigation</h3>
+<ul>
+<li class="right" style="margin-right: 10px">
+<a accesskey="I" href="../genindex.html" title="General Index">index</a></li>
+<li class="right">
+<a href="../py-modindex.html" title="Python Module Index">modules</a> |</li>
+<li class="right">
+<a accesskey="N" href="celery.worker.job.html" title="celery.worker.job">next</a> |</li>
+<li class="right">
+<a accesskey="P" href="celery.worker.html" title="celery.worker">previous</a> |</li>
+<li class="nav-item nav-item-0"><a href="../index.html">Celery 3.1.23 documentation</a> »</li>
+<li class="nav-item nav-item-1"><a accesskey="U" href="index.html">API Reference</a> »</li>
+</ul>
+</div>
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
+<div class="deck">
+<p>
+        This document describes the current stable version of Celery (3.1). For development docs,
+        <a href="http://docs.celeryproject.org/en/master/reference/celery.worker.consumer.html">go here</a>.
+        </p>
+</div>
+<div class="section" id="celery-worker-consumer"><a name="//apple_ref/cpp/Module/celery.worker.consumer"></a>
+<h1>celery.worker.consumer<a class="headerlink" href="#celery-worker-consumer" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#id1" id="id2">celery.worker.consumer</a></li>
+</ul>
+</div>
+<span class="target" id="module-celery.worker.consumer"></span><div class="section" id="id1">
+<h2><a class="toc-backref" href="#id2">celery.worker.consumer</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>This module contains the components responsible for consuming messages
+from the broker, processing the messages and keeping the broker connections
+up and running.</p>
+<dl class="class">
+<dt id="celery.worker.consumer.Consumer"><a name="//apple_ref/cpp/Class/celery.worker.consumer.Consumer"></a>
+<em class="property">class </em><code class="descclassname">celery.worker.consumer.</code><code class="descname">Consumer</code><span class="sig-paren">(</span><em>on_task_request</em>, <em>init_callback=&lt;function noop&gt;</em>, <em>hostname=None</em>, <em>pool=None</em>, <em>app=None</em>, <em>timer=None</em>, <em>controller=None</em>, <em>hub=None</em>, <em>amqheartbeat=None</em>, <em>worker_options=None</em>, <em>disable_rate_limits=False</em>, <em>initial_prefetch_count=2</em>, <em>prefetch_multiplier=1</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Consumer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Consumer" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="class">
+<dt id="celery.worker.consumer.Consumer.Blueprint"><a name="//apple_ref/cpp/Class/celery.worker.consumer.Consumer.Blueprint"></a>
+<em class="property">class </em><code class="descname">Blueprint</code><span class="sig-paren">(</span><em>steps=None</em>, <em>name=None</em>, <em>app=None</em>, <em>on_start=None</em>, <em>on_close=None</em>, <em>on_stopped=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Consumer.Blueprint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Consumer.Blueprint" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="celery.worker.consumer.Consumer.Blueprint.default_steps"><a name="//apple_ref/cpp/Attribute/celery.worker.consumer.Consumer.Blueprint.default_steps"></a>
+<code class="descname">default_steps</code><em class="property"> = ['celery.worker.consumer:Connection', 'celery.worker.consumer:Mingle', 'celery.worker.consumer:Events', 'celery.worker.consumer:Gossip', 'celery.worker.consumer:Heart', 'celery.worker.consumer:Control', 'celery.worker.consumer:Tasks', 'celery.worker.consumer:Evloop', 'celery.worker.consumer:Agent']</em><a class="headerlink" href="#celery.worker.consumer.Consumer.Blueprint.default_steps" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.worker.consumer.Consumer.Blueprint.name"><a name="//apple_ref/cpp/Attribute/celery.worker.consumer.Consumer.Blueprint.name"></a>
+<code class="descname">name</code><em class="property"> = 'Consumer'</em><a class="headerlink" href="#celery.worker.consumer.Consumer.Blueprint.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.consumer.Consumer.Blueprint.shutdown"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Consumer.Blueprint.shutdown"></a>
+<code class="descname">shutdown</code><span class="sig-paren">(</span><em>parent</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Consumer.Blueprint.shutdown"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Consumer.Blueprint.shutdown" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</dd></dl>
+<dl class="attribute">
+<dt id="celery.worker.consumer.Consumer.Strategies"><a name="//apple_ref/cpp/Attribute/celery.worker.consumer.Consumer.Strategies"></a>
+<code class="descclassname">Consumer.</code><code class="descname">Strategies</code><a class="headerlink" href="#celery.worker.consumer.Consumer.Strategies" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference external" href="http://docs.python.org/dev/library/stdtypes.html#dict" title="(in Python v3.6)"><code class="xref py py-class docutils literal"><span class="pre">dict</span></code></a></p>
+</dd></dl>
+<dl class="method">
+<dt id="celery.worker.consumer.Consumer.add_task_queue"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Consumer.add_task_queue"></a>
+<code class="descclassname">Consumer.</code><code class="descname">add_task_queue</code><span class="sig-paren">(</span><em>queue</em>, <em>exchange=None</em>, <em>exchange_type=None</em>, <em>routing_key=None</em>, <em>**options</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Consumer.add_task_queue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Consumer.add_task_queue" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.consumer.Consumer.apply_eta_task"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Consumer.apply_eta_task"></a>
+<code class="descclassname">Consumer.</code><code class="descname">apply_eta_task</code><span class="sig-paren">(</span><em>task</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Consumer.apply_eta_task"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Consumer.apply_eta_task" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method called by the timer to apply a task with an
+ETA/countdown.</p>
+</dd></dl>
+<dl class="method">
+<dt id="celery.worker.consumer.Consumer.bucket_for_task"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Consumer.bucket_for_task"></a>
+<code class="descclassname">Consumer.</code><code class="descname">bucket_for_task</code><span class="sig-paren">(</span><em>type</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Consumer.bucket_for_task"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Consumer.bucket_for_task" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.consumer.Consumer.cancel_task_queue"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Consumer.cancel_task_queue"></a>
+<code class="descclassname">Consumer.</code><code class="descname">cancel_task_queue</code><span class="sig-paren">(</span><em>queue</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Consumer.cancel_task_queue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Consumer.cancel_task_queue" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.consumer.Consumer.connect"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Consumer.connect"></a>
+<code class="descclassname">Consumer.</code><code class="descname">connect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Consumer.connect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Consumer.connect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Establish the broker connection.</p>
+<p>Will retry establishing the connection if the
+<a class="reference internal" href="../configuration.html#std:setting-BROKER_CONNECTION_RETRY"><code class="xref std std-setting docutils literal"><span class="pre">BROKER_CONNECTION_RETRY</span></code></a> setting is enabled</p>
+</dd></dl>
+<dl class="method">
+<dt id="celery.worker.consumer.Consumer.create_task_handler"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Consumer.create_task_handler"></a>
+<code class="descclassname">Consumer.</code><code class="descname">create_task_handler</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Consumer.create_task_handler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Consumer.create_task_handler" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.worker.consumer.Consumer.in_shutdown"><a name="//apple_ref/cpp/Attribute/celery.worker.consumer.Consumer.in_shutdown"></a>
+<code class="descclassname">Consumer.</code><code class="descname">in_shutdown</code><em class="property"> = False</em><a class="headerlink" href="#celery.worker.consumer.Consumer.in_shutdown" title="Permalink to this definition">¶</a></dt>
+<dd><p>set when consumer is shutting down.</p>
+</dd></dl>
+<dl class="attribute">
+<dt id="celery.worker.consumer.Consumer.init_callback"><a name="//apple_ref/cpp/Attribute/celery.worker.consumer.Consumer.init_callback"></a>
+<code class="descclassname">Consumer.</code><code class="descname">init_callback</code><em class="property"> = None</em><a class="headerlink" href="#celery.worker.consumer.Consumer.init_callback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optional callback called the first time the worker
+is ready to receive tasks.</p>
+</dd></dl>
+<dl class="method">
+<dt id="celery.worker.consumer.Consumer.loop_args"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Consumer.loop_args"></a>
+<code class="descclassname">Consumer.</code><code class="descname">loop_args</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Consumer.loop_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Consumer.loop_args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.consumer.Consumer.on_close"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Consumer.on_close"></a>
+<code class="descclassname">Consumer.</code><code class="descname">on_close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Consumer.on_close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Consumer.on_close" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.consumer.Consumer.on_decode_error"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Consumer.on_decode_error"></a>
+<code class="descclassname">Consumer.</code><code class="descname">on_decode_error</code><span class="sig-paren">(</span><em>message</em>, <em>exc</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Consumer.on_decode_error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Consumer.on_decode_error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Callback called if an error occurs while decoding
+a message received.</p>
+<p>Simply logs the error and acknowledges the message so it
+doesn’t enter a loop.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name"></col>
+<col class="field-body"></col>
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>message</strong> – The message with errors.</li>
+<li><strong>exc</strong> – The original exception instance.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+<dl class="method">
+<dt id="celery.worker.consumer.Consumer.on_invalid_task"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Consumer.on_invalid_task"></a>
+<code class="descclassname">Consumer.</code><code class="descname">on_invalid_task</code><span class="sig-paren">(</span><em>body</em>, <em>message</em>, <em>exc</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Consumer.on_invalid_task"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Consumer.on_invalid_task" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.consumer.Consumer.on_ready"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Consumer.on_ready"></a>
+<code class="descclassname">Consumer.</code><code class="descname">on_ready</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Consumer.on_ready"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Consumer.on_ready" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.consumer.Consumer.on_unknown_message"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Consumer.on_unknown_message"></a>
+<code class="descclassname">Consumer.</code><code class="descname">on_unknown_message</code><span class="sig-paren">(</span><em>body</em>, <em>message</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Consumer.on_unknown_message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Consumer.on_unknown_message" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.consumer.Consumer.on_unknown_task"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Consumer.on_unknown_task"></a>
+<code class="descclassname">Consumer.</code><code class="descname">on_unknown_task</code><span class="sig-paren">(</span><em>body</em>, <em>message</em>, <em>exc</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Consumer.on_unknown_task"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Consumer.on_unknown_task" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.worker.consumer.Consumer.pool"><a name="//apple_ref/cpp/Attribute/celery.worker.consumer.Consumer.pool"></a>
+<code class="descclassname">Consumer.</code><code class="descname">pool</code><em class="property"> = None</em><a class="headerlink" href="#celery.worker.consumer.Consumer.pool" title="Permalink to this definition">¶</a></dt>
+<dd><p>The current worker pool instance.</p>
+</dd></dl>
+<dl class="method">
+<dt id="celery.worker.consumer.Consumer.register_with_event_loop"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Consumer.register_with_event_loop"></a>
+<code class="descclassname">Consumer.</code><code class="descname">register_with_event_loop</code><span class="sig-paren">(</span><em>hub</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Consumer.register_with_event_loop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Consumer.register_with_event_loop" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.consumer.Consumer.reset_rate_limits"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Consumer.reset_rate_limits"></a>
+<code class="descclassname">Consumer.</code><code class="descname">reset_rate_limits</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Consumer.reset_rate_limits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Consumer.reset_rate_limits" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.worker.consumer.Consumer.restart_count"><a name="//apple_ref/cpp/Attribute/celery.worker.consumer.Consumer.restart_count"></a>
+<code class="descclassname">Consumer.</code><code class="descname">restart_count</code><em class="property"> = -1</em><a class="headerlink" href="#celery.worker.consumer.Consumer.restart_count" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.consumer.Consumer.shutdown"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Consumer.shutdown"></a>
+<code class="descclassname">Consumer.</code><code class="descname">shutdown</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Consumer.shutdown"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Consumer.shutdown" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.consumer.Consumer.start"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Consumer.start"></a>
+<code class="descclassname">Consumer.</code><code class="descname">start</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Consumer.start"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Consumer.start" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.consumer.Consumer.stop"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Consumer.stop"></a>
+<code class="descclassname">Consumer.</code><code class="descname">stop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Consumer.stop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Consumer.stop" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.worker.consumer.Consumer.timer"><a name="//apple_ref/cpp/Attribute/celery.worker.consumer.Consumer.timer"></a>
+<code class="descclassname">Consumer.</code><code class="descname">timer</code><em class="property"> = None</em><a class="headerlink" href="#celery.worker.consumer.Consumer.timer" title="Permalink to this definition">¶</a></dt>
+<dd><p>A timer used for high-priority internal tasks, such
+as sending heartbeats.</p>
+</dd></dl>
+<dl class="method">
+<dt id="celery.worker.consumer.Consumer.update_strategies"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Consumer.update_strategies"></a>
+<code class="descclassname">Consumer.</code><code class="descname">update_strategies</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Consumer.update_strategies"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Consumer.update_strategies" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</dd></dl>
+<dl class="class">
+<dt id="celery.worker.consumer.Connection"><a name="//apple_ref/cpp/Class/celery.worker.consumer.Connection"></a>
+<em class="property">class </em><code class="descclassname">celery.worker.consumer.</code><code class="descname">Connection</code><span class="sig-paren">(</span><em>c</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Connection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Connection" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="celery.worker.consumer.Connection.info"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Connection.info"></a>
+<code class="descname">info</code><span class="sig-paren">(</span><em>c</em>, <em>params='N/A'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Connection.info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Connection.info" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.worker.consumer.Connection.name"><a name="//apple_ref/cpp/Attribute/celery.worker.consumer.Connection.name"></a>
+<code class="descname">name</code><em class="property"> = u'celery.worker.consumer.Connection'</em><a class="headerlink" href="#celery.worker.consumer.Connection.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.consumer.Connection.shutdown"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Connection.shutdown"></a>
+<code class="descname">shutdown</code><span class="sig-paren">(</span><em>c</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Connection.shutdown"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Connection.shutdown" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.consumer.Connection.start"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Connection.start"></a>
+<code class="descname">start</code><span class="sig-paren">(</span><em>c</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Connection.start"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Connection.start" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</dd></dl>
+<dl class="class">
+<dt id="celery.worker.consumer.Events"><a name="//apple_ref/cpp/Class/celery.worker.consumer.Events"></a>
+<em class="property">class </em><code class="descclassname">celery.worker.consumer.</code><code class="descname">Events</code><span class="sig-paren">(</span><em>c</em>, <em>send_events=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Events"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Events" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="celery.worker.consumer.Events.name"><a name="//apple_ref/cpp/Attribute/celery.worker.consumer.Events.name"></a>
+<code class="descname">name</code><em class="property"> = u'celery.worker.consumer.Events'</em><a class="headerlink" href="#celery.worker.consumer.Events.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.worker.consumer.Events.requires"><a name="//apple_ref/cpp/Attribute/celery.worker.consumer.Events.requires"></a>
+<code class="descname">requires</code><em class="property"> = (step:celery.worker.consumer.Connection{()},)</em><a class="headerlink" href="#celery.worker.consumer.Events.requires" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.consumer.Events.shutdown"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Events.shutdown"></a>
+<code class="descname">shutdown</code><span class="sig-paren">(</span><em>c</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Events.shutdown"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Events.shutdown" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.consumer.Events.start"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Events.start"></a>
+<code class="descname">start</code><span class="sig-paren">(</span><em>c</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Events.start"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Events.start" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.consumer.Events.stop"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Events.stop"></a>
+<code class="descname">stop</code><span class="sig-paren">(</span><em>c</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Events.stop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Events.stop" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</dd></dl>
+<dl class="class">
+<dt id="celery.worker.consumer.Heart"><a name="//apple_ref/cpp/Class/celery.worker.consumer.Heart"></a>
+<em class="property">class </em><code class="descclassname">celery.worker.consumer.</code><code class="descname">Heart</code><span class="sig-paren">(</span><em>c</em>, <em>without_heartbeat=False</em>, <em>heartbeat_interval=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Heart"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Heart" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="celery.worker.consumer.Heart.name"><a name="//apple_ref/cpp/Attribute/celery.worker.consumer.Heart.name"></a>
+<code class="descname">name</code><em class="property"> = u'celery.worker.consumer.Heart'</em><a class="headerlink" href="#celery.worker.consumer.Heart.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.worker.consumer.Heart.requires"><a name="//apple_ref/cpp/Attribute/celery.worker.consumer.Heart.requires"></a>
+<code class="descname">requires</code><em class="property"> = (step:celery.worker.consumer.Events{(step:celery.worker.consumer.Connection{()},)},)</em><a class="headerlink" href="#celery.worker.consumer.Heart.requires" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.consumer.Heart.shutdown"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Heart.shutdown"></a>
+<code class="descname">shutdown</code><span class="sig-paren">(</span><em>c</em><span class="sig-paren">)</span><a class="headerlink" href="#celery.worker.consumer.Heart.shutdown" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.consumer.Heart.start"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Heart.start"></a>
+<code class="descname">start</code><span class="sig-paren">(</span><em>c</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Heart.start"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Heart.start" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.consumer.Heart.stop"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Heart.stop"></a>
+<code class="descname">stop</code><span class="sig-paren">(</span><em>c</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Heart.stop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Heart.stop" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</dd></dl>
+<dl class="class">
+<dt id="celery.worker.consumer.Control"><a name="//apple_ref/cpp/Class/celery.worker.consumer.Control"></a>
+<em class="property">class </em><code class="descclassname">celery.worker.consumer.</code><code class="descname">Control</code><span class="sig-paren">(</span><em>c</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Control"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Control" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="celery.worker.consumer.Control.include_if"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Control.include_if"></a>
+<code class="descname">include_if</code><span class="sig-paren">(</span><em>c</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Control.include_if"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Control.include_if" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.worker.consumer.Control.name"><a name="//apple_ref/cpp/Attribute/celery.worker.consumer.Control.name"></a>
+<code class="descname">name</code><em class="property"> = u'celery.worker.consumer.Control'</em><a class="headerlink" href="#celery.worker.consumer.Control.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.worker.consumer.Control.requires"><a name="//apple_ref/cpp/Attribute/celery.worker.consumer.Control.requires"></a>
+<code class="descname">requires</code><em class="property"> = (step:celery.worker.consumer.Tasks{(step:celery.worker.consumer.Mingle{(step:celery.worker.consumer.Events{(step:celery.worker.consumer.Connection{()},)},)},)},)</em><a class="headerlink" href="#celery.worker.consumer.Control.requires" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</dd></dl>
+<dl class="class">
+<dt id="celery.worker.consumer.Tasks"><a name="//apple_ref/cpp/Class/celery.worker.consumer.Tasks"></a>
+<em class="property">class </em><code class="descclassname">celery.worker.consumer.</code><code class="descname">Tasks</code><span class="sig-paren">(</span><em>c</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Tasks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Tasks" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="celery.worker.consumer.Tasks.info"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Tasks.info"></a>
+<code class="descname">info</code><span class="sig-paren">(</span><em>c</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Tasks.info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Tasks.info" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.worker.consumer.Tasks.name"><a name="//apple_ref/cpp/Attribute/celery.worker.consumer.Tasks.name"></a>
+<code class="descname">name</code><em class="property"> = u'celery.worker.consumer.Tasks'</em><a class="headerlink" href="#celery.worker.consumer.Tasks.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.worker.consumer.Tasks.requires"><a name="//apple_ref/cpp/Attribute/celery.worker.consumer.Tasks.requires"></a>
+<code class="descname">requires</code><em class="property"> = (step:celery.worker.consumer.Mingle{(step:celery.worker.consumer.Events{(step:celery.worker.consumer.Connection{()},)},)},)</em><a class="headerlink" href="#celery.worker.consumer.Tasks.requires" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.consumer.Tasks.shutdown"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Tasks.shutdown"></a>
+<code class="descname">shutdown</code><span class="sig-paren">(</span><em>c</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Tasks.shutdown"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Tasks.shutdown" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.consumer.Tasks.start"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Tasks.start"></a>
+<code class="descname">start</code><span class="sig-paren">(</span><em>c</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Tasks.start"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Tasks.start" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.consumer.Tasks.stop"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Tasks.stop"></a>
+<code class="descname">stop</code><span class="sig-paren">(</span><em>c</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Tasks.stop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Tasks.stop" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</dd></dl>
+<dl class="class">
+<dt id="celery.worker.consumer.Evloop"><a name="//apple_ref/cpp/Class/celery.worker.consumer.Evloop"></a>
+<em class="property">class </em><code class="descclassname">celery.worker.consumer.</code><code class="descname">Evloop</code><span class="sig-paren">(</span><em>parent</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Evloop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Evloop" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="celery.worker.consumer.Evloop.label"><a name="//apple_ref/cpp/Attribute/celery.worker.consumer.Evloop.label"></a>
+<code class="descname">label</code><em class="property"> = 'event loop'</em><a class="headerlink" href="#celery.worker.consumer.Evloop.label" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.worker.consumer.Evloop.last"><a name="//apple_ref/cpp/Attribute/celery.worker.consumer.Evloop.last"></a>
+<code class="descname">last</code><em class="property"> = True</em><a class="headerlink" href="#celery.worker.consumer.Evloop.last" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.worker.consumer.Evloop.name"><a name="//apple_ref/cpp/Attribute/celery.worker.consumer.Evloop.name"></a>
+<code class="descname">name</code><em class="property"> = u'celery.worker.consumer.Evloop'</em><a class="headerlink" href="#celery.worker.consumer.Evloop.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.consumer.Evloop.patch_all"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Evloop.patch_all"></a>
+<code class="descname">patch_all</code><span class="sig-paren">(</span><em>c</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Evloop.patch_all"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Evloop.patch_all" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.consumer.Evloop.start"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Evloop.start"></a>
+<code class="descname">start</code><span class="sig-paren">(</span><em>c</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Evloop.start"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Evloop.start" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</dd></dl>
+<dl class="class">
+<dt id="celery.worker.consumer.Agent"><a name="//apple_ref/cpp/Class/celery.worker.consumer.Agent"></a>
+<em class="property">class </em><code class="descclassname">celery.worker.consumer.</code><code class="descname">Agent</code><span class="sig-paren">(</span><em>c</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Agent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Agent" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="celery.worker.consumer.Agent.conditional"><a name="//apple_ref/cpp/Attribute/celery.worker.consumer.Agent.conditional"></a>
+<code class="descname">conditional</code><em class="property"> = True</em><a class="headerlink" href="#celery.worker.consumer.Agent.conditional" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.consumer.Agent.create"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Agent.create"></a>
+<code class="descname">create</code><span class="sig-paren">(</span><em>c</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Agent.create"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Agent.create" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.worker.consumer.Agent.name"><a name="//apple_ref/cpp/Attribute/celery.worker.consumer.Agent.name"></a>
+<code class="descname">name</code><em class="property"> = u'celery.worker.consumer.Agent'</em><a class="headerlink" href="#celery.worker.consumer.Agent.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.worker.consumer.Agent.requires"><a name="//apple_ref/cpp/Attribute/celery.worker.consumer.Agent.requires"></a>
+<code class="descname">requires</code><em class="property"> = (step:celery.worker.consumer.Connection{()},)</em><a class="headerlink" href="#celery.worker.consumer.Agent.requires" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</dd></dl>
+<dl class="class">
+<dt id="celery.worker.consumer.Mingle"><a name="//apple_ref/cpp/Class/celery.worker.consumer.Mingle"></a>
+<em class="property">class </em><code class="descclassname">celery.worker.consumer.</code><code class="descname">Mingle</code><span class="sig-paren">(</span><em>c</em>, <em>without_mingle=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Mingle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Mingle" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="celery.worker.consumer.Mingle.compatible_transport"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Mingle.compatible_transport"></a>
+<code class="descname">compatible_transport</code><span class="sig-paren">(</span><em>app</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Mingle.compatible_transport"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Mingle.compatible_transport" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.worker.consumer.Mingle.compatible_transports"><a name="//apple_ref/cpp/Attribute/celery.worker.consumer.Mingle.compatible_transports"></a>
+<code class="descname">compatible_transports</code><em class="property"> = set(['redis', 'amqp'])</em><a class="headerlink" href="#celery.worker.consumer.Mingle.compatible_transports" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.worker.consumer.Mingle.label"><a name="//apple_ref/cpp/Attribute/celery.worker.consumer.Mingle.label"></a>
+<code class="descname">label</code><em class="property"> = 'Mingle'</em><a class="headerlink" href="#celery.worker.consumer.Mingle.label" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.worker.consumer.Mingle.name"><a name="//apple_ref/cpp/Attribute/celery.worker.consumer.Mingle.name"></a>
+<code class="descname">name</code><em class="property"> = u'celery.worker.consumer.Mingle'</em><a class="headerlink" href="#celery.worker.consumer.Mingle.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.worker.consumer.Mingle.requires"><a name="//apple_ref/cpp/Attribute/celery.worker.consumer.Mingle.requires"></a>
+<code class="descname">requires</code><em class="property"> = (step:celery.worker.consumer.Events{(step:celery.worker.consumer.Connection{()},)},)</em><a class="headerlink" href="#celery.worker.consumer.Mingle.requires" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.consumer.Mingle.start"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Mingle.start"></a>
+<code class="descname">start</code><span class="sig-paren">(</span><em>c</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Mingle.start"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Mingle.start" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</dd></dl>
+<dl class="class">
+<dt id="celery.worker.consumer.Gossip"><a name="//apple_ref/cpp/Class/celery.worker.consumer.Gossip"></a>
+<em class="property">class </em><code class="descclassname">celery.worker.consumer.</code><code class="descname">Gossip</code><span class="sig-paren">(</span><em>c</em>, <em>without_gossip=False</em>, <em>interval=5.0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Gossip"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Gossip" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="celery.worker.consumer.Gossip.call_task"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Gossip.call_task"></a>
+<code class="descname">call_task</code><span class="sig-paren">(</span><em>task</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Gossip.call_task"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Gossip.call_task" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.consumer.Gossip.compatible_transport"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Gossip.compatible_transport"></a>
+<code class="descname">compatible_transport</code><span class="sig-paren">(</span><em>app</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Gossip.compatible_transport"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Gossip.compatible_transport" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.worker.consumer.Gossip.compatible_transports"><a name="//apple_ref/cpp/Attribute/celery.worker.consumer.Gossip.compatible_transports"></a>
+<code class="descname">compatible_transports</code><em class="property"> = set(['redis', 'amqp'])</em><a class="headerlink" href="#celery.worker.consumer.Gossip.compatible_transports" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.consumer.Gossip.election"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Gossip.election"></a>
+<code class="descname">election</code><span class="sig-paren">(</span><em>id</em>, <em>topic</em>, <em>action=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Gossip.election"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Gossip.election" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.consumer.Gossip.get_consumers"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Gossip.get_consumers"></a>
+<code class="descname">get_consumers</code><span class="sig-paren">(</span><em>channel</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Gossip.get_consumers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Gossip.get_consumers" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.worker.consumer.Gossip.label"><a name="//apple_ref/cpp/Attribute/celery.worker.consumer.Gossip.label"></a>
+<code class="descname">label</code><em class="property"> = 'Gossip'</em><a class="headerlink" href="#celery.worker.consumer.Gossip.label" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.worker.consumer.Gossip.name"><a name="//apple_ref/cpp/Attribute/celery.worker.consumer.Gossip.name"></a>
+<code class="descname">name</code><em class="property"> = u'celery.worker.consumer.Gossip'</em><a class="headerlink" href="#celery.worker.consumer.Gossip.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.consumer.Gossip.on_elect"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Gossip.on_elect"></a>
+<code class="descname">on_elect</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Gossip.on_elect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Gossip.on_elect" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.consumer.Gossip.on_elect_ack"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Gossip.on_elect_ack"></a>
+<code class="descname">on_elect_ack</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Gossip.on_elect_ack"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Gossip.on_elect_ack" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.consumer.Gossip.on_message"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Gossip.on_message"></a>
+<code class="descname">on_message</code><span class="sig-paren">(</span><em>prepare</em>, <em>message</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Gossip.on_message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Gossip.on_message" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.consumer.Gossip.on_node_join"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Gossip.on_node_join"></a>
+<code class="descname">on_node_join</code><span class="sig-paren">(</span><em>worker</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Gossip.on_node_join"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Gossip.on_node_join" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.consumer.Gossip.on_node_leave"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Gossip.on_node_leave"></a>
+<code class="descname">on_node_leave</code><span class="sig-paren">(</span><em>worker</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Gossip.on_node_leave"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Gossip.on_node_leave" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.consumer.Gossip.on_node_lost"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Gossip.on_node_lost"></a>
+<code class="descname">on_node_lost</code><span class="sig-paren">(</span><em>worker</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Gossip.on_node_lost"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Gossip.on_node_lost" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.consumer.Gossip.periodic"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Gossip.periodic"></a>
+<code class="descname">periodic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Gossip.periodic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Gossip.periodic" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.consumer.Gossip.register_timer"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Gossip.register_timer"></a>
+<code class="descname">register_timer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Gossip.register_timer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Gossip.register_timer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="attribute">
+<dt id="celery.worker.consumer.Gossip.requires"><a name="//apple_ref/cpp/Attribute/celery.worker.consumer.Gossip.requires"></a>
+<code class="descname">requires</code><em class="property"> = (step:celery.worker.consumer.Mingle{(step:celery.worker.consumer.Events{(step:celery.worker.consumer.Connection{()},)},)},)</em><a class="headerlink" href="#celery.worker.consumer.Gossip.requires" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="method">
+<dt id="celery.worker.consumer.Gossip.start"><a name="//apple_ref/cpp/Method/celery.worker.consumer.Gossip.start"></a>
+<code class="descname">start</code><span class="sig-paren">(</span><em>c</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#Gossip.start"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.Gossip.start" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</dd></dl>
+<dl class="function">
+<dt id="celery.worker.consumer.dump_body"><a name="//apple_ref/cpp/Function/celery.worker.consumer.dump_body"></a>
+<code class="descclassname">celery.worker.consumer.</code><code class="descname">dump_body</code><span class="sig-paren">(</span><em>m</em>, <em>body</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/celery/worker/consumer.html#dump_body"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#celery.worker.consumer.dump_body" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div aria-label="related navigation" class="related" role="navigation">
+<h3>Navigation</h3>
+<ul>
+<li class="right" style="margin-right: 10px">
+<a href="../genindex.html" title="General Index">index</a></li>
+<li class="right">
+<a href="../py-modindex.html" title="Python Module Index">modules</a> |</li>
+<li class="right">
+<a href="celery.worker.job.html" title="celery.worker.job">next</a> |</li>
+<li class="right">
+<a href="celery.worker.html" title="celery.worker">previous</a> |</li>
+<li class="nav-item nav-item-0"><a href="../index.html">Celery 3.1.23 documentation</a> »</li>
+<li class="nav-item nav-item-1"><a href="index.html">API Reference</a> »</li>
+</ul>
+</div>
+<div class="footer" role="contentinfo">
+        © <a href="../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
+    </div>
+</body>
+</html>
