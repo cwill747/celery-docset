@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleIdentifier</key>
-	<string>jinja2</string>
+	<string>celery</string>
 	<key>CFBundleName</key>
-	<string>Jinja2</string>
+	<string>Celery</string>
 	<key>DashDocSetKeyword</key>
-	<string>jinja</string>
+	<string>celery</string>
 	<key>dashIndexFilePath</key>
 	<string>index.html</string>
     <key>DashDocSetFamily</key>
