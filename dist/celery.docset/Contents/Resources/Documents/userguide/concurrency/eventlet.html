@@ -1,17 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Concurrency with Eventlet &mdash; Celery 3.1.23 documentation</title>
-    
-    <link rel="stylesheet" href="../../_static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>Concurrency with Eventlet — Celery 3.1.23 documentation</title>
+<link href="../../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
         VERSION:     '3.1.23',
@@ -20,53 +16,28 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="copyright" title="Copyright" href="../../copyright.html" />
-    <link rel="top" title="Celery 3.1.23 documentation" href="../../index.html" />
-    <link rel="up" title="Concurrency" href="index.html" />
-    <link rel="next" title="Signals" href="../signals.html" />
-    <link rel="prev" title="Concurrency" href="index.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="../signals.html" title="Signals"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="index.html" title="Concurrency"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" >User Guide</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U">Concurrency</a> &raquo;</li> 
-      </ul>
-    </div>  
+<script src="../../_static/jquery.js" type="text/javascript"></script>
+<script src="../../_static/underscore.js" type="text/javascript"></script>
+<script src="../../_static/doctools.js" type="text/javascript"></script>
+<link href="../../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="index.html" rel="up" title="Concurrency"/>
+<link href="../signals.html" rel="next" title="Signals"/>
+<link href="index.html" rel="prev" title="Concurrency"/>
+</head>
+<body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
 <div class="deck">
-
-    
-        <p>
+<p>
         This document describes the current stable version of Celery (3.1). For development docs,
         <a href="http://docs.celeryproject.org/en/master/userguide/concurrency/eventlet.html">go here</a>.
         </p>
-    
-
 </div>
-    <div class="section" id="concurrency-with-eventlet">
+<div class="section" id="concurrency-with-eventlet">
 <span id="concurrency-eventlet"></span><h1>Concurrency with Eventlet<a class="headerlink" href="#concurrency-with-eventlet" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="introduction">
 <span id="eventlet-introduction"></span><h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
@@ -112,34 +83,15 @@ what works best.</p>
 some examples taking use of Eventlet support.</p>
 </div>
 </div>
+</div>
+</div>
+</div>
 
+<div class="clearer"></div>
+</div>
 
-          </div>
-        </div>
-      </div>
+<div class="footer" role="contentinfo">
+        © <a href="../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="../signals.html" title="Signals"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="index.html" title="Concurrency"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" >User Guide</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="index.html" >Concurrency</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &copy; <a href="../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
-    </div>
-  </body>
+</body>
 </html>

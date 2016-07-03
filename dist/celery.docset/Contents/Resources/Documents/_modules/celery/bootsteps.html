@@ -1,17 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>celery.bootsteps &mdash; Celery 3.1.23 documentation</title>
-    
-    <link rel="stylesheet" href="../../_static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>celery.bootsteps — Celery 3.1.23 documentation</title>
+<link href="../../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
         VERSION:     '3.1.23',
@@ -20,52 +16,34 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="copyright" title="Copyright" href="../../copyright.html" />
-    <link rel="top" title="Celery 3.1.23 documentation" href="../../index.html" />
-    <link rel="up" title="Module code" href="../index.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
-      </ul>
-    </div>  
+<script src="../../_static/jquery.js" type="text/javascript"></script>
+<script src="../../_static/underscore.js" type="text/javascript"></script>
+<script src="../../_static/doctools.js" type="text/javascript"></script>
+<link href="../../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="../index.html" rel="up" title="Module code"/>
+</head>
+<body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
 <div class="deck">
-
-    
-        <p>
+<p>
         This document describes the current stable version of Celery (3.1). For development docs,
         <a href="http://docs.celeryproject.org/en/master/_modules/celery/bootsteps.html">go here</a>.
         </p>
-    
-
 </div>
-    <h1>Source code for celery.bootsteps</h1><div class="highlight"><pre>
+<h1>Source code for celery.bootsteps</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="sd">    celery.bootsteps</span>
 <span class="sd">    ~~~~~~~~~~~~~~~~</span>
 
 <span class="sd">    A directed acyclic graph of reusable components.</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">unicode_literals</span>
 
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
@@ -85,7 +63,7 @@
 <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
     <span class="n">IGNORE_ERRORS</span> <span class="o">=</span> <span class="p">()</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Blueprint&#39;</span><span class="p">,</span> <span class="s1">&#39;Step&#39;</span><span class="p">,</span> <span class="s1">&#39;StartStopStep&#39;</span><span class="p">,</span> <span class="s1">&#39;ConsumerStep&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Blueprint'</span><span class="p">,</span> <span class="s1">'Step'</span><span class="p">,</span> <span class="s1">'StartStopStep'</span><span class="p">,</span> <span class="s1">'ConsumerStep'</span><span class="p">]</span>
 
 <span class="c1">#: States</span>
 <span class="n">RUN</span> <span class="o">=</span> <span class="mh">0x1</span>
@@ -97,28 +75,28 @@
 
 
 <span class="k">def</span> <span class="nf">_pre</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">fmt</span><span class="p">):</span>
-    <span class="k">return</span> <span class="s1">&#39;| {0}: {1}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ns</span><span class="o">.</span><span class="n">alias</span><span class="p">,</span> <span class="n">fmt</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s1">'| {0}: {1}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ns</span><span class="o">.</span><span class="n">alias</span><span class="p">,</span> <span class="n">fmt</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">_label</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">'.'</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
 
 <span class="k">class</span> <span class="nc">StepFormatter</span><span class="p">(</span><span class="n">GraphFormatter</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Graph formatter for :class:`Blueprint`.&quot;&quot;&quot;</span>
+    <span class="sd">"""Graph formatter for :class:`Blueprint`."""</span>
 
-    <span class="n">blueprint_prefix</span> <span class="o">=</span> <span class="s1">&#39;⧉&#39;</span>
-    <span class="n">conditional_prefix</span> <span class="o">=</span> <span class="s1">&#39;∘&#39;</span>
+    <span class="n">blueprint_prefix</span> <span class="o">=</span> <span class="s1">'⧉'</span>
+    <span class="n">conditional_prefix</span> <span class="o">=</span> <span class="s1">'∘'</span>
     <span class="n">blueprint_scheme</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;shape&#39;</span><span class="p">:</span> <span class="s1">&#39;parallelogram&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;slategray4&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;fillcolor&#39;</span><span class="p">:</span> <span class="s1">&#39;slategray3&#39;</span><span class="p">,</span>
+        <span class="s1">'shape'</span><span class="p">:</span> <span class="s1">'parallelogram'</span><span class="p">,</span>
+        <span class="s1">'color'</span><span class="p">:</span> <span class="s1">'slategray4'</span><span class="p">,</span>
+        <span class="s1">'fillcolor'</span><span class="p">:</span> <span class="s1">'slategray3'</span><span class="p">,</span>
     <span class="p">}</span>
 
     <span class="k">def</span> <span class="nf">label</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">step</span> <span class="ow">and</span> <span class="s1">&#39;{0}{1}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="k">return</span> <span class="n">step</span> <span class="ow">and</span> <span class="s1">'{0}{1}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_get_prefix</span><span class="p">(</span><span class="n">step</span><span class="p">),</span>
-            <span class="p">(</span><span class="n">step</span><span class="o">.</span><span class="n">label</span> <span class="ow">or</span> <span class="n">_label</span><span class="p">(</span><span class="n">step</span><span class="p">))</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="s1">&#39;ignore&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="n">step</span><span class="o">.</span><span class="n">label</span> <span class="ow">or</span> <span class="n">_label</span><span class="p">(</span><span class="n">step</span><span class="p">))</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">'utf-8'</span><span class="p">,</span> <span class="s1">'ignore'</span><span class="p">),</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_get_prefix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="p">):</span>
@@ -126,7 +104,7 @@
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">blueprint_prefix</span>
         <span class="k">if</span> <span class="n">step</span><span class="o">.</span><span class="n">conditional</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">conditional_prefix</span>
-        <span class="k">return</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">return</span> <span class="s1">''</span>
 
     <span class="k">def</span> <span class="nf">node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="o">**</span><span class="n">attrs</span><span class="p">):</span>
         <span class="n">scheme</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">blueprint_scheme</span> <span class="k">if</span> <span class="n">obj</span><span class="o">.</span><span class="n">last</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_scheme</span>
@@ -134,12 +112,12 @@
 
     <span class="k">def</span> <span class="nf">edge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="o">**</span><span class="n">attrs</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">last</span><span class="p">:</span>
-            <span class="n">attrs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">arrowhead</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkseagreen3&#39;</span><span class="p">)</span>
+            <span class="n">attrs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">arrowhead</span><span class="o">=</span><span class="s1">'none'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'darkseagreen3'</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">draw_edge</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_scheme</span><span class="p">,</span> <span class="n">attrs</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="Blueprint"><a class="viewcode-back" href="../../reference/celery.bootsteps.html#celery.bootsteps.Blueprint">[docs]</a><span class="k">class</span> <span class="nc">Blueprint</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Blueprint containing bootsteps that can be applied to objects.</span>
+    <span class="sd">"""Blueprint containing bootsteps that can be applied to objects.</span>
 
 <span class="sd">    :keyword steps: List of steps.</span>
 <span class="sd">    :keyword name: Set explicit name for this blueprint.</span>
@@ -148,7 +126,7 @@
 <span class="sd">    :keyword on_close: Optional callback applied before blueprint close.</span>
 <span class="sd">    :keyword on_stopped: Optional callback applied after blueprint stopped.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">GraphFormatter</span> <span class="o">=</span> <span class="n">StepFormatter</span>
 
     <span class="n">name</span> <span class="o">=</span> <span class="bp">None</span>
@@ -156,10 +134,10 @@
     <span class="n">started</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">default_steps</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
     <span class="n">state_to_name</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="mi">0</span><span class="p">:</span> <span class="s1">&#39;initializing&#39;</span><span class="p">,</span>
-        <span class="n">RUN</span><span class="p">:</span> <span class="s1">&#39;running&#39;</span><span class="p">,</span>
-        <span class="n">CLOSE</span><span class="p">:</span> <span class="s1">&#39;closing&#39;</span><span class="p">,</span>
-        <span class="n">TERMINATE</span><span class="p">:</span> <span class="s1">&#39;terminating&#39;</span><span class="p">,</span>
+        <span class="mi">0</span><span class="p">:</span> <span class="s1">'initializing'</span><span class="p">,</span>
+        <span class="n">RUN</span><span class="p">:</span> <span class="s1">'running'</span><span class="p">,</span>
+        <span class="n">CLOSE</span><span class="p">:</span> <span class="s1">'closing'</span><span class="p">,</span>
+        <span class="n">TERMINATE</span><span class="p">:</span> <span class="s1">'terminating'</span><span class="p">,</span>
     <span class="p">}</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
@@ -178,10 +156,10 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_start</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">on_start</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">parent</span><span class="o">.</span><span class="n">steps</span> <span class="k">if</span> <span class="n">s</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">(</span><span class="s1">&#39;Starting </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">step</span><span class="o">.</span><span class="n">alias</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">(</span><span class="s1">'Starting </span><span class="si">%s</span><span class="s1">'</span><span class="p">,</span> <span class="n">step</span><span class="o">.</span><span class="n">alias</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">started</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
             <span class="n">step</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
-            <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;^-- substep ok&#39;</span><span class="p">)</span></div>
+            <span class="n">debug</span><span class="p">(</span><span class="s1">'^-- substep ok'</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Blueprint.human_state"><a class="viewcode-back" href="../../reference/celery.bootsteps.html#celery.bootsteps.Blueprint.human_state">[docs]</a>    <span class="k">def</span> <span class="nf">human_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_to_name</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">]</span></div>
@@ -195,21 +173,21 @@
 <div class="viewcode-block" id="Blueprint.close"><a class="viewcode-back" href="../../reference/celery.bootsteps.html#celery.bootsteps.Blueprint.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_close</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">on_close</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">send_all</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="s1">&#39;close&#39;</span><span class="p">,</span> <span class="s1">&#39;closing&#39;</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">send_all</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="s1">'close'</span><span class="p">,</span> <span class="s1">'closing'</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Blueprint.restart"><a class="viewcode-back" href="../../reference/celery.bootsteps.html#celery.bootsteps.Blueprint.restart">[docs]</a>    <span class="k">def</span> <span class="nf">restart</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;stop&#39;</span><span class="p">,</span>
-                <span class="n">description</span><span class="o">=</span><span class="s1">&#39;restarting&#39;</span><span class="p">,</span> <span class="n">propagate</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class="viewcode-block" id="Blueprint.restart"><a class="viewcode-back" href="../../reference/celery.bootsteps.html#celery.bootsteps.Blueprint.restart">[docs]</a>    <span class="k">def</span> <span class="nf">restart</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">'stop'</span><span class="p">,</span>
+                <span class="n">description</span><span class="o">=</span><span class="s1">'restarting'</span><span class="p">,</span> <span class="n">propagate</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">send_all</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">propagate</span><span class="o">=</span><span class="n">propagate</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Blueprint.send_all"><a class="viewcode-back" href="../../reference/celery.bootsteps.html#celery.bootsteps.Blueprint.send_all">[docs]</a>    <span class="k">def</span> <span class="nf">send_all</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span>
                  <span class="n">description</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">propagate</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">()):</span>
-        <span class="n">description</span> <span class="o">=</span> <span class="n">description</span> <span class="ow">or</span> <span class="n">method</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="n">description</span> <span class="ow">or</span> <span class="n">method</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'_'</span><span class="p">,</span> <span class="s1">' '</span><span class="p">)</span>
         <span class="n">steps</span> <span class="o">=</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">parent</span><span class="o">.</span><span class="n">steps</span><span class="p">)</span> <span class="k">if</span> <span class="n">reverse</span> <span class="k">else</span> <span class="n">parent</span><span class="o">.</span><span class="n">steps</span>
         <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="n">steps</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">step</span><span class="p">:</span>
                 <span class="n">fun</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">fun</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1">...&#39;</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">(</span><span class="s1">'</span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1">...'</span><span class="p">,</span>
                                 <span class="n">description</span><span class="o">.</span><span class="n">capitalize</span><span class="p">(),</span> <span class="n">step</span><span class="o">.</span><span class="n">alias</span><span class="p">)</span>
                     <span class="k">try</span><span class="p">:</span>
                         <span class="n">fun</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
@@ -217,12 +195,12 @@
                         <span class="k">if</span> <span class="n">propagate</span><span class="p">:</span>
                             <span class="k">raise</span>
                         <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
-                            <span class="s1">&#39;Error on </span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1">: </span><span class="si">%r</span><span class="s1">&#39;</span><span class="p">,</span>
+                            <span class="s1">'Error on </span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1">: </span><span class="si">%r</span><span class="s1">'</span><span class="p">,</span>
                             <span class="n">description</span><span class="p">,</span> <span class="n">step</span><span class="o">.</span><span class="n">alias</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
                         <span class="p">)</span></div>
 
 <div class="viewcode-block" id="Blueprint.stop"><a class="viewcode-back" href="../../reference/celery.bootsteps.html#celery.bootsteps.Blueprint.stop">[docs]</a>    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">close</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">terminate</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
-        <span class="n">what</span> <span class="o">=</span> <span class="s1">&#39;terminating&#39;</span> <span class="k">if</span> <span class="n">terminate</span> <span class="k">else</span> <span class="s1">&#39;stopping&#39;</span>
+        <span class="n">what</span> <span class="o">=</span> <span class="s1">'terminating'</span> <span class="k">if</span> <span class="n">terminate</span> <span class="k">else</span> <span class="s1">'stopping'</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="ow">in</span> <span class="p">(</span><span class="n">CLOSE</span><span class="p">,</span> <span class="n">TERMINATE</span><span class="p">):</span>
             <span class="k">return</span>
 
@@ -235,7 +213,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">CLOSE</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">restart</span><span class="p">(</span>
-            <span class="n">parent</span><span class="p">,</span> <span class="s1">&#39;terminate&#39;</span> <span class="k">if</span> <span class="n">terminate</span> <span class="k">else</span> <span class="s1">&#39;stop&#39;</span><span class="p">,</span>
+            <span class="n">parent</span><span class="p">,</span> <span class="s1">'terminate'</span> <span class="k">if</span> <span class="n">terminate</span> <span class="k">else</span> <span class="s1">'stop'</span><span class="p">,</span>
             <span class="n">description</span><span class="o">=</span><span class="n">what</span><span class="p">,</span> <span class="n">propagate</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
         <span class="p">)</span>
 
@@ -253,7 +231,7 @@
             <span class="k">pass</span></div>
 
 <div class="viewcode-block" id="Blueprint.apply"><a class="viewcode-back" href="../../reference/celery.bootsteps.html#celery.bootsteps.Blueprint.apply">[docs]</a>    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Apply the steps in this blueprint to an object.</span>
+        <span class="sd">"""Apply the steps in this blueprint to an object.</span>
 
 <span class="sd">        This will apply the ``__init__`` and ``include`` methods</span>
 <span class="sd">        of each step, with the object as argument::</span>
@@ -265,18 +243,18 @@
 <span class="sd">        For :class:`StartStopStep` the services created</span>
 <span class="sd">        will also be added to the objects ``steps`` attribute.</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">(</span><span class="s1">&#39;Preparing bootsteps.&#39;</span><span class="p">)</span>
+<span class="sd">        """</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">(</span><span class="s1">'Preparing bootsteps.'</span><span class="p">)</span>
         <span class="n">order</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">steps</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">steps</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">claim_steps</span><span class="p">()</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">(</span><span class="s1">&#39;Building graph...&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">(</span><span class="s1">'Building graph...'</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">S</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_finalize_steps</span><span class="p">(</span><span class="n">steps</span><span class="p">):</span>
             <span class="n">step</span> <span class="o">=</span> <span class="n">S</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
             <span class="n">steps</span><span class="p">[</span><span class="n">step</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">step</span>
             <span class="n">order</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">(</span><span class="s1">&#39;New boot order: {</span><span class="si">%s</span><span class="s1">}&#39;</span><span class="p">,</span>
-                    <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">alias</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">(</span><span class="s1">'New boot order: {</span><span class="si">%s</span><span class="s1">}'</span><span class="p">,</span>
+                    <span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">alias</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="p">))</span>
         <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="n">order</span><span class="p">:</span>
             <span class="n">step</span><span class="o">.</span><span class="n">include</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span></div>
@@ -316,7 +294,7 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">G</span><span class="o">.</span><span class="n">topsort</span><span class="p">()</span>
         <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s1">&#39;unknown bootstep: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">exc</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s1">'unknown bootstep: </span><span class="si">%s</span><span class="s1">'</span> <span class="o">%</span> <span class="n">exc</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Blueprint.claim_steps"><a class="viewcode-back" href="../../reference/celery.bootsteps.html#celery.bootsteps.Blueprint.claim_steps">[docs]</a>    <span class="k">def</span> <span class="nf">claim_steps</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">load_step</span><span class="p">(</span><span class="n">step</span><span class="p">)</span> <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_all_steps</span><span class="p">())</span></div>
@@ -337,14 +315,14 @@
 
 
 <span class="k">class</span> <span class="nc">StepType</span><span class="p">(</span><span class="nb">type</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Metaclass for steps.&quot;&quot;&quot;</span>
+    <span class="sd">"""Metaclass for steps."""</span>
 
     <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">attrs</span><span class="p">):</span>
-        <span class="n">module</span> <span class="o">=</span> <span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;__module__&#39;</span><span class="p">)</span>
-        <span class="n">qname</span> <span class="o">=</span> <span class="s1">&#39;{0}.{1}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="k">if</span> <span class="n">module</span> <span class="k">else</span> <span class="n">name</span>
+        <span class="n">module</span> <span class="o">=</span> <span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'__module__'</span><span class="p">)</span>
+        <span class="n">qname</span> <span class="o">=</span> <span class="s1">'{0}.{1}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="k">if</span> <span class="n">module</span> <span class="k">else</span> <span class="n">name</span>
         <span class="n">attrs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
             <span class="n">__qualname__</span><span class="o">=</span><span class="n">qname</span><span class="p">,</span>
-            <span class="n">name</span><span class="o">=</span><span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">qname</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'name'</span><span class="p">)</span> <span class="ow">or</span> <span class="n">qname</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">StepType</span><span class="p">,</span> <span class="n">cls</span><span class="p">)</span><span class="o">.</span><span class="n">__new__</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">attrs</span><span class="p">)</span>
 
@@ -352,19 +330,19 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s1">&#39;step:{0.name}{{{0.requires!r}}}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s1">'step:{0.name}{{{0.requires!r}}}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
 
 <span class="nd">@with_metaclass</span><span class="p">(</span><span class="n">StepType</span><span class="p">)</span>
 <div class="viewcode-block" id="Step"><a class="viewcode-back" href="../../reference/celery.bootsteps.html#celery.bootsteps.Step">[docs]</a><span class="k">class</span> <span class="nc">Step</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A Bootstep.</span>
+    <span class="sd">"""A Bootstep.</span>
 
 <span class="sd">    The :meth:`__init__` method is called when the step</span>
 <span class="sd">    is bound to a parent object, and can as such be used</span>
 <span class="sd">    to initialize attributes in the parent object at</span>
 <span class="sd">    parent instantiation-time.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="c1">#: Optional step name, will use qualname if not specified.</span>
     <span class="n">name</span> <span class="o">=</span> <span class="bp">None</span>
@@ -392,8 +370,8 @@
         <span class="k">pass</span>
 
 <div class="viewcode-block" id="Step.include_if"><a class="viewcode-back" href="../../reference/celery.bootsteps.html#celery.bootsteps.Step.include_if">[docs]</a>    <span class="k">def</span> <span class="nf">include_if</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;An optional predicate that decides whether this</span>
-<span class="sd">        step should be created.&quot;&quot;&quot;</span>
+        <span class="sd">"""An optional predicate that decides whether this</span>
+<span class="sd">        step should be created."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">enabled</span></div>
 
 <div class="viewcode-block" id="Step.instantiate"><a class="viewcode-back" href="../../reference/celery.bootsteps.html#celery.bootsteps.Step.instantiate">[docs]</a>    <span class="k">def</span> <span class="nf">instantiate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -408,11 +386,11 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_should_include</span><span class="p">(</span><span class="n">parent</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="Step.create"><a class="viewcode-back" href="../../reference/celery.bootsteps.html#celery.bootsteps.Step.create">[docs]</a>    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Create the step.&quot;&quot;&quot;</span>
+        <span class="sd">"""Create the step."""</span>
         <span class="k">pass</span></div>
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s1">&#39;&lt;step: {0.alias}&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s1">'&lt;step: {0.alias}&gt;'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">alias</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -442,7 +420,7 @@
 
 <div class="viewcode-block" id="StartStopStep.terminate"><a class="viewcode-back" href="../../reference/celery.bootsteps.html#celery.bootsteps.StartStopStep.terminate">[docs]</a>    <span class="k">def</span> <span class="nf">terminate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="p">:</span>
-            <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="p">,</span> <span class="s1">&#39;terminate&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="o">.</span><span class="n">stop</span><span class="p">)()</span></div>
+            <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="p">,</span> <span class="s1">'terminate'</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="o">.</span><span class="n">stop</span><span class="p">)()</span></div>
 
 <div class="viewcode-block" id="StartStopStep.include"><a class="viewcode-back" href="../../reference/celery.bootsteps.html#celery.bootsteps.StartStopStep.include">[docs]</a>    <span class="k">def</span> <span class="nf">include</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
         <span class="n">inc</span><span class="p">,</span> <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_should_include</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
@@ -453,11 +431,11 @@
 
 
 <div class="viewcode-block" id="ConsumerStep"><a class="viewcode-back" href="../../reference/celery.bootsteps.html#celery.bootsteps.ConsumerStep">[docs]</a><span class="k">class</span> <span class="nc">ConsumerStep</span><span class="p">(</span><span class="n">StartStopStep</span><span class="p">):</span>
-    <span class="n">requires</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;celery.worker.consumer:Connection&#39;</span><span class="p">,</span> <span class="p">)</span>
+    <span class="n">requires</span> <span class="o">=</span> <span class="p">(</span><span class="s1">'celery.worker.consumer:Connection'</span><span class="p">,</span> <span class="p">)</span>
     <span class="n">consumers</span> <span class="o">=</span> <span class="bp">None</span>
 
 <div class="viewcode-block" id="ConsumerStep.get_consumers"><a class="viewcode-back" href="../../reference/celery.bootsteps.html#celery.bootsteps.ConsumerStep.get_consumers">[docs]</a>    <span class="k">def</span> <span class="nf">get_consumers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;missing get_consumers&#39;</span><span class="p">)</span></div>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">'missing get_consumers'</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="ConsumerStep.start"><a class="viewcode-back" href="../../reference/celery.bootsteps.html#celery.bootsteps.ConsumerStep.start">[docs]</a>    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
         <span class="n">channel</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">channel</span><span class="p">()</span>
@@ -481,26 +459,15 @@
         <span class="k">for</span> <span class="n">channel</span> <span class="ow">in</span> <span class="n">channels</span><span class="p">:</span>
             <span class="n">ignore_errors</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">connection</span><span class="p">,</span> <span class="n">channel</span><span class="o">.</span><span class="n">close</span><span class="p">)</span></div>
 </pre></div>
+</div>
+</div>
+</div>
 
-          </div>
-        </div>
-      </div>
+<div class="clearer"></div>
+</div>
+
+<div class="footer" role="contentinfo">
+        © <a href="../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &copy; <a href="../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
-    </div>
-  </body>
+</body>
 </html>

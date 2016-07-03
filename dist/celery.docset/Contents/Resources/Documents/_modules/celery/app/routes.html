@@ -1,17 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>celery.app.routes &mdash; Celery 3.1.23 documentation</title>
-    
-    <link rel="stylesheet" href="../../../_static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>celery.app.routes — Celery 3.1.23 documentation</title>
+<link href="../../../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
         VERSION:     '3.1.23',
@@ -20,54 +16,35 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="copyright" title="Copyright" href="../../../copyright.html" />
-    <link rel="top" title="Celery 3.1.23 documentation" href="../../../index.html" />
-    <link rel="up" title="celery.app" href="../app.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="../app.html" accesskey="U">celery.app</a> &raquo;</li> 
-      </ul>
-    </div>  
+<script src="../../../_static/jquery.js" type="text/javascript"></script>
+<script src="../../../_static/underscore.js" type="text/javascript"></script>
+<script src="../../../_static/doctools.js" type="text/javascript"></script>
+<link href="../../../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../../../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="../app.html" rel="up" title="celery.app"/>
+</head>
+<body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
 <div class="deck">
-
-    
-        <p>
+<p>
         This document describes the current stable version of Celery (3.1). For development docs,
         <a href="http://docs.celeryproject.org/en/master/_modules/celery/app/routes.html">go here</a>.
         </p>
-    
-
 </div>
-    <h1>Source code for celery.app.routes</h1><div class="highlight"><pre>
+<h1>Source code for celery.app.routes</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="sd">    celery.routes</span>
 <span class="sd">    ~~~~~~~~~~~~~</span>
 
 <span class="sd">    Contains utilities for working with task routers,</span>
 <span class="sd">    (:setting:`CELERY_ROUTES`).</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
 
 <span class="kn">from</span> <span class="nn">celery.exceptions</span> <span class="kn">import</span> <span class="n">QueueNotFound</span>
@@ -76,13 +53,13 @@
 <span class="kn">from</span> <span class="nn">celery.utils.functional</span> <span class="kn">import</span> <span class="n">firstmethod</span><span class="p">,</span> <span class="n">mlazy</span>
 <span class="kn">from</span> <span class="nn">celery.utils.imports</span> <span class="kn">import</span> <span class="n">instantiate</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;MapRoute&#39;</span><span class="p">,</span> <span class="s1">&#39;Router&#39;</span><span class="p">,</span> <span class="s1">&#39;prepare&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'MapRoute'</span><span class="p">,</span> <span class="s1">'Router'</span><span class="p">,</span> <span class="s1">'prepare'</span><span class="p">]</span>
 
-<span class="n">_first_route</span> <span class="o">=</span> <span class="n">firstmethod</span><span class="p">(</span><span class="s1">&#39;route_for_task&#39;</span><span class="p">)</span>
+<span class="n">_first_route</span> <span class="o">=</span> <span class="n">firstmethod</span><span class="p">(</span><span class="s1">'route_for_task'</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="MapRoute"><a class="viewcode-back" href="../../../internals/reference/celery.app.routes.html#celery.app.routes.MapRoute">[docs]</a><span class="k">class</span> <span class="nc">MapRoute</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Creates a router out of a :class:`dict`.&quot;&quot;&quot;</span>
+    <span class="sd">"""Creates a router out of a :class:`dict`."""</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">map</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">map</span> <span class="o">=</span> <span class="nb">map</span>
@@ -93,7 +70,7 @@
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
             <span class="k">pass</span>
         <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;queue&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="p">[</span><span class="n">task</span><span class="p">]}</span></div></div>
+            <span class="k">return</span> <span class="p">{</span><span class="s1">'queue'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="p">[</span><span class="n">task</span><span class="p">]}</span></div></div>
 
 
 <div class="viewcode-block" id="Router"><a class="viewcode-back" href="../../../internals/reference/celery.app.routes.html#celery.app.routes.Router">[docs]</a><span class="k">class</span> <span class="nc">Router</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -106,12 +83,12 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">create_missing</span> <span class="o">=</span> <span class="n">create_missing</span>
 
 <div class="viewcode-block" id="Router.route"><a class="viewcode-back" href="../../../internals/reference/celery.app.routes.html#celery.app.routes.Router.route">[docs]</a>    <span class="k">def</span> <span class="nf">route</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">task</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(),</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{}):</span>
-        <span class="n">options</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">expand_destination</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>  <span class="c1"># expands &#39;queue&#39;</span>
+        <span class="n">options</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">expand_destination</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>  <span class="c1"># expands 'queue'</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">routes</span><span class="p">:</span>
             <span class="n">route</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lookup_route</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">route</span><span class="p">:</span>  <span class="c1"># expands &#39;queue&#39; in route.</span>
+            <span class="k">if</span> <span class="n">route</span><span class="p">:</span>  <span class="c1"># expands 'queue' in route.</span>
                 <span class="k">return</span> <span class="n">lpmerge</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">expand_destination</span><span class="p">(</span><span class="n">route</span><span class="p">),</span> <span class="n">options</span><span class="p">)</span>
-        <span class="k">if</span> <span class="s1">&#39;queue&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">options</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s1">'queue'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">options</span><span class="p">:</span>
             <span class="n">options</span> <span class="o">=</span> <span class="n">lpmerge</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">expand_destination</span><span class="p">(</span>
                               <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">CELERY_DEFAULT_QUEUE</span><span class="p">),</span> <span class="n">options</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">options</span></div>
@@ -123,16 +100,16 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># can use defaults from configured queue, but override specific</span>
             <span class="c1"># things (like the routing_key): great for topic exchanges.</span>
-            <span class="n">queue</span> <span class="o">=</span> <span class="n">route</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;queue&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+            <span class="n">queue</span> <span class="o">=</span> <span class="n">route</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">'queue'</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">queue</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">Q</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">queues</span><span class="p">[</span><span class="n">queue</span><span class="p">]</span>  <span class="c1"># noqa</span>
             <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">QueueNotFound</span><span class="p">(</span>
-                    <span class="s1">&#39;Queue {0!r} missing from CELERY_QUEUES&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">queue</span><span class="p">))</span>
+                    <span class="s1">'Queue {0!r} missing from CELERY_QUEUES'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">queue</span><span class="p">))</span>
             <span class="c1"># needs to be declared by publisher</span>
-            <span class="n">route</span><span class="p">[</span><span class="s1">&#39;queue&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Q</span>
+            <span class="n">route</span><span class="p">[</span><span class="s1">'queue'</span><span class="p">]</span> <span class="o">=</span> <span class="n">Q</span>
         <span class="k">return</span> <span class="n">route</span></div>
 
 <div class="viewcode-block" id="Router.lookup_route"><a class="viewcode-back" href="../../../internals/reference/celery.app.routes.html#celery.app.routes.Router.lookup_route">[docs]</a>    <span class="k">def</span> <span class="nf">lookup_route</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
@@ -140,7 +117,7 @@
 
 
 <div class="viewcode-block" id="prepare"><a class="viewcode-back" href="../../../internals/reference/celery.app.routes.html#celery.app.routes.prepare">[docs]</a><span class="k">def</span> <span class="nf">prepare</span><span class="p">(</span><span class="n">routes</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Expands the :setting:`CELERY_ROUTES` setting.&quot;&quot;&quot;</span>
+    <span class="sd">"""Expands the :setting:`CELERY_ROUTES` setting."""</span>
 
     <span class="k">def</span> <span class="nf">expand_route</span><span class="p">(</span><span class="n">route</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">route</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
@@ -155,27 +132,15 @@
         <span class="n">routes</span> <span class="o">=</span> <span class="p">(</span><span class="n">routes</span><span class="p">,</span> <span class="p">)</span>
     <span class="k">return</span> <span class="p">[</span><span class="n">expand_route</span><span class="p">(</span><span class="n">route</span><span class="p">)</span> <span class="k">for</span> <span class="n">route</span> <span class="ow">in</span> <span class="n">routes</span><span class="p">]</span></div>
 </pre></div>
+</div>
+</div>
+</div>
 
-          </div>
-        </div>
-      </div>
+<div class="clearer"></div>
+</div>
+
+<div class="footer" role="contentinfo">
+        © <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="../app.html" >celery.app</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &copy; <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
-    </div>
-  </body>
+</body>
 </html>

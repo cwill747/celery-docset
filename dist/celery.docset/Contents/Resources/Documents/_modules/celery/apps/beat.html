@@ -1,17 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>celery.apps.beat &mdash; Celery 3.1.23 documentation</title>
-    
-    <link rel="stylesheet" href="../../../_static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>celery.apps.beat — Celery 3.1.23 documentation</title>
+<link href="../../../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
         VERSION:     '3.1.23',
@@ -20,56 +16,38 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="copyright" title="Copyright" href="../../../copyright.html" />
-    <link rel="top" title="Celery 3.1.23 documentation" href="../../../index.html" />
-    <link rel="up" title="Module code" href="../../index.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
-      </ul>
-    </div>  
+<script src="../../../_static/jquery.js" type="text/javascript"></script>
+<script src="../../../_static/underscore.js" type="text/javascript"></script>
+<script src="../../../_static/doctools.js" type="text/javascript"></script>
+<link href="../../../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../../../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="../../index.html" rel="up" title="Module code"/>
+</head>
+<body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
 <div class="deck">
-
-    
-        <p>
+<p>
         This document describes the current stable version of Celery (3.1). For development docs,
         <a href="http://docs.celeryproject.org/en/master/_modules/celery/apps/beat.html">go here</a>.
         </p>
-    
-
 </div>
-    <h1>Source code for celery.apps.beat</h1><div class="highlight"><pre>
+<h1>Source code for celery.apps.beat</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="sd">    celery.apps.beat</span>
 <span class="sd">    ~~~~~~~~~~~~~~~~</span>
 
-<span class="sd">    This module is the &#39;program-version&#39; of :mod:`celery.beat`.</span>
+<span class="sd">    This module is the 'program-version' of :mod:`celery.beat`.</span>
 
 <span class="sd">    It does everything necessary to run that module</span>
 <span class="sd">    as an actual application, like installing signal handlers</span>
 <span class="sd">    and so on.</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">unicode_literals</span>
 
 <span class="kn">import</span> <span class="nn">numbers</span>
@@ -81,9 +59,9 @@
 <span class="kn">from</span> <span class="nn">celery.utils.log</span> <span class="kn">import</span> <span class="n">LOG_LEVELS</span><span class="p">,</span> <span class="n">get_logger</span>
 <span class="kn">from</span> <span class="nn">celery.utils.timeutils</span> <span class="kn">import</span> <span class="n">humanize_seconds</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Beat&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Beat'</span><span class="p">]</span>
 
-<span class="n">STARTUP_INFO_FMT</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="n">STARTUP_INFO_FMT</span> <span class="o">=</span> <span class="s2">"""</span>
 <span class="s2">Configuration -&gt;</span>
 <span class="s2">    . broker -&gt; {conninfo}</span>
 <span class="s2">    . loader -&gt; {loader}</span>
@@ -91,9 +69,9 @@
 <span class="s2">{scheduler_info}</span>
 <span class="s2">    . logfile -&gt; {logfile}@%{loglevel}</span>
 <span class="s2">    . maxinterval -&gt; {hmax_interval} ({max_interval}s)</span>
-<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="s2">"""</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
 
-<span class="n">logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="s1">&#39;celery.beat&#39;</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="s1">'celery.beat'</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="Beat"><a class="viewcode-back" href="../../../reference/celery.apps.beat.html#celery.apps.beat.Beat">[docs]</a><span class="k">class</span> <span class="nc">Beat</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -105,17 +83,17 @@
                  <span class="n">loglevel</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">logfile</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">schedule</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
                  <span class="n">scheduler_cls</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">redirect_stdouts</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
                  <span class="n">redirect_stdouts_level</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Starts the beat task scheduler.&quot;&quot;&quot;</span>
+        <span class="sd">"""Starts the beat task scheduler."""</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="n">app</span> <span class="o">=</span> <span class="n">app</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">loglevel</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getopt</span><span class="p">(</span><span class="s1">&#39;log_level&#39;</span><span class="p">,</span> <span class="n">loglevel</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">logfile</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getopt</span><span class="p">(</span><span class="s1">&#39;log_file&#39;</span><span class="p">,</span> <span class="n">logfile</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">schedule</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getopt</span><span class="p">(</span><span class="s1">&#39;schedule_filename&#39;</span><span class="p">,</span> <span class="n">schedule</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">scheduler_cls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getopt</span><span class="p">(</span><span class="s1">&#39;scheduler&#39;</span><span class="p">,</span> <span class="n">scheduler_cls</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">loglevel</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getopt</span><span class="p">(</span><span class="s1">'log_level'</span><span class="p">,</span> <span class="n">loglevel</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logfile</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getopt</span><span class="p">(</span><span class="s1">'log_file'</span><span class="p">,</span> <span class="n">logfile</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">schedule</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getopt</span><span class="p">(</span><span class="s1">'schedule_filename'</span><span class="p">,</span> <span class="n">schedule</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scheduler_cls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getopt</span><span class="p">(</span><span class="s1">'scheduler'</span><span class="p">,</span> <span class="n">scheduler_cls</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">redirect_stdouts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getopt</span><span class="p">(</span>
-            <span class="s1">&#39;redirect_stdouts&#39;</span><span class="p">,</span> <span class="n">redirect_stdouts</span><span class="p">,</span>
+            <span class="s1">'redirect_stdouts'</span><span class="p">,</span> <span class="n">redirect_stdouts</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">redirect_stdouts_level</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getopt</span><span class="p">(</span>
-            <span class="s1">&#39;redirect_stdouts_level&#39;</span><span class="p">,</span> <span class="n">redirect_stdouts_level</span><span class="p">,</span>
+            <span class="s1">'redirect_stdouts_level'</span><span class="p">,</span> <span class="n">redirect_stdouts_level</span><span class="p">,</span>
         <span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">max_interval</span> <span class="o">=</span> <span class="n">max_interval</span>
@@ -133,11 +111,11 @@
     <span class="k">def</span> <span class="nf">_getopt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">value</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">find_value_for_key</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">namespace</span><span class="o">=</span><span class="s1">&#39;celerybeat&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">find_value_for_key</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">namespace</span><span class="o">=</span><span class="s1">'celerybeat'</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Beat.run"><a class="viewcode-back" href="../../../reference/celery.apps.beat.html#celery.apps.beat.Beat.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">colored</span><span class="o">.</span><span class="n">cyan</span><span class="p">(</span>
-            <span class="s1">&#39;celery beat v{0} is starting.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">VERSION_BANNER</span><span class="p">))))</span>
+            <span class="s1">'celery beat v{0} is starting.'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">VERSION_BANNER</span><span class="p">))))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">init_loader</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_process_title</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">start_scheduler</span><span class="p">()</span></div>
@@ -158,20 +136,20 @@
                             <span class="n">scheduler_cls</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">scheduler_cls</span><span class="p">,</span>
                             <span class="n">schedule_filename</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">schedule</span><span class="p">)</span>
 
-        <span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">blue</span><span class="p">(</span><span class="s1">&#39;__    &#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">magenta</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">),</span>
-                  <span class="n">c</span><span class="o">.</span><span class="n">blue</span><span class="p">(</span><span class="s1">&#39;    ... __   &#39;</span><span class="p">),</span> <span class="n">c</span><span class="o">.</span><span class="n">magenta</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">),</span>
-                  <span class="n">c</span><span class="o">.</span><span class="n">blue</span><span class="p">(</span><span class="s1">&#39;        _</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">),</span>
+        <span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">blue</span><span class="p">(</span><span class="s1">'__    '</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">magenta</span><span class="p">(</span><span class="s1">'-'</span><span class="p">),</span>
+                  <span class="n">c</span><span class="o">.</span><span class="n">blue</span><span class="p">(</span><span class="s1">'    ... __   '</span><span class="p">),</span> <span class="n">c</span><span class="o">.</span><span class="n">magenta</span><span class="p">(</span><span class="s1">'-'</span><span class="p">),</span>
+                  <span class="n">c</span><span class="o">.</span><span class="n">blue</span><span class="p">(</span><span class="s1">'        _</span><span class="se">\n</span><span class="s1">'</span><span class="p">),</span>
                   <span class="n">c</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">startup_info</span><span class="p">(</span><span class="n">beat</span><span class="p">)))))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setup_logging</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">socket_timeout</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Setting default socket timeout to </span><span class="si">%r</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">'Setting default socket timeout to </span><span class="si">%r</span><span class="s1">'</span><span class="p">,</span>
                          <span class="bp">self</span><span class="o">.</span><span class="n">socket_timeout</span><span class="p">)</span>
             <span class="n">socket</span><span class="o">.</span><span class="n">setdefaulttimeout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">socket_timeout</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">install_sync_handler</span><span class="p">(</span><span class="n">beat</span><span class="p">)</span>
             <span class="n">beat</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="s1">&#39;beat raised exception </span><span class="si">%s</span><span class="s1">: </span><span class="si">%r</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="s1">'beat raised exception </span><span class="si">%s</span><span class="s1">: </span><span class="si">%r</span><span class="s1">'</span><span class="p">,</span>
                             <span class="n">exc</span><span class="o">.</span><span class="n">__class__</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span>
                             <span class="n">exc_info</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span></div>
 
@@ -185,7 +163,7 @@
         <span class="n">scheduler</span> <span class="o">=</span> <span class="n">beat</span><span class="o">.</span><span class="n">get_scheduler</span><span class="p">(</span><span class="n">lazy</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">STARTUP_INFO_FMT</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
             <span class="n">conninfo</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">connection</span><span class="p">()</span><span class="o">.</span><span class="n">as_uri</span><span class="p">(),</span>
-            <span class="n">logfile</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">logfile</span> <span class="ow">or</span> <span class="s1">&#39;[stderr]&#39;</span><span class="p">,</span>
+            <span class="n">logfile</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">logfile</span> <span class="ow">or</span> <span class="s1">'[stderr]'</span><span class="p">,</span>
             <span class="n">loglevel</span><span class="o">=</span><span class="n">LOG_LEVELS</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">loglevel</span><span class="p">],</span>
             <span class="n">loader</span><span class="o">=</span><span class="n">qualname</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">loader</span><span class="p">),</span>
             <span class="n">scheduler</span><span class="o">=</span><span class="n">qualname</span><span class="p">(</span><span class="n">scheduler</span><span class="p">),</span>
@@ -195,14 +173,14 @@
         <span class="p">)</span></div>
 
 <div class="viewcode-block" id="Beat.set_process_title"><a class="viewcode-back" href="../../../reference/celery.apps.beat.html#celery.apps.beat.Beat.set_process_title">[docs]</a>    <span class="k">def</span> <span class="nf">set_process_title</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">arg_start</span> <span class="o">=</span> <span class="s1">&#39;manage&#39;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="mi">2</span> <span class="ow">or</span> <span class="mi">1</span>
+        <span class="n">arg_start</span> <span class="o">=</span> <span class="s1">'manage'</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="mi">2</span> <span class="ow">or</span> <span class="mi">1</span>
         <span class="n">platforms</span><span class="o">.</span><span class="n">set_process_title</span><span class="p">(</span>
-            <span class="s1">&#39;celery beat&#39;</span><span class="p">,</span> <span class="n">info</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="n">arg_start</span><span class="p">:]),</span>
+            <span class="s1">'celery beat'</span><span class="p">,</span> <span class="n">info</span><span class="o">=</span><span class="s1">' '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="n">arg_start</span><span class="p">:]),</span>
         <span class="p">)</span></div>
 
 <div class="viewcode-block" id="Beat.install_sync_handler"><a class="viewcode-back" href="../../../reference/celery.apps.beat.html#celery.apps.beat.Beat.install_sync_handler">[docs]</a>    <span class="k">def</span> <span class="nf">install_sync_handler</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">beat</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Install a `SIGTERM` + `SIGINT` handler that saves</span>
-<span class="sd">        the beat schedule.&quot;&quot;&quot;</span>
+        <span class="sd">"""Install a `SIGTERM` + `SIGINT` handler that saves</span>
+<span class="sd">        the beat schedule."""</span>
 
         <span class="k">def</span> <span class="nf">_sync</span><span class="p">(</span><span class="n">signum</span><span class="p">,</span> <span class="n">frame</span><span class="p">):</span>
             <span class="n">beat</span><span class="o">.</span><span class="n">sync</span><span class="p">()</span>
@@ -210,26 +188,15 @@
 
         <span class="n">platforms</span><span class="o">.</span><span class="n">signals</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">SIGTERM</span><span class="o">=</span><span class="n">_sync</span><span class="p">,</span> <span class="n">SIGINT</span><span class="o">=</span><span class="n">_sync</span><span class="p">)</span></div></div>
 </pre></div>
+</div>
+</div>
+</div>
 
-          </div>
-        </div>
-      </div>
+<div class="clearer"></div>
+</div>
+
+<div class="footer" role="contentinfo">
+        © <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &copy; <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
-    </div>
-  </body>
+</body>
 </html>

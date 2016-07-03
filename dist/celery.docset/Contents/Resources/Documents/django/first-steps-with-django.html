@@ -1,17 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>First steps with Django &mdash; Celery 3.1.23 documentation</title>
-    
-    <link rel="stylesheet" href="../_static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>First steps with Django — Celery 3.1.23 documentation</title>
+<link href="../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
         VERSION:     '3.1.23',
@@ -20,52 +16,28 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="copyright" title="Copyright" href="../copyright.html" />
-    <link rel="top" title="Celery 3.1.23 documentation" href="../index.html" />
-    <link rel="up" title="Django" href="index.html" />
-    <link rel="next" title="Contributing" href="../contributing.html" />
-    <link rel="prev" title="Django" href="index.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="../contributing.html" title="Contributing"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="index.html" title="Django"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Django</a> &raquo;</li> 
-      </ul>
-    </div>  
+<script src="../_static/jquery.js" type="text/javascript"></script>
+<script src="../_static/underscore.js" type="text/javascript"></script>
+<script src="../_static/doctools.js" type="text/javascript"></script>
+<link href="../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="index.html" rel="up" title="Django"/>
+<link href="../contributing.html" rel="next" title="Contributing"/>
+<link href="index.html" rel="prev" title="Django"/>
+</head>
+<body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
 <div class="deck">
-
-    
-        <p>
+<p>
         This document describes the current stable version of Celery (3.1). For development docs,
         <a href="http://docs.celeryproject.org/en/master/django/first-steps-with-django.html">go here</a>.
         </p>
-    
-
 </div>
-    <div class="section" id="first-steps-with-django">
+<div class="section" id="first-steps-with-django">
 <span id="django-first-steps"></span><h1>First steps with Django<a class="headerlink" href="#first-steps-with-django" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="using-celery-with-django">
 <h2>Using Celery with Django<a class="headerlink" href="#using-celery-with-django" title="Permalink to this headline">¶</a></h2>
@@ -74,13 +46,13 @@
 <p class="last">Previous versions of Celery required a separate library to work with Django,
 but since 3.1 this is no longer the case. Django is supported out of the
 box now so this document only contains a basic way to integrate Celery and
-Django.  You will use the same API as non-Django users so it&#8217;s recommended that
+Django.  You will use the same API as non-Django users so it’s recommended that
 you read the <a class="reference internal" href="../getting-started/first-steps-with-celery.html#first-steps"><span>First Steps with Celery</span></a> tutorial
 first and come back to this tutorial.  When you have a working example you can
 continue to the <a class="reference internal" href="../getting-started/next-steps.html#next-steps"><span>Next Steps</span></a> guide.</p>
 </div>
 <p>To use Celery with your Django project you must first define
-an instance of the Celery library (called an &#8220;app&#8221;)</p>
+an instance of the Celery library (called an “app”)</p>
 <p>If you have a modern Django project layout like:</p>
 <div class="highlight-python3"><div class="highlight"><pre><span></span><span class="o">-</span> <span class="n">proj</span><span class="o">/</span>
   <span class="o">-</span> <span class="n">proj</span><span class="o">/</span><span class="n">__init__</span><span class="o">.</span><span class="n">py</span>
@@ -92,8 +64,8 @@ an instance of the Celery library (called an &#8220;app&#8221;)</p>
 <p>then the recommended way is to create a new <cite>proj/proj/celery.py</cite> module
 that defines the Celery instance:</p>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">file:</th><td class="field-body"><cite>proj/proj/celery.py</cite></td>
 </tr>
@@ -105,27 +77,27 @@ that defines the Celery instance:</p>
 
 <span class="kn">from</span> <span class="nn">celery</span> <span class="k">import</span> <span class="n">Celery</span>
 
-<span class="c1"># set the default Django settings module for the &#39;celery&#39; program.</span>
-<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;DJANGO_SETTINGS_MODULE&#39;</span><span class="p">,</span> <span class="s1">&#39;proj.settings&#39;</span><span class="p">)</span>
+<span class="c1"># set the default Django settings module for the 'celery' program.</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">'DJANGO_SETTINGS_MODULE'</span><span class="p">,</span> <span class="s1">'proj.settings'</span><span class="p">)</span>
 
 <span class="kn">from</span> <span class="nn">django.conf</span> <span class="k">import</span> <span class="n">settings</span>  <span class="c1"># noqa</span>
 
-<span class="n">app</span> <span class="o">=</span> <span class="n">Celery</span><span class="p">(</span><span class="s1">&#39;proj&#39;</span><span class="p">)</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">Celery</span><span class="p">(</span><span class="s1">'proj'</span><span class="p">)</span>
 
 <span class="c1"># Using a string here means the worker will not have to</span>
 <span class="c1"># pickle the object when using Windows.</span>
-<span class="n">app</span><span class="o">.</span><span class="n">config_from_object</span><span class="p">(</span><span class="s1">&#39;django.conf:settings&#39;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">config_from_object</span><span class="p">(</span><span class="s1">'django.conf:settings'</span><span class="p">)</span>
 <span class="n">app</span><span class="o">.</span><span class="n">autodiscover_tasks</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">settings</span><span class="o">.</span><span class="n">INSTALLED_APPS</span><span class="p">)</span>
 
 
 <span class="nd">@app</span><span class="o">.</span><span class="n">task</span><span class="p">(</span><span class="n">bind</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">debug_task</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Request: </span><span class="si">{0!r}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'Request: </span><span class="si">{0!r}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>Then you need to import this app in your <code class="file docutils literal"><span class="pre">proj/proj/__init__.py</span></code>
 module.  This ensures that the app is loaded when Django starts
-so that the <code class="docutils literal"><span class="pre">&#64;shared_task</span></code> decorator (mentioned later) will use it:</p>
+so that the <code class="docutils literal"><span class="pre">@shared_task</span></code> decorator (mentioned later) will use it:</p>
 <p><code class="file docutils literal"><span class="pre">proj/proj/__init__.py</span></code>:</p>
 <div class="highlight-python3"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span>
 
@@ -137,7 +109,7 @@ so that the <code class="docutils literal"><span class="pre">&#64;shared_task</s
 <p>Note that this example project layout is suitable for larger projects,
 for simple projects you may use a single contained module that defines
 both the app and tasks, like in the <a class="reference internal" href="../getting-started/first-steps-with-celery.html#tut-celery"><span>First Steps with Celery</span></a> tutorial.</p>
-<p>Let&#8217;s break down what happens in the first module,
+<p>Let’s break down what happens in the first module,
 first we import absolute imports from the future, so that our
 <code class="docutils literal"><span class="pre">celery.py</span></code> module will not clash with the library:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
@@ -145,25 +117,25 @@ first we import absolute imports from the future, so that our
 </div>
 <p>Then we set the default <span class="target" id="index-0"></span><code class="xref std std-envvar docutils literal"><span class="pre">DJANGO_SETTINGS_MODULE</span></code>
 for the <strong class="program">celery</strong> command-line program:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;DJANGO_SETTINGS_MODULE&#39;</span><span class="p">,</span> <span class="s1">&#39;proj.settings&#39;</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">'DJANGO_SETTINGS_MODULE'</span><span class="p">,</span> <span class="s1">'proj.settings'</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Specifying the settings here means the <code class="docutils literal"><span class="pre">celery</span></code> command line program
 will know where your Django project is.  This statement must always appear before
 the app instance is created, which is what we do next:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">app</span> <span class="o">=</span> <span class="n">Celery</span><span class="p">(</span><span class="s1">&#39;proj&#39;</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">app</span> <span class="o">=</span> <span class="n">Celery</span><span class="p">(</span><span class="s1">'proj'</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>This is your instance of the library, you can have many instances
-but there&#8217;s probably no reason for that when using Django.</p>
+but there’s probably no reason for that when using Django.</p>
 <p>We also add the Django settings module as a configuration source
-for Celery.  This means that you don&#8217;t have to use multiple
+for Celery.  This means that you don’t have to use multiple
 configuration files, and instead configure Celery directly
 from the Django settings.</p>
 <p>You can pass the object directly here, but using a string is better since
-then the worker doesn&#8217;t have to serialize the object when using Windows
+then the worker doesn’t have to serialize the object when using Windows
 or execv:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">app</span><span class="o">.</span><span class="n">config_from_object</span><span class="p">(</span><span class="s1">&#39;django.conf:settings&#39;</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">app</span><span class="o">.</span><span class="n">config_from_object</span><span class="p">(</span><span class="s1">'django.conf:settings'</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Next, a common practice for reusable apps is to define all tasks
@@ -190,11 +162,11 @@ module will not evaluate the Django settings object.</p>
 its own request information.  This is using the new <code class="docutils literal"><span class="pre">bind=True</span></code> task option
 introduced in Celery 3.1 to easily refer to the current task instance.</p>
 <div class="section" id="using-the-shared-task-decorator">
-<h3>Using the <code class="docutils literal"><span class="pre">&#64;shared_task</span></code> decorator<a class="headerlink" href="#using-the-shared-task-decorator" title="Permalink to this headline">¶</a></h3>
+<h3>Using the <code class="docutils literal"><span class="pre">@shared_task</span></code> decorator<a class="headerlink" href="#using-the-shared-task-decorator" title="Permalink to this headline">¶</a></h3>
 <p>The tasks you write will probably live in reusable apps, and reusable
 apps cannot depend on the project itself, so you also cannot import your app
 instance directly.</p>
-<p>The <code class="docutils literal"><span class="pre">&#64;shared_task</span></code> decorator lets you create tasks without having any
+<p>The <code class="docutils literal"><span class="pre">@shared_task</span></code> decorator lets you create tasks without having any
 concrete app instance:</p>
 <p><code class="file docutils literal"><span class="pre">demoapp/tasks.py</span></code>:</p>
 <div class="highlight-python3"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span>
@@ -245,8 +217,8 @@ the Django ORM and the Django Cache frameworks.</p>
 <div><p>This step will create the tables used to store results
 when using the database result backend and the tables used
 by the database periodic task scheduler.  You can skip
-this step if you don&#8217;t use these.</p>
-<p>If you are using <a class="reference external" href="http://pypi.python.org/pypi/South/">south</a> for schema migrations, you&#8217;ll want to:</p>
+this step if you don’t use these.</p>
+<p>If you are using <a class="reference external" href="http://pypi.python.org/pypi/South/">south</a> for schema migrations, you’ll want to:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ python manage.py migrate djcelery
 </pre></div>
 </div>
@@ -259,13 +231,13 @@ this step if you don&#8217;t use these.</p>
 <li><p class="first">Configure celery to use the django-celery backend.</p>
 <p>For the database backend you must use:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">app</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
-    <span class="n">CELERY_RESULT_BACKEND</span><span class="o">=</span><span class="s1">&#39;djcelery.backends.database:DatabaseBackend&#39;</span><span class="p">,</span>
+    <span class="n">CELERY_RESULT_BACKEND</span><span class="o">=</span><span class="s1">'djcelery.backends.database:DatabaseBackend'</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 <p>For the cache backend you can use:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">app</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
-    <span class="n">CELERY_RESULT_BACKEND</span><span class="o">=</span><span class="s1">&#39;djcelery.backends.cache:CacheBackend&#39;</span><span class="p">,</span>
+    <span class="n">CELERY_RESULT_BACKEND</span><span class="o">=</span><span class="s1">'djcelery.backends.cache:CacheBackend'</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -290,7 +262,7 @@ of the tasks will be different.</p>
 <p>In a production environment you will want to run the worker in the background
 as a daemon - see <a class="reference internal" href="../tutorials/daemonizing.html#daemonizing"><span>Running the worker as a daemon</span></a> - but for testing and
 development it is useful to be able to start a worker instance by using the
-<code class="docutils literal"><span class="pre">celery</span> <span class="pre">worker</span></code> manage command, much as you would use Django&#8217;s runserver:</p>
+<code class="docutils literal"><span class="pre">celery</span> <span class="pre">worker</span></code> manage command, much as you would use Django’s runserver:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ celery -A proj worker -l info
 </pre></div>
 </div>
@@ -307,33 +279,15 @@ use the help command:</p>
 can study the <a class="reference internal" href="../userguide/index.html#guide"><span>User Guide</span></a>.</p>
 </div>
 </div>
+</div>
+</div>
+</div>
 
+<div class="clearer"></div>
+</div>
 
-          </div>
-        </div>
-      </div>
+<div class="footer" role="contentinfo">
+        © <a href="../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="../contributing.html" title="Contributing"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="index.html" title="Django"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" >Django</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &copy; <a href="../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
-    </div>
-  </body>
+</body>
 </html>

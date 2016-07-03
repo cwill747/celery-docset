@@ -1,17 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>celery.backends.amqp &mdash; Celery 3.1.23 documentation</title>
-    
-    <link rel="stylesheet" href="../../../_static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>celery.backends.amqp — Celery 3.1.23 documentation</title>
+<link href="../../../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
         VERSION:     '3.1.23',
@@ -20,47 +16,28 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="copyright" title="Copyright" href="../../../copyright.html" />
-    <link rel="top" title="Celery 3.1.23 documentation" href="../../../index.html" />
-    <link rel="up" title="celery.backends" href="../backends.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="../backends.html" accesskey="U">celery.backends</a> &raquo;</li> 
-      </ul>
-    </div>  
+<script src="../../../_static/jquery.js" type="text/javascript"></script>
+<script src="../../../_static/underscore.js" type="text/javascript"></script>
+<script src="../../../_static/doctools.js" type="text/javascript"></script>
+<link href="../../../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../../../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="../backends.html" rel="up" title="celery.backends"/>
+</head>
+<body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
 <div class="deck">
-
-    
-        <p>
+<p>
         This document describes the current stable version of Celery (3.1). For development docs,
         <a href="http://docs.celeryproject.org/en/master/_modules/celery/backends/amqp.html">go here</a>.
         </p>
-    
-
 </div>
-    <h1>Source code for celery.backends.amqp</h1><div class="highlight"><pre>
+<h1>Source code for celery.backends.amqp</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="sd">    celery.backends.amqp</span>
 <span class="sd">    ~~~~~~~~~~~~~~~~~~~~</span>
 
@@ -68,7 +45,7 @@
 
 <span class="sd">    This backend publishes results as messages.</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
 
 <span class="kn">import</span> <span class="nn">socket</span>
@@ -87,20 +64,20 @@
 
 <span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">BaseBackend</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;BacklogLimitExceeded&#39;</span><span class="p">,</span> <span class="s1">&#39;AMQPBackend&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'BacklogLimitExceeded'</span><span class="p">,</span> <span class="s1">'AMQPBackend'</span><span class="p">]</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="BacklogLimitExceeded"><a class="viewcode-back" href="../../../internals/reference/celery.backends.amqp.html#celery.backends.amqp.BacklogLimitExceeded">[docs]</a><span class="k">class</span> <span class="nc">BacklogLimitExceeded</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Too much state history to fast-forward.&quot;&quot;&quot;</span></div>
+    <span class="sd">"""Too much state history to fast-forward."""</span></div>
 
 
 <span class="k">def</span> <span class="nf">repair_uuid</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
     <span class="c1"># Historically the dashes in UUIDS are removed from AMQ entity names,</span>
-    <span class="c1"># but there is no known reason to.  Hopefully we&#39;ll be able to fix</span>
+    <span class="c1"># but there is no known reason to.  Hopefully we'll be able to fix</span>
     <span class="c1"># this in v4.0.</span>
-    <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-</span><span class="si">%s</span><span class="s1">-</span><span class="si">%s</span><span class="s1">-</span><span class="si">%s</span><span class="s1">-</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">s</span><span class="p">[:</span><span class="mi">8</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="mi">8</span><span class="p">:</span><span class="mi">12</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="mi">12</span><span class="p">:</span><span class="mi">16</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="mi">16</span><span class="p">:</span><span class="mi">20</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="mi">20</span><span class="p">:])</span>
+    <span class="k">return</span> <span class="s1">'</span><span class="si">%s</span><span class="s1">-</span><span class="si">%s</span><span class="s1">-</span><span class="si">%s</span><span class="s1">-</span><span class="si">%s</span><span class="s1">-</span><span class="si">%s</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">s</span><span class="p">[:</span><span class="mi">8</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="mi">8</span><span class="p">:</span><span class="mi">12</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="mi">12</span><span class="p">:</span><span class="mi">16</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="mi">16</span><span class="p">:</span><span class="mi">20</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="mi">20</span><span class="p">:])</span>
 
 
 <span class="k">class</span> <span class="nc">NoCacheQueue</span><span class="p">(</span><span class="n">Queue</span><span class="p">):</span>
@@ -108,7 +85,7 @@
 
 
 <div class="viewcode-block" id="AMQPBackend"><a class="viewcode-back" href="../../../internals/reference/celery.backends.amqp.html#celery.backends.amqp.AMQPBackend">[docs]</a><span class="k">class</span> <span class="nc">AMQPBackend</span><span class="p">(</span><span class="n">BaseBackend</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Publishes results by sending messages.&quot;&quot;&quot;</span>
+    <span class="sd">"""Publishes results by sending messages."""</span>
     <span class="n">Exchange</span> <span class="o">=</span> <span class="n">Exchange</span>
     <span class="n">Queue</span> <span class="o">=</span> <span class="n">NoCacheQueue</span>
     <span class="n">Consumer</span> <span class="o">=</span> <span class="n">Consumer</span>
@@ -121,10 +98,10 @@
     <span class="n">supports_native_join</span> <span class="o">=</span> <span class="bp">True</span>
 
     <span class="n">retry_policy</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;max_retries&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
-        <span class="s1">&#39;interval_start&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s1">&#39;interval_step&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s1">&#39;interval_max&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s1">'max_retries'</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+        <span class="s1">'interval_start'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s1">'interval_step'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s1">'interval_max'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
     <span class="p">}</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">,</span> <span class="n">connection</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">exchange</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">exchange_type</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
@@ -143,13 +120,13 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">auto_delete</span> <span class="o">=</span> <span class="n">auto_delete</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">expires</span> <span class="o">=</span> <span class="bp">None</span>
-        <span class="k">if</span> <span class="s1">&#39;expires&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="ow">or</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;expires&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">expires</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prepare_expires</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;expires&#39;</span><span class="p">))</span>
+        <span class="k">if</span> <span class="s1">'expires'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="ow">or</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">'expires'</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">expires</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prepare_expires</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'expires'</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">queue_arguments</span> <span class="o">=</span> <span class="n">dictfilter</span><span class="p">({</span>
-            <span class="s1">&#39;x-expires&#39;</span><span class="p">:</span> <span class="n">maybe_s_to_ms</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">expires</span><span class="p">),</span>
+            <span class="s1">'x-expires'</span><span class="p">:</span> <span class="n">maybe_s_to_ms</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">expires</span><span class="p">),</span>
         <span class="p">})</span>
 
-    <span class="k">def</span> <span class="nf">_create_exchange</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;direct&#39;</span><span class="p">,</span> <span class="n">delivery_mode</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_create_exchange</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">'direct'</span><span class="p">,</span> <span class="n">delivery_mode</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Exchange</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
                              <span class="nb">type</span><span class="o">=</span><span class="nb">type</span><span class="p">,</span>
                              <span class="n">delivery_mode</span><span class="o">=</span><span class="n">delivery_mode</span><span class="p">,</span>
@@ -169,7 +146,7 @@
         <span class="k">pass</span></div>
 
 <div class="viewcode-block" id="AMQPBackend.rkey"><a class="viewcode-back" href="../../../internals/reference/celery.backends.amqp.html#celery.backends.amqp.AMQPBackend.rkey">[docs]</a>    <span class="k">def</span> <span class="nf">rkey</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_id</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">task_id</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">task_id</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'-'</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="AMQPBackend.destination_for"><a class="viewcode-back" href="../../../internals/reference/celery.backends.amqp.html#celery.backends.amqp.AMQPBackend.destination_for">[docs]</a>    <span class="k">def</span> <span class="nf">destination_for</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_id</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">request</span><span class="p">:</span>
@@ -178,16 +155,16 @@
 
 <div class="viewcode-block" id="AMQPBackend.store_result"><a class="viewcode-back" href="../../../internals/reference/celery.backends.amqp.html#celery.backends.amqp.AMQPBackend.store_result">[docs]</a>    <span class="k">def</span> <span class="nf">store_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_id</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span>
                      <span class="n">traceback</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Send task return value and status.&quot;&quot;&quot;</span>
+        <span class="sd">"""Send task return value and status."""</span>
         <span class="n">routing_key</span><span class="p">,</span> <span class="n">correlation_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">destination_for</span><span class="p">(</span><span class="n">task_id</span><span class="p">,</span> <span class="n">request</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">routing_key</span><span class="p">:</span>
             <span class="k">return</span>
         <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">amqp</span><span class="o">.</span><span class="n">producer_pool</span><span class="o">.</span><span class="n">acquire</span><span class="p">(</span><span class="n">block</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> <span class="k">as</span> <span class="n">producer</span><span class="p">:</span>
             <span class="n">producer</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span>
-                <span class="p">{</span><span class="s1">&#39;task_id&#39;</span><span class="p">:</span> <span class="n">task_id</span><span class="p">,</span> <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="n">status</span><span class="p">,</span>
-                 <span class="s1">&#39;result&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">encode_result</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">status</span><span class="p">),</span>
-                 <span class="s1">&#39;traceback&#39;</span><span class="p">:</span> <span class="n">traceback</span><span class="p">,</span>
-                 <span class="s1">&#39;children&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_task_children</span><span class="p">(</span><span class="n">request</span><span class="p">)},</span>
+                <span class="p">{</span><span class="s1">'task_id'</span><span class="p">:</span> <span class="n">task_id</span><span class="p">,</span> <span class="s1">'status'</span><span class="p">:</span> <span class="n">status</span><span class="p">,</span>
+                 <span class="s1">'result'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">encode_result</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">status</span><span class="p">),</span>
+                 <span class="s1">'traceback'</span><span class="p">:</span> <span class="n">traceback</span><span class="p">,</span>
+                 <span class="s1">'children'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_task_children</span><span class="p">(</span><span class="n">request</span><span class="p">)},</span>
                 <span class="n">exchange</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">exchange</span><span class="p">,</span>
                 <span class="n">routing_key</span><span class="o">=</span><span class="n">routing_key</span><span class="p">,</span>
                 <span class="n">correlation_id</span><span class="o">=</span><span class="n">correlation_id</span><span class="p">,</span>
@@ -208,14 +185,14 @@
                  <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">cached_meta</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">task_id</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">cache</span> <span class="ow">and</span> <span class="n">cached_meta</span> <span class="ow">and</span> \
-                <span class="n">cached_meta</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">READY_STATES</span><span class="p">:</span>
+                <span class="n">cached_meta</span><span class="p">[</span><span class="s1">'status'</span><span class="p">]</span> <span class="ow">in</span> <span class="n">READY_STATES</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">cached_meta</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">consume</span><span class="p">(</span><span class="n">task_id</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span> <span class="n">no_ack</span><span class="o">=</span><span class="n">no_ack</span><span class="p">,</span>
                                     <span class="n">on_interval</span><span class="o">=</span><span class="n">on_interval</span><span class="p">)</span>
             <span class="k">except</span> <span class="n">socket</span><span class="o">.</span><span class="n">timeout</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="n">TimeoutError</span><span class="p">(</span><span class="s1">&#39;The operation timed out.&#39;</span><span class="p">)</span></div>
+                <span class="k">raise</span> <span class="n">TimeoutError</span><span class="p">(</span><span class="s1">'The operation timed out.'</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="AMQPBackend.get_task_meta"><a class="viewcode-back" href="../../../internals/reference/celery.backends.amqp.html#celery.backends.amqp.AMQPBackend.get_task_meta">[docs]</a>    <span class="k">def</span> <span class="nf">get_task_meta</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_id</span><span class="p">,</span> <span class="n">backlog_limit</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
         <span class="c1"># Polling and using basic_get</span>
@@ -230,7 +207,7 @@
                 <span class="p">)</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">acc</span><span class="p">:</span>  <span class="c1"># no more messages</span>
                     <span class="k">break</span>
-                <span class="k">if</span> <span class="n">acc</span><span class="o">.</span><span class="n">payload</span><span class="p">[</span><span class="s1">&#39;task_id&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">task_id</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">acc</span><span class="o">.</span><span class="n">payload</span><span class="p">[</span><span class="s1">'task_id'</span><span class="p">]</span> <span class="o">==</span> <span class="n">task_id</span><span class="p">:</span>
                     <span class="n">prev</span><span class="p">,</span> <span class="n">latest</span> <span class="o">=</span> <span class="n">latest</span><span class="p">,</span> <span class="n">acc</span>
                 <span class="k">if</span> <span class="n">prev</span><span class="p">:</span>
                     <span class="c1"># backends are not expected to keep history,</span>
@@ -251,7 +228,7 @@
                     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="n">task_id</span><span class="p">]</span>
                 <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
                     <span class="c1"># result probably pending.</span>
-                    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="n">states</span><span class="o">.</span><span class="n">PENDING</span><span class="p">,</span> <span class="s1">&#39;result&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">}</span></div>
+                    <span class="k">return</span> <span class="p">{</span><span class="s1">'status'</span><span class="p">:</span> <span class="n">states</span><span class="o">.</span><span class="n">PENDING</span><span class="p">,</span> <span class="s1">'result'</span><span class="p">:</span> <span class="bp">None</span><span class="p">}</span></div>
     <span class="n">poll</span> <span class="o">=</span> <span class="n">get_task_meta</span>  <span class="c1"># XXX compat</span>
 
 <div class="viewcode-block" id="AMQPBackend.drain_events"><a class="viewcode-back" href="../../../internals/reference/celery.backends.amqp.html#celery.backends.amqp.AMQPBackend.drain_events">[docs]</a>    <span class="k">def</span> <span class="nf">drain_events</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">connection</span><span class="p">,</span> <span class="n">consumer</span><span class="p">,</span>
@@ -260,8 +237,8 @@
         <span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
 
         <span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="n">meta</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">meta</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">states</span><span class="o">.</span><span class="n">READY_STATES</span><span class="p">:</span>
-                <span class="n">results</span><span class="p">[</span><span class="n">meta</span><span class="p">[</span><span class="s1">&#39;task_id&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">meta_from_decoded</span><span class="p">(</span><span class="n">meta</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">meta</span><span class="p">[</span><span class="s1">'status'</span><span class="p">]</span> <span class="ow">in</span> <span class="n">states</span><span class="o">.</span><span class="n">READY_STATES</span><span class="p">:</span>
+                <span class="n">results</span><span class="p">[</span><span class="n">meta</span><span class="p">[</span><span class="s1">'task_id'</span><span class="p">]]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">meta_from_decoded</span><span class="p">(</span><span class="n">meta</span><span class="p">)</span>
 
         <span class="n">consumer</span><span class="o">.</span><span class="n">callbacks</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">[</span><span class="n">callback</span><span class="p">]</span>
         <span class="n">time_start</span> <span class="o">=</span> <span class="n">now</span><span class="p">()</span>
@@ -298,7 +275,7 @@
         <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_create_binding</span><span class="p">(</span><span class="n">task_id</span><span class="p">)</span> <span class="k">for</span> <span class="n">task_id</span> <span class="ow">in</span> <span class="n">ids</span><span class="p">]</span>
 
 <div class="viewcode-block" id="AMQPBackend.get_many"><a class="viewcode-back" href="../../../internals/reference/celery.backends.amqp.html#celery.backends.amqp.AMQPBackend.get_many">[docs]</a>    <span class="k">def</span> <span class="nf">get_many</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_ids</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">no_ack</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
-                 <span class="n">now</span><span class="o">=</span><span class="n">monotonic</span><span class="p">,</span> <span class="n">getfields</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="s1">&#39;status&#39;</span><span class="p">,</span> <span class="s1">&#39;task_id&#39;</span><span class="p">),</span>
+                 <span class="n">now</span><span class="o">=</span><span class="n">monotonic</span><span class="p">,</span> <span class="n">getfields</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="s1">'status'</span><span class="p">,</span> <span class="s1">'task_id'</span><span class="p">),</span>
                  <span class="n">READY_STATES</span><span class="o">=</span><span class="n">states</span><span class="o">.</span><span class="n">READY_STATES</span><span class="p">,</span>
                  <span class="n">PROPAGATE_STATES</span><span class="o">=</span><span class="n">states</span><span class="o">.</span><span class="n">PROPAGATE_STATES</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">pool</span><span class="o">.</span><span class="n">acquire_channel</span><span class="p">(</span><span class="n">block</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> <span class="k">as</span> <span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">channel</span><span class="p">):</span>
@@ -311,7 +288,7 @@
                 <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
                     <span class="k">pass</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="n">cached</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">READY_STATES</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">cached</span><span class="p">[</span><span class="s1">'status'</span><span class="p">]</span> <span class="ow">in</span> <span class="n">READY_STATES</span><span class="p">:</span>
                         <span class="k">yield</span> <span class="n">task_id</span><span class="p">,</span> <span class="n">cached</span>
                         <span class="n">mark_cached</span><span class="p">(</span><span class="n">task_id</span><span class="p">)</span>
             <span class="n">ids</span><span class="o">.</span><span class="n">difference_update</span><span class="p">(</span><span class="n">cached_ids</span><span class="p">)</span>
@@ -336,34 +313,34 @@
                     <span class="n">wait</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
                     <span class="k">while</span> <span class="n">results</span><span class="p">:</span>
                         <span class="n">state</span> <span class="o">=</span> <span class="n">popleft</span><span class="p">()</span>
-                        <span class="n">task_id</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s1">&#39;task_id&#39;</span><span class="p">]</span>
+                        <span class="n">task_id</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s1">'task_id'</span><span class="p">]</span>
                         <span class="n">ids</span><span class="o">.</span><span class="n">discard</span><span class="p">(</span><span class="n">task_id</span><span class="p">)</span>
                         <span class="n">push_cache</span><span class="p">(</span><span class="n">task_id</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
                         <span class="k">yield</span> <span class="n">task_id</span><span class="p">,</span> <span class="n">state</span></div>
 
 <div class="viewcode-block" id="AMQPBackend.reload_task_result"><a class="viewcode-back" href="../../../internals/reference/celery.backends.amqp.html#celery.backends.amqp.AMQPBackend.reload_task_result">[docs]</a>    <span class="k">def</span> <span class="nf">reload_task_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_id</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
-            <span class="s1">&#39;reload_task_result is not supported by this backend.&#39;</span><span class="p">)</span></div>
+            <span class="s1">'reload_task_result is not supported by this backend.'</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="AMQPBackend.reload_group_result"><a class="viewcode-back" href="../../../internals/reference/celery.backends.amqp.html#celery.backends.amqp.AMQPBackend.reload_group_result">[docs]</a>    <span class="k">def</span> <span class="nf">reload_group_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_id</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Reload group result, even if it has been previously fetched.&quot;&quot;&quot;</span>
+        <span class="sd">"""Reload group result, even if it has been previously fetched."""</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
-            <span class="s1">&#39;reload_group_result is not supported by this backend.&#39;</span><span class="p">)</span></div>
+            <span class="s1">'reload_group_result is not supported by this backend.'</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="AMQPBackend.save_group"><a class="viewcode-back" href="../../../internals/reference/celery.backends.amqp.html#celery.backends.amqp.AMQPBackend.save_group">[docs]</a>    <span class="k">def</span> <span class="nf">save_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group_id</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
-            <span class="s1">&#39;save_group is not supported by this backend.&#39;</span><span class="p">)</span></div>
+            <span class="s1">'save_group is not supported by this backend.'</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="AMQPBackend.restore_group"><a class="viewcode-back" href="../../../internals/reference/celery.backends.amqp.html#celery.backends.amqp.AMQPBackend.restore_group">[docs]</a>    <span class="k">def</span> <span class="nf">restore_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group_id</span><span class="p">,</span> <span class="n">cache</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
-            <span class="s1">&#39;restore_group is not supported by this backend.&#39;</span><span class="p">)</span></div>
+            <span class="s1">'restore_group is not supported by this backend.'</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="AMQPBackend.delete_group"><a class="viewcode-back" href="../../../internals/reference/celery.backends.amqp.html#celery.backends.amqp.AMQPBackend.delete_group">[docs]</a>    <span class="k">def</span> <span class="nf">delete_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group_id</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
-            <span class="s1">&#39;delete_group is not supported by this backend.&#39;</span><span class="p">)</span></div>
+            <span class="s1">'delete_group is not supported by this backend.'</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="AMQPBackend.as_uri"><a class="viewcode-back" href="../../../internals/reference/celery.backends.amqp.html#celery.backends.amqp.AMQPBackend.as_uri">[docs]</a>    <span class="k">def</span> <span class="nf">as_uri</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">include_password</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s1">&#39;amqp://&#39;</span></div>
+        <span class="k">return</span> <span class="s1">'amqp://'</span></div>
 
     <span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(),</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{}):</span>
         <span class="n">kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
@@ -377,27 +354,15 @@
         <span class="p">)</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">AMQPBackend</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__reduce__</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span></div>
 </pre></div>
+</div>
+</div>
+</div>
 
-          </div>
-        </div>
-      </div>
+<div class="clearer"></div>
+</div>
+
+<div class="footer" role="contentinfo">
+        © <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="../backends.html" >celery.backends</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &copy; <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
-    </div>
-  </body>
+</body>
 </html>

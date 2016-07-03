@@ -1,17 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Internals &mdash; Celery 3.1.23 documentation</title>
-    
-    <link rel="stylesheet" href="../_static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>Internals — Celery 3.1.23 documentation</title>
+<link href="../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
         VERSION:     '3.1.23',
@@ -20,58 +16,35 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="copyright" title="Copyright" href="../copyright.html" />
-    <link rel="top" title="Celery 3.1.23 documentation" href="../index.html" />
-    <link rel="next" title="Contributors Guide to the Code" href="guide.html" />
-    <link rel="prev" title="celery.bin.graph" href="../reference/celery.bin.graph.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="guide.html" title="Contributors Guide to the Code"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="../reference/celery.bin.graph.html" title="celery.bin.graph"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Celery 3.1.23 documentation</a> &raquo;</li> 
-      </ul>
-    </div>  
+<script src="../_static/jquery.js" type="text/javascript"></script>
+<script src="../_static/underscore.js" type="text/javascript"></script>
+<script src="../_static/doctools.js" type="text/javascript"></script>
+<link href="../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="guide.html" rel="next" title="Contributors Guide to the Code"/>
+<link href="../reference/celery.bin.graph.html" rel="prev" title="celery.bin.graph"/>
+</head>
+<body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
 <div class="deck">
-
-    
-        <p>
+<p>
         This document describes the current stable version of Celery (3.1). For development docs,
         <a href="http://docs.celeryproject.org/en/master/internals/index.html">go here</a>.
         </p>
-    
-
 </div>
-    <div class="section" id="internals">
+<div class="section" id="internals">
 <span id="id1"></span><h1>Internals<a class="headerlink" href="#internals" title="Permalink to this headline">¶</a></h1>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Release:</th><td class="field-body">3.1</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Date:</th><td class="field-body">June 19, 2016</td>
+<tr class="field-even field"><th class="field-name">Date:</th><td class="field-body">July 03, 2016</td>
 </tr>
 </tbody>
 </table>
@@ -80,7 +53,7 @@
 <li class="toctree-l1"><a class="reference internal" href="guide.html">Contributors Guide to the Code</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="guide.html#philosophy">Philosophy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="guide.html#conventions-and-idioms-used">Conventions and Idioms Used</a></li>
-<li class="toctree-l2"><a class="reference internal" href="guide.html#applications-vs-single-mode">Applications vs. &#8220;single mode&#8221;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide.html#applications-vs-single-mode">Applications vs. “single mode”</a></li>
 <li class="toctree-l2"><a class="reference internal" href="guide.html#module-overview">Module Overview</a></li>
 </ul>
 </li>
@@ -109,7 +82,7 @@
 <li class="toctree-l2"><a class="reference internal" href="protov2.html#example">Example</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="app-overview.html">&#8220;The Big Instance&#8221; Refactor</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="app-overview.html">“The Big Instance” Refactor</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="app-overview.html#examples">Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="app-overview.html#deprecations">Deprecations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="app-overview.html#removed-deprecations">Removed deprecations</a></li>
@@ -179,32 +152,15 @@
 </ul>
 </div>
 </div>
+</div>
+</div>
+</div>
 
+<div class="clearer"></div>
+</div>
 
-          </div>
-        </div>
-      </div>
+<div class="footer" role="contentinfo">
+        © <a href="../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="guide.html" title="Contributors Guide to the Code"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="../reference/celery.bin.graph.html" title="celery.bin.graph"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Celery 3.1.23 documentation</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &copy; <a href="../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
-    </div>
-  </body>
+</body>
 </html>

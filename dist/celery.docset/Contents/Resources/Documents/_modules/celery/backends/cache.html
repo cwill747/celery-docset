@@ -1,17 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>celery.backends.cache &mdash; Celery 3.1.23 documentation</title>
-    
-    <link rel="stylesheet" href="../../../_static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>celery.backends.cache — Celery 3.1.23 documentation</title>
+<link href="../../../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
         VERSION:     '3.1.23',
@@ -20,53 +16,34 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="copyright" title="Copyright" href="../../../copyright.html" />
-    <link rel="top" title="Celery 3.1.23 documentation" href="../../../index.html" />
-    <link rel="up" title="celery.backends" href="../backends.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="../backends.html" accesskey="U">celery.backends</a> &raquo;</li> 
-      </ul>
-    </div>  
+<script src="../../../_static/jquery.js" type="text/javascript"></script>
+<script src="../../../_static/underscore.js" type="text/javascript"></script>
+<script src="../../../_static/doctools.js" type="text/javascript"></script>
+<link href="../../../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../../../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="../backends.html" rel="up" title="celery.backends"/>
+</head>
+<body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
 <div class="deck">
-
-    
-        <p>
+<p>
         This document describes the current stable version of Celery (3.1). For development docs,
         <a href="http://docs.celeryproject.org/en/master/_modules/celery/backends/cache.html">go here</a>.
         </p>
-    
-
 </div>
-    <h1>Source code for celery.backends.cache</h1><div class="highlight"><pre>
+<h1>Source code for celery.backends.cache</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="sd">    celery.backends.cache</span>
 <span class="sd">    ~~~~~~~~~~~~~~~~~~~~~</span>
 
 <span class="sd">    Memcache and in-memory cache result backend.</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
 
 <span class="kn">import</span> <span class="nn">sys</span>
@@ -79,20 +56,20 @@
 
 <span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">KeyValueStoreBackend</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;CacheBackend&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'CacheBackend'</span><span class="p">]</span>
 
 <span class="n">_imp</span> <span class="o">=</span> <span class="p">[</span><span class="bp">None</span><span class="p">]</span>
 
 <span class="n">PY3</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span>
 
-<span class="n">REQUIRES_BACKEND</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="n">REQUIRES_BACKEND</span> <span class="o">=</span> <span class="s2">"""</span><span class="se">\</span>
 <span class="s2">The memcached backend requires either pylibmc or python-memcached.</span><span class="se">\</span>
-<span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">"""</span>
 
-<span class="n">UNKNOWN_BACKEND</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="n">UNKNOWN_BACKEND</span> <span class="o">=</span> <span class="s2">"""</span><span class="se">\</span>
 <span class="s2">The cache backend {0!r} is unknown,</span>
 <span class="s2">Please use one of the following backends instead: {1}</span><span class="se">\</span>
-<span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">"""</span>
 
 
 <span class="k">def</span> <span class="nf">import_best_memcache</span><span class="p">():</span>
@@ -118,7 +95,7 @@
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">is_pylibmc</span><span class="p">:</span>
         <span class="k">def</span> <span class="nf">Client</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>  <span class="c1"># noqa</span>
-            <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;behaviors&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+            <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">'behaviors'</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">_Client</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">Client</span><span class="p">,</span> <span class="n">key_t</span>
@@ -146,10 +123,10 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="o">.</span><span class="n">incr</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">delta</span><span class="p">)</span>
 
 
-<span class="n">backends</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;memcache&#39;</span><span class="p">:</span> <span class="n">get_best_memcache</span><span class="p">,</span>
-            <span class="s1">&#39;memcached&#39;</span><span class="p">:</span> <span class="n">get_best_memcache</span><span class="p">,</span>
-            <span class="s1">&#39;pylibmc&#39;</span><span class="p">:</span> <span class="n">get_best_memcache</span><span class="p">,</span>
-            <span class="s1">&#39;memory&#39;</span><span class="p">:</span> <span class="k">lambda</span><span class="p">:</span> <span class="p">(</span><span class="n">DummyClient</span><span class="p">,</span> <span class="n">ensure_bytes</span><span class="p">)}</span>
+<span class="n">backends</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'memcache'</span><span class="p">:</span> <span class="n">get_best_memcache</span><span class="p">,</span>
+            <span class="s1">'memcached'</span><span class="p">:</span> <span class="n">get_best_memcache</span><span class="p">,</span>
+            <span class="s1">'pylibmc'</span><span class="p">:</span> <span class="n">get_best_memcache</span><span class="p">,</span>
+            <span class="s1">'memory'</span><span class="p">:</span> <span class="k">lambda</span><span class="p">:</span> <span class="p">(</span><span class="n">DummyClient</span><span class="p">,</span> <span class="n">ensure_bytes</span><span class="p">)}</span>
 
 
 <div class="viewcode-block" id="CacheBackend"><a class="viewcode-back" href="../../../internals/reference/celery.backends.cache.html#celery.backends.cache.CacheBackend">[docs]</a><span class="k">class</span> <span class="nc">CacheBackend</span><span class="p">(</span><span class="n">KeyValueStoreBackend</span><span class="p">):</span>
@@ -168,14 +145,14 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">backend</span> <span class="o">=</span> <span class="n">url</span> <span class="ow">or</span> <span class="n">backend</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">CELERY_CACHE_BACKEND</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">servers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="s1">&#39;://&#39;</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">servers</span> <span class="o">=</span> <span class="n">servers</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">servers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="s1">'://'</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">servers</span> <span class="o">=</span> <span class="n">servers</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">'/'</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">';'</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">expires</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prepare_expires</span><span class="p">(</span><span class="n">expires</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Client</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_t</span> <span class="o">=</span> <span class="n">backends</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="p">]()</span>
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">ImproperlyConfigured</span><span class="p">(</span><span class="n">UNKNOWN_BACKEND</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="p">,</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">backends</span><span class="p">)))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="p">,</span> <span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">backends</span><span class="p">)))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_encode_prefixes</span><span class="p">()</span>  <span class="c1"># rencode the keyprefixes</span>
 
 <div class="viewcode-block" id="CacheBackend.get"><a class="viewcode-back" href="../../../internals/reference/celery.backends.cache.html#celery.backends.cache.CacheBackend.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
@@ -204,8 +181,8 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">servers</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(),</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{}):</span>
-        <span class="n">servers</span> <span class="o">=</span> <span class="s1">&#39;;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">servers</span><span class="p">)</span>
-        <span class="n">backend</span> <span class="o">=</span> <span class="s1">&#39;{0}://{1}/&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="p">,</span> <span class="n">servers</span><span class="p">)</span>
+        <span class="n">servers</span> <span class="o">=</span> <span class="s1">';'</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">servers</span><span class="p">)</span>
+        <span class="n">backend</span> <span class="o">=</span> <span class="s1">'{0}://{1}/'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="p">,</span> <span class="n">servers</span><span class="p">)</span>
         <span class="n">kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
             <span class="nb">dict</span><span class="p">(</span><span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">,</span>
                  <span class="n">expires</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">expires</span><span class="p">,</span>
@@ -213,35 +190,23 @@
         <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">CacheBackend</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__reduce__</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
 
 <div class="viewcode-block" id="CacheBackend.as_uri"><a class="viewcode-back" href="../../../internals/reference/celery.backends.cache.html#celery.backends.cache.CacheBackend.as_uri">[docs]</a>    <span class="k">def</span> <span class="nf">as_uri</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the backend as an URI.</span>
+        <span class="sd">"""Return the backend as an URI.</span>
 
 <span class="sd">        This properly handles the case of multiple servers.</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">servers</span> <span class="o">=</span> <span class="s1">&#39;;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">servers</span><span class="p">)</span>
-        <span class="k">return</span> <span class="s1">&#39;{0}://{1}/&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="p">,</span> <span class="n">servers</span><span class="p">)</span></div></div>
+<span class="sd">        """</span>
+        <span class="n">servers</span> <span class="o">=</span> <span class="s1">';'</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">servers</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s1">'{0}://{1}/'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="p">,</span> <span class="n">servers</span><span class="p">)</span></div></div>
 </pre></div>
+</div>
+</div>
+</div>
 
-          </div>
-        </div>
-      </div>
+<div class="clearer"></div>
+</div>
+
+<div class="footer" role="contentinfo">
+        © <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="../backends.html" >celery.backends</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &copy; <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
-    </div>
-  </body>
+</body>
 </html>

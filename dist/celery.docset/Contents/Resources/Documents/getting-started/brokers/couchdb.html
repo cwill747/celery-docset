@@ -1,17 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Using CouchDB &mdash; Celery 3.1.23 documentation</title>
-    
-    <link rel="stylesheet" href="../../_static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>Using CouchDB — Celery 3.1.23 documentation</title>
+<link href="../../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
         VERSION:     '3.1.23',
@@ -20,59 +16,34 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="copyright" title="Copyright" href="../../copyright.html" />
-    <link rel="top" title="Celery 3.1.23 documentation" href="../../index.html" />
-    <link rel="up" title="Brokers" href="index.html" />
-    <link rel="next" title="Using Beanstalk" href="beanstalk.html" />
-    <link rel="prev" title="Using Amazon SQS" href="sqs.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="beanstalk.html" title="Using Beanstalk"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="sqs.html" title="Using Amazon SQS"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" >Getting Started</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U">Brokers</a> &raquo;</li> 
-      </ul>
-    </div>  
+<script src="../../_static/jquery.js" type="text/javascript"></script>
+<script src="../../_static/underscore.js" type="text/javascript"></script>
+<script src="../../_static/doctools.js" type="text/javascript"></script>
+<link href="../../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="index.html" rel="up" title="Brokers"/>
+<link href="beanstalk.html" rel="next" title="Using Beanstalk"/>
+<link href="sqs.html" rel="prev" title="Using Amazon SQS"/>
+</head>
+<body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
 <div class="deck">
-
-    
-        <p>
+<p>
         This document describes the current stable version of Celery (3.1). For development docs,
         <a href="http://docs.celeryproject.org/en/master/getting-started/brokers/couchdb.html">go here</a>.
         </p>
-    
-
 </div>
-    <div class="section" id="using-couchdb">
+<div class="section" id="using-couchdb">
 <span id="broker-couchdb"></span><h1>Using CouchDB<a class="headerlink" href="#using-couchdb" title="Permalink to this headline">¶</a></h1>
 <div class="admonition-experimental-status admonition">
 <p class="first admonition-title">Experimental Status</p>
 <p class="last">The CouchDB transport is in need of improvements in many areas and there
-are several open bugs.  Unfortunately we don&#8217;t have the resources or funds
-required to improve the situation, so we&#8217;re looking for contributors
+are several open bugs.  Unfortunately we don’t have the resources or funds
+required to improve the situation, so we’re looking for contributors
 and partners willing to help.</p>
 </div>
 <div class="section" id="installation">
@@ -88,7 +59,7 @@ the <code class="docutils literal"><span class="pre">celery[couchdb]</span></cod
 <span id="broker-couchdb-configuration"></span><h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
 <p>Configuration is easy, set the transport, and configure the location of
 your CouchDB database:</p>
-<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">BROKER_URL</span> <span class="o">=</span> <span class="s1">&#39;couchdb://localhost:5984/database_name&#39;</span>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">BROKER_URL</span> <span class="o">=</span> <span class="s1">'couchdb://localhost:5984/database_name'</span>
 </pre></div>
 </div>
 <p>Where the URL is in the format of:</p>
@@ -114,34 +85,15 @@ but needed if your CouchDB server requires authentication.</p>
 </div></blockquote>
 </div>
 </div>
+</div>
+</div>
+</div>
 
+<div class="clearer"></div>
+</div>
 
-          </div>
-        </div>
-      </div>
+<div class="footer" role="contentinfo">
+        © <a href="../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="beanstalk.html" title="Using Beanstalk"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="sqs.html" title="Using Amazon SQS"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" >Getting Started</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="index.html" >Brokers</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &copy; <a href="../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
-    </div>
-  </body>
+</body>
 </html>

@@ -1,17 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>celery.loaders.default &mdash; Celery 3.1.23 documentation</title>
-    
-    <link rel="stylesheet" href="../../../_static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>celery.loaders.default — Celery 3.1.23 documentation</title>
+<link href="../../../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
         VERSION:     '3.1.23',
@@ -20,53 +16,34 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="copyright" title="Copyright" href="../../../copyright.html" />
-    <link rel="top" title="Celery 3.1.23 documentation" href="../../../index.html" />
-    <link rel="up" title="celery.loaders" href="../loaders.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="../loaders.html" accesskey="U">celery.loaders</a> &raquo;</li> 
-      </ul>
-    </div>  
+<script src="../../../_static/jquery.js" type="text/javascript"></script>
+<script src="../../../_static/underscore.js" type="text/javascript"></script>
+<script src="../../../_static/doctools.js" type="text/javascript"></script>
+<link href="../../../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../../../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="../loaders.html" rel="up" title="celery.loaders"/>
+</head>
+<body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
 <div class="deck">
-
-    
-        <p>
+<p>
         This document describes the current stable version of Celery (3.1). For development docs,
         <a href="http://docs.celeryproject.org/en/master/_modules/celery/loaders/default.html">go here</a>.
         </p>
-    
-
 </div>
-    <h1>Source code for celery.loaders.default</h1><div class="highlight"><pre>
+<h1>Source code for celery.loaders.default</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="sd">    celery.loaders.default</span>
 <span class="sd">    ~~~~~~~~~~~~~~~~~~~~~~</span>
 
 <span class="sd">    The default loader used when no custom app has been initialized.</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
 
 <span class="kn">import</span> <span class="nn">os</span>
@@ -78,24 +55,24 @@
 
 <span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">BaseLoader</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Loader&#39;</span><span class="p">,</span> <span class="s1">&#39;DEFAULT_CONFIG_MODULE&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Loader'</span><span class="p">,</span> <span class="s1">'DEFAULT_CONFIG_MODULE'</span><span class="p">]</span>
 
-<span class="n">DEFAULT_CONFIG_MODULE</span> <span class="o">=</span> <span class="s1">&#39;celeryconfig&#39;</span>
+<span class="n">DEFAULT_CONFIG_MODULE</span> <span class="o">=</span> <span class="s1">'celeryconfig'</span>
 
 <span class="c1">#: Warns if configuration file is missing if :envvar:`C_WNOCONF` is set.</span>
-<span class="n">C_WNOCONF</span> <span class="o">=</span> <span class="n">strtobool</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;C_WNOCONF&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">))</span>
+<span class="n">C_WNOCONF</span> <span class="o">=</span> <span class="n">strtobool</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'C_WNOCONF'</span><span class="p">,</span> <span class="bp">False</span><span class="p">))</span>
 
 
 <div class="viewcode-block" id="Loader"><a class="viewcode-back" href="../../../reference/celery.loaders.default.html#celery.loaders.default.Loader">[docs]</a><span class="k">class</span> <span class="nc">Loader</span><span class="p">(</span><span class="n">BaseLoader</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;The loader used by the default app.&quot;&quot;&quot;</span>
+    <span class="sd">"""The loader used by the default app."""</span>
 
 <div class="viewcode-block" id="Loader.setup_settings"><a class="viewcode-back" href="../../../reference/celery.loaders.default.html#celery.loaders.default.Loader.setup_settings">[docs]</a>    <span class="k">def</span> <span class="nf">setup_settings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">settingsdict</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">DictAttribute</span><span class="p">(</span><span class="n">settingsdict</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Loader.read_configuration"><a class="viewcode-back" href="../../../reference/celery.loaders.default.html#celery.loaders.default.Loader.read_configuration">[docs]</a>    <span class="k">def</span> <span class="nf">read_configuration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fail_silently</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Read configuration from :file:`celeryconfig.py` and configure</span>
-<span class="sd">        celery and Django so it can be used by regular Python.&quot;&quot;&quot;</span>
-        <span class="n">configname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;CELERY_CONFIG_MODULE&#39;</span><span class="p">,</span>
+        <span class="sd">"""Read configuration from :file:`celeryconfig.py` and configure</span>
+<span class="sd">        celery and Django so it can be used by regular Python."""</span>
+        <span class="n">configname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'CELERY_CONFIG_MODULE'</span><span class="p">,</span>
                                     <span class="n">DEFAULT_CONFIG_MODULE</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">usercfg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_import_config_module</span><span class="p">(</span><span class="n">configname</span><span class="p">)</span>
@@ -103,36 +80,24 @@
             <span class="k">if</span> <span class="ow">not</span> <span class="n">fail_silently</span><span class="p">:</span>
                 <span class="k">raise</span>
             <span class="c1"># billiard sets this if forked using execv</span>
-            <span class="k">if</span> <span class="n">C_WNOCONF</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;FORKED_BY_MULTIPROCESSING&#39;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">C_WNOCONF</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'FORKED_BY_MULTIPROCESSING'</span><span class="p">):</span>
                 <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">NotConfigured</span><span class="p">(</span>
-                    <span class="s1">&#39;No {module} module found! Please make sure it exists and &#39;</span>
-                    <span class="s1">&#39;is available to Python.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">module</span><span class="o">=</span><span class="n">configname</span><span class="p">)))</span>
+                    <span class="s1">'No {module} module found! Please make sure it exists and '</span>
+                    <span class="s1">'is available to Python.'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">module</span><span class="o">=</span><span class="n">configname</span><span class="p">)))</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">setup_settings</span><span class="p">({})</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">configured</span> <span class="o">=</span> <span class="bp">True</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">setup_settings</span><span class="p">(</span><span class="n">usercfg</span><span class="p">)</span></div></div>
 </pre></div>
+</div>
+</div>
+</div>
 
-          </div>
-        </div>
-      </div>
+<div class="clearer"></div>
+</div>
+
+<div class="footer" role="contentinfo">
+        © <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="../loaders.html" >celery.loaders</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &copy; <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
-    </div>
-  </body>
+</body>
 </html>

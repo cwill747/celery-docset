@@ -1,17 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>celery.utils.imports &mdash; Celery 3.1.23 documentation</title>
-    
-    <link rel="stylesheet" href="../../../_static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>celery.utils.imports — Celery 3.1.23 documentation</title>
+<link href="../../../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
         VERSION:     '3.1.23',
@@ -20,53 +16,34 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="copyright" title="Copyright" href="../../../copyright.html" />
-    <link rel="top" title="Celery 3.1.23 documentation" href="../../../index.html" />
-    <link rel="up" title="celery.utils" href="../utils.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="../utils.html" accesskey="U">celery.utils</a> &raquo;</li> 
-      </ul>
-    </div>  
+<script src="../../../_static/jquery.js" type="text/javascript"></script>
+<script src="../../../_static/underscore.js" type="text/javascript"></script>
+<script src="../../../_static/doctools.js" type="text/javascript"></script>
+<link href="../../../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../../../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="../utils.html" rel="up" title="celery.utils"/>
+</head>
+<body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
 <div class="deck">
-
-    
-        <p>
+<p>
         This document describes the current stable version of Celery (3.1). For development docs,
         <a href="http://docs.celeryproject.org/en/master/_modules/celery/utils/imports.html">go here</a>.
         </p>
-    
-
 </div>
-    <h1>Source code for celery.utils.imports</h1><div class="highlight"><pre>
+<h1>Source code for celery.utils.imports</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="sd">    celery.utils.import</span>
 <span class="sd">    ~~~~~~~~~~~~~~~~~~~</span>
 
 <span class="sd">    Utilities related to importing modules and symbols by name.</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
 
 <span class="kn">import</span> <span class="nn">imp</span> <span class="kn">as</span> <span class="nn">_imp</span>
@@ -81,8 +58,8 @@
 <span class="kn">from</span> <span class="nn">celery.five</span> <span class="kn">import</span> <span class="nb">reload</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s1">&#39;NotAPackage&#39;</span><span class="p">,</span> <span class="s1">&#39;qualname&#39;</span><span class="p">,</span> <span class="s1">&#39;instantiate&#39;</span><span class="p">,</span> <span class="s1">&#39;symbol_by_name&#39;</span><span class="p">,</span> <span class="s1">&#39;cwd_in_path&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;find_module&#39;</span><span class="p">,</span> <span class="s1">&#39;import_from_cwd&#39;</span><span class="p">,</span> <span class="s1">&#39;reload_from_cwd&#39;</span><span class="p">,</span> <span class="s1">&#39;module_file&#39;</span><span class="p">,</span>
+    <span class="s1">'NotAPackage'</span><span class="p">,</span> <span class="s1">'qualname'</span><span class="p">,</span> <span class="s1">'instantiate'</span><span class="p">,</span> <span class="s1">'symbol_by_name'</span><span class="p">,</span> <span class="s1">'cwd_in_path'</span><span class="p">,</span>
+    <span class="s1">'find_module'</span><span class="p">,</span> <span class="s1">'import_from_cwd'</span><span class="p">,</span> <span class="s1">'reload_from_cwd'</span><span class="p">,</span> <span class="s1">'module_file'</span><span class="p">,</span>
 <span class="p">]</span>
 
 
@@ -92,25 +69,25 @@
 
 <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span> <span class="o">&gt;</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span>  <span class="c1"># pragma: no cover</span>
     <span class="k">def</span> <span class="nf">qualname</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s1">&#39;__name__&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s1">&#39;__class__&#39;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s1">'__name__'</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s1">'__class__'</span><span class="p">):</span>
             <span class="n">obj</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">__class__</span>
-        <span class="n">q</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s1">&#39;__qualname__&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
-        <span class="k">if</span> <span class="s1">&#39;.&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">q</span><span class="p">:</span>
-            <span class="n">q</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="n">obj</span><span class="o">.</span><span class="n">__module__</span><span class="p">,</span> <span class="n">q</span><span class="p">))</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s1">'__qualname__'</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">'.'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">q</span><span class="p">:</span>
+            <span class="n">q</span> <span class="o">=</span> <span class="s1">'.'</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="n">obj</span><span class="o">.</span><span class="n">__module__</span><span class="p">,</span> <span class="n">q</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">q</span>
 <span class="k">else</span><span class="p">:</span>
 <div class="viewcode-block" id="qualname"><a class="viewcode-back" href="../../../internals/reference/celery.utils.imports.html#celery.utils.imports.qualname">[docs]</a>    <span class="k">def</span> <span class="nf">qualname</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>  <span class="c1"># noqa</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s1">&#39;__name__&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s1">&#39;__class__&#39;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s1">'__name__'</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s1">'__class__'</span><span class="p">):</span>
             <span class="n">obj</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">__class__</span>
-        <span class="k">return</span> <span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="n">obj</span><span class="o">.</span><span class="n">__module__</span><span class="p">,</span> <span class="n">obj</span><span class="o">.</span><span class="n">__name__</span><span class="p">))</span></div>
+        <span class="k">return</span> <span class="s1">'.'</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="n">obj</span><span class="o">.</span><span class="n">__module__</span><span class="p">,</span> <span class="n">obj</span><span class="o">.</span><span class="n">__name__</span><span class="p">))</span></div>
 
 
 <div class="viewcode-block" id="instantiate"><a class="viewcode-back" href="../../../internals/reference/celery.utils.imports.html#celery.utils.imports.instantiate">[docs]</a><span class="k">def</span> <span class="nf">instantiate</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Instantiate class by name.</span>
+    <span class="sd">"""Instantiate class by name.</span>
 
 <span class="sd">    See :func:`symbol_by_name`.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">symbol_by_name</span><span class="p">(</span><span class="n">name</span><span class="p">)(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 
@@ -131,15 +108,15 @@
 
 
 <div class="viewcode-block" id="find_module"><a class="viewcode-back" href="../../../internals/reference/celery.utils.imports.html#celery.utils.imports.find_module">[docs]</a><span class="k">def</span> <span class="nf">find_module</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">imp</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Version of :func:`imp.find_module` supporting dots.&quot;&quot;&quot;</span>
+    <span class="sd">"""Version of :func:`imp.find_module` supporting dots."""</span>
     <span class="k">if</span> <span class="n">imp</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
         <span class="n">imp</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span>
     <span class="k">with</span> <span class="n">cwd_in_path</span><span class="p">():</span>
-        <span class="k">if</span> <span class="s1">&#39;.&#39;</span> <span class="ow">in</span> <span class="n">module</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s1">'.'</span> <span class="ow">in</span> <span class="n">module</span><span class="p">:</span>
             <span class="n">last</span> <span class="o">=</span> <span class="bp">None</span>
-            <span class="n">parts</span> <span class="o">=</span> <span class="n">module</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+            <span class="n">parts</span> <span class="o">=</span> <span class="n">module</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">'.'</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">part</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">parts</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
-                <span class="n">mpart</span> <span class="o">=</span> <span class="n">imp</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parts</span><span class="p">[:</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]))</span>
+                <span class="n">mpart</span> <span class="o">=</span> <span class="n">imp</span><span class="p">(</span><span class="s1">'.'</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parts</span><span class="p">[:</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]))</span>
                 <span class="k">try</span><span class="p">:</span>
                     <span class="n">path</span> <span class="o">=</span> <span class="n">mpart</span><span class="o">.</span><span class="n">__path__</span>
                 <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
@@ -150,12 +127,12 @@
 
 
 <div class="viewcode-block" id="import_from_cwd"><a class="viewcode-back" href="../../../internals/reference/celery.utils.imports.html#celery.utils.imports.import_from_cwd">[docs]</a><span class="k">def</span> <span class="nf">import_from_cwd</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">imp</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">package</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Import module, but make sure it finds modules</span>
+    <span class="sd">"""Import module, but make sure it finds modules</span>
 <span class="sd">    located in the current directory.</span>
 
 <span class="sd">    Modules located in the current directory has</span>
 <span class="sd">    precedence over modules located in `sys.path`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">imp</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
         <span class="n">imp</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span>
     <span class="k">with</span> <span class="n">cwd_in_path</span><span class="p">():</span>
@@ -170,31 +147,19 @@
 
 
 <div class="viewcode-block" id="module_file"><a class="viewcode-back" href="../../../internals/reference/celery.utils.imports.html#celery.utils.imports.module_file">[docs]</a><span class="k">def</span> <span class="nf">module_file</span><span class="p">(</span><span class="n">module</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return the correct original file name of a module.&quot;&quot;&quot;</span>
+    <span class="sd">"""Return the correct original file name of a module."""</span>
     <span class="n">name</span> <span class="o">=</span> <span class="n">module</span><span class="o">.</span><span class="n">__file__</span>
-    <span class="k">return</span> <span class="n">name</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.pyc&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="n">name</span></div>
+    <span class="k">return</span> <span class="n">name</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">'.pyc'</span><span class="p">)</span> <span class="k">else</span> <span class="n">name</span></div>
 </pre></div>
+</div>
+</div>
+</div>
 
-          </div>
-        </div>
-      </div>
+<div class="clearer"></div>
+</div>
+
+<div class="footer" role="contentinfo">
+        © <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="../utils.html" >celery.utils</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &copy; <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
-    </div>
-  </body>
+</body>
 </html>

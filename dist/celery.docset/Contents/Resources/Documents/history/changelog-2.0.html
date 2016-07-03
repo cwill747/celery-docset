@@ -1,17 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Change history for Celery 2.0 &mdash; Celery 3.1.23 documentation</title>
-    
-    <link rel="stylesheet" href="../_static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>Change history for Celery 2.0 — Celery 3.1.23 documentation</title>
+<link href="../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
         VERSION:     '3.1.23',
@@ -20,52 +16,28 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="copyright" title="Copyright" href="../copyright.html" />
-    <link rel="top" title="Celery 3.1.23 documentation" href="../index.html" />
-    <link rel="up" title="History" href="index.html" />
-    <link rel="next" title="Change history for Celery 1.0" href="changelog-1.0.html" />
-    <link rel="prev" title="Change history for Celery 2.1" href="changelog-2.1.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="changelog-1.0.html" title="Change history for Celery 1.0"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="changelog-2.1.html" title="Change history for Celery 2.1"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">History</a> &raquo;</li> 
-      </ul>
-    </div>  
+<script src="../_static/jquery.js" type="text/javascript"></script>
+<script src="../_static/underscore.js" type="text/javascript"></script>
+<script src="../_static/doctools.js" type="text/javascript"></script>
+<link href="../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="index.html" rel="up" title="History"/>
+<link href="changelog-1.0.html" rel="next" title="Change history for Celery 1.0"/>
+<link href="changelog-2.1.html" rel="prev" title="Change history for Celery 2.1"/>
+</head>
+<body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
 <div class="deck">
-
-    
-        <p>
+<p>
         This document describes the current stable version of Celery (3.1). For development docs,
         <a href="http://docs.celeryproject.org/en/master/history/changelog-2.0.html">go here</a>.
         </p>
-    
-
 </div>
-    <div class="section" id="change-history-for-celery-2-0">
+<div class="section" id="change-history-for-celery-2-0">
 <span id="changelog-2-0"></span><h1>Change history for Celery 2.0<a class="headerlink" href="#change-history-for-celery-2-0" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
@@ -93,8 +65,8 @@
 <div class="section" id="version-2-0-3">
 <span id="id1"></span><h2><a class="toc-backref" href="#id5">2.0.3</a><a class="headerlink" href="#version-2-0-3" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2010-08-27 12:00 P.M CEST</td>
 </tr>
@@ -117,7 +89,7 @@ then sent when the connection is re-established.</p>
 so its functionality was replaced.</p>
 </div></blockquote>
 </li>
-<li><p class="first">Redis result backend: Documentation typos: Redis doesn&#8217;t have
+<li><p class="first">Redis result backend: Documentation typos: Redis doesn’t have
 database names, but database numbers. The default database is now 0.</p>
 </li>
 <li><p class="first"><code class="xref py py-class docutils literal"><span class="pre">inspect</span></code>:
@@ -131,18 +103,18 @@ precedence over values defined in <a class="reference internal" href="../configu
 the two.</p>
 <blockquote>
 <div><p>With the follow settings:</p>
-<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">CELERY_QUEUES</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;cpubound&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;exchange&quot;</span><span class="p">:</span> <span class="s2">&quot;cpubound&quot;</span><span class="p">,</span>
-                              <span class="s2">&quot;routing_key&quot;</span><span class="p">:</span> <span class="s2">&quot;cpubound&quot;</span><span class="p">}}</span>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">CELERY_QUEUES</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"cpubound"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"exchange"</span><span class="p">:</span> <span class="s2">"cpubound"</span><span class="p">,</span>
+                              <span class="s2">"routing_key"</span><span class="p">:</span> <span class="s2">"cpubound"</span><span class="p">}}</span>
 
-<span class="n">CELERY_ROUTES</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;tasks.add&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;queue&quot;</span><span class="p">:</span> <span class="s2">&quot;cpubound&quot;</span><span class="p">,</span>
-                               <span class="s2">&quot;routing_key&quot;</span><span class="p">:</span> <span class="s2">&quot;tasks.add&quot;</span><span class="p">,</span>
-                               <span class="s2">&quot;serializer&quot;</span><span class="p">:</span> <span class="s2">&quot;json&quot;</span><span class="p">}}</span>
+<span class="n">CELERY_ROUTES</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"tasks.add"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"queue"</span><span class="p">:</span> <span class="s2">"cpubound"</span><span class="p">,</span>
+                               <span class="s2">"routing_key"</span><span class="p">:</span> <span class="s2">"tasks.add"</span><span class="p">,</span>
+                               <span class="s2">"serializer"</span><span class="p">:</span> <span class="s2">"json"</span><span class="p">}}</span>
 </pre></div>
 </div>
 <p>The final routing options for <cite>tasks.add</cite> will become:</p>
-<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;exchange&quot;</span><span class="p">:</span> <span class="s2">&quot;cpubound&quot;</span><span class="p">,</span>
- <span class="s2">&quot;routing_key&quot;</span><span class="p">:</span> <span class="s2">&quot;tasks.add&quot;</span><span class="p">,</span>
- <span class="s2">&quot;serializer&quot;</span><span class="p">:</span> <span class="s2">&quot;json&quot;</span><span class="p">}</span>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">"exchange"</span><span class="p">:</span> <span class="s2">"cpubound"</span><span class="p">,</span>
+ <span class="s2">"routing_key"</span><span class="p">:</span> <span class="s2">"tasks.add"</span><span class="p">,</span>
+ <span class="s2">"serializer"</span><span class="p">:</span> <span class="s2">"json"</span><span class="p">}</span>
 </pre></div>
 </div>
 <p>This was not the case before: the values
@@ -152,7 +124,7 @@ in <a class="reference internal" href="../configuration.html#std:setting-CELERY_
 <li><p class="first">Worker crashed if the value of <code class="xref std std-setting docutils literal"><span class="pre">CELERY_TASK_ERROR_WHITELIST</span></code> was
 not an iterable</p>
 </li>
-<li><p class="first"><code class="xref py py-func docutils literal"><span class="pre">apply()</span></code>: Make sure <cite>kwargs[&#8220;task_id&#8221;]</cite> is
+<li><p class="first"><code class="xref py py-func docutils literal"><span class="pre">apply()</span></code>: Make sure <cite>kwargs[“task_id”]</cite> is
 always set.</p>
 </li>
 <li><p class="first"><cite>AsyncResult.traceback</cite>: Now returns <code class="xref py py-const docutils literal"><span class="pre">None</span></code>, instead of raising
@@ -212,7 +184,7 @@ See <a class="reference external" href="https://github.com/celery/celery/issues/
 <ul>
 <li><p class="first">getting-started/broker-installation: Fixed typo</p>
 <blockquote>
-<div><p><cite>set_permissions &#8220;&#8221;</cite> -&gt; <cite>set_permissions &#8221;.*&#8221;</cite>.</p>
+<div><p><cite>set_permissions “”</cite> -&gt; <cite>set_permissions ”.*”</cite>.</p>
 </div></blockquote>
 </li>
 <li><p class="first">Tasks User Guide: Added section on database transactions.</p>
@@ -220,7 +192,7 @@ See <a class="reference external" href="https://github.com/celery/celery/issues/
 <div><p>See <a class="reference external" href="https://github.com/celery/celery/issues/169"><span class="xref issue">issue #169</span></a>.</p>
 </div></blockquote>
 </li>
-<li><p class="first">Routing User Guide: Fixed typo <cite>&#8220;feed&#8221;: -&gt; {&#8220;queue&#8221;: &#8220;feeds&#8221;}</cite>.</p>
+<li><p class="first">Routing User Guide: Fixed typo <cite>“feed”: -&gt; {“queue”: “feeds”}</cite>.</p>
 <blockquote>
 <div><p>See <a class="reference external" href="https://github.com/celery/celery/issues/169"><span class="xref issue">issue #169</span></a>.</p>
 </div></blockquote>
@@ -249,8 +221,8 @@ and <a class="reference internal" href="../configuration.html#std:setting-CELERY
 <div class="section" id="version-2-0-2">
 <span id="id2"></span><h2><a class="toc-backref" href="#id8">2.0.2</a><a class="headerlink" href="#version-2-0-2" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2010-07-22 11:31 A.M CEST</td>
 </tr>
@@ -302,7 +274,7 @@ when closing the terminal.</p>
 <div><p>See <a class="reference external" href="https://github.com/celery/celery/issues/152"><span class="xref issue">issue #152</span></a>.</p>
 </div></blockquote>
 </li>
-<li><p class="first">Test tear down: Don&#8217;t use <cite>atexit</cite> but nose&#8217;s <cite>teardown()</cite> functionality
+<li><p class="first">Test tear down: Don’t use <cite>atexit</cite> but nose’s <cite>teardown()</cite> functionality
 instead.</p>
 <blockquote>
 <div><p>See <a class="reference external" href="https://github.com/celery/celery/issues/154"><span class="xref issue">issue #154</span></a>.</p>
@@ -315,7 +287,7 @@ instead.</p>
 <li><p class="first">Can now define a white list of errors to send error emails for.</p>
 <blockquote>
 <div><p>Example:</p>
-<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">CELERY_TASK_ERROR_WHITELIST</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;myapp.MalformedInputError&#39;</span><span class="p">)</span>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">CELERY_TASK_ERROR_WHITELIST</span> <span class="o">=</span> <span class="p">(</span><span class="s1">'myapp.MalformedInputError'</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>See <a class="reference external" href="https://github.com/celery/celery/issues/153"><span class="xref issue">issue #153</span></a>.</p>
@@ -331,10 +303,10 @@ an infinite loop.</p>
 <blockquote>
 <div><p>Examples:</p>
 <div class="highlight-python3"><div class="highlight"><pre><span></span><span class="c1"># Inspect a single worker</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">inspect</span><span class="p">(</span><span class="s2">&quot;myworker.example.com&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">inspect</span><span class="p">(</span><span class="s2">"myworker.example.com"</span><span class="p">)</span>
 
 <span class="c1"># Inspect several workers</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">inspect</span><span class="p">([</span><span class="s2">&quot;myworker.example.com&quot;</span><span class="p">,</span> <span class="s2">&quot;myworker2.example.com&quot;</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">inspect</span><span class="p">([</span><span class="s2">"myworker.example.com"</span><span class="p">,</span> <span class="s2">"myworker2.example.com"</span><span class="p">])</span>
 
 <span class="c1"># Inspect all workers consuming on this vhost.</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">inspect</span><span class="p">()</span>
@@ -384,8 +356,8 @@ and stop an embedded worker process, for use in functional testing.</p>
 <div class="section" id="version-2-0-1">
 <span id="id3"></span><h2><a class="toc-backref" href="#id9">2.0.1</a><a class="headerlink" href="#version-2-0-1" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2010-07-09 03:02 P.M CEST</td>
 </tr>
@@ -395,12 +367,12 @@ and stop an embedded worker process, for use in functional testing.</p>
 </table>
 <ul>
 <li><p class="first">multiprocessing.pool: Now handles encoding errors, so that pickling errors
-doesn&#8217;t crash the worker processes.</p>
+doesn’t crash the worker processes.</p>
 </li>
-<li><p class="first">The remote control command replies was not working with RabbitMQ 1.8.0&#8217;s
+<li><p class="first">The remote control command replies was not working with RabbitMQ 1.8.0’s
 stricter equivalence checks.</p>
 <blockquote>
-<div><p>If you&#8217;ve already hit this problem you may have to delete the
+<div><p>If you’ve already hit this problem you may have to delete the
 declaration:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ camqadm exchange.delete celerycrq
 </pre></div>
@@ -414,7 +386,7 @@ declaration:</p>
 <li><p class="first">A bug sneaked in the ETA scheduler that made it only able to execute
 one task per second(!)</p>
 <blockquote>
-<div><p>The scheduler sleeps between iterations so it doesn&#8217;t consume too much CPU.
+<div><p>The scheduler sleeps between iterations so it doesn’t consume too much CPU.
 It keeps a list of the scheduled items sorted by time, at each iteration
 it sleeps for the remaining time of the item with the nearest deadline.
 If there are no eta tasks it will sleep for a minimum amount of time, one
@@ -449,7 +421,7 @@ ready queue.</p>
 </li>
 <li><p class="first">New Sphinx theme by Armin Ronacher: <a class="reference external" href="http://docs.celeryproject.org/">http://docs.celeryproject.org/</a></p>
 </li>
-<li><p class="first">Fixed &#8220;pending_xref&#8221; errors shown in the HTML rendering of the
+<li><p class="first">Fixed “pending_xref” errors shown in the HTML rendering of the
 documentation. Apparently this was caused by new changes in Sphinx 1.0b2.</p>
 </li>
 <li><p class="first">Router classes in <a class="reference internal" href="../configuration.html#std:setting-CELERY_ROUTES"><code class="xref std std-setting docutils literal"><span class="pre">CELERY_ROUTES</span></code></a> are now imported lazily.</p>
@@ -462,7 +434,7 @@ by importing it when needed after the environment is set up.</p>
 <li><p class="first"><a class="reference internal" href="../configuration.html#std:setting-CELERY_ROUTES"><code class="xref std std-setting docutils literal"><span class="pre">CELERY_ROUTES</span></code></a> was broken if set to a single dict.</p>
 <blockquote>
 <div><p>This example in the docs should now work again:</p>
-<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">CELERY_ROUTES</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;feed.tasks.import_feed&quot;</span><span class="p">:</span> <span class="s2">&quot;feeds&quot;</span><span class="p">}</span>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">CELERY_ROUTES</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"feed.tasks.import_feed"</span><span class="p">:</span> <span class="s2">"feeds"</span><span class="p">}</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -474,13 +446,13 @@ by importing it when needed after the environment is set up.</p>
 <div><p>Dumps information about the worker, like pool process ids, and
 total number of tasks executed by type.</p>
 <p>Example reply:</p>
-<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="p">[{</span><span class="s1">&#39;worker.local&#39;</span><span class="p">:</span>
-     <span class="s1">&#39;total&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;tasks.sleeptask&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">},</span>
-     <span class="s1">&#39;pool&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;timeouts&#39;</span><span class="p">:</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
-              <span class="s1">&#39;processes&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">60376</span><span class="p">,</span> <span class="mi">60377</span><span class="p">],</span>
-              <span class="s1">&#39;max-concurrency&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-              <span class="s1">&#39;max-tasks-per-child&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-              <span class="s1">&#39;put-guarded-by-semaphore&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}}]</span>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="p">[{</span><span class="s1">'worker.local'</span><span class="p">:</span>
+     <span class="s1">'total'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'tasks.sleeptask'</span><span class="p">:</span> <span class="mi">6</span><span class="p">},</span>
+     <span class="s1">'pool'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'timeouts'</span><span class="p">:</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+              <span class="s1">'processes'</span><span class="p">:</span> <span class="p">[</span><span class="mi">60376</span><span class="p">,</span> <span class="mi">60377</span><span class="p">],</span>
+              <span class="s1">'max-concurrency'</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+              <span class="s1">'max-tasks-per-child'</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+              <span class="s1">'put-guarded-by-semaphore'</span><span class="p">:</span> <span class="kc">True</span><span class="p">}}]</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -492,19 +464,19 @@ By default arguments are passed through repr in case there
 are arguments that is not JSON encodable. If you know
 the arguments are JSON safe, you can pass the argument <cite>safe=True</cite>.</p>
 <p>Example reply:</p>
-<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">broadcast</span><span class="p">(</span><span class="s2">&quot;dump_active&quot;</span><span class="p">,</span> <span class="n">arguments</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;safe&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span> <span class="n">reply</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="go">[{&#39;worker.local&#39;: [</span>
-<span class="go">    {&#39;args&#39;: &#39;(1,)&#39;,</span>
-<span class="go">     &#39;time_start&#39;: 1278580542.6300001,</span>
-<span class="go">     &#39;name&#39;: &#39;tasks.sleeptask&#39;,</span>
-<span class="go">     &#39;delivery_info&#39;: {</span>
-<span class="go">         &#39;consumer_tag&#39;: &#39;30&#39;,</span>
-<span class="go">         &#39;routing_key&#39;: &#39;celery&#39;,</span>
-<span class="go">         &#39;exchange&#39;: &#39;celery&#39;},</span>
-<span class="go">     &#39;hostname&#39;: &#39;casper.local&#39;,</span>
-<span class="go">     &#39;acknowledged&#39;: True,</span>
-<span class="go">     &#39;kwargs&#39;: &#39;{}&#39;,</span>
-<span class="go">     &#39;id&#39;: &#39;802e93e9-e470-47ed-b913-06de8510aca2&#39;,</span>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">broadcast</span><span class="p">(</span><span class="s2">"dump_active"</span><span class="p">,</span> <span class="n">arguments</span><span class="o">=</span><span class="p">{</span><span class="s2">"safe"</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span> <span class="n">reply</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">[{'worker.local': [</span>
+<span class="go">    {'args': '(1,)',</span>
+<span class="go">     'time_start': 1278580542.6300001,</span>
+<span class="go">     'name': 'tasks.sleeptask',</span>
+<span class="go">     'delivery_info': {</span>
+<span class="go">         'consumer_tag': '30',</span>
+<span class="go">         'routing_key': 'celery',</span>
+<span class="go">         'exchange': 'celery'},</span>
+<span class="go">     'hostname': 'casper.local',</span>
+<span class="go">     'acknowledged': True,</span>
+<span class="go">     'kwargs': '{}',</span>
+<span class="go">     'id': '802e93e9-e470-47ed-b913-06de8510aca2',</span>
 <span class="go">    }</span>
 <span class="go">]}]</span>
 </pre></div>
@@ -513,7 +485,7 @@ the arguments are JSON safe, you can pass the argument <cite>safe=True</cite>.</
 </li>
 <li><p class="first">Added experimental support for persistent revokes.</p>
 <blockquote>
-<div><p>Use the <cite>-S|&#8211;statedb</cite> argument to the worker to enable it:</p>
+<div><p>Use the <cite>-S|–statedb</cite> argument to the worker to enable it:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ celeryd --statedb<span class="o">=</span>/var/run/celeryd
 </pre></div>
 </div>
@@ -526,8 +498,8 @@ as the <cite>shelve</cite> module automatically adds the <cite>.db</cite> suffix
 <div class="section" id="version-2-0-0">
 <span id="id4"></span><h2><a class="toc-backref" href="#id10">2.0.0</a><a class="headerlink" href="#version-2-0-0" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2010-07-02 02:30 P.M CEST</td>
 </tr>
@@ -541,7 +513,7 @@ as the <cite>shelve</cite> module automatically adds the <cite>.db</cite> suffix
 being that the Django dependency has been removed so Celery no longer
 supports Django out of the box, but instead as an add-on package
 called <a class="reference external" href="http://pypi.python.org/pypi/django-celery">django-celery</a>.</p>
-<p>We&#8217;re very sorry for breaking backwards compatibility, but there&#8217;s
+<p>We’re very sorry for breaking backwards compatibility, but there’s
 also many new and exciting features to make up for the time you lose
 upgrading, so be sure to read the <a class="reference internal" href="#v200-news"><span>News</span></a> section.</p>
 <p>Quite a lot of potential users have been upset about the Django dependency,
@@ -554,18 +526,18 @@ well.</p>
 <p>Django integration has been moved to a separate package: <a class="reference external" href="http://pypi.python.org/pypi/django-celery">django-celery</a>.</p>
 <ul>
 <li><p class="first">To upgrade you need to install the <a class="reference external" href="http://pypi.python.org/pypi/django-celery">django-celery</a> module and change:</p>
-<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="s2">&quot;celery&quot;</span>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="s2">"celery"</span>
 </pre></div>
 </div>
 <p>to:</p>
-<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="s2">&quot;djcelery&quot;</span>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="s2">"djcelery"</span>
 </pre></div>
 </div>
 </li>
 <li><p class="first">If you use <cite>mod_wsgi</cite> you need to add the following line to your <cite>.wsgi</cite>
 file:</p>
 <div class="highlight-python3"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;CELERY_LOADER&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;django&quot;</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"CELERY_LOADER"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"django"</span>
 </pre></div>
 </div>
 </li>
@@ -573,8 +545,8 @@ file:</p>
 <blockquote>
 <div><table border="1" class="docutils">
 <colgroup>
-<col width="50%" />
-<col width="50%" />
+<col width="50%"></col>
+<col width="50%"></col>
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head"><strong>Module name</strong></th>
@@ -613,8 +585,8 @@ file:</p>
 </ul>
 <p>Importing <code class="xref py py-mod docutils literal"><span class="pre">djcelery</span></code> will automatically setup Celery to use Django loader.
 loader.  It does this by setting the <span class="target" id="index-0"></span><code class="xref std std-envvar docutils literal"><span class="pre">CELERY_LOADER</span></code> environment variable to
-<cite>&#8220;django&#8221;</cite> (it won&#8217;t change it if a loader is already set.)</p>
-<p>When the Django loader is used, the &#8220;database&#8221; and &#8220;cache&#8221; result backend
+<cite>“django”</cite> (it won’t change it if a loader is already set.)</p>
+<p>When the Django loader is used, the “database” and “cache” result backend
 aliases will point to the <code class="xref py py-mod docutils literal"><span class="pre">djcelery</span></code> backends instead of the built-in backends,
 and configuration will be read from the Django settings.</p>
 </div>
@@ -628,16 +600,16 @@ Django ORM, see <a class="reference external" href="http://www.sqlalchemy.org/do
 <a class="reference internal" href="../configuration.html#std:setting-CELERY_RESULT_DBURI"><code class="xref std std-setting docutils literal"><span class="pre">CELERY_RESULT_DBURI</span></code></a>. The value here should be an
 <a class="reference external" href="http://www.sqlalchemy.org/docs/core/engines.html#database-urls">SQLAlchemy Connection String</a>, some examples include:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># sqlite (filename)</span>
-<span class="n">CELERY_RESULT_DBURI</span> <span class="o">=</span> <span class="s2">&quot;sqlite:///celerydb.sqlite&quot;</span>
+<span class="n">CELERY_RESULT_DBURI</span> <span class="o">=</span> <span class="s2">"sqlite:///celerydb.sqlite"</span>
 
 <span class="c1"># mysql</span>
-<span class="n">CELERY_RESULT_DBURI</span> <span class="o">=</span> <span class="s2">&quot;mysql://scott:tiger@localhost/foo&quot;</span>
+<span class="n">CELERY_RESULT_DBURI</span> <span class="o">=</span> <span class="s2">"mysql://scott:tiger@localhost/foo"</span>
 
 <span class="c1"># postgresql</span>
-<span class="n">CELERY_RESULT_DBURI</span> <span class="o">=</span> <span class="s2">&quot;postgresql://scott:tiger@localhost/mydatabase&quot;</span>
+<span class="n">CELERY_RESULT_DBURI</span> <span class="o">=</span> <span class="s2">"postgresql://scott:tiger@localhost/mydatabase"</span>
 
 <span class="c1"># oracle</span>
-<span class="n">CELERY_RESULT_DBURI</span> <span class="o">=</span> <span class="s2">&quot;oracle://scott:tiger@127.0.0.1:1521/sidname&quot;</span>
+<span class="n">CELERY_RESULT_DBURI</span> <span class="o">=</span> <span class="s2">"oracle://scott:tiger@127.0.0.1:1521/sidname"</span>
 </pre></div>
 </div>
 <p>See <a class="reference external" href="http://www.sqlalchemy.org/docs/core/engines.html#database-urls">SQLAlchemy Connection Strings</a> for more information about connection
@@ -645,7 +617,7 @@ strings.</p>
 <p>To specify additional SQLAlchemy database engine options you can use
 the <a class="reference internal" href="../configuration.html#std:setting-CELERY_RESULT_ENGINE_OPTIONS"><code class="xref std std-setting docutils literal"><span class="pre">CELERY_RESULT_ENGINE_OPTIONS</span></code></a> setting:</p>
 <div class="highlight-python3"><div class="highlight"><pre><span></span><span class="c1"># echo enables verbose logging from SQLAlchemy.</span>
-<span class="n">CELERY_RESULT_ENGINE_OPTIONS</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;echo&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+<span class="n">CELERY_RESULT_ENGINE_OPTIONS</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"echo"</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -653,14 +625,14 @@ the <a class="reference internal" href="../configuration.html#std:setting-CELERY
 <span id="v200-upgrade-cache"></span><h4><a class="toc-backref" href="#id15">Cache result backend</a><a class="headerlink" href="#cache-result-backend" title="Permalink to this headline">¶</a></h4>
 <p>The cache result backend is no longer using the Django cache framework,
 but it supports mostly the same configuration syntax:</p>
-<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">CELERY_CACHE_BACKEND</span> <span class="o">=</span> <span class="s2">&quot;memcached://A.example.com:11211;B.example.com&quot;</span>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">CELERY_CACHE_BACKEND</span> <span class="o">=</span> <span class="s2">"memcached://A.example.com:11211;B.example.com"</span>
 </pre></div>
 </div>
 <p>To use the cache backend you must either have the <a class="reference external" href="http://pypi.python.org/pypi/pylibmc">pylibmc</a> or
 <a class="reference external" href="http://pypi.python.org/pypi/python-memcached">python-memcached</a> library installed, of which the former is regarded
 as the best choice.</p>
 <p>The support backend types are <cite>memcached://</cite> and <cite>memory://</cite>,
-we haven&#8217;t felt the need to support any of the other backends
+we haven’t felt the need to support any of the other backends
 provided by Django.</p>
 </div>
 </div>
@@ -671,18 +643,18 @@ provided by Django.</p>
 instead of raising <a class="reference external" href="http://docs.python.org/dev/library/exceptions.html#ImportError" title="(in Python v3.6)"><code class="xref py py-exc docutils literal"><span class="pre">ImportError</span></code></a>.</p>
 <blockquote>
 <div><p>The worker raises <a class="reference internal" href="../reference/celery.exceptions.html#celery.exceptions.ImproperlyConfigured" title="celery.exceptions.ImproperlyConfigured"><code class="xref py py-exc docutils literal"><span class="pre">ImproperlyConfigured</span></code></a> if the configuration
-is not set up. This makes it possible to use <cite>&#8211;help</cite> etc., without having a
+is not set up. This makes it possible to use <cite>–help</cite> etc., without having a
 working configuration.</p>
 <p>Also this makes it possible to use the client side of celery without being
 configured:</p>
 <div class="highlight-python3"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">carrot.connection</span> <span class="k">import</span> <span class="n">BrokerConnection</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">conn</span> <span class="o">=</span> <span class="n">BrokerConnection</span><span class="p">(</span><span class="s2">&quot;localhost&quot;</span><span class="p">,</span> <span class="s2">&quot;guest&quot;</span><span class="p">,</span> <span class="s2">&quot;guest&quot;</span><span class="p">,</span> <span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">conn</span> <span class="o">=</span> <span class="n">BrokerConnection</span><span class="p">(</span><span class="s2">"localhost"</span><span class="p">,</span> <span class="s2">"guest"</span><span class="p">,</span> <span class="s2">"guest"</span><span class="p">,</span> <span class="s2">"/"</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">celery.execute</span> <span class="k">import</span> <span class="n">send_task</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">send_task</span><span class="p">(</span><span class="s2">&quot;celery.ping&quot;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(),</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{},</span> <span class="n">connection</span><span class="o">=</span><span class="n">conn</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">send_task</span><span class="p">(</span><span class="s2">"celery.ping"</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(),</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{},</span> <span class="n">connection</span><span class="o">=</span><span class="n">conn</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">celery.backends.amqp</span> <span class="k">import</span> <span class="n">AMQPBackend</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">backend</span> <span class="o">=</span> <span class="n">AMQPBackend</span><span class="p">(</span><span class="n">connection</span><span class="o">=</span><span class="n">conn</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-<span class="go">&#39;pong&#39;</span>
+<span class="go">'pong'</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -692,8 +664,8 @@ the <a class="reference internal" href="../internals/deprecation.html#deprecatio
 <blockquote>
 <div><table border="1" class="docutils">
 <colgroup>
-<col width="50%" />
-<col width="50%" />
+<col width="50%"></col>
+<col width="50%"></col>
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head"><strong>Setting name</strong></th>
@@ -723,16 +695,16 @@ the <a class="reference internal" href="../internals/deprecation.html#deprecatio
 <li><p class="first">The <cite>celery.task.rest</cite> module has been removed, use <a class="reference internal" href="../userguide/remote-tasks.html#module-celery.task.http" title="celery.task.http"><code class="xref py py-mod docutils literal"><span class="pre">celery.task.http</span></code></a>
 instead (as scheduled by the <a class="reference internal" href="../internals/deprecation.html#deprecation-timeline"><span>Celery Deprecation Timeline</span></a>).</p>
 </li>
-<li><p class="first">It&#8217;s no longer allowed to skip the class name in loader names.
+<li><p class="first">It’s no longer allowed to skip the class name in loader names.
 (as scheduled by the <a class="reference internal" href="../internals/deprecation.html#deprecation-timeline"><span>Celery Deprecation Timeline</span></a>):</p>
 <blockquote>
 <div><p>Assuming the implicit <cite>Loader</cite> class name is no longer supported,
 if you use e.g.:</p>
-<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">CELERY_LOADER</span> <span class="o">=</span> <span class="s2">&quot;myapp.loaders&quot;</span>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">CELERY_LOADER</span> <span class="o">=</span> <span class="s2">"myapp.loaders"</span>
 </pre></div>
 </div>
 <p>You need to include the loader class name, like this:</p>
-<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">CELERY_LOADER</span> <span class="o">=</span> <span class="s2">&quot;myapp.loaders.Loader&quot;</span>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">CELERY_LOADER</span> <span class="o">=</span> <span class="s2">"myapp.loaders.Loader"</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -742,11 +714,11 @@ if you use e.g.:</p>
 <div><p>Previous default setting was to expire in 5 days.</p>
 </div></blockquote>
 </li>
-<li><p class="first">AMQP backend: Don&#8217;t use different values for <cite>auto_delete</cite>.</p>
+<li><p class="first">AMQP backend: Don’t use different values for <cite>auto_delete</cite>.</p>
 <blockquote>
 <div><p>This bug became visible with RabbitMQ 1.8.0, which no longer
 allows conflicting declarations for the auto_delete and durable settings.</p>
-<p>If you&#8217;ve already used celery with this backend chances are you
+<p>If you’ve already used celery with this backend chances are you
 have to delete the previous declaration:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ camqadm exchange.delete celeryresults
 </pre></div>
@@ -782,7 +754,7 @@ executing in real-time and investigate tracebacks and results of ready
 tasks. It also enables you to set new rate limits and revoke tasks.</p>
 <p>Screenshot:</p>
 <div class="figure">
-<img alt="../_images/celeryevshotsm.jpg" src="../_images/celeryevshotsm.jpg" />
+<img alt="../_images/celeryevshotsm.jpg" src="../_images/celeryevshotsm.jpg"/>
 </div>
 <p>If you run <cite>celeryev</cite> with the <cite>-d</cite> switch it will act as an event
 dumper, simply dumping the events it receives to standard out:</p>
@@ -822,8 +794,8 @@ The fields here are, in order: *sender hostname*, *timestamp*, *event type* and
 <blockquote>
 <div><table border="1" class="docutils">
 <colgroup>
-<col width="50%" />
-<col width="50%" />
+<col width="50%"></col>
+<col width="50%"></col>
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head"><strong>Module name</strong></th>
@@ -849,18 +821,18 @@ The fields here are, in order: *sender hostname*, *timestamp*, *event type* and
 </li>
 <li><p class="first">now depends on <code class="xref py py-mod docutils literal"><span class="pre">pyparsing</span></code></p>
 </li>
-<li><p class="first">Worker: Added <cite>&#8211;purge</cite> as an alias to <cite>&#8211;discard</cite>.</p>
+<li><p class="first">Worker: Added <cite>–purge</cite> as an alias to <cite>–discard</cite>.</p>
 </li>
 <li><p class="first">Worker: Ctrl+C (SIGINT) once does warm shutdown, hitting Ctrl+C twice
 forces termination.</p>
 </li>
 <li><p class="first">Added support for using complex crontab-expressions in periodic tasks. For
 example, you can now use:</p>
-<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">crontab</span><span class="p">(</span><span class="n">minute</span><span class="o">=</span><span class="s2">&quot;*/15&quot;</span><span class="p">)</span>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">crontab</span><span class="p">(</span><span class="n">minute</span><span class="o">=</span><span class="s2">"*/15"</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>or even:</p>
-<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">crontab</span><span class="p">(</span><span class="n">minute</span><span class="o">=</span><span class="s2">&quot;*/30&quot;</span><span class="p">,</span> <span class="n">hour</span><span class="o">=</span><span class="s2">&quot;8-17,1-2&quot;</span><span class="p">,</span> <span class="n">day_of_week</span><span class="o">=</span><span class="s2">&quot;thu-fri&quot;</span><span class="p">)</span>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">crontab</span><span class="p">(</span><span class="n">minute</span><span class="o">=</span><span class="s2">"*/30"</span><span class="p">,</span> <span class="n">hour</span><span class="o">=</span><span class="s2">"8-17,1-2"</span><span class="p">,</span> <span class="n">day_of_week</span><span class="o">=</span><span class="s2">"thu-fri"</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>See <a class="reference internal" href="../userguide/periodic-tasks.html#guide-beat"><span>Periodic Tasks</span></a>.</p>
@@ -868,7 +840,7 @@ example, you can now use:</p>
 <li><p class="first">Worker: Now waits for available pool processes before applying new
 tasks to the pool.</p>
 <blockquote>
-<div><p>This means it doesn&#8217;t have to wait for dozens of tasks to finish at shutdown
+<div><p>This means it doesn’t have to wait for dozens of tasks to finish at shutdown
 because it has applied prefetched tasks without having any pool
 processes available to immediately accept them.</p>
 <p>See <a class="reference external" href="https://github.com/celery/celery/issues/122"><span class="xref issue">issue #122</span></a>.</p>
@@ -900,9 +872,9 @@ version 1.4.</p>
 <div><p>You can disable this using the <a class="reference internal" href="../configuration.html#std:setting-CELERY_CREATE_MISSING_QUEUES"><code class="xref std std-setting docutils literal"><span class="pre">CELERY_CREATE_MISSING_QUEUES</span></code></a>
 setting.</p>
 <p>The missing queues are created with the following options:</p>
-<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">CELERY_QUEUES</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;exchange&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
-                       <span class="s2">&quot;exchange_type&quot;</span><span class="p">:</span> <span class="s2">&quot;direct&quot;</span><span class="p">,</span>
-                       <span class="s2">&quot;routing_key&quot;</span><span class="p">:</span> <span class="s2">&quot;name}</span>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">CELERY_QUEUES</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"exchange"</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+                       <span class="s2">"exchange_type"</span><span class="p">:</span> <span class="s2">"direct"</span><span class="p">,</span>
+                       <span class="s2">"routing_key"</span><span class="p">:</span> <span class="s2">"name}</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -941,9 +913,9 @@ this to e.g. clean up before the hard time limit comes.</p>
 </li>
 </ul>
 <p>New command-line arguments to celeryd added:
-<cite>&#8211;time-limit</cite> and <cite>&#8211;soft-time-limit</cite>.</p>
-<p>What&#8217;s left?</p>
-<p>This won&#8217;t work on platforms not supporting signals (and specifically
+<cite>–time-limit</cite> and <cite>–soft-time-limit</cite>.</p>
+<p>What’s left?</p>
+<p>This won’t work on platforms not supporting signals (and specifically
 the <cite>SIGUSR1</cite> signal) yet. So an alternative the ability to disable
 the feature all together on nonconforming platforms must be implemented.</p>
 <p>Also when the hard time limit is exceeded, the task result should
@@ -957,8 +929,8 @@ in-memory backend.</p>
 <blockquote>
 <div><table border="1" class="docutils">
 <colgroup>
-<col width="50%" />
-<col width="50%" />
+<col width="50%"></col>
+<col width="50%"></col>
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head"><strong>Log level</strong></th>
@@ -994,44 +966,44 @@ You can explicitly enable/disable this feature using the
 sending tasks. Dictionaries in this list converts to a
 <code class="xref py py-class docutils literal"><span class="pre">celery.routes.MapRoute</span></code> instance.</p>
 <p>Examples:</p>
-<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CELERY_ROUTES</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;celery.ping&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
-<span class="go">                     &quot;mytasks.add&quot;: &quot;cpu-bound&quot;,</span>
-<span class="go">                     &quot;video.encode&quot;: {</span>
-<span class="go">                         &quot;queue&quot;: &quot;video&quot;,</span>
-<span class="go">                         &quot;exchange&quot;: &quot;media&quot;</span>
-<span class="go">                         &quot;routing_key&quot;: &quot;media.video.encode&quot;}}</span>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CELERY_ROUTES</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"celery.ping"</span><span class="p">:</span> <span class="s2">"default"</span><span class="p">,</span>
+<span class="go">                     "mytasks.add": "cpu-bound",</span>
+<span class="go">                     "video.encode": {</span>
+<span class="go">                         "queue": "video",</span>
+<span class="go">                         "exchange": "media"</span>
+<span class="go">                         "routing_key": "media.video.encode"}}</span>
 </pre></div>
 </div>
-<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CELERY_ROUTES</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;myapp.tasks.Router&quot;</span><span class="p">,</span>
-<span class="go">                     {&quot;celery.ping&quot;: &quot;default})</span>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CELERY_ROUTES</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"myapp.tasks.Router"</span><span class="p">,</span>
+<span class="go">                     {"celery.ping": "default})</span>
 </pre></div>
 </div>
 <p>Where <cite>myapp.tasks.Router</cite> could be:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Router</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 
     <span class="k">def</span> <span class="nf">route_for_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">task</span> <span class="o">==</span> <span class="s2">&quot;celery.ping&quot;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s2">&quot;default&quot;</span>
+        <span class="k">if</span> <span class="n">task</span> <span class="o">==</span> <span class="s2">"celery.ping"</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">"default"</span>
 </pre></div>
 </div>
 <p>route_for_task may return a string or a dict. A string then means
-it&#8217;s a queue name in <a class="reference internal" href="../configuration.html#std:setting-CELERY_QUEUES"><code class="xref std std-setting docutils literal"><span class="pre">CELERY_QUEUES</span></code></a>, a dict means it&#8217;s a custom route.</p>
+it’s a queue name in <a class="reference internal" href="../configuration.html#std:setting-CELERY_QUEUES"><code class="xref std std-setting docutils literal"><span class="pre">CELERY_QUEUES</span></code></a>, a dict means it’s a custom route.</p>
 <p>When sending tasks, the routers are consulted in order. The first
-router that doesn&#8217;t return <cite>None</cite> is the route to use. The message options
+router that doesn’t return <cite>None</cite> is the route to use. The message options
 is then merged with the found route settings, where the routers settings
 have priority.</p>
 <p>Example if <code class="xref py py-func docutils literal"><span class="pre">apply_async()</span></code> has these arguments:</p>
-<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Task</span><span class="o">.</span><span class="n">apply_async</span><span class="p">(</span><span class="n">immediate</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">exchange</span><span class="o">=</span><span class="s2">&quot;video&quot;</span><span class="p">,</span>
-<span class="gp">... </span>                 <span class="n">routing_key</span><span class="o">=</span><span class="s2">&quot;video.compress&quot;</span><span class="p">)</span>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Task</span><span class="o">.</span><span class="n">apply_async</span><span class="p">(</span><span class="n">immediate</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">exchange</span><span class="o">=</span><span class="s2">"video"</span><span class="p">,</span>
+<span class="gp">... </span>                 <span class="n">routing_key</span><span class="o">=</span><span class="s2">"video.compress"</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>and a router returns:</p>
-<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;immediate&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
- <span class="s2">&quot;exchange&quot;</span><span class="p">:</span> <span class="s2">&quot;urgent&quot;</span><span class="p">}</span>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">"immediate"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+ <span class="s2">"exchange"</span><span class="p">:</span> <span class="s2">"urgent"</span><span class="p">}</span>
 </pre></div>
 </div>
 <p>the final message options will be:</p>
-<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">immediate</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exchange</span><span class="o">=</span><span class="s2">&quot;urgent&quot;</span><span class="p">,</span> <span class="n">routing_key</span><span class="o">=</span><span class="s2">&quot;video.compress&quot;</span>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">immediate</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exchange</span><span class="o">=</span><span class="s2">"urgent"</span><span class="p">,</span> <span class="n">routing_key</span><span class="o">=</span><span class="s2">"video.compress"</span>
 </pre></div>
 </div>
 <p>(and any default message options defined in the
@@ -1081,7 +1053,7 @@ queues:</p>
 <li><p class="first">Worker: New return value for the <cite>revoke</cite> control command:</p>
 <blockquote>
 <div><p>Now returns:</p>
-<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;ok&quot;</span><span class="p">:</span> <span class="s2">&quot;task $id revoked&quot;</span><span class="p">}</span>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">"ok"</span><span class="p">:</span> <span class="s2">"task $id revoked"</span><span class="p">}</span>
 </pre></div>
 </div>
 <p>instead of <cite>True</cite>.</p>
@@ -1091,15 +1063,15 @@ queues:</p>
 <blockquote>
 <div><p>Example usage:</p>
 <div class="highlight-python3"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">celery.task.control</span> <span class="k">import</span> <span class="n">broadcast</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">broadcast</span><span class="p">(</span><span class="s2">&quot;enable_events&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">broadcast</span><span class="p">(</span><span class="s2">&quot;disable_events&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">broadcast</span><span class="p">(</span><span class="s2">"enable_events"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">broadcast</span><span class="p">(</span><span class="s2">"disable_events"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div></blockquote>
 </li>
 <li><p class="first">Removed top-level tests directory. Test config now in celery.tests.config</p>
 <blockquote>
-<div><p>This means running the unit tests doesn&#8217;t require any special setup.
+<div><p>This means running the unit tests doesn’t require any special setup.
 <cite>celery/tests/__init__</cite> now configures the <span class="target" id="index-1"></span><code class="xref std std-envvar docutils literal"><span class="pre">CELERY_CONFIG_MODULE</span></code>
 and <span class="target" id="index-2"></span><code class="xref std std-envvar docutils literal"><span class="pre">CELERY_LOADER</span></code> environment variables, so when <cite>nosetests</cite>
 imports that, the unit test environment is all set up.</p>
@@ -1122,7 +1094,7 @@ imports that, the unit test environment is all set up.</p>
 <p>The coverage output is then located in <cite>celery/tests/cover/index.html</cite>.</p>
 </div></blockquote>
 </li>
-<li><p class="first">Worker: New option <cite>&#8211;version</cite>: Dump version info and exit.</p>
+<li><p class="first">Worker: New option <cite>–version</cite>: Dump version info and exit.</p>
 </li>
 <li><p class="first"><code class="xref py py-mod docutils literal"><span class="pre">celeryd-multi</span></code>: Tool for shell scripts
 to start multiple workers.</p>
@@ -1131,7 +1103,7 @@ to start multiple workers.</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># Advanced example with 10 workers:</span>
 <span class="c1">#   * Three of the workers processes the images and video queue</span>
 <span class="c1">#   * Two of the workers processes the data queue with loglevel DEBUG</span>
-<span class="c1">#   * the rest processes the default&#39; queue.</span>
+<span class="c1">#   * the rest processes the default' queue.</span>
 $ celeryd-multi start <span class="m">10</span> -l INFO -Q:1-3 images,video -Q:4,5:data
     -Q default -L:4,5 DEBUG
 
@@ -1152,7 +1124,7 @@ $ celeryd-multi start <span class="m">2</span> -n worker.example.com -c 3
 celeryd -n celeryd1.worker.example.com -c 3
 celeryd -n celeryd2.worker.example.com -c 3
 
-<span class="c1"># Additionl options are added to each celeryd&#39;,</span>
+<span class="c1"># Additionl options are added to each celeryd',</span>
 <span class="c1"># but you can also modify the options for ranges of or single workers</span>
 
 <span class="c1"># 3 workers: Two with 3 processes, and one with 10 processes.</span>
@@ -1195,33 +1167,15 @@ celeryd-multi -n xuzzy.myhost -c 3
 </div>
 </div>
 </div>
+</div>
+</div>
+</div>
 
+<div class="clearer"></div>
+</div>
 
-          </div>
-        </div>
-      </div>
+<div class="footer" role="contentinfo">
+        © <a href="../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="changelog-1.0.html" title="Change history for Celery 1.0"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="changelog-2.1.html" title="Change history for Celery 2.1"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" >History</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &copy; <a href="../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
-    </div>
-  </body>
+</body>
 </html>

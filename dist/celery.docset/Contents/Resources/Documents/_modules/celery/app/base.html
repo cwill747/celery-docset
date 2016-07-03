@@ -1,17 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>celery.app.base &mdash; Celery 3.1.23 documentation</title>
-    
-    <link rel="stylesheet" href="../../../_static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>celery.app.base — Celery 3.1.23 documentation</title>
+<link href="../../../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
         VERSION:     '3.1.23',
@@ -20,53 +16,34 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="copyright" title="Copyright" href="../../../copyright.html" />
-    <link rel="top" title="Celery 3.1.23 documentation" href="../../../index.html" />
-    <link rel="up" title="celery.app" href="../app.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="../app.html" accesskey="U">celery.app</a> &raquo;</li> 
-      </ul>
-    </div>  
+<script src="../../../_static/jquery.js" type="text/javascript"></script>
+<script src="../../../_static/underscore.js" type="text/javascript"></script>
+<script src="../../../_static/doctools.js" type="text/javascript"></script>
+<link href="../../../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../../../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="../app.html" rel="up" title="celery.app"/>
+</head>
+<body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
 <div class="deck">
-
-    
-        <p>
+<p>
         This document describes the current stable version of Celery (3.1). For development docs,
         <a href="http://docs.celeryproject.org/en/master/_modules/celery/app/base.html">go here</a>.
         </p>
-    
-
 </div>
-    <h1>Source code for celery.app.base</h1><div class="highlight"><pre>
+<h1>Source code for celery.app.base</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="sd">    celery.app.base</span>
 <span class="sd">    ~~~~~~~~~~~~~~~</span>
 
 <span class="sd">    Actual App instance implementation.</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
 
 <span class="kn">import</span> <span class="nn">os</span>
@@ -108,18 +85,18 @@
 <span class="c1"># Load all builtin tasks</span>
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">builtins</span>  <span class="c1"># noqa</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Celery&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Celery'</span><span class="p">]</span>
 
-<span class="n">_EXECV</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;FORKED_BY_MULTIPROCESSING&#39;</span><span class="p">)</span>
+<span class="n">_EXECV</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'FORKED_BY_MULTIPROCESSING'</span><span class="p">)</span>
 <span class="n">BUILTIN_FIXUPS</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">([</span>
-    <span class="s1">&#39;celery.fixups.django:fixup&#39;</span><span class="p">,</span>
+    <span class="s1">'celery.fixups.django:fixup'</span><span class="p">,</span>
 <span class="p">])</span>
 
-<span class="n">ERR_ENVVAR_NOT_SET</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="n">ERR_ENVVAR_NOT_SET</span> <span class="o">=</span> <span class="s2">"""</span><span class="se">\</span>
 <span class="s2">The environment variable {0!r} is not set,</span>
 <span class="s2">and as such the configuration could not be loaded.</span>
 <span class="s2">Please set this variable and make it point to</span>
-<span class="s2">a configuration module.&quot;&quot;&quot;</span>
+<span class="s2">a configuration module."""</span>
 
 <span class="n">_after_fork_registered</span> <span class="o">=</span> <span class="bp">False</span>
 
@@ -130,8 +107,8 @@
 
 
 <span class="k">def</span> <span class="nf">_unpickle_appattr</span><span class="p">(</span><span class="n">reverse_name</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Given an attribute name and a list of args, gets</span>
-<span class="sd">    the attribute from the current app and calls it.&quot;&quot;&quot;</span>
+    <span class="sd">"""Given an attribute name and a list of args, gets</span>
+<span class="sd">    the attribute from the current app and calls it."""</span>
     <span class="k">return</span> <span class="n">get_current_app</span><span class="p">()</span><span class="o">.</span><span class="n">_rgetattr</span><span class="p">(</span><span class="n">reverse_name</span><span class="p">)(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
 
 
@@ -151,7 +128,7 @@
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">mputil</span><span class="o">.</span><span class="n">_logger</span><span class="p">:</span>
                 <span class="n">mputil</span><span class="o">.</span><span class="n">_logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-                    <span class="s1">&#39;after forker raised exception: </span><span class="si">%r</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+                    <span class="s1">'after forker raised exception: </span><span class="si">%r</span><span class="s1">'</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">_ensure_after_fork</span><span class="p">():</span>
@@ -167,13 +144,13 @@
     <span class="n">SYSTEM</span> <span class="o">=</span> <span class="n">platforms</span><span class="o">.</span><span class="n">SYSTEM</span>
     <span class="n">IS_OSX</span><span class="p">,</span> <span class="n">IS_WINDOWS</span> <span class="o">=</span> <span class="n">platforms</span><span class="o">.</span><span class="n">IS_OSX</span><span class="p">,</span> <span class="n">platforms</span><span class="o">.</span><span class="n">IS_WINDOWS</span>
 
-    <span class="n">amqp_cls</span> <span class="o">=</span> <span class="s1">&#39;celery.app.amqp:AMQP&#39;</span>
+    <span class="n">amqp_cls</span> <span class="o">=</span> <span class="s1">'celery.app.amqp:AMQP'</span>
     <span class="n">backend_cls</span> <span class="o">=</span> <span class="bp">None</span>
-    <span class="n">events_cls</span> <span class="o">=</span> <span class="s1">&#39;celery.events:Events&#39;</span>
-    <span class="n">loader_cls</span> <span class="o">=</span> <span class="s1">&#39;celery.loaders.app:AppLoader&#39;</span>
-    <span class="n">log_cls</span> <span class="o">=</span> <span class="s1">&#39;celery.app.log:Logging&#39;</span>
-    <span class="n">control_cls</span> <span class="o">=</span> <span class="s1">&#39;celery.app.control:Control&#39;</span>
-    <span class="n">task_cls</span> <span class="o">=</span> <span class="s1">&#39;celery.app.task:Task&#39;</span>
+    <span class="n">events_cls</span> <span class="o">=</span> <span class="s1">'celery.events:Events'</span>
+    <span class="n">loader_cls</span> <span class="o">=</span> <span class="s1">'celery.loaders.app:AppLoader'</span>
+    <span class="n">log_cls</span> <span class="o">=</span> <span class="s1">'celery.app.log:Logging'</span>
+    <span class="n">control_cls</span> <span class="o">=</span> <span class="s1">'celery.app.control:Control'</span>
+    <span class="n">task_cls</span> <span class="o">=</span> <span class="s1">'celery.app.task:Task'</span>
     <span class="n">registry_cls</span> <span class="o">=</span> <span class="n">TaskRegistry</span>
     <span class="n">_fixups</span> <span class="o">=</span> <span class="bp">None</span>
     <span class="n">_pool</span> <span class="o">=</span> <span class="bp">None</span>
@@ -214,17 +191,17 @@
         <span class="c1"># If the class defines a custom __reduce_args__ we need to use</span>
         <span class="c1"># the old way of pickling apps, which is pickling a list of</span>
         <span class="c1"># args instead of the new way that pickles a dict of keywords.</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_using_v1_reduce</span> <span class="o">=</span> <span class="n">app_has_custom</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;__reduce_args__&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_using_v1_reduce</span> <span class="o">=</span> <span class="n">app_has_custom</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">'__reduce_args__'</span><span class="p">)</span>
 
         <span class="c1"># these options are moved to the config to</span>
         <span class="c1"># simplify pickling of the app object.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_preconf</span> <span class="o">=</span> <span class="n">changes</span> <span class="ow">or</span> <span class="p">{}</span>
         <span class="k">if</span> <span class="n">broker</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_preconf</span><span class="p">[</span><span class="s1">&#39;BROKER_URL&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">broker</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_preconf</span><span class="p">[</span><span class="s1">'BROKER_URL'</span><span class="p">]</span> <span class="o">=</span> <span class="n">broker</span>
         <span class="k">if</span> <span class="n">backend</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_preconf</span><span class="p">[</span><span class="s1">&#39;CELERY_RESULT_BACKEND&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">backend</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_preconf</span><span class="p">[</span><span class="s1">'CELERY_RESULT_BACKEND'</span><span class="p">]</span> <span class="o">=</span> <span class="n">backend</span>
         <span class="k">if</span> <span class="n">include</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_preconf</span><span class="p">[</span><span class="s1">&#39;CELERY_IMPORTS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">include</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_preconf</span><span class="p">[</span><span class="s1">'CELERY_IMPORTS'</span><span class="p">]</span> <span class="o">=</span> <span class="n">include</span>
 
         <span class="c1"># - Apply fixups.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fixups</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">builtin_fixups</span><span class="p">)</span> <span class="k">if</span> <span class="n">fixups</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="n">fixups</span>
@@ -253,24 +230,24 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_maybe_close_pool</span><span class="p">()</span></div>
 
     <span class="k">def</span> <span class="nf">on_init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Optional callback called at init.&quot;&quot;&quot;</span>
+        <span class="sd">"""Optional callback called at init."""</span>
         <span class="k">pass</span>
 
 <div class="viewcode-block" id="Celery.start"><a class="viewcode-back" href="../../../reference/celery.html#celery.Celery.start">[docs]</a>    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">instantiate</span><span class="p">(</span>
-            <span class="s1">&#39;celery.bin.celery:CeleryCommand&#39;</span><span class="p">,</span>
+            <span class="s1">'celery.bin.celery:CeleryCommand'</span><span class="p">,</span>
             <span class="n">app</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">execute_from_commandline</span><span class="p">(</span><span class="n">argv</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Celery.worker_main"><a class="viewcode-back" href="../../../reference/celery.html#celery.Celery.worker_main">[docs]</a>    <span class="k">def</span> <span class="nf">worker_main</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">instantiate</span><span class="p">(</span>
-            <span class="s1">&#39;celery.bin.worker:worker&#39;</span><span class="p">,</span>
+            <span class="s1">'celery.bin.worker:worker'</span><span class="p">,</span>
             <span class="n">app</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">execute_from_commandline</span><span class="p">(</span><span class="n">argv</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Celery.task"><a class="viewcode-back" href="../../../reference/celery.html#celery.Celery.task">[docs]</a>    <span class="k">def</span> <span class="nf">task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">opts</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Creates new task class from any callable.&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">_EXECV</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">opts</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;_force_evaluate&#39;</span><span class="p">):</span>
+        <span class="sd">"""Creates new task class from any callable."""</span>
+        <span class="k">if</span> <span class="n">_EXECV</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">opts</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'_force_evaluate'</span><span class="p">):</span>
             <span class="c1"># When using execv the task in the original module will point to a</span>
-            <span class="c1"># different app, so doing things like &#39;add.request&#39; will point to</span>
+            <span class="c1"># different app, so doing things like 'add.request' will point to</span>
             <span class="c1"># a differnt task instance.  This makes sure it will always use</span>
             <span class="c1"># the task instance from the current app.</span>
             <span class="c1"># Really need a better solution for this :(</span>
@@ -292,7 +269,7 @@
                         <span class="n">task</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
                     <span class="k">return</span> <span class="n">task</span>
 
-                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">finalized</span> <span class="ow">or</span> <span class="n">opts</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;_force_evaluate&#39;</span><span class="p">):</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">finalized</span> <span class="ow">or</span> <span class="n">opts</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'_force_evaluate'</span><span class="p">):</span>
                     <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_task_from_fun</span><span class="p">(</span><span class="n">fun</span><span class="p">,</span> <span class="o">**</span><span class="n">opts</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="c1"># return a proxy object that evaluates on first use</span>
@@ -308,27 +285,27 @@
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
                 <span class="k">return</span> <span class="n">inner_create_task_cls</span><span class="p">(</span><span class="o">**</span><span class="n">opts</span><span class="p">)(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;argument 1 to @task() must be a callable&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">'argument 1 to @task() must be a callable'</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">args</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-                <span class="s1">&#39;@task() takes exactly 1 argument ({0} given)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="s1">'@task() takes exactly 1 argument ({0} given)'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                     <span class="nb">sum</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">opts</span><span class="p">)])))</span>
         <span class="k">return</span> <span class="n">inner_create_task_cls</span><span class="p">(</span><span class="o">**</span><span class="n">opts</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_task_from_fun</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fun</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">finalized</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">autofinalize</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s1">&#39;Contract breach: app not finalized&#39;</span><span class="p">)</span>
-        <span class="n">base</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;base&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">Task</span>
-        <span class="n">bind</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;bind&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s1">'Contract breach: app not finalized'</span><span class="p">)</span>
+        <span class="n">base</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">'base'</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">Task</span>
+        <span class="n">bind</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">'bind'</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
 
         <span class="n">T</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">fun</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="p">),</span> <span class="nb">dict</span><span class="p">({</span>
-            <span class="s1">&#39;app&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="p">,</span>
-            <span class="s1">&#39;accept_magic_kwargs&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
-            <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="n">fun</span> <span class="k">if</span> <span class="n">bind</span> <span class="k">else</span> <span class="nb">staticmethod</span><span class="p">(</span><span class="n">fun</span><span class="p">),</span>
-            <span class="s1">&#39;_decorated&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
-            <span class="s1">&#39;__doc__&#39;</span><span class="p">:</span> <span class="n">fun</span><span class="o">.</span><span class="n">__doc__</span><span class="p">,</span>
-            <span class="s1">&#39;__module__&#39;</span><span class="p">:</span> <span class="n">fun</span><span class="o">.</span><span class="n">__module__</span><span class="p">,</span>
-            <span class="s1">&#39;__wrapped__&#39;</span><span class="p">:</span> <span class="n">fun</span><span class="p">},</span> <span class="o">**</span><span class="n">options</span><span class="p">))()</span>
+            <span class="s1">'app'</span><span class="p">:</span> <span class="bp">self</span><span class="p">,</span>
+            <span class="s1">'accept_magic_kwargs'</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+            <span class="s1">'run'</span><span class="p">:</span> <span class="n">fun</span> <span class="k">if</span> <span class="n">bind</span> <span class="k">else</span> <span class="nb">staticmethod</span><span class="p">(</span><span class="n">fun</span><span class="p">),</span>
+            <span class="s1">'_decorated'</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+            <span class="s1">'__doc__'</span><span class="p">:</span> <span class="n">fun</span><span class="o">.</span><span class="n">__doc__</span><span class="p">,</span>
+            <span class="s1">'__module__'</span><span class="p">:</span> <span class="n">fun</span><span class="o">.</span><span class="n">__module__</span><span class="p">,</span>
+            <span class="s1">'__wrapped__'</span><span class="p">:</span> <span class="n">fun</span><span class="p">},</span> <span class="o">**</span><span class="n">options</span><span class="p">))()</span>
         <span class="n">task</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tasks</span><span class="p">[</span><span class="n">T</span><span class="o">.</span><span class="n">name</span><span class="p">]</span>  <span class="c1"># return global instance.</span>
         <span class="k">return</span> <span class="n">task</span>
 
@@ -336,7 +313,7 @@
         <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_finalize_mutex</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">finalized</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">auto</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">autofinalize</span><span class="p">:</span>
-                    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s1">&#39;Contract breach: app not finalized&#39;</span><span class="p">)</span>
+                    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s1">'Contract breach: app not finalized'</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">finalized</span> <span class="o">=</span> <span class="bp">True</span>
                 <span class="n">_announce_app_finalized</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
@@ -369,23 +346,23 @@
                 <span class="n">ERR_ENVVAR_NOT_SET</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">variable_name</span><span class="p">))</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">config_from_object</span><span class="p">(</span><span class="n">module_name</span><span class="p">,</span> <span class="n">silent</span><span class="o">=</span><span class="n">silent</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="n">force</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">config_from_cmdline</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argv</span><span class="p">,</span> <span class="n">namespace</span><span class="o">=</span><span class="s1">&#39;celery&#39;</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">config_from_cmdline</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argv</span><span class="p">,</span> <span class="n">namespace</span><span class="o">=</span><span class="s1">'celery'</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">loader</span><span class="o">.</span><span class="n">cmdline_config_parser</span><span class="p">(</span><span class="n">argv</span><span class="p">,</span> <span class="n">namespace</span><span class="p">))</span>
 
 <div class="viewcode-block" id="Celery.setup_security"><a class="viewcode-back" href="../../../reference/celery.html#celery.Celery.setup_security">[docs]</a>    <span class="k">def</span> <span class="nf">setup_security</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">allowed_serializers</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">cert</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
-                       <span class="n">store</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">digest</span><span class="o">=</span><span class="s1">&#39;sha1&#39;</span><span class="p">,</span> <span class="n">serializer</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">):</span>
+                       <span class="n">store</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">digest</span><span class="o">=</span><span class="s1">'sha1'</span><span class="p">,</span> <span class="n">serializer</span><span class="o">=</span><span class="s1">'json'</span><span class="p">):</span>
         <span class="kn">from</span> <span class="nn">celery.security</span> <span class="kn">import</span> <span class="n">setup_security</span>
         <span class="k">return</span> <span class="n">setup_security</span><span class="p">(</span><span class="n">allowed_serializers</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">cert</span><span class="p">,</span>
                               <span class="n">store</span><span class="p">,</span> <span class="n">digest</span><span class="p">,</span> <span class="n">serializer</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Celery.autodiscover_tasks"><a class="viewcode-back" href="../../../reference/celery.html#celery.Celery.autodiscover_tasks">[docs]</a>    <span class="k">def</span> <span class="nf">autodiscover_tasks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">packages</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;tasks&#39;</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class="viewcode-block" id="Celery.autodiscover_tasks"><a class="viewcode-back" href="../../../reference/celery.html#celery.Celery.autodiscover_tasks">[docs]</a>    <span class="k">def</span> <span class="nf">autodiscover_tasks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">packages</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">'tasks'</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">force</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_autodiscover_tasks</span><span class="p">(</span><span class="n">packages</span><span class="p">,</span> <span class="n">related_name</span><span class="p">)</span>
         <span class="n">signals</span><span class="o">.</span><span class="n">import_modules</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">promise</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_autodiscover_tasks</span><span class="p">,</span> <span class="p">(</span><span class="n">packages</span><span class="p">,</span> <span class="n">related_name</span><span class="p">),</span>
         <span class="p">),</span> <span class="n">weak</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">sender</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">_autodiscover_tasks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">packages</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;tasks&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_autodiscover_tasks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">packages</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">'tasks'</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># argument may be lazy</span>
         <span class="n">packages</span> <span class="o">=</span> <span class="n">packages</span><span class="p">()</span> <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="n">packages</span><span class="p">)</span> <span class="k">else</span> <span class="n">packages</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">loader</span><span class="o">.</span><span class="n">autodiscover_tasks</span><span class="p">(</span><span class="n">packages</span><span class="p">,</span> <span class="n">related_name</span><span class="p">)</span>
@@ -401,7 +378,7 @@
         <span class="n">conf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conf</span>
         <span class="k">if</span> <span class="n">conf</span><span class="o">.</span><span class="n">CELERY_ALWAYS_EAGER</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">AlwaysEagerIgnored</span><span class="p">(</span>
-                <span class="s1">&#39;CELERY_ALWAYS_EAGER has no effect on send_task&#39;</span><span class="p">,</span>
+                <span class="s1">'CELERY_ALWAYS_EAGER has no effect on send_task'</span><span class="p">,</span>
             <span class="p">),</span> <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
         <span class="n">options</span> <span class="o">=</span> <span class="n">router</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">connection</span><span class="p">:</span>
@@ -434,7 +411,7 @@
             <span class="n">virtual_host</span> <span class="ow">or</span> <span class="n">conf</span><span class="o">.</span><span class="n">BROKER_VHOST</span><span class="p">,</span>
             <span class="n">port</span> <span class="ow">or</span> <span class="n">conf</span><span class="o">.</span><span class="n">BROKER_PORT</span><span class="p">,</span>
             <span class="n">transport</span><span class="o">=</span><span class="n">transport</span> <span class="ow">or</span> <span class="n">conf</span><span class="o">.</span><span class="n">BROKER_TRANSPORT</span><span class="p">,</span>
-            <span class="n">ssl</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">either</span><span class="p">(</span><span class="s1">&#39;BROKER_USE_SSL&#39;</span><span class="p">,</span> <span class="n">ssl</span><span class="p">),</span>
+            <span class="n">ssl</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">either</span><span class="p">(</span><span class="s1">'BROKER_USE_SSL'</span><span class="p">,</span> <span class="n">ssl</span><span class="p">),</span>
             <span class="n">heartbeat</span><span class="o">=</span><span class="n">heartbeat</span><span class="p">,</span>
             <span class="n">login_method</span><span class="o">=</span><span class="n">login_method</span> <span class="ow">or</span> <span class="n">conf</span><span class="o">.</span><span class="n">BROKER_LOGIN_METHOD</span><span class="p">,</span>
             <span class="n">failover_strategy</span><span class="o">=</span><span class="p">(</span>
@@ -444,13 +421,13 @@
                 <span class="n">conf</span><span class="o">.</span><span class="n">BROKER_TRANSPORT_OPTIONS</span><span class="p">,</span> <span class="o">**</span><span class="n">transport_options</span> <span class="ow">or</span> <span class="p">{}</span>
             <span class="p">),</span>
             <span class="n">connect_timeout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">either</span><span class="p">(</span>
-                <span class="s1">&#39;BROKER_CONNECTION_TIMEOUT&#39;</span><span class="p">,</span> <span class="n">connect_timeout</span>
+                <span class="s1">'BROKER_CONNECTION_TIMEOUT'</span><span class="p">,</span> <span class="n">connect_timeout</span>
             <span class="p">),</span>
         <span class="p">)</span></div>
     <span class="n">broker_connection</span> <span class="o">=</span> <span class="n">connection</span>
 
     <span class="k">def</span> <span class="nf">_acquire_connection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pool</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Helper for :meth:`connection_or_acquire`.&quot;&quot;&quot;</span>
+        <span class="sd">"""Helper for :meth:`connection_or_acquire`."""</span>
         <span class="k">if</span> <span class="n">pool</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="o">.</span><span class="n">acquire</span><span class="p">(</span><span class="n">block</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="p">()</span>
@@ -466,7 +443,7 @@
     <span class="n">default_producer</span> <span class="o">=</span> <span class="n">producer_or_acquire</span>  <span class="c1"># XXX compat</span>
 
     <span class="k">def</span> <span class="nf">prepare_config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Prepare configuration before it is merged with the defaults.&quot;&quot;&quot;</span>
+        <span class="sd">"""Prepare configuration before it is merged with the defaults."""</span>
         <span class="k">return</span> <span class="n">find_deprecated_settings</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Celery.now"><a class="viewcode-back" href="../../../reference/celery.html#celery.Celery.now">[docs]</a>    <span class="k">def</span> <span class="nf">now</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -491,8 +468,8 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">amqp</span><span class="o">.</span><span class="n">queues</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">queues</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">either</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">default_key</span><span class="p">,</span> <span class="o">*</span><span class="n">values</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Fallback to the value of a configuration key if none of the</span>
-<span class="sd">        `*values` are true.&quot;&quot;&quot;</span>
+        <span class="sd">"""Fallback to the value of a configuration key if none of the</span>
+<span class="sd">        `*values` are true."""</span>
         <span class="k">return</span> <span class="n">first</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">default_key</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Celery.bugreport"><a class="viewcode-back" href="../../../reference/celery.html#celery.Celery.bugreport">[docs]</a>    <span class="k">def</span> <span class="nf">bugreport</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -506,7 +483,7 @@
         <span class="k">return</span> <span class="n">backend</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Celery.on_configure"><a class="viewcode-back" href="../../../reference/celery.html#celery.Celery.on_configure">[docs]</a>    <span class="k">def</span> <span class="nf">on_configure</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Callback calld when the app loads configuration&quot;&quot;&quot;</span>
+        <span class="sd">"""Callback calld when the app loads configuration"""</span>
         <span class="k">pass</span></div>
 
     <span class="k">def</span> <span class="nf">_get_config</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -530,26 +507,26 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pool</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_pool</span><span class="o">.</span><span class="n">force_close_all</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_pool</span> <span class="o">=</span> <span class="bp">None</span>
-            <span class="n">amqp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;amqp&#39;</span><span class="p">)</span>
+            <span class="n">amqp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'amqp'</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">amqp</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">amqp</span><span class="o">.</span><span class="n">_producer_pool</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
                 <span class="n">amqp</span><span class="o">.</span><span class="n">_producer_pool</span><span class="o">.</span><span class="n">force_close_all</span><span class="p">()</span>
                 <span class="n">amqp</span><span class="o">.</span><span class="n">_producer_pool</span> <span class="o">=</span> <span class="bp">None</span>
 
 <div class="viewcode-block" id="Celery.signature"><a class="viewcode-back" href="../../../reference/celery.html#celery.Celery.signature">[docs]</a>    <span class="k">def</span> <span class="nf">signature</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;app&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s1">'app'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">signature</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">create_task_cls</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Creates a base task class using default configuration</span>
-<span class="sd">        taken from this app.&quot;&quot;&quot;</span>
+        <span class="sd">"""Creates a base task class using default configuration</span>
+<span class="sd">        taken from this app."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">subclass_with_self</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">task_cls</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Task&#39;</span><span class="p">,</span> <span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;_app&#39;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">task_cls</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'Task'</span><span class="p">,</span> <span class="n">attribute</span><span class="o">=</span><span class="s1">'_app'</span><span class="p">,</span>
             <span class="n">keep_reduce</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">abstract</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
         <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">subclass_with_self</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Class</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;app&#39;</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">subclass_with_self</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Class</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">attribute</span><span class="o">=</span><span class="s1">'app'</span><span class="p">,</span>
                            <span class="n">reverse</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">keep_reduce</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Subclass an app-compatible class by setting its app attribute</span>
+        <span class="sd">"""Subclass an app-compatible class by setting its app attribute</span>
 <span class="sd">        to be this app instance.</span>
 
 <span class="sd">        App-compatible means that the class has a class attribute that</span>
@@ -559,9 +536,9 @@
 <span class="sd">        :param Class: The app-compatible class to subclass.</span>
 <span class="sd">        :keyword name: Custom name for the target class.</span>
 <span class="sd">        :keyword attribute: Name of the attribute holding the app,</span>
-<span class="sd">                            default is &#39;app&#39;.</span>
+<span class="sd">                            default is 'app'.</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">Class</span> <span class="o">=</span> <span class="n">symbol_by_name</span><span class="p">(</span><span class="n">Class</span><span class="p">)</span>
         <span class="n">reverse</span> <span class="o">=</span> <span class="n">reverse</span> <span class="k">if</span> <span class="n">reverse</span> <span class="k">else</span> <span class="n">Class</span><span class="o">.</span><span class="n">__name__</span>
 
@@ -571,7 +548,7 @@
         <span class="n">attrs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">({</span><span class="n">attribute</span><span class="p">:</span> <span class="bp">self</span><span class="p">},</span> <span class="n">__module__</span><span class="o">=</span><span class="n">Class</span><span class="o">.</span><span class="n">__module__</span><span class="p">,</span>
                      <span class="n">__doc__</span><span class="o">=</span><span class="n">Class</span><span class="o">.</span><span class="n">__doc__</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">keep_reduce</span><span class="p">:</span>
-            <span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;__reduce__&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">__reduce__</span>
+            <span class="n">attrs</span><span class="p">[</span><span class="s1">'__reduce__'</span><span class="p">]</span> <span class="o">=</span> <span class="n">__reduce__</span>
 
         <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="n">name</span> <span class="ow">or</span> <span class="n">Class</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="p">(</span><span class="n">Class</span><span class="p">,</span> <span class="p">),</span> <span class="n">attrs</span><span class="p">)</span>
 
@@ -579,7 +556,7 @@
         <span class="k">return</span> <span class="n">attrgetter</span><span class="p">(</span><span class="n">path</span><span class="p">)(</span><span class="bp">self</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s1">&#39;&lt;{0} {1}&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">appstr</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+        <span class="k">return</span> <span class="s1">'&lt;{0} {1}&gt;'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">appstr</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_using_v1_reduce</span><span class="p">:</span>
@@ -588,7 +565,7 @@
 
     <span class="k">def</span> <span class="nf">__reduce_v1__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Reduce only pickles the configuration changes,</span>
-        <span class="c1"># so the default configuration doesn&#39;t have to be passed</span>
+        <span class="c1"># so the default configuration doesn't have to be passed</span>
         <span class="c1"># between processes.</span>
         <span class="k">return</span> <span class="p">(</span>
             <span class="n">_unpickle_app</span><span class="p">,</span>
@@ -596,25 +573,25 @@
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__reduce_keys__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return keyword arguments used to reconstruct the object</span>
-<span class="sd">        when unpickling.&quot;&quot;&quot;</span>
+        <span class="sd">"""Return keyword arguments used to reconstruct the object</span>
+<span class="sd">        when unpickling."""</span>
         <span class="k">return</span> <span class="p">{</span>
-            <span class="s1">&#39;main&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="p">,</span>
-            <span class="s1">&#39;changes&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">changes</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">configured</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_preconf</span><span class="p">,</span>
-            <span class="s1">&#39;loader&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">loader_cls</span><span class="p">,</span>
-            <span class="s1">&#39;backend&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend_cls</span><span class="p">,</span>
-            <span class="s1">&#39;amqp&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">amqp_cls</span><span class="p">,</span>
-            <span class="s1">&#39;events&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">events_cls</span><span class="p">,</span>
-            <span class="s1">&#39;log&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">log_cls</span><span class="p">,</span>
-            <span class="s1">&#39;control&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">control_cls</span><span class="p">,</span>
-            <span class="s1">&#39;accept_magic_kwargs&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">accept_magic_kwargs</span><span class="p">,</span>
-            <span class="s1">&#39;fixups&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">fixups</span><span class="p">,</span>
-            <span class="s1">&#39;config_source&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config_source</span><span class="p">,</span>
-            <span class="s1">&#39;task_cls&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">task_cls</span><span class="p">,</span>
+            <span class="s1">'main'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="p">,</span>
+            <span class="s1">'changes'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">changes</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">configured</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_preconf</span><span class="p">,</span>
+            <span class="s1">'loader'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">loader_cls</span><span class="p">,</span>
+            <span class="s1">'backend'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend_cls</span><span class="p">,</span>
+            <span class="s1">'amqp'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">amqp_cls</span><span class="p">,</span>
+            <span class="s1">'events'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">events_cls</span><span class="p">,</span>
+            <span class="s1">'log'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">log_cls</span><span class="p">,</span>
+            <span class="s1">'control'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">control_cls</span><span class="p">,</span>
+            <span class="s1">'accept_magic_kwargs'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">accept_magic_kwargs</span><span class="p">,</span>
+            <span class="s1">'fixups'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">fixups</span><span class="p">,</span>
+            <span class="s1">'config_source'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config_source</span><span class="p">,</span>
+            <span class="s1">'task_cls'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">task_cls</span><span class="p">,</span>
         <span class="p">}</span>
 
     <span class="k">def</span> <span class="nf">__reduce_args__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Deprecated method, please use :meth:`__reduce_keys__` instead.&quot;&quot;&quot;</span>
+        <span class="sd">"""Deprecated method, please use :meth:`__reduce_keys__` instead."""</span>
         <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">changes</span><span class="p">,</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">loader_cls</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend_cls</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">amqp_cls</span><span class="p">,</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">events_cls</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">log_cls</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">control_cls</span><span class="p">,</span>
@@ -622,15 +599,15 @@
 
     <span class="nd">@cached_property</span>
 <div class="viewcode-block" id="Celery.Worker"><a class="viewcode-back" href="../../../reference/celery.html#celery.Celery.Worker">[docs]</a>    <span class="k">def</span> <span class="nf">Worker</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">subclass_with_self</span><span class="p">(</span><span class="s1">&#39;celery.apps.worker:Worker&#39;</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">subclass_with_self</span><span class="p">(</span><span class="s1">'celery.apps.worker:Worker'</span><span class="p">)</span></div>
 
     <span class="nd">@cached_property</span>
 <div class="viewcode-block" id="Celery.WorkController"><a class="viewcode-back" href="../../../reference/celery.html#celery.Celery.WorkController">[docs]</a>    <span class="k">def</span> <span class="nf">WorkController</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">subclass_with_self</span><span class="p">(</span><span class="s1">&#39;celery.worker:WorkController&#39;</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">subclass_with_self</span><span class="p">(</span><span class="s1">'celery.worker:WorkController'</span><span class="p">)</span></div>
 
     <span class="nd">@cached_property</span>
 <div class="viewcode-block" id="Celery.Beat"><a class="viewcode-back" href="../../../reference/celery.html#celery.Celery.Beat">[docs]</a>    <span class="k">def</span> <span class="nf">Beat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">subclass_with_self</span><span class="p">(</span><span class="s1">&#39;celery.apps.beat:Beat&#39;</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">subclass_with_self</span><span class="p">(</span><span class="s1">'celery.apps.beat:Beat'</span><span class="p">)</span></div>
 
     <span class="nd">@cached_property</span>
 <div class="viewcode-block" id="Celery.Task"><a class="viewcode-back" href="../../../reference/celery.html#celery.Celery.Task">[docs]</a>    <span class="k">def</span> <span class="nf">Task</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -642,25 +619,25 @@
 
     <span class="nd">@cached_property</span>
 <div class="viewcode-block" id="Celery.AsyncResult"><a class="viewcode-back" href="../../../reference/celery.html#celery.Celery.AsyncResult">[docs]</a>    <span class="k">def</span> <span class="nf">AsyncResult</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">subclass_with_self</span><span class="p">(</span><span class="s1">&#39;celery.result:AsyncResult&#39;</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">subclass_with_self</span><span class="p">(</span><span class="s1">'celery.result:AsyncResult'</span><span class="p">)</span></div>
 
     <span class="nd">@cached_property</span>
     <span class="k">def</span> <span class="nf">ResultSet</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">subclass_with_self</span><span class="p">(</span><span class="s1">&#39;celery.result:ResultSet&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">subclass_with_self</span><span class="p">(</span><span class="s1">'celery.result:ResultSet'</span><span class="p">)</span>
 
     <span class="nd">@cached_property</span>
 <div class="viewcode-block" id="Celery.GroupResult"><a class="viewcode-back" href="../../../reference/celery.html#celery.Celery.GroupResult">[docs]</a>    <span class="k">def</span> <span class="nf">GroupResult</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">subclass_with_self</span><span class="p">(</span><span class="s1">&#39;celery.result:GroupResult&#39;</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">subclass_with_self</span><span class="p">(</span><span class="s1">'celery.result:GroupResult'</span><span class="p">)</span></div>
 
     <span class="nd">@cached_property</span>
     <span class="k">def</span> <span class="nf">TaskSet</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># XXX compat</span>
-        <span class="sd">&quot;&quot;&quot;Deprecated! Please use :class:`celery.group` instead.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">subclass_with_self</span><span class="p">(</span><span class="s1">&#39;celery.task.sets:TaskSet&#39;</span><span class="p">)</span>
+        <span class="sd">"""Deprecated! Please use :class:`celery.group` instead."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">subclass_with_self</span><span class="p">(</span><span class="s1">'celery.task.sets:TaskSet'</span><span class="p">)</span>
 
     <span class="nd">@cached_property</span>
     <span class="k">def</span> <span class="nf">TaskSetResult</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># XXX compat</span>
-        <span class="sd">&quot;&quot;&quot;Deprecated! Please use :attr:`GroupResult` instead.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">subclass_with_self</span><span class="p">(</span><span class="s1">&#39;celery.result:TaskSetResult&#39;</span><span class="p">)</span>
+        <span class="sd">"""Deprecated! Please use :attr:`GroupResult` instead."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">subclass_with_self</span><span class="p">(</span><span class="s1">'celery.result:TaskSetResult'</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">pool</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -722,32 +699,20 @@
         <span class="n">conf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conf</span>
         <span class="n">tz</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">CELERY_TIMEZONE</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">tz</span><span class="p">:</span>
-            <span class="k">return</span> <span class="p">(</span><span class="n">timezone</span><span class="o">.</span><span class="n">get_timezone</span><span class="p">(</span><span class="s1">&#39;UTC&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">conf</span><span class="o">.</span><span class="n">CELERY_ENABLE_UTC</span>
+            <span class="k">return</span> <span class="p">(</span><span class="n">timezone</span><span class="o">.</span><span class="n">get_timezone</span><span class="p">(</span><span class="s1">'UTC'</span><span class="p">)</span> <span class="k">if</span> <span class="n">conf</span><span class="o">.</span><span class="n">CELERY_ENABLE_UTC</span>
                     <span class="k">else</span> <span class="n">timezone</span><span class="o">.</span><span class="n">local</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">timezone</span><span class="o">.</span><span class="n">get_timezone</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">CELERY_TIMEZONE</span><span class="p">)</span></div></div>
 <span class="n">App</span> <span class="o">=</span> <span class="n">Celery</span>  <span class="c1"># compat</span>
 </pre></div>
+</div>
+</div>
+</div>
 
-          </div>
-        </div>
-      </div>
+<div class="clearer"></div>
+</div>
+
+<div class="footer" role="contentinfo">
+        © <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="../app.html" >celery.app</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &copy; <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
-    </div>
-  </body>
+</body>
 </html>

@@ -1,17 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>celery.contrib.rdb &mdash; Celery 3.1.23 documentation</title>
-    
-    <link rel="stylesheet" href="../../../_static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>celery.contrib.rdb — Celery 3.1.23 documentation</title>
+<link href="../../../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
         VERSION:     '3.1.23',
@@ -20,46 +16,28 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="copyright" title="Copyright" href="../../../copyright.html" />
-    <link rel="top" title="Celery 3.1.23 documentation" href="../../../index.html" />
-    <link rel="up" title="Module code" href="../../index.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
-      </ul>
-    </div>  
+<script src="../../../_static/jquery.js" type="text/javascript"></script>
+<script src="../../../_static/underscore.js" type="text/javascript"></script>
+<script src="../../../_static/doctools.js" type="text/javascript"></script>
+<link href="../../../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../../../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="../../index.html" rel="up" title="Module code"/>
+</head>
+<body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
 <div class="deck">
-
-    
-        <p>
+<p>
         This document describes the current stable version of Celery (3.1). For development docs,
         <a href="http://docs.celeryproject.org/en/master/_modules/celery/contrib/rdb.html">go here</a>.
         </p>
-    
-
 </div>
-    <h1>Source code for celery.contrib.rdb</h1><div class="highlight"><pre>
+<h1>Source code for celery.contrib.rdb</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="sd">celery.contrib.rdb</span>
 <span class="sd">==================</span>
 
@@ -84,7 +62,7 @@
 
 <span class="sd">.. envvar:: CELERY_RDB_HOST</span>
 
-<span class="sd">    Hostname to bind to.  Default is &#39;127.0.01&#39;, which means the socket</span>
+<span class="sd">    Hostname to bind to.  Default is '127.0.01', which means the socket</span>
 <span class="sd">    will only be accessible from the local host.</span>
 
 <span class="sd">.. envvar:: CELERY_RDB_PORT</span>
@@ -93,7 +71,7 @@
 <span class="sd">    The debugger will try to find an available port starting from the</span>
 <span class="sd">    base port.  The selected port will be logged by the worker.</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">print_function</span>
 
 <span class="kn">import</span> <span class="nn">errno</span>
@@ -107,39 +85,39 @@
 
 <span class="kn">from</span> <span class="nn">celery.five</span> <span class="kn">import</span> <span class="nb">range</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;CELERY_RDB_HOST&#39;</span><span class="p">,</span> <span class="s1">&#39;CELERY_RDB_PORT&#39;</span><span class="p">,</span> <span class="s1">&#39;default_port&#39;</span><span class="p">,</span>
-           <span class="s1">&#39;Rdb&#39;</span><span class="p">,</span> <span class="s1">&#39;debugger&#39;</span><span class="p">,</span> <span class="s1">&#39;set_trace&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'CELERY_RDB_HOST'</span><span class="p">,</span> <span class="s1">'CELERY_RDB_PORT'</span><span class="p">,</span> <span class="s1">'default_port'</span><span class="p">,</span>
+           <span class="s1">'Rdb'</span><span class="p">,</span> <span class="s1">'debugger'</span><span class="p">,</span> <span class="s1">'set_trace'</span><span class="p">]</span>
 
 <span class="n">default_port</span> <span class="o">=</span> <span class="mi">6899</span>
 
-<span class="n">CELERY_RDB_HOST</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;CELERY_RDB_HOST&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="s1">&#39;127.0.0.1&#39;</span>
-<span class="n">CELERY_RDB_PORT</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;CELERY_RDB_PORT&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">default_port</span><span class="p">)</span>
+<span class="n">CELERY_RDB_HOST</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'CELERY_RDB_HOST'</span><span class="p">)</span> <span class="ow">or</span> <span class="s1">'127.0.0.1'</span>
+<span class="n">CELERY_RDB_PORT</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'CELERY_RDB_PORT'</span><span class="p">)</span> <span class="ow">or</span> <span class="n">default_port</span><span class="p">)</span>
 
 <span class="c1">#: Holds the currently active debugger.</span>
 <span class="n">_current</span> <span class="o">=</span> <span class="p">[</span><span class="bp">None</span><span class="p">]</span>
 
-<span class="n">_frame</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">sys</span><span class="p">,</span> <span class="s1">&#39;_getframe&#39;</span><span class="p">)</span>
+<span class="n">_frame</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">sys</span><span class="p">,</span> <span class="s1">'_getframe'</span><span class="p">)</span>
 
-<span class="n">NO_AVAILABLE_PORT</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
-<span class="s2">{self.ident}: Couldn&#39;t find an available port.</span>
+<span class="n">NO_AVAILABLE_PORT</span> <span class="o">=</span> <span class="s2">"""</span><span class="se">\</span>
+<span class="s2">{self.ident}: Couldn't find an available port.</span>
 
 <span class="s2">Please specify one using the CELERY_RDB_PORT environment variable.</span>
-<span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">"""</span>
 
-<span class="n">BANNER</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="n">BANNER</span> <span class="o">=</span> <span class="s2">"""</span><span class="se">\</span>
 <span class="s2">{self.ident}: Please telnet into {self.host} {self.port}.</span>
 
 <span class="s2">Type `exit` in session to continue.</span>
 
 <span class="s2">{self.ident}: Waiting for client...</span>
-<span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">"""</span>
 
-<span class="n">SESSION_STARTED</span> <span class="o">=</span> <span class="s1">&#39;{self.ident}: Now in session with {self.remote_addr}.&#39;</span>
-<span class="n">SESSION_ENDED</span> <span class="o">=</span> <span class="s1">&#39;{self.ident}: Session with {self.remote_addr} ended.&#39;</span>
+<span class="n">SESSION_STARTED</span> <span class="o">=</span> <span class="s1">'{self.ident}: Now in session with {self.remote_addr}.'</span>
+<span class="n">SESSION_ENDED</span> <span class="o">=</span> <span class="s1">'{self.ident}: Session with {self.remote_addr} ended.'</span>
 
 
 <div class="viewcode-block" id="Rdb"><a class="viewcode-back" href="../../../reference/celery.contrib.rdb.html#celery.contrib.rdb.Rdb">[docs]</a><span class="k">class</span> <span class="nc">Rdb</span><span class="p">(</span><span class="n">Pdb</span><span class="p">):</span>
-    <span class="n">me</span> <span class="o">=</span> <span class="s1">&#39;Remote Debugger&#39;</span>
+    <span class="n">me</span> <span class="o">=</span> <span class="s1">'Remote Debugger'</span>
     <span class="n">_prev_outs</span> <span class="o">=</span> <span class="bp">None</span>
     <span class="n">_sock</span> <span class="o">=</span> <span class="bp">None</span>
 
@@ -155,22 +133,22 @@
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_sock</span><span class="o">.</span><span class="n">setblocking</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_sock</span><span class="o">.</span><span class="n">listen</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">ident</span> <span class="o">=</span> <span class="s1">&#39;{0}:{1}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">me</span><span class="p">,</span> <span class="n">this_port</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ident</span> <span class="o">=</span> <span class="s1">'{0}:{1}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">me</span><span class="p">,</span> <span class="n">this_port</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">host</span> <span class="o">=</span> <span class="n">host</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">port</span> <span class="o">=</span> <span class="n">this_port</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">say</span><span class="p">(</span><span class="n">BANNER</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">=</span><span class="bp">self</span><span class="p">))</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="p">,</span> <span class="n">address</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sock</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">setblocking</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">remote_addr</span> <span class="o">=</span> <span class="s1">&#39;:&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">address</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">remote_addr</span> <span class="o">=</span> <span class="s1">':'</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">address</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">say</span><span class="p">(</span><span class="n">SESSION_STARTED</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">=</span><span class="bp">self</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdin</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">makefile</span><span class="p">(</span><span class="s1">&#39;rw&#39;</span><span class="p">)</span>
-        <span class="n">Pdb</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">completekey</span><span class="o">=</span><span class="s1">&#39;tab&#39;</span><span class="p">,</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdin</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">makefile</span><span class="p">(</span><span class="s1">'rw'</span><span class="p">)</span>
+        <span class="n">Pdb</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">completekey</span><span class="o">=</span><span class="s1">'tab'</span><span class="p">,</span>
                      <span class="n">stdin</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">get_avail_port</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">search_limit</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">skew</span><span class="o">=+</span><span class="mi">0</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">_</span><span class="p">,</span> <span class="n">skew</span> <span class="o">=</span> <span class="n">current_process</span><span class="p">()</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+            <span class="n">_</span><span class="p">,</span> <span class="n">skew</span> <span class="o">=</span> <span class="n">current_process</span><span class="p">()</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">'-'</span><span class="p">)</span>
             <span class="n">skew</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">skew</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
             <span class="k">pass</span>
@@ -228,8 +206,8 @@
 
 
 <div class="viewcode-block" id="debugger"><a class="viewcode-back" href="../../../reference/celery.contrib.rdb.html#celery.contrib.rdb.debugger">[docs]</a><span class="k">def</span> <span class="nf">debugger</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;Return the current debugger instance (if any),</span>
-<span class="sd">    or creates a new one.&quot;&quot;&quot;</span>
+    <span class="sd">"""Return the current debugger instance (if any),</span>
+<span class="sd">    or creates a new one."""</span>
     <span class="n">rdb</span> <span class="o">=</span> <span class="n">_current</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="k">if</span> <span class="n">rdb</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">rdb</span><span class="o">.</span><span class="n">active</span><span class="p">:</span>
         <span class="n">rdb</span> <span class="o">=</span> <span class="n">_current</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">Rdb</span><span class="p">()</span>
@@ -237,31 +215,20 @@
 
 
 <div class="viewcode-block" id="set_trace"><a class="viewcode-back" href="../../../reference/celery.contrib.rdb.html#celery.contrib.rdb.set_trace">[docs]</a><span class="k">def</span> <span class="nf">set_trace</span><span class="p">(</span><span class="n">frame</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set breakpoint at current location, or a specified frame&quot;&quot;&quot;</span>
+    <span class="sd">"""Set breakpoint at current location, or a specified frame"""</span>
     <span class="k">if</span> <span class="n">frame</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
         <span class="n">frame</span> <span class="o">=</span> <span class="n">_frame</span><span class="p">()</span><span class="o">.</span><span class="n">f_back</span>
     <span class="k">return</span> <span class="n">debugger</span><span class="p">()</span><span class="o">.</span><span class="n">set_trace</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span></div>
 </pre></div>
+</div>
+</div>
+</div>
 
-          </div>
-        </div>
-      </div>
+<div class="clearer"></div>
+</div>
+
+<div class="footer" role="contentinfo">
+        © <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &copy; <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
-    </div>
-  </body>
+</body>
 </html>

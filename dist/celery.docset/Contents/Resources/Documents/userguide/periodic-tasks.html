@@ -1,17 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Periodic Tasks &mdash; Celery 3.1.23 documentation</title>
-    
-    <link rel="stylesheet" href="../_static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>Periodic Tasks — Celery 3.1.23 documentation</title>
+<link href="../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
         VERSION:     '3.1.23',
@@ -20,52 +16,28 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="copyright" title="Copyright" href="../copyright.html" />
-    <link rel="top" title="Celery 3.1.23 documentation" href="../index.html" />
-    <link rel="up" title="User Guide" href="index.html" />
-    <link rel="next" title="HTTP Callback Tasks (Webhooks)" href="remote-tasks.html" />
-    <link rel="prev" title="Workers Guide" href="workers.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="remote-tasks.html" title="HTTP Callback Tasks (Webhooks)"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="workers.html" title="Workers Guide"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">User Guide</a> &raquo;</li> 
-      </ul>
-    </div>  
+<script src="../_static/jquery.js" type="text/javascript"></script>
+<script src="../_static/underscore.js" type="text/javascript"></script>
+<script src="../_static/doctools.js" type="text/javascript"></script>
+<link href="../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="index.html" rel="up" title="User Guide"/>
+<link href="remote-tasks.html" rel="next" title="HTTP Callback Tasks (Webhooks)"/>
+<link href="workers.html" rel="prev" title="Workers Guide"/>
+</head>
+<body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
 <div class="deck">
-
-    
-        <p>
+<p>
         This document describes the current stable version of Celery (3.1). For development docs,
         <a href="http://docs.celeryproject.org/en/master/userguide/periodic-tasks.html">go here</a>.
         </p>
-    
-
 </div>
-    <div class="section" id="periodic-tasks">
+<div class="section" id="periodic-tasks">
 <span id="guide-beat"></span><h1>Periodic Tasks<a class="headerlink" href="#periodic-tasks" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
@@ -100,7 +72,7 @@ and the service can operate without using locks.</p>
 but you can change the time zone used using the <a class="reference internal" href="../configuration.html#std:setting-CELERY_TIMEZONE"><code class="xref std std-setting docutils literal"><span class="pre">CELERY_TIMEZONE</span></code></a>
 setting.</p>
 <p>An example time zone could be <cite>Europe/London</cite>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">CELERY_TIMEZONE</span> <span class="o">=</span> <span class="s1">&#39;Europe/London&#39;</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">CELERY_TIMEZONE</span> <span class="o">=</span> <span class="s1">'Europe/London'</span>
 </pre></div>
 </div>
 <p>This setting must be added to your app, either by configuration it directly
@@ -137,14 +109,14 @@ change, so you must do this manually:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span>
 
 <span class="n">CELERYBEAT_SCHEDULE</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;add-every-30-seconds&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;task&#39;</span><span class="p">:</span> <span class="s1">&#39;tasks.add&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;schedule&#39;</span><span class="p">:</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="mi">30</span><span class="p">),</span>
-        <span class="s1">&#39;args&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+    <span class="s1">'add-every-30-seconds'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">'task'</span><span class="p">:</span> <span class="s1">'tasks.add'</span><span class="p">,</span>
+        <span class="s1">'schedule'</span><span class="p">:</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="mi">30</span><span class="p">),</span>
+        <span class="s1">'args'</span><span class="p">:</span> <span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
     <span class="p">},</span>
 <span class="p">}</span>
 
-<span class="n">CELERY_TIMEZONE</span> <span class="o">=</span> <span class="s1">&#39;UTC&#39;</span>
+<span class="n">CELERY_TIMEZONE</span> <span class="o">=</span> <span class="s1">'UTC'</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -153,7 +125,7 @@ change, so you must do this manually:</p>
 please see <a class="reference internal" href="../getting-started/first-steps-with-celery.html#celerytut-configuration"><span>Configuration</span></a>.  You can either
 set these options on your app directly or you can keep
 a separate module for configuration.</p>
-<p class="last">If you want to use a single item tuple for <cite>args</cite>, don&#8217;t forget
+<p class="last">If you want to use a single item tuple for <cite>args</cite>, don’t forget
 that the constructor is a comma and not a pair of parentheses.</p>
 </div>
 <p>Using a <a class="reference external" href="http://docs.python.org/dev/library/datetime.html#datetime.timedelta" title="(in Python v3.6)"><code class="xref py py-class docutils literal"><span class="pre">timedelta</span></code></a> for the schedule means the task will
@@ -203,7 +175,7 @@ e.g. <cite>exchange</cite>, <cite>routing_key</cite>, <cite>expires</cite>, and 
 <li><p class="first"><cite>relative</cite></p>
 <blockquote>
 <div><p>By default <a class="reference external" href="http://docs.python.org/dev/library/datetime.html#datetime.timedelta" title="(in Python v3.6)"><code class="xref py py-class docutils literal"><span class="pre">timedelta</span></code></a> schedules are scheduled
-&#8220;by the clock&#8221;. This means the frequency is rounded to the nearest
+“by the clock”. This means the frequency is rounded to the nearest
 second, minute, hour or day depending on the period of the timedelta.</p>
 <p>If <cite>relative</cite> is true the frequency is not rounded and will be
 relative to the time when <strong class="program">celery beat</strong> was started.</p>
@@ -221,10 +193,10 @@ the <a class="reference internal" href="../reference/celery.schedules.html#celer
 
 <span class="n">CELERYBEAT_SCHEDULE</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1"># Executes every Monday morning at 7:30 A.M</span>
-    <span class="s1">&#39;add-every-monday-morning&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;task&#39;</span><span class="p">:</span> <span class="s1">&#39;tasks.add&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;schedule&#39;</span><span class="p">:</span> <span class="n">crontab</span><span class="p">(</span><span class="n">hour</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">minute</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">day_of_week</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
-        <span class="s1">&#39;args&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">16</span><span class="p">),</span>
+    <span class="s1">'add-every-monday-morning'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">'task'</span><span class="p">:</span> <span class="s1">'tasks.add'</span><span class="p">,</span>
+        <span class="s1">'schedule'</span><span class="p">:</span> <span class="n">crontab</span><span class="p">(</span><span class="n">hour</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">minute</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">day_of_week</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+        <span class="s1">'args'</span><span class="p">:</span> <span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">16</span><span class="p">),</span>
     <span class="p">},</span>
 <span class="p">}</span>
 </pre></div>
@@ -232,8 +204,8 @@ the <a class="reference internal" href="../reference/celery.schedules.html#celer
 <p>The syntax of these crontab expressions are very flexible.  Some examples:</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="48%" />
-<col width="52%" />
+<col width="48%"></col>
+<col width="52%"></col>
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><strong>Example</strong></td>
@@ -292,7 +264,7 @@ at every hour <em>except</em>: 1am,
 <td>Execute hour divisible by 5. This means
 that it is triggered at 3pm, not 5pm
 (since 3pm equals the 24-hour clock
-value of &#8220;15&#8221;, which is divisible by 5).</td>
+value of “15”, which is divisible by 5).</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">crontab(minute=0,</span> <span class="pre">hour='*/3,8-17')</span></code></td>
 <td>Execute every hour divisible by 3, and
@@ -343,7 +315,7 @@ quarter.</td>
 </div>
 <p>You can also start embed <cite>beat</cite> inside the worker by enabling
 workers <cite>-B</cite> option, this is convenient if you will never run
-more than one worker node, but it&#8217;s not commonly used and for that
+more than one worker node, but it’s not commonly used and for that
 reason is not recommended for production use:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ celery -A proj worker -B
 </pre></div>
@@ -370,38 +342,20 @@ Django database:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ celery -A proj beat -S djcelery.schedulers.DatabaseScheduler
 </pre></div>
 </div>
-<p>Using <cite>django-celery</cite>&#8216;s scheduler you can add, modify and remove periodic
+<p>Using <cite>django-celery</cite>‘s scheduler you can add, modify and remove periodic
 tasks from the Django Admin.</p>
 </div>
 </div>
 </div>
+</div>
+</div>
+</div>
 
+<div class="clearer"></div>
+</div>
 
-          </div>
-        </div>
-      </div>
+<div class="footer" role="contentinfo">
+        © <a href="../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="remote-tasks.html" title="HTTP Callback Tasks (Webhooks)"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="workers.html" title="Workers Guide"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" >User Guide</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &copy; <a href="../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
-    </div>
-  </body>
+</body>
 </html>

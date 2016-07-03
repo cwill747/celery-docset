@@ -1,17 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>celery.utils.dispatch.signal &mdash; Celery 3.1.23 documentation</title>
-    
-    <link rel="stylesheet" href="../../../../_static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>celery.utils.dispatch.signal — Celery 3.1.23 documentation</title>
+<link href="../../../../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../../../../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../../',
         VERSION:     '3.1.23',
@@ -20,47 +16,28 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
-    <link rel="copyright" title="Copyright" href="../../../../copyright.html" />
-    <link rel="top" title="Celery 3.1.23 documentation" href="../../../../index.html" />
-    <link rel="up" title="celery.utils" href="../../utils.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="../../utils.html" accesskey="U">celery.utils</a> &raquo;</li> 
-      </ul>
-    </div>  
+<script src="../../../../_static/jquery.js" type="text/javascript"></script>
+<script src="../../../../_static/underscore.js" type="text/javascript"></script>
+<script src="../../../../_static/doctools.js" type="text/javascript"></script>
+<link href="../../../../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../../../../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="../../utils.html" rel="up" title="celery.utils"/>
+</head>
+<body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
 <div class="deck">
-
-    
-        <p>
+<p>
         This document describes the current stable version of Celery (3.1). For development docs,
         <a href="http://docs.celeryproject.org/en/master/_modules/celery/utils/dispatch/signal.html">go here</a>.
         </p>
-    
-
 </div>
-    <h1>Source code for celery.utils.dispatch.signal</h1><div class="highlight"><pre>
+<h1>Source code for celery.utils.dispatch.signal</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="sd">&quot;&quot;&quot;Signal class.&quot;&quot;&quot;</span>
+<span class="sd">"""Signal class."""</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
 
 <span class="kn">import</span> <span class="nn">weakref</span>
@@ -69,7 +46,7 @@
 <span class="kn">from</span> <span class="nn">celery.five</span> <span class="kn">import</span> <span class="nb">range</span>
 <span class="kn">from</span> <span class="nn">celery.local</span> <span class="kn">import</span> <span class="n">PromiseProxy</span><span class="p">,</span> <span class="n">Proxy</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Signal&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Signal'</span><span class="p">]</span>
 
 <span class="n">WEAKREF_TYPES</span> <span class="o">=</span> <span class="p">(</span><span class="n">weakref</span><span class="o">.</span><span class="n">ReferenceType</span><span class="p">,</span> <span class="n">saferef</span><span class="o">.</span><span class="n">BoundMethodWeakref</span><span class="p">)</span>
 
@@ -77,28 +54,28 @@
 <span class="k">def</span> <span class="nf">_make_id</span><span class="p">(</span><span class="n">target</span><span class="p">):</span>  <span class="c1"># pragma: no cover</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">Proxy</span><span class="p">):</span>
         <span class="n">target</span> <span class="o">=</span> <span class="n">target</span><span class="o">.</span><span class="n">_get_current_object</span><span class="p">()</span>
-    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="s1">&#39;__func__&#39;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="s1">'__func__'</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">target</span><span class="o">.</span><span class="n">__self__</span><span class="p">),</span> <span class="nb">id</span><span class="p">(</span><span class="n">target</span><span class="o">.</span><span class="n">__func__</span><span class="p">))</span>
     <span class="k">return</span> <span class="nb">id</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="Signal"><a class="viewcode-back" href="../../../../internals/reference/celery.utils.dispatch.signal.html#celery.events.snapshot.Signal">[docs]</a><span class="k">class</span> <span class="nc">Signal</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>  <span class="c1"># pragma: no cover</span>
-    <span class="sd">&quot;&quot;&quot;Base class for all signals</span>
+    <span class="sd">"""Base class for all signals</span>
 
 
 <span class="sd">    .. attribute:: receivers</span>
 <span class="sd">        Internal attribute, holds a dictionary of</span>
 <span class="sd">        `{receiverkey (id): weakref(receiver)}` mappings.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">providing_args</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Create a new signal.</span>
+        <span class="sd">"""Create a new signal.</span>
 
 <span class="sd">        :param providing_args: A list of the arguments this signal can pass</span>
 <span class="sd">            along in a :meth:`send` call.</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">receivers</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">if</span> <span class="n">providing_args</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">providing_args</span> <span class="o">=</span> <span class="p">[]</span>
@@ -111,7 +88,7 @@
         <span class="p">)</span>
 
 <div class="viewcode-block" id="Signal.connect"><a class="viewcode-back" href="../../../../internals/reference/celery.utils.dispatch.signal.html#celery.events.snapshot.Signal.connect">[docs]</a>    <span class="k">def</span> <span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Connect receiver to sender for signal.</span>
+        <span class="sd">"""Connect receiver to sender for signal.</span>
 
 <span class="sd">        :param receiver: A function or an instance method which is to</span>
 <span class="sd">            receive signals. Receivers must be hashable objects.</span>
@@ -139,7 +116,7 @@
 <span class="sd">            particular instance of a receiver. This will usually be a</span>
 <span class="sd">            string, though it may be anything hashable.</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">def</span> <span class="nf">_handle_options</span><span class="p">(</span><span class="n">sender</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">weak</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">dispatch_uid</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
 
             <span class="k">def</span> <span class="nf">_connect_signal</span><span class="p">(</span><span class="n">fun</span><span class="p">):</span>
@@ -177,7 +154,7 @@
 
 <div class="viewcode-block" id="Signal.disconnect"><a class="viewcode-back" href="../../../../internals/reference/celery.utils.dispatch.signal.html#celery.events.snapshot.Signal.disconnect">[docs]</a>    <span class="k">def</span> <span class="nf">disconnect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">receiver</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">sender</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">weak</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
                    <span class="n">dispatch_uid</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Disconnect receiver from sender for signal.</span>
+        <span class="sd">"""Disconnect receiver from sender for signal.</span>
 
 <span class="sd">        If weak references are used, disconnect need not be called. The</span>
 <span class="sd">        receiver will be removed from dispatch automatically.</span>
@@ -192,7 +169,7 @@
 <span class="sd">        :keyword dispatch_uid: the unique identifier of the receiver</span>
 <span class="sd">            to disconnect</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">dispatch_uid</span><span class="p">:</span>
             <span class="n">lookup_key</span> <span class="o">=</span> <span class="p">(</span><span class="n">dispatch_uid</span><span class="p">,</span> <span class="n">_make_id</span><span class="p">(</span><span class="n">sender</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
@@ -205,7 +182,7 @@
                 <span class="k">break</span></div>
 
 <div class="viewcode-block" id="Signal.send"><a class="viewcode-back" href="../../../../internals/reference/celery.utils.dispatch.signal.html#celery.events.snapshot.Signal.send">[docs]</a>    <span class="k">def</span> <span class="nf">send</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sender</span><span class="p">,</span> <span class="o">**</span><span class="n">named</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Send signal from sender to all connected receivers.</span>
+        <span class="sd">"""Send signal from sender to all connected receivers.</span>
 
 <span class="sd">        If any receiver raises an error, the error propagates back through</span>
 <span class="sd">        send, terminating the dispatch loop, so it is quite possible to not</span>
@@ -218,7 +195,7 @@
 
 <span class="sd">        :returns: a list of tuple pairs: `[(receiver, response), … ]`.</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">responses</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">receivers</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">responses</span>
@@ -229,7 +206,7 @@
         <span class="k">return</span> <span class="n">responses</span></div>
 
 <div class="viewcode-block" id="Signal.send_robust"><a class="viewcode-back" href="../../../../internals/reference/celery.utils.dispatch.signal.html#celery.events.snapshot.Signal.send_robust">[docs]</a>    <span class="k">def</span> <span class="nf">send_robust</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sender</span><span class="p">,</span> <span class="o">**</span><span class="n">named</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Send signal from sender to all connected receivers catching errors.</span>
+        <span class="sd">"""Send signal from sender to all connected receivers catching errors.</span>
 
 <span class="sd">        :param sender: The sender of the signal. Can be any python object</span>
 <span class="sd">            (normally one registered with a connect if you actually want</span>
@@ -247,7 +224,7 @@
 <span class="sd">        :exc:`Exception`), the error instance is returned as the result</span>
 <span class="sd">        for that receiver.</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">responses</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">receivers</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">responses</span>
@@ -264,12 +241,12 @@
         <span class="k">return</span> <span class="n">responses</span></div>
 
     <span class="k">def</span> <span class="nf">_live_receivers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">senderkey</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Filter sequence of receivers to get resolved, live receivers.</span>
+        <span class="sd">"""Filter sequence of receivers to get resolved, live receivers.</span>
 
 <span class="sd">        This checks for weak references and resolves them, then returning only</span>
 <span class="sd">        live receivers.</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">none_senderkey</span> <span class="o">=</span> <span class="n">_make_id</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
         <span class="n">receivers</span> <span class="o">=</span> <span class="p">[]</span>
 
@@ -285,7 +262,7 @@
         <span class="k">return</span> <span class="n">receivers</span>
 
     <span class="k">def</span> <span class="nf">_remove_receiver</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">receiver</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Remove dead receivers from connections.&quot;&quot;&quot;</span>
+        <span class="sd">"""Remove dead receivers from connections."""</span>
 
         <span class="n">to_remove</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">connected_receiver</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">receivers</span><span class="p">:</span>
@@ -297,31 +274,19 @@
                     <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">receivers</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s1">&#39;&lt;Signal: {0}&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s1">'&lt;Signal: {0}&gt;'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
 
     <span class="n">__str__</span> <span class="o">=</span> <span class="n">__repr__</span></div>
 </pre></div>
+</div>
+</div>
+</div>
 
-          </div>
-        </div>
-      </div>
+<div class="clearer"></div>
+</div>
+
+<div class="footer" role="contentinfo">
+        © <a href="../../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="../../utils.html" >celery.utils</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &copy; <a href="../../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
-    </div>
-  </body>
+</body>
 </html>

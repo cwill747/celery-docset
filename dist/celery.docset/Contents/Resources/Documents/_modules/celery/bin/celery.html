@@ -1,17 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>celery.bin.celery &mdash; Celery 3.1.23 documentation</title>
-    
-    <link rel="stylesheet" href="../../../_static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>celery.bin.celery — Celery 3.1.23 documentation</title>
+<link href="../../../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
         VERSION:     '3.1.23',
@@ -20,52 +16,34 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="copyright" title="Copyright" href="../../../copyright.html" />
-    <link rel="top" title="Celery 3.1.23 documentation" href="../../../index.html" />
-    <link rel="up" title="Module code" href="../../index.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
-      </ul>
-    </div>  
+<script src="../../../_static/jquery.js" type="text/javascript"></script>
+<script src="../../../_static/underscore.js" type="text/javascript"></script>
+<script src="../../../_static/doctools.js" type="text/javascript"></script>
+<link href="../../../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../../../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="../../index.html" rel="up" title="Module code"/>
+</head>
+<body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
 <div class="deck">
-
-    
-        <p>
+<p>
         This document describes the current stable version of Celery (3.1). For development docs,
         <a href="http://docs.celeryproject.org/en/master/_modules/celery/bin/celery.html">go here</a>.
         </p>
-    
-
 </div>
-    <h1>Source code for celery.bin.celery</h1><div class="highlight"><pre>
+<h1>Source code for celery.bin.celery</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="sd">The :program:`celery` umbrella command.</span>
 
 <span class="sd">.. program:: celery</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">unicode_literals</span>
 
 <span class="kn">import</span> <span class="nn">anyjson</span>
@@ -92,32 +70,32 @@
 <span class="kn">from</span> <span class="nn">celery.bin.graph</span> <span class="kn">import</span> <span class="n">graph</span>
 <span class="kn">from</span> <span class="nn">celery.bin.worker</span> <span class="kn">import</span> <span class="n">worker</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;CeleryCommand&#39;</span><span class="p">,</span> <span class="s1">&#39;main&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'CeleryCommand'</span><span class="p">,</span> <span class="s1">'main'</span><span class="p">]</span>
 
-<span class="n">HELP</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="n">HELP</span> <span class="o">=</span> <span class="s2">"""</span>
 <span class="s2">---- -- - - ---- Commands- -------------- --- ------------</span>
 
 <span class="s2">{commands}</span>
 <span class="s2">---- -- - - --------- -- - -------------- --- ------------</span>
 
-<span class="s2">Type &#39;{prog_name} &lt;command&gt; --help&#39; for help using a specific command.</span>
-<span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">Type '{prog_name} &lt;command&gt; --help' for help using a specific command.</span>
+<span class="s2">"""</span>
 
-<span class="n">MIGRATE_PROGRESS_FMT</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="n">MIGRATE_PROGRESS_FMT</span> <span class="o">=</span> <span class="s2">"""</span><span class="se">\</span>
 <span class="s2">Migrating task {state.count}/{state.strtotal}: </span><span class="se">\</span>
 <span class="s2">{body[task]}[{body[id]}]</span><span class="se">\</span>
-<span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">"""</span>
 
-<span class="n">DEBUG</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;C_DEBUG&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+<span class="n">DEBUG</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'C_DEBUG'</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
 
 <span class="n">command_classes</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">(</span><span class="s1">&#39;Main&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;worker&#39;</span><span class="p">,</span> <span class="s1">&#39;events&#39;</span><span class="p">,</span> <span class="s1">&#39;beat&#39;</span><span class="p">,</span> <span class="s1">&#39;shell&#39;</span><span class="p">,</span> <span class="s1">&#39;multi&#39;</span><span class="p">,</span> <span class="s1">&#39;amqp&#39;</span><span class="p">],</span> <span class="s1">&#39;green&#39;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">&#39;Remote Control&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">,</span> <span class="s1">&#39;inspect&#39;</span><span class="p">,</span> <span class="s1">&#39;control&#39;</span><span class="p">],</span> <span class="s1">&#39;blue&#39;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">&#39;Utils&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;purge&#39;</span><span class="p">,</span> <span class="s1">&#39;list&#39;</span><span class="p">,</span> <span class="s1">&#39;migrate&#39;</span><span class="p">,</span> <span class="s1">&#39;call&#39;</span><span class="p">,</span> <span class="s1">&#39;result&#39;</span><span class="p">,</span> <span class="s1">&#39;report&#39;</span><span class="p">],</span> <span class="bp">None</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">'Main'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'worker'</span><span class="p">,</span> <span class="s1">'events'</span><span class="p">,</span> <span class="s1">'beat'</span><span class="p">,</span> <span class="s1">'shell'</span><span class="p">,</span> <span class="s1">'multi'</span><span class="p">,</span> <span class="s1">'amqp'</span><span class="p">],</span> <span class="s1">'green'</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">'Remote Control'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'status'</span><span class="p">,</span> <span class="s1">'inspect'</span><span class="p">,</span> <span class="s1">'control'</span><span class="p">],</span> <span class="s1">'blue'</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">'Utils'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'purge'</span><span class="p">,</span> <span class="s1">'list'</span><span class="p">,</span> <span class="s1">'migrate'</span><span class="p">,</span> <span class="s1">'call'</span><span class="p">,</span> <span class="s1">'result'</span><span class="p">,</span> <span class="s1">'report'</span><span class="p">],</span> <span class="bp">None</span><span class="p">),</span>
 <span class="p">]</span>
 <span class="k">if</span> <span class="n">DEBUG</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
     <span class="n">command_classes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-        <span class="p">(</span><span class="s1">&#39;Debug&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;graph&#39;</span><span class="p">],</span> <span class="s1">&#39;red&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">'Debug'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'graph'</span><span class="p">],</span> <span class="s1">'red'</span><span class="p">),</span>
     <span class="p">)</span>
 
 
@@ -132,8 +110,8 @@
     <span class="c1"># work with multiprocessing fork emulation.</span>
     <span class="c1"># (see multiprocessing.forking.get_preparation_data())</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">__name__</span> <span class="o">!=</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
-            <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="s1">&#39;__main__&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="n">__name__</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">__name__</span> <span class="o">!=</span> <span class="s1">'__main__'</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="s1">'__main__'</span><span class="p">]</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="n">__name__</span><span class="p">]</span>
         <span class="n">cmd</span> <span class="o">=</span> <span class="n">CeleryCommand</span><span class="p">()</span>
         <span class="n">cmd</span><span class="o">.</span><span class="n">maybe_patch_concurrency</span><span class="p">()</span>
         <span class="kn">from</span> <span class="nn">billiard</span> <span class="kn">import</span> <span class="n">freeze_support</span>
@@ -144,7 +122,7 @@
 
 
 <span class="k">class</span> <span class="nc">multi</span><span class="p">(</span><span class="n">Command</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Start multiple worker instances.&quot;&quot;&quot;</span>
+    <span class="sd">"""Start multiple worker instances."""</span>
     <span class="n">respects_app_option</span> <span class="o">=</span> <span class="bp">False</span>
 
     <span class="k">def</span> <span class="nf">get_options</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -159,38 +137,38 @@
 
 
 <span class="k">class</span> <span class="nc">list_</span><span class="p">(</span><span class="n">Command</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Get info from broker.</span>
+    <span class="sd">"""Get info from broker.</span>
 
 <span class="sd">    Examples::</span>
 
 <span class="sd">        celery list bindings</span>
 
 <span class="sd">    NOTE: For RabbitMQ the management plugin is required.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">args</span> <span class="o">=</span> <span class="s1">&#39;[bindings]&#39;</span>
+<span class="sd">    """</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="s1">'[bindings]'</span>
 
     <span class="k">def</span> <span class="nf">list_bindings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">management</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">bindings</span> <span class="o">=</span> <span class="n">management</span><span class="o">.</span><span class="n">get_bindings</span><span class="p">()</span>
         <span class="k">except</span> <span class="ne">NotImplementedError</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="bp">self</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="s1">&#39;Your transport cannot list bindings.&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="bp">self</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="s1">'Your transport cannot list bindings.'</span><span class="p">)</span>
 
         <span class="k">def</span> <span class="nf">fmt</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">r</span><span class="p">):</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="p">(</span><span class="s1">&#39;{0:&lt;28} {1:&lt;28} {2}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">r</span><span class="p">))</span>
-        <span class="n">fmt</span><span class="p">(</span><span class="s1">&#39;Queue&#39;</span><span class="p">,</span> <span class="s1">&#39;Exchange&#39;</span><span class="p">,</span> <span class="s1">&#39;Routing Key&#39;</span><span class="p">)</span>
-        <span class="n">fmt</span><span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">16</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">16</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">16</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="p">(</span><span class="s1">'{0:&lt;28} {1:&lt;28} {2}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">r</span><span class="p">))</span>
+        <span class="n">fmt</span><span class="p">(</span><span class="s1">'Queue'</span><span class="p">,</span> <span class="s1">'Exchange'</span><span class="p">,</span> <span class="s1">'Routing Key'</span><span class="p">)</span>
+        <span class="n">fmt</span><span class="p">(</span><span class="s1">'-'</span> <span class="o">*</span> <span class="mi">16</span><span class="p">,</span> <span class="s1">'-'</span> <span class="o">*</span> <span class="mi">16</span><span class="p">,</span> <span class="s1">'-'</span> <span class="o">*</span> <span class="mi">16</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">bindings</span><span class="p">:</span>
-            <span class="n">fmt</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="s1">&#39;destination&#39;</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="s1">&#39;source&#39;</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="s1">&#39;routing_key&#39;</span><span class="p">])</span>
+            <span class="n">fmt</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="s1">'destination'</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="s1">'source'</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="s1">'routing_key'</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">what</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
-        <span class="n">topics</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;bindings&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">list_bindings</span><span class="p">}</span>
-        <span class="n">available</span> <span class="o">=</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">topics</span><span class="p">)</span>
+        <span class="n">topics</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'bindings'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">list_bindings</span><span class="p">}</span>
+        <span class="n">available</span> <span class="o">=</span> <span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">topics</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">what</span><span class="p">:</span>
             <span class="k">raise</span> <span class="bp">self</span><span class="o">.</span><span class="n">UsageError</span><span class="p">(</span>
-                <span class="s1">&#39;You must specify one of {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">available</span><span class="p">))</span>
+                <span class="s1">'You must specify one of {0}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">available</span><span class="p">))</span>
         <span class="k">if</span> <span class="n">what</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">topics</span><span class="p">:</span>
             <span class="k">raise</span> <span class="bp">self</span><span class="o">.</span><span class="n">UsageError</span><span class="p">(</span>
-                <span class="s1">&#39;unknown topic {0!r} (choose one of: {1})&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="s1">'unknown topic {0!r} (choose one of: {1})'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                     <span class="n">what</span><span class="p">,</span> <span class="n">available</span><span class="p">))</span>
         <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">connection</span><span class="p">()</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">amqp</span><span class="o">.</span><span class="n">TaskConsumer</span><span class="p">(</span><span class="n">conn</span><span class="p">)</span><span class="o">.</span><span class="n">declare</span><span class="p">()</span>
@@ -198,40 +176,40 @@
 
 
 <span class="k">class</span> <span class="nc">call</span><span class="p">(</span><span class="n">Command</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Call a task by name.</span>
+    <span class="sd">"""Call a task by name.</span>
 
 <span class="sd">    Examples::</span>
 
-<span class="sd">        celery call tasks.add --args=&#39;[2, 2]&#39;</span>
-<span class="sd">        celery call tasks.add --args=&#39;[2, 2]&#39; --countdown=10</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">args</span> <span class="o">=</span> <span class="s1">&#39;&lt;task_name&gt;&#39;</span>
+<span class="sd">        celery call tasks.add --args='[2, 2]'</span>
+<span class="sd">        celery call tasks.add --args='[2, 2]' --countdown=10</span>
+<span class="sd">    """</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="s1">'&lt;task_name&gt;'</span>
     <span class="n">option_list</span> <span class="o">=</span> <span class="n">Command</span><span class="o">.</span><span class="n">option_list</span> <span class="o">+</span> <span class="p">(</span>
-        <span class="n">Option</span><span class="p">(</span><span class="s1">&#39;--args&#39;</span><span class="p">,</span> <span class="s1">&#39;-a&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;positional arguments (json).&#39;</span><span class="p">),</span>
-        <span class="n">Option</span><span class="p">(</span><span class="s1">&#39;--kwargs&#39;</span><span class="p">,</span> <span class="s1">&#39;-k&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;keyword arguments (json).&#39;</span><span class="p">),</span>
-        <span class="n">Option</span><span class="p">(</span><span class="s1">&#39;--eta&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;scheduled time (ISO-8601).&#39;</span><span class="p">),</span>
-        <span class="n">Option</span><span class="p">(</span><span class="s1">&#39;--countdown&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;float&#39;</span><span class="p">,</span>
-               <span class="n">help</span><span class="o">=</span><span class="s1">&#39;eta in seconds from now (float/int).&#39;</span><span class="p">),</span>
-        <span class="n">Option</span><span class="p">(</span><span class="s1">&#39;--expires&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;expiry time (ISO-8601/float/int).&#39;</span><span class="p">),</span>
-        <span class="n">Option</span><span class="p">(</span><span class="s1">&#39;--serializer&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;defaults to json.&#39;</span><span class="p">),</span>
-        <span class="n">Option</span><span class="p">(</span><span class="s1">&#39;--queue&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;custom queue name.&#39;</span><span class="p">),</span>
-        <span class="n">Option</span><span class="p">(</span><span class="s1">&#39;--exchange&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;custom exchange name.&#39;</span><span class="p">),</span>
-        <span class="n">Option</span><span class="p">(</span><span class="s1">&#39;--routing-key&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;custom routing key.&#39;</span><span class="p">),</span>
+        <span class="n">Option</span><span class="p">(</span><span class="s1">'--args'</span><span class="p">,</span> <span class="s1">'-a'</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">'positional arguments (json).'</span><span class="p">),</span>
+        <span class="n">Option</span><span class="p">(</span><span class="s1">'--kwargs'</span><span class="p">,</span> <span class="s1">'-k'</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">'keyword arguments (json).'</span><span class="p">),</span>
+        <span class="n">Option</span><span class="p">(</span><span class="s1">'--eta'</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">'scheduled time (ISO-8601).'</span><span class="p">),</span>
+        <span class="n">Option</span><span class="p">(</span><span class="s1">'--countdown'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">'float'</span><span class="p">,</span>
+               <span class="n">help</span><span class="o">=</span><span class="s1">'eta in seconds from now (float/int).'</span><span class="p">),</span>
+        <span class="n">Option</span><span class="p">(</span><span class="s1">'--expires'</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">'expiry time (ISO-8601/float/int).'</span><span class="p">),</span>
+        <span class="n">Option</span><span class="p">(</span><span class="s1">'--serializer'</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">'json'</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">'defaults to json.'</span><span class="p">),</span>
+        <span class="n">Option</span><span class="p">(</span><span class="s1">'--queue'</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">'custom queue name.'</span><span class="p">),</span>
+        <span class="n">Option</span><span class="p">(</span><span class="s1">'--exchange'</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">'custom exchange name.'</span><span class="p">),</span>
+        <span class="n">Option</span><span class="p">(</span><span class="s1">'--routing-key'</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">'custom routing key.'</span><span class="p">),</span>
     <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
         <span class="c1"># Positional args.</span>
-        <span class="n">args</span> <span class="o">=</span> <span class="n">kw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;args&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">()</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="n">kw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'args'</span><span class="p">)</span> <span class="ow">or</span> <span class="p">()</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">string_t</span><span class="p">):</span>
             <span class="n">args</span> <span class="o">=</span> <span class="n">anyjson</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
 
         <span class="c1"># Keyword args.</span>
-        <span class="n">kwargs</span> <span class="o">=</span> <span class="n">kw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;kwargs&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">{}</span>
+        <span class="n">kwargs</span> <span class="o">=</span> <span class="n">kw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'kwargs'</span><span class="p">)</span> <span class="ow">or</span> <span class="p">{}</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">string_t</span><span class="p">):</span>
             <span class="n">kwargs</span> <span class="o">=</span> <span class="n">anyjson</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
 
         <span class="c1"># Expires can be int/float.</span>
-        <span class="n">expires</span> <span class="o">=</span> <span class="n">kw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;expires&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="bp">None</span>
+        <span class="n">expires</span> <span class="o">=</span> <span class="n">kw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'expires'</span><span class="p">)</span> <span class="ow">or</span> <span class="bp">None</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">expires</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">expires</span><span class="p">)</span>
         <span class="k">except</span> <span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
@@ -242,33 +220,33 @@
                 <span class="k">raise</span>
 
         <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">send_task</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="n">kwargs</span><span class="p">,</span>
-                                 <span class="n">countdown</span><span class="o">=</span><span class="n">kw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;countdown&#39;</span><span class="p">),</span>
-                                 <span class="n">serializer</span><span class="o">=</span><span class="n">kw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;serializer&#39;</span><span class="p">),</span>
-                                 <span class="n">queue</span><span class="o">=</span><span class="n">kw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;queue&#39;</span><span class="p">),</span>
-                                 <span class="n">exchange</span><span class="o">=</span><span class="n">kw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;exchange&#39;</span><span class="p">),</span>
-                                 <span class="n">routing_key</span><span class="o">=</span><span class="n">kw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;routing_key&#39;</span><span class="p">),</span>
-                                 <span class="n">eta</span><span class="o">=</span><span class="n">maybe_iso8601</span><span class="p">(</span><span class="n">kw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;eta&#39;</span><span class="p">)),</span>
+                                 <span class="n">countdown</span><span class="o">=</span><span class="n">kw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'countdown'</span><span class="p">),</span>
+                                 <span class="n">serializer</span><span class="o">=</span><span class="n">kw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'serializer'</span><span class="p">),</span>
+                                 <span class="n">queue</span><span class="o">=</span><span class="n">kw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'queue'</span><span class="p">),</span>
+                                 <span class="n">exchange</span><span class="o">=</span><span class="n">kw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'exchange'</span><span class="p">),</span>
+                                 <span class="n">routing_key</span><span class="o">=</span><span class="n">kw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'routing_key'</span><span class="p">),</span>
+                                 <span class="n">eta</span><span class="o">=</span><span class="n">maybe_iso8601</span><span class="p">(</span><span class="n">kw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'eta'</span><span class="p">)),</span>
                                  <span class="n">expires</span><span class="o">=</span><span class="n">expires</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
 
 
 <span class="k">class</span> <span class="nc">purge</span><span class="p">(</span><span class="n">Command</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Erase all messages from all known task queues.</span>
+    <span class="sd">"""Erase all messages from all known task queues.</span>
 
 <span class="sd">    WARNING: There is no undo operation for this command.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">warn_prelude</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="s1">&#39;{warning}: This will remove all tasks from {queues}: {names}.</span><span class="se">\n</span><span class="s1">&#39;</span>
-        <span class="s1">&#39;         There is no undo for this operation!</span><span class="se">\n\n</span><span class="s1">&#39;</span>
-        <span class="s1">&#39;(to skip this prompt use the -f option)</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="s1">'{warning}: This will remove all tasks from {queues}: {names}.</span><span class="se">\n</span><span class="s1">'</span>
+        <span class="s1">'         There is no undo for this operation!</span><span class="se">\n\n</span><span class="s1">'</span>
+        <span class="s1">'(to skip this prompt use the -f option)</span><span class="se">\n</span><span class="s1">'</span>
     <span class="p">)</span>
-    <span class="n">warn_prompt</span> <span class="o">=</span> <span class="s1">&#39;Are you sure you want to delete all tasks&#39;</span>
-    <span class="n">fmt_purged</span> <span class="o">=</span> <span class="s1">&#39;Purged {mnum} {messages} from {qnum} known task {queues}.&#39;</span>
-    <span class="n">fmt_empty</span> <span class="o">=</span> <span class="s1">&#39;No messages purged from {qnum} {queues}&#39;</span>
+    <span class="n">warn_prompt</span> <span class="o">=</span> <span class="s1">'Are you sure you want to delete all tasks'</span>
+    <span class="n">fmt_purged</span> <span class="o">=</span> <span class="s1">'Purged {mnum} {messages} from {qnum} known task {queues}.'</span>
+    <span class="n">fmt_empty</span> <span class="o">=</span> <span class="s1">'No messages purged from {qnum} {queues}'</span>
     <span class="n">option_list</span> <span class="o">=</span> <span class="n">Command</span><span class="o">.</span><span class="n">option_list</span> <span class="o">+</span> <span class="p">(</span>
-        <span class="n">Option</span><span class="p">(</span><span class="s1">&#39;--force&#39;</span><span class="p">,</span> <span class="s1">&#39;-f&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span>
-               <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Do not prompt for verification&#39;</span><span class="p">),</span>
+        <span class="n">Option</span><span class="p">(</span><span class="s1">'--force'</span><span class="p">,</span> <span class="s1">'-f'</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">'store_true'</span><span class="p">,</span>
+               <span class="n">help</span><span class="o">=</span><span class="s1">'Do not prompt for verification'</span><span class="p">),</span>
     <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -276,21 +254,21 @@
         <span class="n">qnum</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">names</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">force</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">warn_prelude</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="n">warning</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">colored</span><span class="o">.</span><span class="n">red</span><span class="p">(</span><span class="s1">&#39;WARNING&#39;</span><span class="p">),</span>
-                <span class="n">queues</span><span class="o">=</span><span class="n">text</span><span class="o">.</span><span class="n">pluralize</span><span class="p">(</span><span class="n">qnum</span><span class="p">,</span> <span class="s1">&#39;queue&#39;</span><span class="p">),</span> <span class="n">names</span><span class="o">=</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">names</span><span class="p">),</span>
+                <span class="n">warning</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">colored</span><span class="o">.</span><span class="n">red</span><span class="p">(</span><span class="s1">'WARNING'</span><span class="p">),</span>
+                <span class="n">queues</span><span class="o">=</span><span class="n">text</span><span class="o">.</span><span class="n">pluralize</span><span class="p">(</span><span class="n">qnum</span><span class="p">,</span> <span class="s1">'queue'</span><span class="p">),</span> <span class="n">names</span><span class="o">=</span><span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">names</span><span class="p">),</span>
             <span class="p">))</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">warn_prompt</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;yes&#39;</span><span class="p">,</span> <span class="s1">&#39;no&#39;</span><span class="p">),</span> <span class="s1">&#39;no&#39;</span><span class="p">)</span> <span class="o">!=</span> <span class="s1">&#39;yes&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">warn_prompt</span><span class="p">,</span> <span class="p">(</span><span class="s1">'yes'</span><span class="p">,</span> <span class="s1">'no'</span><span class="p">),</span> <span class="s1">'no'</span><span class="p">)</span> <span class="o">!=</span> <span class="s1">'yes'</span><span class="p">:</span>
                 <span class="k">return</span>
         <span class="n">messages</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">control</span><span class="o">.</span><span class="n">purge</span><span class="p">()</span>
         <span class="n">fmt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fmt_purged</span> <span class="k">if</span> <span class="n">messages</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">fmt_empty</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="p">(</span><span class="n">fmt</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
             <span class="n">mnum</span><span class="o">=</span><span class="n">messages</span><span class="p">,</span> <span class="n">qnum</span><span class="o">=</span><span class="n">qnum</span><span class="p">,</span>
-            <span class="n">messages</span><span class="o">=</span><span class="n">text</span><span class="o">.</span><span class="n">pluralize</span><span class="p">(</span><span class="n">messages</span><span class="p">,</span> <span class="s1">&#39;message&#39;</span><span class="p">),</span>
-            <span class="n">queues</span><span class="o">=</span><span class="n">text</span><span class="o">.</span><span class="n">pluralize</span><span class="p">(</span><span class="n">qnum</span><span class="p">,</span> <span class="s1">&#39;queue&#39;</span><span class="p">)))</span>
+            <span class="n">messages</span><span class="o">=</span><span class="n">text</span><span class="o">.</span><span class="n">pluralize</span><span class="p">(</span><span class="n">messages</span><span class="p">,</span> <span class="s1">'message'</span><span class="p">),</span>
+            <span class="n">queues</span><span class="o">=</span><span class="n">text</span><span class="o">.</span><span class="n">pluralize</span><span class="p">(</span><span class="n">qnum</span><span class="p">,</span> <span class="s1">'queue'</span><span class="p">)))</span>
 
 
 <span class="k">class</span> <span class="nc">result</span><span class="p">(</span><span class="n">Command</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Gives the return value for a given task id.</span>
+    <span class="sd">"""Gives the return value for a given task id.</span>
 
 <span class="sd">    Examples::</span>
 
@@ -298,18 +276,18 @@
 <span class="sd">        celery result 8f511516-e2f5-4da4-9d2f-0fb83a86e500 -t tasks.add</span>
 <span class="sd">        celery result 8f511516-e2f5-4da4-9d2f-0fb83a86e500 --traceback</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">args</span> <span class="o">=</span> <span class="s1">&#39;&lt;task_id&gt;&#39;</span>
+<span class="sd">    """</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="s1">'&lt;task_id&gt;'</span>
     <span class="n">option_list</span> <span class="o">=</span> <span class="n">Command</span><span class="o">.</span><span class="n">option_list</span> <span class="o">+</span> <span class="p">(</span>
-        <span class="n">Option</span><span class="p">(</span><span class="s1">&#39;--task&#39;</span><span class="p">,</span> <span class="s1">&#39;-t&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;name of task (if custom backend)&#39;</span><span class="p">),</span>
-        <span class="n">Option</span><span class="p">(</span><span class="s1">&#39;--traceback&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span>
-               <span class="n">help</span><span class="o">=</span><span class="s1">&#39;show traceback instead&#39;</span><span class="p">),</span>
+        <span class="n">Option</span><span class="p">(</span><span class="s1">'--task'</span><span class="p">,</span> <span class="s1">'-t'</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">'name of task (if custom backend)'</span><span class="p">),</span>
+        <span class="n">Option</span><span class="p">(</span><span class="s1">'--traceback'</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">'store_true'</span><span class="p">,</span>
+               <span class="n">help</span><span class="o">=</span><span class="s1">'show traceback instead'</span><span class="p">),</span>
     <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_id</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">result_cls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">AsyncResult</span>
-        <span class="n">task</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;task&#39;</span><span class="p">)</span>
-        <span class="n">traceback</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;traceback&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+        <span class="n">task</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'task'</span><span class="p">)</span>
+        <span class="n">traceback</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'traceback'</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">task</span><span class="p">:</span>
             <span class="n">result_cls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tasks</span><span class="p">[</span><span class="n">task</span><span class="p">]</span><span class="o">.</span><span class="n">AsyncResult</span>
@@ -326,79 +304,79 @@
     <span class="n">choices</span> <span class="o">=</span> <span class="bp">None</span>
     <span class="n">leaf</span> <span class="o">=</span> <span class="bp">False</span>
     <span class="n">option_list</span> <span class="o">=</span> <span class="n">Command</span><span class="o">.</span><span class="n">option_list</span> <span class="o">+</span> <span class="p">(</span>
-        <span class="n">Option</span><span class="p">(</span><span class="s1">&#39;--timeout&#39;</span><span class="p">,</span> <span class="s1">&#39;-t&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;float&#39;</span><span class="p">,</span>
-               <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Timeout in seconds (float) waiting for reply&#39;</span><span class="p">),</span>
-        <span class="n">Option</span><span class="p">(</span><span class="s1">&#39;--destination&#39;</span><span class="p">,</span> <span class="s1">&#39;-d&#39;</span><span class="p">,</span>
-               <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Comma separated list of destination node names.&#39;</span><span class="p">))</span>
+        <span class="n">Option</span><span class="p">(</span><span class="s1">'--timeout'</span><span class="p">,</span> <span class="s1">'-t'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">'float'</span><span class="p">,</span>
+               <span class="n">help</span><span class="o">=</span><span class="s1">'Timeout in seconds (float) waiting for reply'</span><span class="p">),</span>
+        <span class="n">Option</span><span class="p">(</span><span class="s1">'--destination'</span><span class="p">,</span> <span class="s1">'-d'</span><span class="p">,</span>
+               <span class="n">help</span><span class="o">=</span><span class="s1">'Comma separated list of destination node names.'</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">show_body</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;show_body&#39;</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">show_reply</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;show_reply&#39;</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">show_body</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">'show_body'</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">show_reply</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">'show_reply'</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">_RemoteControl</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">get_command_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span>
-                         <span class="n">indent</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+                         <span class="n">indent</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">help</span><span class="p">:</span>
-            <span class="n">help</span> <span class="o">=</span> <span class="s1">&#39;|&#39;</span> <span class="o">+</span> <span class="n">text</span><span class="o">.</span><span class="n">indent</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="n">command</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">indent</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span>
+            <span class="n">help</span> <span class="o">=</span> <span class="s1">'|'</span> <span class="o">+</span> <span class="n">text</span><span class="o">.</span><span class="n">indent</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="n">command</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">indent</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">help</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="c1"># see if it uses args.</span>
             <span class="n">meth</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">text</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
-                <span class="s1">&#39;|&#39;</span> <span class="o">+</span> <span class="n">text</span><span class="o">.</span><span class="n">indent</span><span class="p">(</span><span class="s1">&#39;{0}{1} {2}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="s1">'|'</span> <span class="o">+</span> <span class="n">text</span><span class="o">.</span><span class="n">indent</span><span class="p">(</span><span class="s1">'{0}{1} {2}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                     <span class="n">prefix</span><span class="p">,</span> <span class="n">color</span><span class="p">(</span><span class="n">command</span><span class="p">),</span> <span class="n">meth</span><span class="o">.</span><span class="n">__doc__</span><span class="p">),</span> <span class="n">indent</span><span class="p">),</span>
                 <span class="n">help</span><span class="p">,</span>
             <span class="p">])</span>
 
         <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">text</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
-                <span class="s1">&#39;|&#39;</span> <span class="o">+</span> <span class="n">text</span><span class="o">.</span><span class="n">indent</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">color</span><span class="p">(</span><span class="n">command</span><span class="p">)),</span> <span class="n">indent</span><span class="p">),</span> <span class="n">help</span><span class="p">,</span>
+                <span class="s1">'|'</span> <span class="o">+</span> <span class="n">text</span><span class="o">.</span><span class="n">indent</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">color</span><span class="p">(</span><span class="n">command</span><span class="p">)),</span> <span class="n">indent</span><span class="p">),</span> <span class="n">help</span><span class="p">,</span>
             <span class="p">])</span>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">list_commands</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">list_commands</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
         <span class="n">color</span> <span class="o">=</span> <span class="n">color</span> <span class="k">if</span> <span class="n">color</span> <span class="k">else</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span>
-        <span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="k">if</span> <span class="n">prefix</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span>
-        <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_command_info</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">indent</span><span class="p">,</span> <span class="n">prefix</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">help</span><span class="p">)</span>
+        <span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s1">' '</span> <span class="k">if</span> <span class="n">prefix</span> <span class="k">else</span> <span class="s1">''</span>
+        <span class="k">return</span> <span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_command_info</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">indent</span><span class="p">,</span> <span class="n">prefix</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">help</span><span class="p">)</span>
                          <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">choices</span><span class="p">))</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">epilog</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
-            <span class="s1">&#39;[Commands]&#39;</span><span class="p">,</span>
+        <span class="k">return</span> <span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+            <span class="s1">'[Commands]'</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">list_commands</span><span class="p">(</span><span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
         <span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">usage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s1">&#39;%prog {0} [options] {1} &lt;command&gt; [arg1 .. argN]&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="k">return</span> <span class="s1">'%prog {0} [options] {1} &lt;command&gt; [arg1 .. argN]'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
             <span class="n">command</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;call&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">'call'</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">args</span><span class="p">:</span>
             <span class="k">raise</span> <span class="bp">self</span><span class="o">.</span><span class="n">UsageError</span><span class="p">(</span>
-                <span class="s1">&#39;Missing {0.name} method. See --help&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+                <span class="s1">'Missing {0.name} method. See --help'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">do_call_method</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">do_call_method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">method</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;help&#39;</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="bp">self</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="s2">&quot;Did you mean &#39;{0.name} --help&#39;?&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">'help'</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="bp">self</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="s2">"Did you mean '{0.name} --help'?"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
         <span class="k">if</span> <span class="n">method</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">choices</span><span class="p">:</span>
             <span class="k">raise</span> <span class="bp">self</span><span class="o">.</span><span class="n">UsageError</span><span class="p">(</span>
-                <span class="s1">&#39;Unknown {0.name} method {1}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">))</span>
+                <span class="s1">'Unknown {0.name} method {1}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">))</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">connection</span><span class="p">()</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">driver_type</span> <span class="o">==</span> <span class="s1">&#39;sql&#39;</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="bp">self</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="s1">&#39;Broadcast not supported by SQL broker transport&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">connection</span><span class="p">()</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">driver_type</span> <span class="o">==</span> <span class="s1">'sql'</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="bp">self</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="s1">'Broadcast not supported by SQL broker transport'</span><span class="p">)</span>
 
-        <span class="n">destination</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;destination&#39;</span><span class="p">)</span>
-        <span class="n">timeout</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;timeout&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="n">method</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">destination</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'destination'</span><span class="p">)</span>
+        <span class="n">timeout</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'timeout'</span><span class="p">)</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="n">method</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">destination</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">destination</span><span class="p">,</span> <span class="n">string_t</span><span class="p">):</span>
-            <span class="n">destination</span> <span class="o">=</span> <span class="p">[</span><span class="n">dest</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">dest</span> <span class="ow">in</span> <span class="n">destination</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)]</span>
+            <span class="n">destination</span> <span class="o">=</span> <span class="p">[</span><span class="n">dest</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">dest</span> <span class="ow">in</span> <span class="n">destination</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">','</span><span class="p">)]</span>
 
         <span class="n">handler</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">)</span>
 
@@ -406,13 +384,13 @@
                           <span class="n">destination</span><span class="o">=</span><span class="n">destination</span><span class="p">,</span>
                           <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">say_remote_command_reply</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">replies</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="bp">self</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="s1">&#39;No nodes replied within time constraint.&#39;</span><span class="p">,</span>
+            <span class="k">raise</span> <span class="bp">self</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="s1">'No nodes replied within time constraint.'</span><span class="p">,</span>
                              <span class="n">status</span><span class="o">=</span><span class="n">EX_UNAVAILABLE</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">replies</span>
 
 
 <span class="k">class</span> <span class="nc">inspect</span><span class="p">(</span><span class="n">_RemoteControl</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Inspect the worker at runtime.</span>
+    <span class="sd">"""Inspect the worker at runtime.</span>
 
 <span class="sd">    Availability: RabbitMQ (amqp), Redis, and MongoDB transports.</span>
 
@@ -422,38 +400,38 @@
 <span class="sd">        celery inspect scheduled -d worker1@example.com</span>
 <span class="sd">        celery inspect revoked -d w1@e.com,w2@e.com</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;inspect&#39;</span>
+<span class="sd">    """</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s1">'inspect'</span>
     <span class="n">choices</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;active&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;dump active tasks (being processed)&#39;</span><span class="p">),</span>
-        <span class="s1">&#39;active_queues&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;dump queues being consumed from&#39;</span><span class="p">),</span>
-        <span class="s1">&#39;scheduled&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;dump scheduled tasks (eta/countdown/retry)&#39;</span><span class="p">),</span>
-        <span class="s1">&#39;reserved&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;dump reserved tasks (waiting to be processed)&#39;</span><span class="p">),</span>
-        <span class="s1">&#39;stats&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;dump worker statistics&#39;</span><span class="p">),</span>
-        <span class="s1">&#39;revoked&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;dump of revoked task ids&#39;</span><span class="p">),</span>
-        <span class="s1">&#39;registered&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;dump of registered tasks&#39;</span><span class="p">),</span>
-        <span class="s1">&#39;ping&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="s1">&#39;ping worker(s)&#39;</span><span class="p">),</span>
-        <span class="s1">&#39;clock&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;get value of logical clock&#39;</span><span class="p">),</span>
-        <span class="s1">&#39;conf&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;dump worker configuration&#39;</span><span class="p">),</span>
-        <span class="s1">&#39;report&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;get bugreport info&#39;</span><span class="p">),</span>
-        <span class="s1">&#39;memsample&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;sample memory (requires psutil)&#39;</span><span class="p">),</span>
-        <span class="s1">&#39;memdump&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;dump memory samples (requires psutil)&#39;</span><span class="p">),</span>
-        <span class="s1">&#39;objgraph&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">60.0</span><span class="p">,</span> <span class="s1">&#39;create object graph (requires objgraph)&#39;</span><span class="p">),</span>
+        <span class="s1">'active'</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">'dump active tasks (being processed)'</span><span class="p">),</span>
+        <span class="s1">'active_queues'</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">'dump queues being consumed from'</span><span class="p">),</span>
+        <span class="s1">'scheduled'</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">'dump scheduled tasks (eta/countdown/retry)'</span><span class="p">),</span>
+        <span class="s1">'reserved'</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">'dump reserved tasks (waiting to be processed)'</span><span class="p">),</span>
+        <span class="s1">'stats'</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">'dump worker statistics'</span><span class="p">),</span>
+        <span class="s1">'revoked'</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">'dump of revoked task ids'</span><span class="p">),</span>
+        <span class="s1">'registered'</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">'dump of registered tasks'</span><span class="p">),</span>
+        <span class="s1">'ping'</span><span class="p">:</span> <span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="s1">'ping worker(s)'</span><span class="p">),</span>
+        <span class="s1">'clock'</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">'get value of logical clock'</span><span class="p">),</span>
+        <span class="s1">'conf'</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">'dump worker configuration'</span><span class="p">),</span>
+        <span class="s1">'report'</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">'get bugreport info'</span><span class="p">),</span>
+        <span class="s1">'memsample'</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">'sample memory (requires psutil)'</span><span class="p">),</span>
+        <span class="s1">'memdump'</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">'dump memory samples (requires psutil)'</span><span class="p">),</span>
+        <span class="s1">'objgraph'</span><span class="p">:</span> <span class="p">(</span><span class="mf">60.0</span><span class="p">,</span> <span class="s1">'create object graph (requires objgraph)'</span><span class="p">),</span>
     <span class="p">}</span>
 
     <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
         <span class="n">i</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">control</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="o">**</span><span class="n">options</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">method</span><span class="p">)(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">objgraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">type_</span><span class="o">=</span><span class="s1">&#39;Request&#39;</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;objgraph&#39;</span><span class="p">,</span> <span class="n">type_</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">objgraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">type_</span><span class="o">=</span><span class="s1">'Request'</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">'objgraph'</span><span class="p">,</span> <span class="n">type_</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">conf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">with_defaults</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;conf&#39;</span><span class="p">,</span> <span class="n">with_defaults</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">'conf'</span><span class="p">,</span> <span class="n">with_defaults</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 
 <span class="k">class</span> <span class="nc">control</span><span class="p">(</span><span class="n">_RemoteControl</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Workers remote control.</span>
+    <span class="sd">"""Workers remote control.</span>
 
 <span class="sd">    Availability: RabbitMQ (amqp), Redis, and MongoDB transports.</span>
 
@@ -468,80 +446,80 @@
 
 <span class="sd">        celery control -d w1.e.com add_consumer queue exchange direct rkey</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;control&#39;</span>
+<span class="sd">    """</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s1">'control'</span>
     <span class="n">choices</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;enable_events&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;tell worker(s) to enable events&#39;</span><span class="p">),</span>
-        <span class="s1">&#39;disable_events&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;tell worker(s) to disable events&#39;</span><span class="p">),</span>
-        <span class="s1">&#39;add_consumer&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;tell worker(s) to start consuming a queue&#39;</span><span class="p">),</span>
-        <span class="s1">&#39;cancel_consumer&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;tell worker(s) to stop consuming a queue&#39;</span><span class="p">),</span>
-        <span class="s1">&#39;rate_limit&#39;</span><span class="p">:</span> <span class="p">(</span>
-            <span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;tell worker(s) to modify the rate limit for a task type&#39;</span><span class="p">),</span>
-        <span class="s1">&#39;time_limit&#39;</span><span class="p">:</span> <span class="p">(</span>
-            <span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;tell worker(s) to modify the time limit for a task type.&#39;</span><span class="p">),</span>
-        <span class="s1">&#39;autoscale&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;change autoscale settings&#39;</span><span class="p">),</span>
-        <span class="s1">&#39;pool_grow&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;start more pool processes&#39;</span><span class="p">),</span>
-        <span class="s1">&#39;pool_shrink&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;use less pool processes&#39;</span><span class="p">),</span>
+        <span class="s1">'enable_events'</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">'tell worker(s) to enable events'</span><span class="p">),</span>
+        <span class="s1">'disable_events'</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">'tell worker(s) to disable events'</span><span class="p">),</span>
+        <span class="s1">'add_consumer'</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">'tell worker(s) to start consuming a queue'</span><span class="p">),</span>
+        <span class="s1">'cancel_consumer'</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">'tell worker(s) to stop consuming a queue'</span><span class="p">),</span>
+        <span class="s1">'rate_limit'</span><span class="p">:</span> <span class="p">(</span>
+            <span class="mf">1.0</span><span class="p">,</span> <span class="s1">'tell worker(s) to modify the rate limit for a task type'</span><span class="p">),</span>
+        <span class="s1">'time_limit'</span><span class="p">:</span> <span class="p">(</span>
+            <span class="mf">1.0</span><span class="p">,</span> <span class="s1">'tell worker(s) to modify the time limit for a task type.'</span><span class="p">),</span>
+        <span class="s1">'autoscale'</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">'change autoscale settings'</span><span class="p">),</span>
+        <span class="s1">'pool_grow'</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">'start more pool processes'</span><span class="p">),</span>
+        <span class="s1">'pool_shrink'</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">'use less pool processes'</span><span class="p">),</span>
     <span class="p">}</span>
 
     <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">control</span><span class="p">,</span> <span class="n">method</span><span class="p">)(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">reply</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">pool_grow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;[N=1]&quot;&quot;&quot;</span>
+        <span class="sd">"""[N=1]"""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">pool_shrink</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;[N=1]&quot;&quot;&quot;</span>
+        <span class="sd">"""[N=1]"""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">autoscale</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;[max] [min]&quot;&quot;&quot;</span>
+        <span class="sd">"""[max] [min]"""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="nb">max</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="nb">min</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">rate_limit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">task_name</span><span class="p">,</span> <span class="n">rate_limit</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;&lt;task_name&gt; &lt;rate_limit&gt; (e.g. 5/s | 5/m | 5/h)&gt;&quot;&quot;&quot;</span>
+        <span class="sd">"""&lt;task_name&gt; &lt;rate_limit&gt; (e.g. 5/s | 5/m | 5/h)&gt;"""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">task_name</span><span class="p">,</span> <span class="n">rate_limit</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">time_limit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">task_name</span><span class="p">,</span> <span class="n">soft</span><span class="p">,</span> <span class="n">hard</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;&lt;task_name&gt; &lt;soft_secs&gt; [hard_secs]&quot;&quot;&quot;</span>
+        <span class="sd">"""&lt;task_name&gt; &lt;soft_secs&gt; [hard_secs]"""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">task_name</span><span class="p">,</span>
                          <span class="nb">float</span><span class="p">(</span><span class="n">soft</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="n">hard</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">add_consumer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">queue</span><span class="p">,</span> <span class="n">exchange</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
-                     <span class="n">exchange_type</span><span class="o">=</span><span class="s1">&#39;direct&#39;</span><span class="p">,</span> <span class="n">routing_key</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;&lt;queue&gt; [exchange [type [routing_key]]]&quot;&quot;&quot;</span>
+                     <span class="n">exchange_type</span><span class="o">=</span><span class="s1">'direct'</span><span class="p">,</span> <span class="n">routing_key</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">"""&lt;queue&gt; [exchange [type [routing_key]]]"""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">queue</span><span class="p">,</span> <span class="n">exchange</span><span class="p">,</span>
                          <span class="n">exchange_type</span><span class="p">,</span> <span class="n">routing_key</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">cancel_consumer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">queue</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;&lt;queue&gt;&quot;&quot;&quot;</span>
+        <span class="sd">"""&lt;queue&gt;"""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">queue</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 
 <span class="k">class</span> <span class="nc">status</span><span class="p">(</span><span class="n">Command</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Show list of workers that are online.&quot;&quot;&quot;</span>
+    <span class="sd">"""Show list of workers that are online."""</span>
     <span class="n">option_list</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">option_list</span>
 
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">I</span> <span class="o">=</span> <span class="n">inspect</span><span class="p">(</span>
             <span class="n">app</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="p">,</span>
-            <span class="n">no_color</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;no_color&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">),</span>
+            <span class="n">no_color</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'no_color'</span><span class="p">,</span> <span class="bp">False</span><span class="p">),</span>
             <span class="n">stdout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">stderr</span><span class="p">,</span>
             <span class="n">show_reply</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">show_body</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
         <span class="p">)</span>
-        <span class="n">replies</span> <span class="o">=</span> <span class="n">I</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;ping&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">replies</span> <span class="o">=</span> <span class="n">I</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">'ping'</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">replies</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="bp">self</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="s1">&#39;No nodes replied within time constraint&#39;</span><span class="p">,</span>
+            <span class="k">raise</span> <span class="bp">self</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="s1">'No nodes replied within time constraint'</span><span class="p">,</span>
                              <span class="n">status</span><span class="o">=</span><span class="n">EX_UNAVAILABLE</span><span class="p">)</span>
         <span class="n">nodecount</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">replies</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;quiet&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">{0} {1} online.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="n">nodecount</span><span class="p">,</span> <span class="n">text</span><span class="o">.</span><span class="n">pluralize</span><span class="p">(</span><span class="n">nodecount</span><span class="p">,</span> <span class="s1">&#39;node&#39;</span><span class="p">)))</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'quiet'</span><span class="p">,</span> <span class="bp">False</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">{0} {1} online.'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">nodecount</span><span class="p">,</span> <span class="n">text</span><span class="o">.</span><span class="n">pluralize</span><span class="p">(</span><span class="n">nodecount</span><span class="p">,</span> <span class="s1">'node'</span><span class="p">)))</span>
 
 
 <span class="k">class</span> <span class="nc">migrate</span><span class="p">(</span><span class="n">Command</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Migrate tasks from one broker to another.</span>
+    <span class="sd">"""Migrate tasks from one broker to another.</span>
 
 <span class="sd">    Examples::</span>
 
@@ -550,21 +528,21 @@
 
 <span class="sd">    NOTE: This command is experimental, make sure you have</span>
 <span class="sd">          a backup of the tasks before you continue.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">args</span> <span class="o">=</span> <span class="s1">&#39;&lt;source_url&gt; &lt;dest_url&gt;&#39;</span>
+<span class="sd">    """</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="s1">'&lt;source_url&gt; &lt;dest_url&gt;'</span>
     <span class="n">option_list</span> <span class="o">=</span> <span class="n">Command</span><span class="o">.</span><span class="n">option_list</span> <span class="o">+</span> <span class="p">(</span>
-        <span class="n">Option</span><span class="p">(</span><span class="s1">&#39;--limit&#39;</span><span class="p">,</span> <span class="s1">&#39;-n&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;int&#39;</span><span class="p">,</span>
-               <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Number of tasks to consume (int)&#39;</span><span class="p">),</span>
-        <span class="n">Option</span><span class="p">(</span><span class="s1">&#39;--timeout&#39;</span><span class="p">,</span> <span class="s1">&#39;-t&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;float&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
-               <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Timeout in seconds (float) waiting for tasks&#39;</span><span class="p">),</span>
-        <span class="n">Option</span><span class="p">(</span><span class="s1">&#39;--ack-messages&#39;</span><span class="p">,</span> <span class="s1">&#39;-a&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span>
-               <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Ack messages from source broker.&#39;</span><span class="p">),</span>
-        <span class="n">Option</span><span class="p">(</span><span class="s1">&#39;--tasks&#39;</span><span class="p">,</span> <span class="s1">&#39;-T&#39;</span><span class="p">,</span>
-               <span class="n">help</span><span class="o">=</span><span class="s1">&#39;List of task names to filter on.&#39;</span><span class="p">),</span>
-        <span class="n">Option</span><span class="p">(</span><span class="s1">&#39;--queues&#39;</span><span class="p">,</span> <span class="s1">&#39;-Q&#39;</span><span class="p">,</span>
-               <span class="n">help</span><span class="o">=</span><span class="s1">&#39;List of queues to migrate.&#39;</span><span class="p">),</span>
-        <span class="n">Option</span><span class="p">(</span><span class="s1">&#39;--forever&#39;</span><span class="p">,</span> <span class="s1">&#39;-F&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span>
-               <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Continually migrate tasks until killed.&#39;</span><span class="p">),</span>
+        <span class="n">Option</span><span class="p">(</span><span class="s1">'--limit'</span><span class="p">,</span> <span class="s1">'-n'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">'int'</span><span class="p">,</span>
+               <span class="n">help</span><span class="o">=</span><span class="s1">'Number of tasks to consume (int)'</span><span class="p">),</span>
+        <span class="n">Option</span><span class="p">(</span><span class="s1">'--timeout'</span><span class="p">,</span> <span class="s1">'-t'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">'float'</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+               <span class="n">help</span><span class="o">=</span><span class="s1">'Timeout in seconds (float) waiting for tasks'</span><span class="p">),</span>
+        <span class="n">Option</span><span class="p">(</span><span class="s1">'--ack-messages'</span><span class="p">,</span> <span class="s1">'-a'</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">'store_true'</span><span class="p">,</span>
+               <span class="n">help</span><span class="o">=</span><span class="s1">'Ack messages from source broker.'</span><span class="p">),</span>
+        <span class="n">Option</span><span class="p">(</span><span class="s1">'--tasks'</span><span class="p">,</span> <span class="s1">'-T'</span><span class="p">,</span>
+               <span class="n">help</span><span class="o">=</span><span class="s1">'List of task names to filter on.'</span><span class="p">),</span>
+        <span class="n">Option</span><span class="p">(</span><span class="s1">'--queues'</span><span class="p">,</span> <span class="s1">'-Q'</span><span class="p">,</span>
+               <span class="n">help</span><span class="o">=</span><span class="s1">'List of queues to migrate.'</span><span class="p">),</span>
+        <span class="n">Option</span><span class="p">(</span><span class="s1">'--forever'</span><span class="p">,</span> <span class="s1">'-F'</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">'store_true'</span><span class="p">,</span>
+               <span class="n">help</span><span class="o">=</span><span class="s1">'Continually migrate tasks until killed.'</span><span class="p">),</span>
     <span class="p">)</span>
     <span class="n">progress_fmt</span> <span class="o">=</span> <span class="n">MIGRATE_PROGRESS_FMT</span>
 
@@ -582,7 +560,7 @@
 
 
 <span class="k">class</span> <span class="nc">shell</span><span class="p">(</span><span class="n">Command</span><span class="p">):</span>  <span class="c1"># pragma: no cover</span>
-    <span class="sd">&quot;&quot;&quot;Start shell session with convenient access to celery symbols.</span>
+    <span class="sd">"""Start shell session with convenient access to celery symbols.</span>
 
 <span class="sd">    The following symbols will be added to the main globals:</span>
 
@@ -591,22 +569,22 @@
 <span class="sd">          xmap, xstarmap subtask, Task</span>
 <span class="sd">        - all registered tasks.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">option_list</span> <span class="o">=</span> <span class="n">Command</span><span class="o">.</span><span class="n">option_list</span> <span class="o">+</span> <span class="p">(</span>
-        <span class="n">Option</span><span class="p">(</span><span class="s1">&#39;--ipython&#39;</span><span class="p">,</span> <span class="s1">&#39;-I&#39;</span><span class="p">,</span>
-               <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;force_ipython&#39;</span><span class="p">,</span>
-               <span class="n">help</span><span class="o">=</span><span class="s1">&#39;force iPython.&#39;</span><span class="p">),</span>
-        <span class="n">Option</span><span class="p">(</span><span class="s1">&#39;--bpython&#39;</span><span class="p">,</span> <span class="s1">&#39;-B&#39;</span><span class="p">,</span>
-               <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;force_bpython&#39;</span><span class="p">,</span>
-               <span class="n">help</span><span class="o">=</span><span class="s1">&#39;force bpython.&#39;</span><span class="p">),</span>
-        <span class="n">Option</span><span class="p">(</span><span class="s1">&#39;--python&#39;</span><span class="p">,</span> <span class="s1">&#39;-P&#39;</span><span class="p">,</span>
-               <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;force_python&#39;</span><span class="p">,</span>
-               <span class="n">help</span><span class="o">=</span><span class="s1">&#39;force default Python shell.&#39;</span><span class="p">),</span>
-        <span class="n">Option</span><span class="p">(</span><span class="s1">&#39;--without-tasks&#39;</span><span class="p">,</span> <span class="s1">&#39;-T&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span>
-               <span class="n">help</span><span class="o">=</span><span class="s2">&quot;don&#39;t add tasks to locals.&quot;</span><span class="p">),</span>
-        <span class="n">Option</span><span class="p">(</span><span class="s1">&#39;--eventlet&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span>
-               <span class="n">help</span><span class="o">=</span><span class="s1">&#39;use eventlet.&#39;</span><span class="p">),</span>
-        <span class="n">Option</span><span class="p">(</span><span class="s1">&#39;--gevent&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;use gevent.&#39;</span><span class="p">),</span>
+        <span class="n">Option</span><span class="p">(</span><span class="s1">'--ipython'</span><span class="p">,</span> <span class="s1">'-I'</span><span class="p">,</span>
+               <span class="n">action</span><span class="o">=</span><span class="s1">'store_true'</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s1">'force_ipython'</span><span class="p">,</span>
+               <span class="n">help</span><span class="o">=</span><span class="s1">'force iPython.'</span><span class="p">),</span>
+        <span class="n">Option</span><span class="p">(</span><span class="s1">'--bpython'</span><span class="p">,</span> <span class="s1">'-B'</span><span class="p">,</span>
+               <span class="n">action</span><span class="o">=</span><span class="s1">'store_true'</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s1">'force_bpython'</span><span class="p">,</span>
+               <span class="n">help</span><span class="o">=</span><span class="s1">'force bpython.'</span><span class="p">),</span>
+        <span class="n">Option</span><span class="p">(</span><span class="s1">'--python'</span><span class="p">,</span> <span class="s1">'-P'</span><span class="p">,</span>
+               <span class="n">action</span><span class="o">=</span><span class="s1">'store_true'</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s1">'force_python'</span><span class="p">,</span>
+               <span class="n">help</span><span class="o">=</span><span class="s1">'force default Python shell.'</span><span class="p">),</span>
+        <span class="n">Option</span><span class="p">(</span><span class="s1">'--without-tasks'</span><span class="p">,</span> <span class="s1">'-T'</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">'store_true'</span><span class="p">,</span>
+               <span class="n">help</span><span class="o">=</span><span class="s2">"don't add tasks to locals."</span><span class="p">),</span>
+        <span class="n">Option</span><span class="p">(</span><span class="s1">'--eventlet'</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">'store_true'</span><span class="p">,</span>
+               <span class="n">help</span><span class="o">=</span><span class="s1">'use eventlet.'</span><span class="p">),</span>
+        <span class="n">Option</span><span class="p">(</span><span class="s1">'--gevent'</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">'store_true'</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">'use gevent.'</span><span class="p">),</span>
     <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">force_ipython</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">force_bpython</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
@@ -614,28 +592,28 @@
             <span class="n">gevent</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
         <span class="k">if</span> <span class="n">eventlet</span><span class="p">:</span>
-            <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;celery.concurrency.eventlet&#39;</span><span class="p">)</span>
+            <span class="n">import_module</span><span class="p">(</span><span class="s1">'celery.concurrency.eventlet'</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">gevent</span><span class="p">:</span>
-            <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;celery.concurrency.gevent&#39;</span><span class="p">)</span>
+            <span class="n">import_module</span><span class="p">(</span><span class="s1">'celery.concurrency.gevent'</span><span class="p">)</span>
         <span class="kn">import</span> <span class="nn">celery</span>
         <span class="kn">import</span> <span class="nn">celery.task.base</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">loader</span><span class="o">.</span><span class="n">import_default_modules</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">locals</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;app&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="p">,</span>
-                       <span class="s1">&#39;celery&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="p">,</span>
-                       <span class="s1">&#39;Task&#39;</span><span class="p">:</span> <span class="n">celery</span><span class="o">.</span><span class="n">Task</span><span class="p">,</span>
-                       <span class="s1">&#39;chord&#39;</span><span class="p">:</span> <span class="n">celery</span><span class="o">.</span><span class="n">chord</span><span class="p">,</span>
-                       <span class="s1">&#39;group&#39;</span><span class="p">:</span> <span class="n">celery</span><span class="o">.</span><span class="n">group</span><span class="p">,</span>
-                       <span class="s1">&#39;chain&#39;</span><span class="p">:</span> <span class="n">celery</span><span class="o">.</span><span class="n">chain</span><span class="p">,</span>
-                       <span class="s1">&#39;chunks&#39;</span><span class="p">:</span> <span class="n">celery</span><span class="o">.</span><span class="n">chunks</span><span class="p">,</span>
-                       <span class="s1">&#39;xmap&#39;</span><span class="p">:</span> <span class="n">celery</span><span class="o">.</span><span class="n">xmap</span><span class="p">,</span>
-                       <span class="s1">&#39;xstarmap&#39;</span><span class="p">:</span> <span class="n">celery</span><span class="o">.</span><span class="n">xstarmap</span><span class="p">,</span>
-                       <span class="s1">&#39;subtask&#39;</span><span class="p">:</span> <span class="n">celery</span><span class="o">.</span><span class="n">subtask</span><span class="p">,</span>
-                       <span class="s1">&#39;signature&#39;</span><span class="p">:</span> <span class="n">celery</span><span class="o">.</span><span class="n">signature</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">locals</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'app'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="p">,</span>
+                       <span class="s1">'celery'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="p">,</span>
+                       <span class="s1">'Task'</span><span class="p">:</span> <span class="n">celery</span><span class="o">.</span><span class="n">Task</span><span class="p">,</span>
+                       <span class="s1">'chord'</span><span class="p">:</span> <span class="n">celery</span><span class="o">.</span><span class="n">chord</span><span class="p">,</span>
+                       <span class="s1">'group'</span><span class="p">:</span> <span class="n">celery</span><span class="o">.</span><span class="n">group</span><span class="p">,</span>
+                       <span class="s1">'chain'</span><span class="p">:</span> <span class="n">celery</span><span class="o">.</span><span class="n">chain</span><span class="p">,</span>
+                       <span class="s1">'chunks'</span><span class="p">:</span> <span class="n">celery</span><span class="o">.</span><span class="n">chunks</span><span class="p">,</span>
+                       <span class="s1">'xmap'</span><span class="p">:</span> <span class="n">celery</span><span class="o">.</span><span class="n">xmap</span><span class="p">,</span>
+                       <span class="s1">'xstarmap'</span><span class="p">:</span> <span class="n">celery</span><span class="o">.</span><span class="n">xstarmap</span><span class="p">,</span>
+                       <span class="s1">'subtask'</span><span class="p">:</span> <span class="n">celery</span><span class="o">.</span><span class="n">subtask</span><span class="p">,</span>
+                       <span class="s1">'signature'</span><span class="p">:</span> <span class="n">celery</span><span class="o">.</span><span class="n">signature</span><span class="p">}</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">without_tasks</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">locals</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span>
                 <span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">task</span><span class="p">)</span> <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">values</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tasks</span><span class="p">)</span>
-                <span class="k">if</span> <span class="ow">not</span> <span class="n">task</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;celery.&#39;</span><span class="p">)),</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">task</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">'celery.'</span><span class="p">)),</span>
             <span class="p">)</span>
 
         <span class="k">if</span> <span class="n">force_python</span><span class="p">:</span>
@@ -669,7 +647,7 @@
             <span class="kn">import</span> <span class="nn">rlcompleter</span>
             <span class="n">readline</span><span class="o">.</span><span class="n">set_completer</span><span class="p">(</span>
                 <span class="n">rlcompleter</span><span class="o">.</span><span class="n">Completer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">locals</span><span class="p">)</span><span class="o">.</span><span class="n">complete</span><span class="p">)</span>
-            <span class="n">readline</span><span class="o">.</span><span class="n">parse_and_bind</span><span class="p">(</span><span class="s1">&#39;tab:complete&#39;</span><span class="p">)</span>
+            <span class="n">readline</span><span class="o">.</span><span class="n">parse_and_bind</span><span class="p">(</span><span class="s1">'tab:complete'</span><span class="p">)</span>
         <span class="n">code</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span><span class="n">local</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">locals</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">invoke_ipython_shell</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -701,7 +679,7 @@
         <span class="n">IPShell</span><span class="p">(</span><span class="n">argv</span><span class="o">=</span><span class="p">[],</span> <span class="n">user_ns</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">locals</span><span class="p">)</span><span class="o">.</span><span class="n">mainloop</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">_no_ipython</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># pragma: no cover</span>
-        <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s2">&quot;no suitable ipython found&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s2">"no suitable ipython found"</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">invoke_bpython_shell</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">bpython</span>
@@ -709,10 +687,10 @@
 
 
 <span class="k">class</span> <span class="nc">help</span><span class="p">(</span><span class="n">Command</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Show help screen and exit.&quot;&quot;&quot;</span>
+    <span class="sd">"""Show help screen and exit."""</span>
 
     <span class="k">def</span> <span class="nf">usage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s1">&#39;%prog &lt;command&gt; [options] {0.args}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s1">'%prog &lt;command&gt; [options] {0.args}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">print_help</span><span class="p">()</span>
@@ -725,7 +703,7 @@
 
 
 <span class="k">class</span> <span class="nc">report</span><span class="p">(</span><span class="n">Command</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Shows information useful to include in bugreports.&quot;&quot;&quot;</span>
+    <span class="sd">"""Shows information useful to include in bugreports."""</span>
 
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">bugreport</span><span class="p">())</span>
@@ -733,30 +711,30 @@
 
 
 <div class="viewcode-block" id="CeleryCommand"><a class="viewcode-back" href="../../../reference/celery.bin.celery.html#celery.bin.celery.CeleryCommand">[docs]</a><span class="k">class</span> <span class="nc">CeleryCommand</span><span class="p">(</span><span class="n">Command</span><span class="p">):</span>
-    <span class="n">namespace</span> <span class="o">=</span> <span class="s1">&#39;celery&#39;</span>
-    <span class="n">ext_fmt</span> <span class="o">=</span> <span class="s1">&#39;{self.namespace}.commands&#39;</span>
+    <span class="n">namespace</span> <span class="o">=</span> <span class="s1">'celery'</span>
+    <span class="n">ext_fmt</span> <span class="o">=</span> <span class="s1">'{self.namespace}.commands'</span>
     <span class="n">commands</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;amqp&#39;</span><span class="p">:</span> <span class="n">amqp</span><span class="p">,</span>
-        <span class="s1">&#39;beat&#39;</span><span class="p">:</span> <span class="n">beat</span><span class="p">,</span>
-        <span class="s1">&#39;call&#39;</span><span class="p">:</span> <span class="n">call</span><span class="p">,</span>
-        <span class="s1">&#39;control&#39;</span><span class="p">:</span> <span class="n">control</span><span class="p">,</span>
-        <span class="s1">&#39;events&#39;</span><span class="p">:</span> <span class="n">events</span><span class="p">,</span>
-        <span class="s1">&#39;graph&#39;</span><span class="p">:</span> <span class="n">graph</span><span class="p">,</span>
-        <span class="s1">&#39;help&#39;</span><span class="p">:</span> <span class="n">help</span><span class="p">,</span>
-        <span class="s1">&#39;inspect&#39;</span><span class="p">:</span> <span class="n">inspect</span><span class="p">,</span>
-        <span class="s1">&#39;list&#39;</span><span class="p">:</span> <span class="n">list_</span><span class="p">,</span>
-        <span class="s1">&#39;migrate&#39;</span><span class="p">:</span> <span class="n">migrate</span><span class="p">,</span>
-        <span class="s1">&#39;multi&#39;</span><span class="p">:</span> <span class="n">multi</span><span class="p">,</span>
-        <span class="s1">&#39;purge&#39;</span><span class="p">:</span> <span class="n">purge</span><span class="p">,</span>
-        <span class="s1">&#39;report&#39;</span><span class="p">:</span> <span class="n">report</span><span class="p">,</span>
-        <span class="s1">&#39;result&#39;</span><span class="p">:</span> <span class="n">result</span><span class="p">,</span>
-        <span class="s1">&#39;shell&#39;</span><span class="p">:</span> <span class="n">shell</span><span class="p">,</span>
-        <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="n">status</span><span class="p">,</span>
-        <span class="s1">&#39;worker&#39;</span><span class="p">:</span> <span class="n">worker</span><span class="p">,</span>
+        <span class="s1">'amqp'</span><span class="p">:</span> <span class="n">amqp</span><span class="p">,</span>
+        <span class="s1">'beat'</span><span class="p">:</span> <span class="n">beat</span><span class="p">,</span>
+        <span class="s1">'call'</span><span class="p">:</span> <span class="n">call</span><span class="p">,</span>
+        <span class="s1">'control'</span><span class="p">:</span> <span class="n">control</span><span class="p">,</span>
+        <span class="s1">'events'</span><span class="p">:</span> <span class="n">events</span><span class="p">,</span>
+        <span class="s1">'graph'</span><span class="p">:</span> <span class="n">graph</span><span class="p">,</span>
+        <span class="s1">'help'</span><span class="p">:</span> <span class="n">help</span><span class="p">,</span>
+        <span class="s1">'inspect'</span><span class="p">:</span> <span class="n">inspect</span><span class="p">,</span>
+        <span class="s1">'list'</span><span class="p">:</span> <span class="n">list_</span><span class="p">,</span>
+        <span class="s1">'migrate'</span><span class="p">:</span> <span class="n">migrate</span><span class="p">,</span>
+        <span class="s1">'multi'</span><span class="p">:</span> <span class="n">multi</span><span class="p">,</span>
+        <span class="s1">'purge'</span><span class="p">:</span> <span class="n">purge</span><span class="p">,</span>
+        <span class="s1">'report'</span><span class="p">:</span> <span class="n">report</span><span class="p">,</span>
+        <span class="s1">'result'</span><span class="p">:</span> <span class="n">result</span><span class="p">,</span>
+        <span class="s1">'shell'</span><span class="p">:</span> <span class="n">shell</span><span class="p">,</span>
+        <span class="s1">'status'</span><span class="p">:</span> <span class="n">status</span><span class="p">,</span>
+        <span class="s1">'worker'</span><span class="p">:</span> <span class="n">worker</span><span class="p">,</span>
 
     <span class="p">}</span>
     <span class="n">enable_config_from_cmdline</span> <span class="o">=</span> <span class="bp">True</span>
-    <span class="n">prog_name</span> <span class="o">=</span> <span class="s1">&#39;celery&#39;</span>
+    <span class="n">prog_name</span> <span class="o">=</span> <span class="s1">'celery'</span>
 
     <span class="nd">@classmethod</span>
 <div class="viewcode-block" id="CeleryCommand.register_command"><a class="viewcode-back" href="../../../reference/celery.bin.celery.html#celery.bin.celery.CeleryCommand.register_command">[docs]</a>    <span class="k">def</span> <span class="nf">register_command</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">fun</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
@@ -767,8 +745,8 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="n">cls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">commands</span><span class="p">[</span><span class="n">command</span><span class="p">]</span>
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-            <span class="n">cls</span><span class="p">,</span> <span class="n">argv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">commands</span><span class="p">[</span><span class="s1">&#39;help&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;help&#39;</span><span class="p">]</span>
-        <span class="n">cls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">commands</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">command</span><span class="p">)</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">commands</span><span class="p">[</span><span class="s1">&#39;help&#39;</span><span class="p">]</span>
+            <span class="n">cls</span><span class="p">,</span> <span class="n">argv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">commands</span><span class="p">[</span><span class="s1">'help'</span><span class="p">],</span> <span class="p">[</span><span class="s1">'help'</span><span class="p">]</span>
+        <span class="n">cls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">commands</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">command</span><span class="p">)</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">commands</span><span class="p">[</span><span class="s1">'help'</span><span class="p">]</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">cls</span><span class="p">(</span>
                 <span class="n">app</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="p">,</span> <span class="n">on_error</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">on_error</span><span class="p">,</span>
@@ -784,11 +762,11 @@
 
 <div class="viewcode-block" id="CeleryCommand.on_usage_error"><a class="viewcode-back" href="../../../reference/celery.bin.celery.html#celery.bin.celery.CeleryCommand.on_usage_error">[docs]</a>    <span class="k">def</span> <span class="nf">on_usage_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">command</span><span class="p">:</span>
-            <span class="n">helps</span> <span class="o">=</span> <span class="s1">&#39;{self.prog_name} {command} --help&#39;</span>
+            <span class="n">helps</span> <span class="o">=</span> <span class="s1">'{self.prog_name} {command} --help'</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">helps</span> <span class="o">=</span> <span class="s1">&#39;{self.prog_name} --help&#39;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">colored</span><span class="o">.</span><span class="n">magenta</span><span class="p">(</span><span class="s1">&#39;Error: {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">exc</span><span class="p">)))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;Please try &#39;{0}&#39;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">helps</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">helps</span> <span class="o">=</span> <span class="s1">'{self.prog_name} --help'</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">colored</span><span class="o">.</span><span class="n">magenta</span><span class="p">(</span><span class="s1">'Error: {0}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">exc</span><span class="p">)))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">"""Please try '{0}'"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">helps</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="n">command</span><span class="p">,</span>
         <span class="p">)))</span></div>
 
@@ -797,16 +775,16 @@
             <span class="n">rest</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">while</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">argv</span><span class="p">):</span>
                 <span class="n">value</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
-                <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;--&#39;</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">'--'</span><span class="p">):</span>
                     <span class="n">rest</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-                <span class="k">elif</span> <span class="n">value</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">):</span>
-                    <span class="c1"># we eat the next argument even though we don&#39;t know</span>
+                <span class="k">elif</span> <span class="n">value</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">'-'</span><span class="p">):</span>
+                    <span class="c1"># we eat the next argument even though we don't know</span>
                     <span class="c1"># if this option takes an argument or not.</span>
                     <span class="c1"># instead we will assume what is the command name in the</span>
                     <span class="c1"># return statements below.</span>
                     <span class="k">try</span><span class="p">:</span>
                         <span class="n">nxt</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
-                        <span class="k">if</span> <span class="n">nxt</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">):</span>
+                        <span class="k">if</span> <span class="n">nxt</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">'-'</span><span class="p">):</span>
                             <span class="c1"># is another option</span>
                             <span class="n">rest</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
                         <span class="k">else</span><span class="p">:</span>
@@ -824,14 +802,14 @@
                 <span class="c1"># we assume the first argument in argv[i:] is the command</span>
                 <span class="c1"># name.</span>
                 <span class="k">return</span> <span class="n">argv</span><span class="p">[</span><span class="n">index</span><span class="p">:]</span> <span class="o">+</span> <span class="n">rest</span>
-            <span class="c1"># if there are no more arguments then the last arg in rest&#39;</span>
+            <span class="c1"># if there are no more arguments then the last arg in rest'</span>
             <span class="c1"># must be the command.</span>
             <span class="p">[</span><span class="n">rest</span><span class="o">.</span><span class="n">pop</span><span class="p">()]</span> <span class="o">+</span> <span class="n">rest</span>
         <span class="k">return</span> <span class="p">[]</span>
 
 <div class="viewcode-block" id="CeleryCommand.prepare_prog_name"><a class="viewcode-back" href="../../../reference/celery.bin.celery.html#celery.bin.celery.CeleryCommand.prepare_prog_name">[docs]</a>    <span class="k">def</span> <span class="nf">prepare_prog_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;__main__.py&#39;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="s1">&#39;__main__&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">__file__</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">'__main__.py'</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="s1">'__main__'</span><span class="p">]</span><span class="o">.</span><span class="n">__file__</span>
         <span class="k">return</span> <span class="n">name</span></div>
 
 <div class="viewcode-block" id="CeleryCommand.handle_argv"><a class="viewcode-back" href="../../../reference/celery.bin.celery.html#celery.bin.celery.CeleryCommand.handle_argv">[docs]</a>    <span class="k">def</span> <span class="nf">handle_argv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prog_name</span><span class="p">,</span> <span class="n">argv</span><span class="p">):</span>
@@ -841,12 +819,12 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="n">command</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
-            <span class="n">command</span><span class="p">,</span> <span class="n">argv</span> <span class="o">=</span> <span class="s1">&#39;help&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;help&#39;</span><span class="p">]</span>
+            <span class="n">command</span><span class="p">,</span> <span class="n">argv</span> <span class="o">=</span> <span class="s1">'help'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'help'</span><span class="p">]</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="n">argv</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="CeleryCommand.execute_from_commandline"><a class="viewcode-back" href="../../../reference/celery.bin.celery.html#celery.bin.celery.CeleryCommand.execute_from_commandline">[docs]</a>    <span class="k">def</span> <span class="nf">execute_from_commandline</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="n">argv</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span> <span class="k">if</span> <span class="n">argv</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="n">argv</span>
-        <span class="k">if</span> <span class="s1">&#39;multi&#39;</span> <span class="ow">in</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]:</span>  <span class="c1"># Issue 1008</span>
+        <span class="k">if</span> <span class="s1">'multi'</span> <span class="ow">in</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]:</span>  <span class="c1"># Issue 1008</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">respects_app_option</span> <span class="o">=</span> <span class="bp">False</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">determine_exit_status</span><span class="p">(</span>
@@ -859,13 +837,13 @@
         <span class="n">colored</span> <span class="o">=</span> <span class="n">term</span><span class="o">.</span><span class="n">colored</span><span class="p">()</span> <span class="k">if</span> <span class="n">colored</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="n">colored</span>
         <span class="n">colored</span> <span class="o">=</span> <span class="n">colored</span><span class="o">.</span><span class="n">names</span><span class="p">[</span><span class="n">color</span><span class="p">]</span> <span class="k">if</span> <span class="n">color</span> <span class="k">else</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span>
         <span class="n">obj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">commands</span><span class="p">[</span><span class="n">command</span><span class="p">]</span>
-        <span class="n">cmd</span> <span class="o">=</span> <span class="s1">&#39;celery {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">colored</span><span class="p">(</span><span class="n">command</span><span class="p">))</span>
+        <span class="n">cmd</span> <span class="o">=</span> <span class="s1">'celery {0}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">colored</span><span class="p">(</span><span class="n">command</span><span class="p">))</span>
         <span class="k">if</span> <span class="n">obj</span><span class="o">.</span><span class="n">leaf</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s1">&#39;|&#39;</span> <span class="o">+</span> <span class="n">text</span><span class="o">.</span><span class="n">indent</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">indent</span><span class="p">)</span>
+            <span class="k">return</span> <span class="s1">'|'</span> <span class="o">+</span> <span class="n">text</span><span class="o">.</span><span class="n">indent</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">indent</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">text</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
-            <span class="s1">&#39; &#39;</span><span class="p">,</span>
-            <span class="s1">&#39;|&#39;</span> <span class="o">+</span> <span class="n">text</span><span class="o">.</span><span class="n">indent</span><span class="p">(</span><span class="s1">&#39;{0} --help&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cmd</span><span class="p">),</span> <span class="n">indent</span><span class="p">),</span>
-            <span class="n">obj</span><span class="o">.</span><span class="n">list_commands</span><span class="p">(</span><span class="n">indent</span><span class="p">,</span> <span class="s1">&#39;celery {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">command</span><span class="p">),</span> <span class="n">colored</span><span class="p">),</span>
+            <span class="s1">' '</span><span class="p">,</span>
+            <span class="s1">'|'</span> <span class="o">+</span> <span class="n">text</span><span class="o">.</span><span class="n">indent</span><span class="p">(</span><span class="s1">'{0} --help'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cmd</span><span class="p">),</span> <span class="n">indent</span><span class="p">),</span>
+            <span class="n">obj</span><span class="o">.</span><span class="n">list_commands</span><span class="p">(</span><span class="n">indent</span><span class="p">,</span> <span class="s1">'celery {0}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">command</span><span class="p">),</span> <span class="n">colored</span><span class="p">),</span>
         <span class="p">])</span></div>
 
     <span class="nd">@classmethod</span>
@@ -875,19 +853,19 @@
         <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">cls</span><span class="p">,</span> <span class="n">commands</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="n">command_classes</span><span class="p">:</span>
             <span class="n">ret</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span>
-                <span class="n">text</span><span class="o">.</span><span class="n">indent</span><span class="p">(</span><span class="s1">&#39;+ {0}: &#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">white</span><span class="p">(</span><span class="n">cls</span><span class="p">)),</span> <span class="n">indent</span><span class="p">),</span>
-                <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="n">text</span><span class="o">.</span><span class="n">indent</span><span class="p">(</span><span class="s1">'+ {0}: '</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">white</span><span class="p">(</span><span class="n">cls</span><span class="p">)),</span> <span class="n">indent</span><span class="p">),</span>
+                <span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">get_command_info</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="n">indent</span> <span class="o">+</span> <span class="mi">4</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">colored</span><span class="p">)</span>
                     <span class="k">for</span> <span class="n">command</span> <span class="ow">in</span> <span class="n">commands</span><span class="p">),</span>
-                <span class="s1">&#39;&#39;</span>
+                <span class="s1">''</span>
             <span class="p">])</span>
-        <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span></div>
+        <span class="k">return</span> <span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="CeleryCommand.with_pool_option"><a class="viewcode-back" href="../../../reference/celery.bin.celery.html#celery.bin.celery.CeleryCommand.with_pool_option">[docs]</a>    <span class="k">def</span> <span class="nf">with_pool_option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argv</span><span class="p">):</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">argv</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="s1">&#39;worker&#39;</span> <span class="ow">in</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">argv</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="s1">'worker'</span> <span class="ow">in</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]:</span>
             <span class="c1"># this command supports custom pools</span>
             <span class="c1"># that may have to be loaded as early as possible.</span>
-            <span class="k">return</span> <span class="p">([</span><span class="s1">&#39;-P&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;--pool&#39;</span><span class="p">])</span></div>
+            <span class="k">return</span> <span class="p">([</span><span class="s1">'-P'</span><span class="p">],</span> <span class="p">[</span><span class="s1">'--pool'</span><span class="p">])</span></div>
 
 <div class="viewcode-block" id="CeleryCommand.on_concurrency_setup"><a class="viewcode-back" href="../../../reference/celery.bin.celery.html#celery.bin.celery.CeleryCommand.on_concurrency_setup">[docs]</a>    <span class="k">def</span> <span class="nf">on_concurrency_setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">load_extension_commands</span><span class="p">()</span></div>
@@ -896,39 +874,28 @@
         <span class="n">names</span> <span class="o">=</span> <span class="n">Extensions</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ext_fmt</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">=</span><span class="bp">self</span><span class="p">),</span>
                            <span class="bp">self</span><span class="o">.</span><span class="n">register_command</span><span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">names</span><span class="p">:</span>
-            <span class="n">command_classes</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s1">&#39;Extensions&#39;</span><span class="p">,</span> <span class="n">names</span><span class="p">,</span> <span class="s1">&#39;magenta&#39;</span><span class="p">))</span></div></div>
+            <span class="n">command_classes</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s1">'Extensions'</span><span class="p">,</span> <span class="n">names</span><span class="p">,</span> <span class="s1">'magenta'</span><span class="p">))</span></div></div>
 
 
 <span class="k">def</span> <span class="nf">command</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Deprecated: Use classmethod :meth:`CeleryCommand.register_command`</span>
-<span class="sd">    instead.&quot;&quot;&quot;</span>
+    <span class="sd">"""Deprecated: Use classmethod :meth:`CeleryCommand.register_command`</span>
+<span class="sd">    instead."""</span>
     <span class="n">_register</span> <span class="o">=</span> <span class="n">CeleryCommand</span><span class="o">.</span><span class="n">register_command</span>
     <span class="k">return</span> <span class="n">_register</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">if</span> <span class="n">args</span> <span class="k">else</span> <span class="n">_register</span>
 
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>          <span class="c1"># pragma: no cover</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>          <span class="c1"># pragma: no cover</span>
     <span class="n">main</span><span class="p">()</span>
 </pre></div>
+</div>
+</div>
+</div>
 
-          </div>
-        </div>
-      </div>
+<div class="clearer"></div>
+</div>
+
+<div class="footer" role="contentinfo">
+        © <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &copy; <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
-    </div>
-  </body>
+</body>
 </html>

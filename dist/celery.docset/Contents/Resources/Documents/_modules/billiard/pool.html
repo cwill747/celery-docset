@@ -1,17 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>billiard.pool &mdash; Celery 3.1.23 documentation</title>
-    
-    <link rel="stylesheet" href="../../_static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>billiard.pool — Celery 3.1.23 documentation</title>
+<link href="../../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
         VERSION:     '3.1.23',
@@ -20,44 +16,26 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="copyright" title="Copyright" href="../../copyright.html" />
-    <link rel="top" title="Celery 3.1.23 documentation" href="../../index.html" />
-    <link rel="up" title="Module code" href="../index.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
-      </ul>
-    </div>  
+<script src="../../_static/jquery.js" type="text/javascript"></script>
+<script src="../../_static/underscore.js" type="text/javascript"></script>
+<script src="../../_static/doctools.js" type="text/javascript"></script>
+<link href="../../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="../index.html" rel="up" title="Module code"/>
+</head>
+<body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
 <div class="deck">
-
-    
-        <p>
+<p>
         This document describes the current stable version of Celery (3.1). For development docs,
         <a href="http://docs.celeryproject.org/en/master/_modules/billiard/pool.html">go here</a>.
         </p>
-    
-
 </div>
-    <h1>Source code for billiard.pool</h1><div class="highlight"><pre>
+<h1>Source code for billiard.pool</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="c1">#</span>
 <span class="c1"># Module providing the `Pool` class for managing a process pool</span>
@@ -106,7 +84,7 @@
 
 <span class="n">PY3</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span>
 
-<span class="k">if</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;Windows&#39;</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+<span class="k">if</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span> <span class="o">==</span> <span class="s1">'Windows'</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
     <span class="c1"># On Windows os.kill calls TerminateProcess which cannot be</span>
     <span class="c1"># handled by # any process, so this is needed to terminate the task</span>
     <span class="c1"># *and its children* (if any).</span>
@@ -130,7 +108,7 @@
     <span class="n">_Semaphore</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">_Semaphore</span>  <span class="c1"># noqa</span>
 
 <span class="n">SIGMAP</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
-    <span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">signal</span><span class="p">)</span> <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;SIG&#39;</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">signal</span><span class="p">)</span> <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">'SIG'</span><span class="p">)</span>
 <span class="p">)</span>
 
 <span class="c1">#</span>
@@ -160,14 +138,14 @@
 
 
 <span class="c1"># Signal used for soft time limits.</span>
-<span class="n">SIG_SOFT_TIMEOUT</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="s2">&quot;SIGUSR1&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+<span class="n">SIG_SOFT_TIMEOUT</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="s2">"SIGUSR1"</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
 
 <span class="c1">#</span>
 <span class="c1"># Miscellaneous</span>
 <span class="c1">#</span>
 
 <span class="n">LOST_WORKER_TIMEOUT</span> <span class="o">=</span> <span class="mf">10.0</span>
-<span class="n">EX_OK</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">os</span><span class="p">,</span> <span class="s2">&quot;EX_OK&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">EX_OK</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">os</span><span class="p">,</span> <span class="s2">"EX_OK"</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
 <span class="n">job_counter</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
 
@@ -187,10 +165,10 @@
 <span class="k">def</span> <span class="nf">human_status</span><span class="p">(</span><span class="n">status</span><span class="p">):</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s1">&#39;signal {0} ({1})&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">-</span><span class="n">status</span><span class="p">,</span> <span class="n">SIGMAP</span><span class="p">[</span><span class="o">-</span><span class="n">status</span><span class="p">])</span>
+            <span class="k">return</span> <span class="s1">'signal {0} ({1})'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">-</span><span class="n">status</span><span class="p">,</span> <span class="n">SIGMAP</span><span class="p">[</span><span class="o">-</span><span class="n">status</span><span class="p">])</span>
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s1">&#39;signal {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">-</span><span class="n">status</span><span class="p">)</span>
-    <span class="k">return</span> <span class="s1">&#39;exitcode {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">status</span><span class="p">)</span>
+            <span class="k">return</span> <span class="s1">'signal {0}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">-</span><span class="n">status</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s1">'exitcode {0}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">status</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">mapstar</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
@@ -212,8 +190,8 @@
 
 
 <span class="k">class</span> <span class="nc">LaxBoundedSemaphore</span><span class="p">(</span><span class="n">_Semaphore</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Semaphore that checks that # release is &lt;= # acquires,</span>
-<span class="sd">    but ignores if # releases &gt;= value.&quot;&quot;&quot;</span>
+    <span class="sd">"""Semaphore that checks that # release is &lt;= # acquires,</span>
+<span class="sd">    but ignores if # releases &gt;= value."""</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">PY3</span><span class="p">:</span>
@@ -271,8 +249,8 @@
 
 
 <span class="k">class</span> <span class="nc">MaybeEncodingError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Wraps possible unpickleable errors, so they can be</span>
-<span class="sd">    safely sent through the socket.&quot;&quot;&quot;</span>
+    <span class="sd">"""Wraps possible unpickleable errors, so they can be</span>
+<span class="sd">    safely sent through the socket."""</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">exc</span> <span class="o">=</span> <span class="nb">repr</span><span class="p">(</span><span class="n">exc</span><span class="p">)</span>
@@ -280,15 +258,15 @@
         <span class="nb">super</span><span class="p">(</span><span class="n">MaybeEncodingError</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">exc</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s2">&quot;&lt;MaybeEncodingError: </span><span class="si">%s</span><span class="s2">&gt;&quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">"&lt;MaybeEncodingError: </span><span class="si">%s</span><span class="s2">&gt;"</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s2">&quot;Error sending result: &#39;</span><span class="si">%r</span><span class="s2">&#39;. Reason: &#39;</span><span class="si">%r</span><span class="s2">&#39;.&quot;</span> <span class="o">%</span> <span class="p">(</span>
+        <span class="k">return</span> <span class="s2">"Error sending result: '</span><span class="si">%r</span><span class="s2">'. Reason: '</span><span class="si">%r</span><span class="s2">'."</span> <span class="o">%</span> <span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">exc</span><span class="p">)</span>
 
 
 <span class="k">class</span> <span class="nc">WorkersJoined</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;All workers have terminated.&quot;&quot;&quot;</span>
+    <span class="sd">"""All workers have terminated."""</span>
 
 
 <span class="k">def</span> <span class="nf">soft_timeout_sighandler</span><span class="p">(</span><span class="n">signum</span><span class="p">,</span> <span class="n">frame</span><span class="p">):</span>
@@ -354,7 +332,7 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">workloop</span><span class="p">(</span><span class="n">pid</span><span class="o">=</span><span class="n">pid</span><span class="p">))</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-            <span class="n">error</span><span class="p">(</span><span class="s1">&#39;Pool process </span><span class="si">%r</span><span class="s1"> error: </span><span class="si">%r</span><span class="s1">&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">error</span><span class="p">(</span><span class="s1">'Pool process </span><span class="si">%r</span><span class="s1"> error: </span><span class="si">%r</span><span class="s1">'</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_do_exit</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="n">_exitcode</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">exc</span><span class="p">)</span>
         <span class="k">finally</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_do_exit</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="n">_exitcode</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">None</span><span class="p">)</span>
@@ -366,7 +344,7 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_exit</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">on_exit</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="n">exitcode</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="o">!=</span> <span class="s1">&#39;win32&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="o">!=</span> <span class="s1">'win32'</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">outq</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="n">DEATH</span><span class="p">,</span> <span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="n">exitcode</span><span class="p">)))</span>
                 <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -400,7 +378,7 @@
             <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="k">while</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">60</span><span class="p">:</span>
-                    <span class="n">error</span><span class="p">(</span><span class="s1">&#39;!!!WAIT FOR ACK TIMEOUT: job:</span><span class="si">%r</span><span class="s1"> fd:</span><span class="si">%r</span><span class="s1">!!!&#39;</span><span class="p">,</span>
+                    <span class="n">error</span><span class="p">(</span><span class="s1">'!!!WAIT FOR ACK TIMEOUT: job:</span><span class="si">%r</span><span class="s1"> fd:</span><span class="si">%r</span><span class="s1">!!!'</span><span class="p">,</span>
                           <span class="n">jid</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">synq</span><span class="o">.</span><span class="n">_reader</span><span class="o">.</span><span class="n">fileno</span><span class="p">(),</span> <span class="n">exc_info</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
                 <span class="n">req</span> <span class="o">=</span> <span class="n">_wait_for_syn</span><span class="p">()</span>
                 <span class="k">if</span> <span class="n">req</span><span class="p">:</span>
@@ -440,15 +418,15 @@
                     <span class="k">finally</span><span class="p">:</span>
                         <span class="k">del</span><span class="p">(</span><span class="n">tb</span><span class="p">)</span>
                 <span class="n">completed</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;worker exiting after </span><span class="si">%d</span><span class="s1"> tasks&#39;</span><span class="p">,</span> <span class="n">completed</span><span class="p">)</span>
+        <span class="n">debug</span><span class="p">(</span><span class="s1">'worker exiting after </span><span class="si">%d</span><span class="s1"> tasks'</span><span class="p">,</span> <span class="n">completed</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">maxtasks</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">EX_RECYCLE</span> <span class="k">if</span> <span class="n">completed</span> <span class="o">==</span> <span class="n">maxtasks</span> <span class="k">else</span> <span class="n">EX_FAILURE</span>
         <span class="k">return</span> <span class="n">EX_OK</span>
 
     <span class="k">def</span> <span class="nf">after_fork</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inq</span><span class="p">,</span> <span class="s1">&#39;_writer&#39;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inq</span><span class="p">,</span> <span class="s1">'_writer'</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">inq</span><span class="o">.</span><span class="n">_writer</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outq</span><span class="p">,</span> <span class="s1">&#39;_reader&#39;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outq</span><span class="p">,</span> <span class="s1">'_reader'</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">outq</span><span class="o">.</span><span class="n">_reader</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">initializer</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
@@ -470,9 +448,9 @@
     <span class="k">def</span> <span class="nf">_make_recv_method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">conn</span><span class="p">):</span>
         <span class="n">get</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">get</span>
 
-        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="s1">&#39;_reader&#39;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="s1">'_reader'</span><span class="p">):</span>
             <span class="n">_poll</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">_reader</span><span class="o">.</span><span class="n">poll</span>
-            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="s1">&#39;get_payload&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">conn</span><span class="o">.</span><span class="n">get_payload</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="s1">'get_payload'</span><span class="p">)</span> <span class="ow">and</span> <span class="n">conn</span><span class="o">.</span><span class="n">get_payload</span><span class="p">:</span>
                 <span class="n">get_payload</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">get_payload</span>
 
                 <span class="k">def</span> <span class="nf">_recv</span><span class="p">(</span><span class="n">timeout</span><span class="p">,</span> <span class="n">loads</span><span class="o">=</span><span class="n">pickle_loads</span><span class="p">):</span>
@@ -501,7 +479,7 @@
 
         <span class="k">def</span> <span class="nf">receive</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="n">debug</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">should_shutdown</span> <span class="ow">and</span> <span class="n">should_shutdown</span><span class="p">():</span>
-                <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;worker got sentinel -- exiting&#39;</span><span class="p">)</span>
+                <span class="n">debug</span><span class="p">(</span><span class="s1">'worker got sentinel -- exiting'</span><span class="p">)</span>
                 <span class="k">raise</span> <span class="ne">SystemExit</span><span class="p">(</span><span class="n">EX_OK</span><span class="p">)</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">ready</span><span class="p">,</span> <span class="n">req</span> <span class="o">=</span> <span class="n">_receive</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
@@ -510,10 +488,10 @@
             <span class="k">except</span> <span class="p">(</span><span class="ne">EOFError</span><span class="p">,</span> <span class="ne">IOError</span><span class="p">)</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">get_errno</span><span class="p">(</span><span class="n">exc</span><span class="p">)</span> <span class="o">==</span> <span class="n">errno</span><span class="o">.</span><span class="n">EINTR</span><span class="p">:</span>
                     <span class="k">return</span> <span class="bp">None</span>  <span class="c1"># interrupted, maybe by gdb</span>
-                <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;worker got </span><span class="si">%s</span><span class="s1"> -- exiting&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">exc</span><span class="p">)</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
+                <span class="n">debug</span><span class="p">(</span><span class="s1">'worker got </span><span class="si">%s</span><span class="s1"> -- exiting'</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">exc</span><span class="p">)</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
                 <span class="k">raise</span> <span class="ne">SystemExit</span><span class="p">(</span><span class="n">EX_FAILURE</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">req</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-                <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;worker got sentinel -- exiting&#39;</span><span class="p">)</span>
+                <span class="n">debug</span><span class="p">(</span><span class="s1">'worker got sentinel -- exiting'</span><span class="p">)</span>
                 <span class="k">raise</span> <span class="ne">SystemExit</span><span class="p">(</span><span class="n">EX_FAILURE</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">req</span>
 
@@ -537,12 +515,12 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">body</span><span class="p">()</span>
         <span class="k">except</span> <span class="n">RestartFreqExceeded</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-            <span class="n">error</span><span class="p">(</span><span class="s2">&quot;Thread </span><span class="si">%r</span><span class="s2"> crashed: </span><span class="si">%r</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span>
+            <span class="n">error</span><span class="p">(</span><span class="s2">"Thread </span><span class="si">%r</span><span class="s2"> crashed: </span><span class="si">%r</span><span class="s2">"</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span>
                   <span class="n">exc_info</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
             <span class="n">_kill</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getpid</span><span class="p">(),</span> <span class="n">signal</span><span class="o">.</span><span class="n">SIGTERM</span><span class="p">)</span>
             <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-            <span class="n">error</span><span class="p">(</span><span class="s2">&quot;Thread </span><span class="si">%r</span><span class="s2"> crashed: </span><span class="si">%r</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span>
+            <span class="n">error</span><span class="p">(</span><span class="s2">"Thread </span><span class="si">%r</span><span class="s2"> crashed: </span><span class="si">%r</span><span class="s2">"</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span>
                   <span class="n">exc_info</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
             <span class="n">os</span><span class="o">.</span><span class="n">_exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
@@ -573,7 +551,7 @@
         <span class="nb">super</span><span class="p">(</span><span class="n">Supervisor</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">body</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;worker handler starting&#39;</span><span class="p">)</span>
+        <span class="n">debug</span><span class="p">(</span><span class="s1">'worker handler starting'</span><span class="p">)</span>
 
         <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.8</span><span class="p">)</span>
 
@@ -600,7 +578,7 @@
             <span class="n">pool</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
             <span class="n">pool</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
             <span class="k">raise</span>
-        <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;worker handler exiting&#39;</span><span class="p">)</span>
+        <span class="n">debug</span><span class="p">(</span><span class="s1">'worker handler exiting'</span><span class="p">)</span>
 
 
 <span class="k">class</span> <span class="nc">TaskHandler</span><span class="p">(</span><span class="n">PoolThread</span><span class="p">):</span>
@@ -621,24 +599,24 @@
                 <span class="n">i</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
                 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">task</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">taskseq</span><span class="p">):</span>
                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">:</span>
-                        <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;task handler found thread._state != RUN&#39;</span><span class="p">)</span>
+                        <span class="n">debug</span><span class="p">(</span><span class="s1">'task handler found thread._state != RUN'</span><span class="p">)</span>
                         <span class="k">break</span>
                     <span class="k">try</span><span class="p">:</span>
                         <span class="n">put</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
                     <span class="k">except</span> <span class="ne">IOError</span><span class="p">:</span>
-                        <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;could not put task on queue&#39;</span><span class="p">)</span>
+                        <span class="n">debug</span><span class="p">(</span><span class="s1">'could not put task on queue'</span><span class="p">)</span>
                         <span class="k">break</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="k">if</span> <span class="n">set_length</span><span class="p">:</span>
-                        <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;doing set_length()&#39;</span><span class="p">)</span>
+                        <span class="n">debug</span><span class="p">(</span><span class="s1">'doing set_length()'</span><span class="p">)</span>
                         <span class="n">set_length</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
                     <span class="k">continue</span>
                 <span class="k">break</span>
             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-                <span class="n">error</span><span class="p">(</span><span class="s1">&#39;Task Handler ERROR: </span><span class="si">%r</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">error</span><span class="p">(</span><span class="s1">'Task Handler ERROR: </span><span class="si">%r</span><span class="s1">'</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
                 <span class="k">break</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;task handler got sentinel&#39;</span><span class="p">)</span>
+            <span class="n">debug</span><span class="p">(</span><span class="s1">'task handler got sentinel'</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">tell_others</span><span class="p">()</span>
 
@@ -649,17 +627,17 @@
 
         <span class="k">try</span><span class="p">:</span>
             <span class="c1"># tell result handler to finish when cache is empty</span>
-            <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;task handler sending sentinel to result handler&#39;</span><span class="p">)</span>
+            <span class="n">debug</span><span class="p">(</span><span class="s1">'task handler sending sentinel to result handler'</span><span class="p">)</span>
             <span class="n">outqueue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
 
             <span class="c1"># tell workers there is no more work</span>
-            <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;task handler sending sentinel to workers&#39;</span><span class="p">)</span>
+            <span class="n">debug</span><span class="p">(</span><span class="s1">'task handler sending sentinel to workers'</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pool</span><span class="p">:</span>
                 <span class="n">put</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">IOError</span><span class="p">:</span>
-            <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;task handler got IOError when sending sentinels&#39;</span><span class="p">)</span>
+            <span class="n">debug</span><span class="p">(</span><span class="s1">'task handler got IOError when sending sentinels'</span><span class="p">)</span>
 
-        <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;task handler exiting&#39;</span><span class="p">)</span>
+        <span class="n">debug</span><span class="p">(</span><span class="s1">'task handler exiting'</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">on_stop_not_started</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tell_others</span><span class="p">()</span>
@@ -682,7 +660,7 @@
         <span class="p">),</span> <span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">on_soft_timeout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">job</span><span class="p">):</span>
-        <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;soft time limit exceeded for </span><span class="si">%r</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">job</span><span class="p">)</span>
+        <span class="n">debug</span><span class="p">(</span><span class="s1">'soft time limit exceeded for </span><span class="si">%r</span><span class="s1">'</span><span class="p">,</span> <span class="n">job</span><span class="p">)</span>
         <span class="n">process</span><span class="p">,</span> <span class="n">_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process_by_pid</span><span class="p">(</span><span class="n">job</span><span class="o">.</span><span class="n">_worker_pid</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">process</span><span class="p">:</span>
             <span class="k">return</span>
@@ -699,7 +677,7 @@
     <span class="k">def</span> <span class="nf">on_hard_timeout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">job</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">job</span><span class="o">.</span><span class="n">ready</span><span class="p">():</span>
             <span class="k">return</span>
-        <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;hard time limit exceeded for </span><span class="si">%r</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">job</span><span class="p">)</span>
+        <span class="n">debug</span><span class="p">(</span><span class="s1">'hard time limit exceeded for </span><span class="si">%r</span><span class="s1">'</span><span class="p">,</span> <span class="n">job</span><span class="p">)</span>
         <span class="c1"># Remove from cache and set return value to an exception</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">TimeLimitExceeded</span><span class="p">(</span><span class="n">job</span><span class="o">.</span><span class="n">_timeout</span><span class="p">)</span>
@@ -718,7 +696,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_trywaitkill</span><span class="p">(</span><span class="n">process</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_trywaitkill</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">worker</span><span class="p">):</span>
-        <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;timeout: sending TERM to </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">worker</span><span class="o">.</span><span class="n">_name</span><span class="p">)</span>
+        <span class="n">debug</span><span class="p">(</span><span class="s1">'timeout: sending TERM to </span><span class="si">%s</span><span class="s1">'</span><span class="p">,</span> <span class="n">worker</span><span class="o">.</span><span class="n">_name</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">worker</span><span class="o">.</span><span class="n">terminate</span><span class="p">()</span>
         <span class="k">except</span> <span class="ne">OSError</span><span class="p">:</span>
@@ -726,7 +704,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">worker</span><span class="o">.</span><span class="n">_popen</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
                 <span class="k">return</span>
-        <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;timeout: TERM timed-out, now sending KILL to </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">worker</span><span class="o">.</span><span class="n">_name</span><span class="p">)</span>
+        <span class="n">debug</span><span class="p">(</span><span class="s1">'timeout: TERM timed-out, now sending KILL to </span><span class="si">%s</span><span class="s1">'</span><span class="p">,</span> <span class="n">worker</span><span class="o">.</span><span class="n">_name</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">_kill</span><span class="p">(</span><span class="n">worker</span><span class="o">.</span><span class="n">pid</span><span class="p">,</span> <span class="n">SIGKILL</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">OSError</span><span class="p">:</span>
@@ -771,10 +749,10 @@
         <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="o">==</span> <span class="n">RUN</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">handle_timeouts</span><span class="p">():</span>
-                    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>  <span class="c1"># don&#39;t spin</span>
+                    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>  <span class="c1"># don't spin</span>
             <span class="k">except</span> <span class="n">CoroStop</span><span class="p">:</span>
                 <span class="k">break</span>
-        <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;timeout handler exiting&#39;</span><span class="p">)</span>
+        <span class="n">debug</span><span class="p">(</span><span class="s1">'timeout handler exiting'</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">handle_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_it</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
@@ -819,7 +797,7 @@
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">cache</span><span class="p">[</span><span class="n">job</span><span class="p">]</span><span class="o">.</span><span class="n">_ack</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">time_accepted</span><span class="p">,</span> <span class="n">pid</span><span class="p">,</span> <span class="n">synqW_fd</span><span class="p">)</span>
             <span class="k">except</span> <span class="p">(</span><span class="ne">KeyError</span><span class="p">,</span> <span class="ne">AttributeError</span><span class="p">):</span>
-                <span class="c1"># Object gone or doesn&#39;t support _ack (e.g. IMAPIterator).</span>
+                <span class="c1"># Object gone or doesn't support _ack (e.g. IMAPIterator).</span>
                 <span class="k">pass</span>
 
         <span class="k">def</span> <span class="nf">on_ready</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">inqW_fd</span><span class="p">):</span>
@@ -853,7 +831,7 @@
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">state_handlers</span><span class="p">[</span><span class="n">state</span><span class="p">](</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-                <span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Unknown job state: </span><span class="si">%s</span><span class="s2"> (args=</span><span class="si">%s</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
+                <span class="n">debug</span><span class="p">(</span><span class="s2">"Unknown job state: </span><span class="si">%s</span><span class="s2"> (args=</span><span class="si">%s</span><span class="s2">)"</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">on_state_change</span> <span class="o">=</span> <span class="n">on_state_change</span>
 
     <span class="k">def</span> <span class="nf">_process_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
@@ -864,17 +842,17 @@
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">ready</span><span class="p">,</span> <span class="n">task</span> <span class="o">=</span> <span class="n">poll</span><span class="p">(</span><span class="n">timeout</span><span class="p">)</span>
             <span class="k">except</span> <span class="p">(</span><span class="ne">IOError</span><span class="p">,</span> <span class="ne">EOFError</span><span class="p">)</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-                <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;result handler got </span><span class="si">%r</span><span class="s1"> -- exiting&#39;</span><span class="p">,</span> <span class="n">exc</span><span class="p">)</span>
+                <span class="n">debug</span><span class="p">(</span><span class="s1">'result handler got </span><span class="si">%r</span><span class="s1"> -- exiting'</span><span class="p">,</span> <span class="n">exc</span><span class="p">)</span>
                 <span class="k">raise</span> <span class="n">CoroStop</span><span class="p">()</span>
 
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">:</span>
                 <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="o">==</span> <span class="n">TERMINATE</span>
-                <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;result handler found thread._state=TERMINATE&#39;</span><span class="p">)</span>
+                <span class="n">debug</span><span class="p">(</span><span class="s1">'result handler found thread._state=TERMINATE'</span><span class="p">)</span>
                 <span class="k">raise</span> <span class="n">CoroStop</span><span class="p">()</span>
 
             <span class="k">if</span> <span class="n">ready</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">task</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-                    <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;result handler got sentinel&#39;</span><span class="p">)</span>
+                    <span class="n">debug</span><span class="p">(</span><span class="s1">'result handler got sentinel'</span><span class="p">)</span>
                     <span class="k">raise</span> <span class="n">CoroStop</span><span class="p">()</span>
                 <span class="n">on_state_change</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">timeout</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># blocking</span>
@@ -893,7 +871,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">_it</span> <span class="o">=</span> <span class="bp">None</span>
 
     <span class="k">def</span> <span class="nf">body</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;result handler starting&#39;</span><span class="p">)</span>
+        <span class="n">debug</span><span class="p">(</span><span class="s1">'result handler starting'</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="o">==</span> <span class="n">RUN</span><span class="p">:</span>
                 <span class="k">try</span><span class="p">:</span>
@@ -921,12 +899,12 @@
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">ready</span><span class="p">,</span> <span class="n">task</span> <span class="o">=</span> <span class="n">poll</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
             <span class="k">except</span> <span class="p">(</span><span class="ne">IOError</span><span class="p">,</span> <span class="ne">EOFError</span><span class="p">)</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-                <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;result handler got </span><span class="si">%r</span><span class="s1"> -- exiting&#39;</span><span class="p">,</span> <span class="n">exc</span><span class="p">)</span>
+                <span class="n">debug</span><span class="p">(</span><span class="s1">'result handler got </span><span class="si">%r</span><span class="s1"> -- exiting'</span><span class="p">,</span> <span class="n">exc</span><span class="p">)</span>
                 <span class="k">return</span>
 
             <span class="k">if</span> <span class="n">ready</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">task</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-                    <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;result handler ignoring extra sentinel&#39;</span><span class="p">)</span>
+                    <span class="n">debug</span><span class="p">(</span><span class="s1">'result handler ignoring extra sentinel'</span><span class="p">)</span>
                     <span class="k">continue</span>
 
                 <span class="n">on_state_change</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
@@ -938,15 +916,15 @@
                     <span class="n">time_terminate</span> <span class="o">=</span> <span class="n">now</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="k">if</span> <span class="n">now</span> <span class="o">-</span> <span class="n">time_terminate</span> <span class="o">&gt;</span> <span class="mf">5.0</span><span class="p">:</span>
-                        <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;result handler exiting: timed out&#39;</span><span class="p">)</span>
+                        <span class="n">debug</span><span class="p">(</span><span class="s1">'result handler exiting: timed out'</span><span class="p">)</span>
                         <span class="k">break</span>
-                    <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;result handler: all workers terminated, &#39;</span>
-                          <span class="s1">&#39;timeout in </span><span class="si">%s</span><span class="s1">s&#39;</span><span class="p">,</span>
+                    <span class="n">debug</span><span class="p">(</span><span class="s1">'result handler: all workers terminated, '</span>
+                          <span class="s1">'timeout in </span><span class="si">%s</span><span class="s1">s'</span><span class="p">,</span>
                           <span class="nb">abs</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">now</span> <span class="o">-</span> <span class="n">time_terminate</span> <span class="o">-</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)))</span>
 
-        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">outqueue</span><span class="p">,</span> <span class="s1">&#39;_reader&#39;</span><span class="p">):</span>
-            <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;ensuring that outqueue is not full&#39;</span><span class="p">)</span>
-            <span class="c1"># If we don&#39;t make room available in outqueue then</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">outqueue</span><span class="p">,</span> <span class="s1">'_reader'</span><span class="p">):</span>
+            <span class="n">debug</span><span class="p">(</span><span class="s1">'ensuring that outqueue is not full'</span><span class="p">)</span>
+            <span class="c1"># If we don't make room available in outqueue then</span>
             <span class="c1"># attempts to add the sentinel (None) to outqueue may</span>
             <span class="c1"># block.  There is guaranteed to be no more than 2 sentinels.</span>
             <span class="k">try</span><span class="p">:</span>
@@ -957,14 +935,14 @@
             <span class="k">except</span> <span class="p">(</span><span class="ne">IOError</span><span class="p">,</span> <span class="ne">EOFError</span><span class="p">):</span>
                 <span class="k">pass</span>
 
-        <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;result handler exiting: len(cache)=</span><span class="si">%s</span><span class="s1">, thread._state=</span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span>
+        <span class="n">debug</span><span class="p">(</span><span class="s1">'result handler exiting: len(cache)=</span><span class="si">%s</span><span class="s1">, thread._state=</span><span class="si">%s</span><span class="s1">'</span><span class="p">,</span>
               <span class="nb">len</span><span class="p">(</span><span class="n">cache</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">)</span>
 
 
 <span class="k">class</span> <span class="nc">Pool</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
+    <span class="sd">'''</span>
 <span class="sd">    Class which supports an async version of applying functions to arguments.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
+<span class="sd">    '''</span>
     <span class="n">Worker</span> <span class="o">=</span> <span class="n">Worker</span>
     <span class="n">Supervisor</span> <span class="o">=</span> <span class="n">Supervisor</span>
     <span class="n">TaskHandler</span> <span class="o">=</span> <span class="n">TaskHandler</span>
@@ -1009,8 +987,8 @@
 
         <span class="k">if</span> <span class="n">soft_timeout</span> <span class="ow">and</span> <span class="n">SIG_SOFT_TIMEOUT</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="ne">UserWarning</span><span class="p">(</span>
-                <span class="s2">&quot;Soft timeouts are not supported: &quot;</span>
-                <span class="s2">&quot;on this platform: It does not have the SIGUSR1 signal.&quot;</span><span class="p">,</span>
+                <span class="s2">"Soft timeouts are not supported: "</span>
+                <span class="s2">"on this platform: It does not have the SIGUSR1 signal."</span><span class="p">,</span>
             <span class="p">))</span>
             <span class="n">soft_timeout</span> <span class="o">=</span> <span class="bp">None</span>
 
@@ -1019,10 +997,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">restart_state</span> <span class="o">=</span> <span class="n">restart_state</span><span class="p">(</span><span class="n">max_restarts</span><span class="p">,</span> <span class="n">max_restart_freq</span> <span class="ow">or</span> <span class="mi">1</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">initializer</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">callable</span><span class="p">(</span><span class="n">initializer</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;initializer must be a callable&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">'initializer must be a callable'</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">on_process_exit</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">callable</span><span class="p">(</span><span class="n">on_process_exit</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;on_process_exit must be callable&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">'on_process_exit must be callable'</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_pool</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_poolctrl</span> <span class="o">=</span> <span class="p">{}</span>
@@ -1122,7 +1100,7 @@
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_pool</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_process_register_queues</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="p">(</span><span class="n">inq</span><span class="p">,</span> <span class="n">outq</span><span class="p">,</span> <span class="n">synq</span><span class="p">))</span>
-        <span class="n">w</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Process&#39;</span><span class="p">,</span> <span class="s1">&#39;PoolWorker&#39;</span><span class="p">)</span>
+        <span class="n">w</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'Process'</span><span class="p">,</span> <span class="s1">'PoolWorker'</span><span class="p">)</span>
         <span class="n">w</span><span class="o">.</span><span class="n">daemon</span> <span class="o">=</span> <span class="bp">True</span>
         <span class="n">w</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">i</span>
         <span class="n">w</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
@@ -1135,10 +1113,10 @@
         <span class="k">pass</span>
 
     <span class="k">def</span> <span class="nf">_join_exited_workers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shutdown</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Cleanup after any worker processes which have exited due to</span>
+        <span class="sd">"""Cleanup after any worker processes which have exited due to</span>
 <span class="sd">        reaching their specified lifetime. Returns True if any workers were</span>
 <span class="sd">        cleaned up.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">now</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="c1"># The worker may have published a result before being terminated,</span>
         <span class="c1"># but we have no way to accurately tell if it did.  So we wait for</span>
@@ -1161,16 +1139,16 @@
             <span class="n">popen</span> <span class="o">=</span> <span class="n">worker</span><span class="o">.</span><span class="n">_popen</span>
             <span class="k">if</span> <span class="n">popen</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">exitcode</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
                 <span class="c1"># worker exited</span>
-                <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Supervisor: cleaning up worker </span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+                <span class="n">debug</span><span class="p">(</span><span class="s1">'Supervisor: cleaning up worker </span><span class="si">%d</span><span class="s1">'</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">popen</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
                     <span class="n">worker</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
-                <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Supervisor: worked </span><span class="si">%d</span><span class="s1"> joined&#39;</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+                <span class="n">debug</span><span class="p">(</span><span class="s1">'Supervisor: worked </span><span class="si">%d</span><span class="s1"> joined'</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
                 <span class="n">cleaned</span><span class="p">[</span><span class="n">worker</span><span class="o">.</span><span class="n">pid</span><span class="p">]</span> <span class="o">=</span> <span class="n">worker</span>
                 <span class="n">exitcodes</span><span class="p">[</span><span class="n">worker</span><span class="o">.</span><span class="n">pid</span><span class="p">]</span> <span class="o">=</span> <span class="n">exitcode</span>
                 <span class="k">if</span> <span class="n">exitcode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="n">EX_OK</span><span class="p">,</span> <span class="n">EX_RECYCLE</span><span class="p">)</span> <span class="ow">and</span> \
-                        <span class="ow">not</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">worker</span><span class="p">,</span> <span class="s1">&#39;_controlled_termination&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">):</span>
+                        <span class="ow">not</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">worker</span><span class="p">,</span> <span class="s1">'_controlled_termination'</span><span class="p">,</span> <span class="bp">False</span><span class="p">):</span>
                     <span class="n">error</span><span class="p">(</span>
-                        <span class="s1">&#39;Process </span><span class="si">%r</span><span class="s1"> pid:</span><span class="si">%r</span><span class="s1"> exited with </span><span class="si">%r</span><span class="s1">&#39;</span><span class="p">,</span>
+                        <span class="s1">'Process </span><span class="si">%r</span><span class="s1"> pid:</span><span class="si">%r</span><span class="s1"> exited with </span><span class="si">%r</span><span class="s1">'</span><span class="p">,</span>
                         <span class="n">worker</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">worker</span><span class="o">.</span><span class="n">pid</span><span class="p">,</span> <span class="n">human_status</span><span class="p">(</span><span class="n">exitcode</span><span class="p">),</span>
                         <span class="n">exc_info</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
                     <span class="p">)</span>
@@ -1191,7 +1169,7 @@
                     <span class="k">if</span> <span class="ow">not</span> <span class="n">job</span><span class="o">.</span><span class="n">ready</span><span class="p">():</span>
                         <span class="n">exitcode</span> <span class="o">=</span> <span class="n">exitcodes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">acked_by_gone</span><span class="p">)</span> <span class="ow">or</span> <span class="mi">0</span>
                         <span class="n">proc</span> <span class="o">=</span> <span class="n">cleaned</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">acked_by_gone</span><span class="p">)</span>
-                        <span class="k">if</span> <span class="n">proc</span> <span class="ow">and</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">proc</span><span class="p">,</span> <span class="s1">&#39;_job_terminated&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">):</span>
+                        <span class="k">if</span> <span class="n">proc</span> <span class="ow">and</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">proc</span><span class="p">,</span> <span class="s1">'_job_terminated'</span><span class="p">,</span> <span class="bp">False</span><span class="p">):</span>
                             <span class="n">job</span><span class="o">.</span><span class="n">_set_terminated</span><span class="p">(</span><span class="n">exitcode</span><span class="p">)</span>
                         <span class="k">else</span><span class="p">:</span>
                             <span class="bp">self</span><span class="o">.</span><span class="n">on_job_process_lost</span><span class="p">(</span>
@@ -1231,7 +1209,7 @@
     <span class="k">def</span> <span class="nf">mark_as_worker_lost</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">job</span><span class="p">,</span> <span class="n">exitcode</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">WorkerLostError</span><span class="p">(</span>
-                <span class="s1">&#39;Worker exited prematurely: {0}.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="s1">'Worker exited prematurely: {0}.'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                     <span class="n">human_status</span><span class="p">(</span><span class="n">exitcode</span><span class="p">)),</span>
             <span class="p">)</span>
         <span class="k">except</span> <span class="n">WorkerLostError</span><span class="p">:</span>
@@ -1261,7 +1239,7 @@
             <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="k">break</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Can&#39;t shrink pool. All processes busy!&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Can't shrink pool. All processes busy!"</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">grow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
@@ -1283,9 +1261,9 @@
         <span class="k">return</span> <span class="bp">False</span>
 
     <span class="k">def</span> <span class="nf">_repopulate_pool</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exitcodes</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Bring the number of pool processes up to the specified number,</span>
+        <span class="sd">"""Bring the number of pool processes up to the specified number,</span>
 <span class="sd">        for use after reaping workers which have exited.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_processes</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pool</span><span class="p">)):</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="o">!=</span> <span class="n">RUN</span><span class="p">:</span>
                 <span class="k">return</span>
@@ -1295,7 +1273,7 @@
             <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">restart_state</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_create_worker_process</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_avail_index</span><span class="p">())</span>
-            <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;added worker&#39;</span><span class="p">)</span>
+            <span class="n">debug</span><span class="p">(</span><span class="s1">'added worker'</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_avail_index</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pool</span><span class="p">)</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_processes</span>
@@ -1306,8 +1284,8 @@
         <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_join_exited_workers</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">_maintain_pool</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;&quot;Clean up any exited workers and start replacements for them.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">""""Clean up any exited workers and start replacements for them.</span>
+<span class="sd">        """</span>
         <span class="n">joined</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_join_exited_workers</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_repopulate_pool</span><span class="p">(</span><span class="n">joined</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">joined</span><span class="p">)):</span>
@@ -1352,43 +1330,43 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">_timeout_handler</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(),</span> <span class="n">kwds</span><span class="o">=</span><span class="p">{}):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
+        <span class="sd">'''</span>
 <span class="sd">        Equivalent of `func(*args, **kwargs)`.</span>
-<span class="sd">        &#39;&#39;&#39;</span>
+<span class="sd">        '''</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="o">==</span> <span class="n">RUN</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply_async</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">starmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">iterable</span><span class="p">,</span> <span class="n">chunksize</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
+        <span class="sd">'''</span>
 <span class="sd">        Like `map()` method but the elements of the `iterable` are expected to</span>
 <span class="sd">        be iterables as well and will be unpacked as arguments. Hence</span>
 <span class="sd">        `func` and (a, b) becomes func(a, b).</span>
-<span class="sd">        &#39;&#39;&#39;</span>
+<span class="sd">        '''</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="o">==</span> <span class="n">RUN</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_map_async</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">iterable</span><span class="p">,</span>
                                    <span class="n">starmapstar</span><span class="p">,</span> <span class="n">chunksize</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">starmap_async</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">iterable</span><span class="p">,</span> <span class="n">chunksize</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
                       <span class="n">callback</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">error_callback</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
+        <span class="sd">'''</span>
 <span class="sd">        Asynchronous version of `starmap()` method.</span>
-<span class="sd">        &#39;&#39;&#39;</span>
+<span class="sd">        '''</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="o">==</span> <span class="n">RUN</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_map_async</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">iterable</span><span class="p">,</span> <span class="n">starmapstar</span><span class="p">,</span> <span class="n">chunksize</span><span class="p">,</span>
                                    <span class="n">callback</span><span class="p">,</span> <span class="n">error_callback</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">iterable</span><span class="p">,</span> <span class="n">chunksize</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
+        <span class="sd">'''</span>
 <span class="sd">        Apply `func` to each element in `iterable`, collecting the results</span>
 <span class="sd">        in a list that is returned.</span>
-<span class="sd">        &#39;&#39;&#39;</span>
+<span class="sd">        '''</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="o">==</span> <span class="n">RUN</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">map_async</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">iterable</span><span class="p">,</span> <span class="n">chunksize</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">imap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">iterable</span><span class="p">,</span> <span class="n">chunksize</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">lost_worker_timeout</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
+        <span class="sd">'''</span>
 <span class="sd">        Equivalent of `map()` -- can be MUCH slower than `Pool.map()`.</span>
-<span class="sd">        &#39;&#39;&#39;</span>
+<span class="sd">        '''</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="o">!=</span> <span class="n">RUN</span><span class="p">:</span>
             <span class="k">return</span>
         <span class="n">lost_worker_timeout</span> <span class="o">=</span> <span class="n">lost_worker_timeout</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">lost_worker_timeout</span>
@@ -1415,9 +1393,9 @@
 
     <span class="k">def</span> <span class="nf">imap_unordered</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">iterable</span><span class="p">,</span> <span class="n">chunksize</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
                        <span class="n">lost_worker_timeout</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
+        <span class="sd">'''</span>
 <span class="sd">        Like `imap()` method but ordering of results is arbitrary.</span>
-<span class="sd">        &#39;&#39;&#39;</span>
+<span class="sd">        '''</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="o">!=</span> <span class="n">RUN</span><span class="p">:</span>
             <span class="k">return</span>
         <span class="n">lost_worker_timeout</span> <span class="o">=</span> <span class="n">lost_worker_timeout</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">lost_worker_timeout</span>
@@ -1450,7 +1428,7 @@
                     <span class="n">soft_timeout</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">lost_worker_timeout</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
                     <span class="n">callbacks_propagate</span><span class="o">=</span><span class="p">(),</span>
                     <span class="n">correlation_id</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
+        <span class="sd">'''</span>
 <span class="sd">        Asynchronous equivalent of `apply()` method.</span>
 
 <span class="sd">        Callback is called when the functions return value is ready.</span>
@@ -1465,7 +1443,7 @@
 <span class="sd">            ...     if callback:</span>
 <span class="sd">            ...         callback(retval)</span>
 
-<span class="sd">        &#39;&#39;&#39;</span>
+<span class="sd">        '''</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="o">!=</span> <span class="n">RUN</span><span class="p">:</span>
             <span class="k">return</span>
         <span class="n">soft_timeout</span> <span class="o">=</span> <span class="n">soft_timeout</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">soft_timeout</span>
@@ -1473,8 +1451,8 @@
         <span class="n">lost_worker_timeout</span> <span class="o">=</span> <span class="n">lost_worker_timeout</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">lost_worker_timeout</span>
         <span class="k">if</span> <span class="n">soft_timeout</span> <span class="ow">and</span> <span class="n">SIG_SOFT_TIMEOUT</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="ne">UserWarning</span><span class="p">(</span>
-                <span class="s2">&quot;Soft timeouts are not supported: &quot;</span>
-                <span class="s2">&quot;on this platform: It does not have the SIGUSR1 signal.&quot;</span><span class="p">,</span>
+                <span class="s2">"Soft timeouts are not supported: "</span>
+                <span class="s2">"on this platform: It does not have the SIGUSR1 signal."</span><span class="p">,</span>
             <span class="p">))</span>
             <span class="n">soft_timeout</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="o">==</span> <span class="n">RUN</span><span class="p">:</span>
@@ -1517,21 +1495,21 @@
 
     <span class="k">def</span> <span class="nf">map_async</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">iterable</span><span class="p">,</span> <span class="n">chunksize</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
                   <span class="n">callback</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">error_callback</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
+        <span class="sd">'''</span>
 <span class="sd">        Asynchronous equivalent of `map()` method.</span>
-<span class="sd">        &#39;&#39;&#39;</span>
+<span class="sd">        '''</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_map_async</span><span class="p">(</span>
             <span class="n">func</span><span class="p">,</span> <span class="n">iterable</span><span class="p">,</span> <span class="n">mapstar</span><span class="p">,</span> <span class="n">chunksize</span><span class="p">,</span> <span class="n">callback</span><span class="p">,</span> <span class="n">error_callback</span><span class="p">,</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_map_async</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">iterable</span><span class="p">,</span> <span class="n">mapper</span><span class="p">,</span> <span class="n">chunksize</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
                    <span class="n">callback</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">error_callback</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
+        <span class="sd">'''</span>
 <span class="sd">        Helper function to implement map, starmap and their async counterparts.</span>
-<span class="sd">        &#39;&#39;&#39;</span>
+<span class="sd">        '''</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="o">!=</span> <span class="n">RUN</span><span class="p">:</span>
             <span class="k">return</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="s1">&#39;__len__&#39;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="s1">'__len__'</span><span class="p">):</span>
             <span class="n">iterable</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">chunksize</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
@@ -1559,11 +1537,11 @@
 
     <span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
-            <span class="s1">&#39;pool objects cannot be passed between processes or pickled&#39;</span><span class="p">,</span>
+            <span class="s1">'pool objects cannot be passed between processes or pickled'</span><span class="p">,</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;closing pool&#39;</span><span class="p">)</span>
+        <span class="n">debug</span><span class="p">(</span><span class="s1">'closing pool'</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="o">==</span> <span class="n">RUN</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="o">=</span> <span class="n">CLOSE</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_putlock</span><span class="p">:</span>
@@ -1573,7 +1551,7 @@
             <span class="n">stop_if_not_current</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_worker_handler</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">terminate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;terminating pool&#39;</span><span class="p">)</span>
+        <span class="n">debug</span><span class="p">(</span><span class="s1">'terminating pool'</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="o">=</span> <span class="n">TERMINATE</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_worker_handler</span><span class="o">.</span><span class="n">terminate</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_terminate</span><span class="p">()</span>
@@ -1584,18 +1562,18 @@
 
     <span class="k">def</span> <span class="nf">join</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="ow">in</span> <span class="p">(</span><span class="n">CLOSE</span><span class="p">,</span> <span class="n">TERMINATE</span><span class="p">)</span>
-        <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;joining worker handler&#39;</span><span class="p">)</span>
+        <span class="n">debug</span><span class="p">(</span><span class="s1">'joining worker handler'</span><span class="p">)</span>
         <span class="n">stop_if_not_current</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_worker_handler</span><span class="p">)</span>
-        <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;joining task handler&#39;</span><span class="p">)</span>
+        <span class="n">debug</span><span class="p">(</span><span class="s1">'joining task handler'</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_stop_task_handler</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_task_handler</span><span class="p">)</span>
-        <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;joining result handler&#39;</span><span class="p">)</span>
+        <span class="n">debug</span><span class="p">(</span><span class="s1">'joining result handler'</span><span class="p">)</span>
         <span class="n">stop_if_not_current</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_result_handler</span><span class="p">)</span>
-        <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;result handler joined&#39;</span><span class="p">)</span>
+        <span class="n">debug</span><span class="p">(</span><span class="s1">'result handler joined'</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pool</span><span class="p">):</span>
-            <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;joining worker </span><span class="si">%s</span><span class="s1">/</span><span class="si">%s</span><span class="s1"> (</span><span class="si">%r</span><span class="s1">)&#39;</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pool</span><span class="p">),</span> <span class="n">p</span><span class="p">)</span>
+            <span class="n">debug</span><span class="p">(</span><span class="s1">'joining worker </span><span class="si">%s</span><span class="s1">/</span><span class="si">%s</span><span class="s1"> (</span><span class="si">%r</span><span class="s1">)'</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pool</span><span class="p">),</span> <span class="n">p</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">_popen</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>  <span class="c1"># process started?</span>
                 <span class="n">p</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
-        <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;pool join complete&#39;</span><span class="p">)</span>
+        <span class="n">debug</span><span class="p">(</span><span class="s1">'pool join complete'</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">restart</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">values</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_poolctrl</span><span class="p">):</span>
@@ -1604,7 +1582,7 @@
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">_help_stuff_finish</span><span class="p">(</span><span class="n">inqueue</span><span class="p">,</span> <span class="n">task_handler</span><span class="p">,</span> <span class="n">_pool</span><span class="p">):</span>
         <span class="c1"># task_handler may be blocked trying to put items on inqueue</span>
-        <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;removing tasks from inqueue until task handler finished&#39;</span><span class="p">)</span>
+        <span class="n">debug</span><span class="p">(</span><span class="s1">'removing tasks from inqueue until task handler finished'</span><span class="p">)</span>
         <span class="n">inqueue</span><span class="o">.</span><span class="n">_rlock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
         <span class="k">while</span> <span class="n">task_handler</span><span class="o">.</span><span class="n">is_alive</span><span class="p">()</span> <span class="ow">and</span> <span class="n">inqueue</span><span class="o">.</span><span class="n">_reader</span><span class="o">.</span><span class="n">poll</span><span class="p">():</span>
             <span class="n">inqueue</span><span class="o">.</span><span class="n">_reader</span><span class="o">.</span><span class="n">recv</span><span class="p">()</span>
@@ -1621,14 +1599,14 @@
                         <span class="n">help_stuff_finish_args</span><span class="p">):</span>
 
         <span class="c1"># this is guaranteed to only be called once</span>
-        <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;finalizing pool&#39;</span><span class="p">)</span>
+        <span class="n">debug</span><span class="p">(</span><span class="s1">'finalizing pool'</span><span class="p">)</span>
 
         <span class="n">worker_handler</span><span class="o">.</span><span class="n">terminate</span><span class="p">()</span>
 
         <span class="n">task_handler</span><span class="o">.</span><span class="n">terminate</span><span class="p">()</span>
         <span class="n">taskqueue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>                 <span class="c1"># sentinel</span>
 
-        <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;helping task handler/workers to finish&#39;</span><span class="p">)</span>
+        <span class="n">debug</span><span class="p">(</span><span class="s1">'helping task handler/workers to finish'</span><span class="p">)</span>
         <span class="n">cls</span><span class="o">.</span><span class="n">_help_stuff_finish</span><span class="p">(</span><span class="o">*</span><span class="n">help_stuff_finish_args</span><span class="p">)</span>
 
         <span class="n">result_handler</span><span class="o">.</span><span class="n">terminate</span><span class="p">()</span>
@@ -1637,32 +1615,32 @@
         <span class="k">if</span> <span class="n">timeout_handler</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">timeout_handler</span><span class="o">.</span><span class="n">terminate</span><span class="p">()</span>
 
-        <span class="c1"># Terminate workers which haven&#39;t already finished</span>
-        <span class="k">if</span> <span class="n">pool</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">pool</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;terminate&#39;</span><span class="p">):</span>
-            <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;terminating workers&#39;</span><span class="p">)</span>
+        <span class="c1"># Terminate workers which haven't already finished</span>
+        <span class="k">if</span> <span class="n">pool</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">pool</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">'terminate'</span><span class="p">):</span>
+            <span class="n">debug</span><span class="p">(</span><span class="s1">'terminating workers'</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pool</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">_is_alive</span><span class="p">():</span>
                     <span class="n">p</span><span class="o">.</span><span class="n">terminate</span><span class="p">()</span>
 
-        <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;joining task handler&#39;</span><span class="p">)</span>
+        <span class="n">debug</span><span class="p">(</span><span class="s1">'joining task handler'</span><span class="p">)</span>
         <span class="n">cls</span><span class="o">.</span><span class="n">_stop_task_handler</span><span class="p">(</span><span class="n">task_handler</span><span class="p">)</span>
 
-        <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;joining result handler&#39;</span><span class="p">)</span>
+        <span class="n">debug</span><span class="p">(</span><span class="s1">'joining result handler'</span><span class="p">)</span>
         <span class="n">result_handler</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="n">timeout_handler</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;joining timeout handler&#39;</span><span class="p">)</span>
+            <span class="n">debug</span><span class="p">(</span><span class="s1">'joining timeout handler'</span><span class="p">)</span>
             <span class="n">timeout_handler</span><span class="o">.</span><span class="n">stop</span><span class="p">(</span><span class="n">TIMEOUT_MAX</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">pool</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">pool</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;terminate&#39;</span><span class="p">):</span>
-            <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;joining pool workers&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">pool</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">pool</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">'terminate'</span><span class="p">):</span>
+            <span class="n">debug</span><span class="p">(</span><span class="s1">'joining pool workers'</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pool</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">is_alive</span><span class="p">():</span>
                     <span class="c1"># worker has not yet exited</span>
-                    <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;cleaning up worker </span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">pid</span><span class="p">)</span>
+                    <span class="n">debug</span><span class="p">(</span><span class="s1">'cleaning up worker </span><span class="si">%d</span><span class="s1">'</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">pid</span><span class="p">)</span>
                     <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">_popen</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
                         <span class="n">p</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
-            <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;pool workers joined&#39;</span><span class="p">)</span>
+            <span class="n">debug</span><span class="p">(</span><span class="s1">'pool workers joined'</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">process_sentinels</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1709,7 +1687,7 @@
         <span class="n">cache</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_job</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span>
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s1">&#39;&lt;Result: {id} ack:{ack} ready:{ready}&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="k">return</span> <span class="s1">'&lt;Result: {id} ack:{ack} ready:{ready}&gt;'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
             <span class="nb">id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_job</span><span class="p">,</span> <span class="n">ack</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_accepted</span><span class="p">,</span> <span class="n">ready</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ready</span><span class="p">(),</span>
         <span class="p">)</span>
 
@@ -1724,7 +1702,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_success</span>
 
     <span class="k">def</span> <span class="nf">_cancel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Only works if synack is used.&quot;&quot;&quot;</span>
+        <span class="sd">"""Only works if synack is used."""</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_cancelled</span> <span class="o">=</span> <span class="bp">True</span>
 
     <span class="k">def</span> <span class="nf">discard</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1761,7 +1739,7 @@
             <span class="k">except</span> <span class="bp">self</span><span class="o">.</span><span class="n">_callbacks_propagate</span><span class="p">:</span>
                 <span class="k">raise</span>
             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-                <span class="n">error</span><span class="p">(</span><span class="s1">&#39;Pool callback raised exception: </span><span class="si">%r</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span>
+                <span class="n">error</span><span class="p">(</span><span class="s1">'Pool callback raised exception: </span><span class="si">%r</span><span class="s1">'</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span>
                       <span class="n">exc_info</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">handle_timeout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">soft</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
@@ -2018,26 +1996,15 @@
             <span class="n">inqueue</span><span class="o">.</span><span class="n">queue</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="bp">None</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">pool</span><span class="p">))</span>
             <span class="n">inqueue</span><span class="o">.</span><span class="n">not_empty</span><span class="o">.</span><span class="n">notify_all</span><span class="p">()</span>
 </pre></div>
+</div>
+</div>
+</div>
 
-          </div>
-        </div>
-      </div>
+<div class="clearer"></div>
+</div>
+
+<div class="footer" role="contentinfo">
+        © <a href="../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &copy; <a href="../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
-    </div>
-  </body>
+</body>
 </html>

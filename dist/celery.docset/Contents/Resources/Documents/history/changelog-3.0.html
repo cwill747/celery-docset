@@ -1,17 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Change history for Celery 3.0 &mdash; Celery 3.1.23 documentation</title>
-    
-    <link rel="stylesheet" href="../_static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>Change history for Celery 3.0 — Celery 3.1.23 documentation</title>
+<link href="../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
         VERSION:     '3.1.23',
@@ -20,52 +16,28 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="copyright" title="Copyright" href="../copyright.html" />
-    <link rel="top" title="Celery 3.1.23 documentation" href="../index.html" />
-    <link rel="up" title="History" href="index.html" />
-    <link rel="next" title="Change history for Celery 2.5" href="changelog-2.5.html" />
-    <link rel="prev" title="History" href="index.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="changelog-2.5.html" title="Change history for Celery 2.5"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="index.html" title="History"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">History</a> &raquo;</li> 
-      </ul>
-    </div>  
+<script src="../_static/jquery.js" type="text/javascript"></script>
+<script src="../_static/underscore.js" type="text/javascript"></script>
+<script src="../_static/doctools.js" type="text/javascript"></script>
+<link href="../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="index.html" rel="up" title="History"/>
+<link href="changelog-2.5.html" rel="next" title="Change history for Celery 2.5"/>
+<link href="index.html" rel="prev" title="History"/>
+</head>
+<body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
 <div class="deck">
-
-    
-        <p>
+<p>
         This document describes the current stable version of Celery (3.1). For development docs,
         <a href="http://docs.celeryproject.org/en/master/history/changelog-3.0.html">go here</a>.
         </p>
-    
-
 </div>
-    <div class="section" id="change-history-for-celery-3-0">
+<div class="section" id="change-history-for-celery-3-0">
 <span id="changelog-3-0"></span><h1>Change history for Celery 3.0<a class="headerlink" href="#change-history-for-celery-3-0" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
@@ -96,12 +68,12 @@
 <li><a class="reference internal" href="#chiastic-slide" id="id49">3.0.0 (Chiastic Slide)</a></li>
 </ul>
 </div>
-<p>If you&#8217;re looking for versions prior to 3.0.x you should go to <a class="reference internal" href="index.html#history"><span>History</span></a>.</p>
+<p>If you’re looking for versions prior to 3.0.x you should go to <a class="reference internal" href="index.html#history"><span>History</span></a>.</p>
 <div class="section" id="version-3-0-24">
 <span id="id1"></span><h2><a class="toc-backref" href="#id25">3.0.24</a><a class="headerlink" href="#version-3-0-24" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2013-10-11 04:40 P.M BST</td>
 </tr>
@@ -136,7 +108,7 @@ if any of the tasks were retried (<a class="reference external" href="https://gi
 <li><p class="first">AsyncResult: Fixed bug with <code class="docutils literal"><span class="pre">copy(AsyncResult)</span></code> when no
 <code class="docutils literal"><span class="pre">current_app</span></code> available.</p>
 </li>
-<li><p class="first">ResultSet: Now properly propagates app when passed string id&#8217;s.</p>
+<li><p class="first">ResultSet: Now properly propagates app when passed string id’s.</p>
 </li>
 <li><p class="first">Loader now ignores <span class="target" id="index-0"></span><code class="xref std std-envvar docutils literal"><span class="pre">CELERY_CONFIG_MODULE</span></code> if value is empty string.</p>
 </li>
@@ -174,8 +146,8 @@ app.</p>
 <div class="section" id="version-3-0-23">
 <span id="id2"></span><h2><a class="toc-backref" href="#id26">3.0.23</a><a class="headerlink" href="#version-3-0-23" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2013-09-02 01:00 P.M BST</td>
 </tr>
@@ -213,8 +185,8 @@ silently discarding them.</p>
 <div class="section" id="version-3-0-22">
 <span id="id3"></span><h2><a class="toc-backref" href="#id27">3.0.22</a><a class="headerlink" href="#version-3-0-22" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2013-08-16 04:30 P.M BST</td>
 </tr>
@@ -248,8 +220,8 @@ Michael Fladischer.</p>
 <div class="section" id="version-3-0-21">
 <span id="id4"></span><h2><a class="toc-backref" href="#id28">3.0.21</a><a class="headerlink" href="#version-3-0-21" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2013-07-05 04:30 P.M BST</td>
 </tr>
@@ -276,8 +248,8 @@ gevent pool.</p>
 <div class="section" id="version-3-0-20">
 <span id="id5"></span><h2><a class="toc-backref" href="#id29">3.0.20</a><a class="headerlink" href="#version-3-0-20" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2013-06-28 04:00 P.M BST</td>
 </tr>
@@ -310,7 +282,7 @@ current directory.</p>
 </li>
 <li><p class="first">Fixed possible race condition when evicting items from the revoked task set.</p>
 </li>
-<li><p class="first">[generic-init.d] Fixed compatibility with Ubuntu&#8217;s minimal Dash
+<li><p class="first">[generic-init.d] Fixed compatibility with Ubuntu’s minimal Dash
 shell (<a class="reference external" href="https://github.com/celery/celery/issues/1387"><span class="xref issue">Issue #1387</span></a>).</p>
 <blockquote>
 <div><p>Fix contributed by monkut.</p>
@@ -360,8 +332,8 @@ specified.</p>
 <div class="section" id="version-3-0-19">
 <span id="id6"></span><h2><a class="toc-backref" href="#id30">3.0.19</a><a class="headerlink" href="#version-3-0-19" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2013-04-17 04:30:00 P.M BST</td>
 </tr>
@@ -390,10 +362,10 @@ using the <a class="reference internal" href="../userguide/signals.html#std:sign
 <span class="nd">@celeryd_after_setup.connect</span>
 <span class="k">def</span> <span class="nf">configure_worker</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">conf</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="n">conf</span><span class="o">.</span><span class="n">CELERY_TASK_PUBLISH_RETRY_POLICY</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;max_retries&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
-        <span class="s1">&#39;interval_start&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s1">&#39;interval_max&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s1">&#39;interval_step&#39;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
+        <span class="s1">'max_retries'</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+        <span class="s1">'interval_start'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s1">'interval_max'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s1">'interval_step'</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
     <span class="p">}</span>
 </pre></div>
 </div>
@@ -410,8 +382,8 @@ even if the body is a buffer instance.</p>
 <div class="section" id="version-3-0-18">
 <span id="id7"></span><h2><a class="toc-backref" href="#id31">3.0.18</a><a class="headerlink" href="#version-3-0-18" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2013-04-12 05:00:00 P.M BST</td>
 </tr>
@@ -433,19 +405,19 @@ the new <a class="reference internal" href="../configuration.html#std:setting-CE
 <div><p>This means that you can force the worker to discard messages
 serialized with pickle and other untrusted serializers.
 For example to only allow JSON serialized messages use:</p>
-<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">CELERY_ACCEPT_CONTENT</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;json&#39;</span><span class="p">]</span>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">CELERY_ACCEPT_CONTENT</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'json'</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>you can also specify MIME types in the whitelist:</p>
-<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">CELERY_ACCEPT_CONTENT</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;application/json&#39;</span><span class="p">]</span>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">CELERY_ACCEPT_CONTENT</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'application/json'</span><span class="p">]</span>
 </pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p class="first">Fixed deadlock in multiprocessing&#8217;s pool caused by the
+<li><p class="first">Fixed deadlock in multiprocessing’s pool caused by the
 semaphore not being released when terminated by signal.</p>
 </li>
-<li><p class="first">Processes Pool: It&#8217;s now possible to debug pool processes using GDB.</p>
+<li><p class="first">Processes Pool: It’s now possible to debug pool processes using GDB.</p>
 </li>
 <li><p class="first"><code class="docutils literal"><span class="pre">celery</span> <span class="pre">report</span></code> now censors possibly secret settings, like passwords
 and secret tokens.</p>
@@ -454,7 +426,7 @@ and secret tokens.</p>
 on the internet.</p>
 </div></blockquote>
 </li>
-<li><p class="first">Connection URLs now ignore multiple &#8216;+&#8217; tokens.</p>
+<li><p class="first">Connection URLs now ignore multiple ‘+’ tokens.</p>
 </li>
 <li><p class="first">Worker/statedb: Now uses pickle protocol 2 (Py2.5+)</p>
 </li>
@@ -475,7 +447,7 @@ but loading from and storing the revoked tasks will be considerably
 faster (what before took 5 minutes will now take less than a second).</p>
 </div></blockquote>
 </li>
-<li><p class="first">Celery will now suggest alternatives if there&#8217;s a typo in the
+<li><p class="first">Celery will now suggest alternatives if there’s a typo in the
 broker transport name (e.g. <code class="docutils literal"><span class="pre">ampq</span></code> -&gt; <code class="docutils literal"><span class="pre">amqp</span></code>).</p>
 </li>
 <li><p class="first">Worker: The auto-reloader would cause a crash if a monitored file
@@ -514,7 +486,7 @@ with the reserved tasks (<a class="reference external" href="https://github.com/
 meant for pickling purposes, this has been fixed so that it now
 receives the real traceback instead.</p>
 </li>
-<li><p class="first">The <code class="docutils literal"><span class="pre">&#64;task</span></code> decorator silently ignored positional arguments,
+<li><p class="first">The <code class="docutils literal"><span class="pre">@task</span></code> decorator silently ignored positional arguments,
 it now raises the expected <a class="reference external" href="http://docs.python.org/dev/library/exceptions.html#TypeError" title="(in Python v3.6)"><code class="xref py py-exc docutils literal"><span class="pre">TypeError</span></code></a> instead (<a class="reference external" href="https://github.com/celery/celery/issues/1125"><span class="xref issue">Issue #1125</span></a>).</p>
 </li>
 <li><p class="first">The worker will now properly handle messages with invalid
@@ -555,8 +527,8 @@ with an SQL based broker transport.</p>
 <div class="section" id="version-3-0-17">
 <span id="id8"></span><h2><a class="toc-backref" href="#id32">3.0.17</a><a class="headerlink" href="#version-3-0-17" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2013-03-22 04:00:00 P.M UTC</td>
 </tr>
@@ -615,7 +587,7 @@ keyword arguments.</p>
 </li>
 <li><p class="first">Worker: Multiprocessing pool workers now import task modules/configuration
 before setting up the logging system so that logging signals can be
-connected before they&#8217;re dispatched.</p>
+connected before they’re dispatched.</p>
 </li>
 <li><p class="first">chord:  The <code class="docutils literal"><span class="pre">AsyncResult</span></code> instance returned now has its <code class="docutils literal"><span class="pre">parent</span></code>
 attribute set to the header <code class="docutils literal"><span class="pre">GroupResult</span></code>.</p>
@@ -628,8 +600,8 @@ attribute set to the header <code class="docutils literal"><span class="pre">Gro
 <div class="section" id="version-3-0-16">
 <span id="id9"></span><h2><a class="toc-backref" href="#id33">3.0.16</a><a class="headerlink" href="#version-3-0-16" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2013-03-07 04:00:00 P.M UTC</td>
 </tr>
@@ -638,7 +610,7 @@ attribute set to the header <code class="docutils literal"><span class="pre">Gro
 </tbody>
 </table>
 <ul>
-<li><p class="first">Happy International Women&#8217;s Day!</p>
+<li><p class="first">Happy International Women’s Day!</p>
 <blockquote>
 <div><p>We have a long way to go, so this is a chance for you to get involved in one
 of the organizations working for making our communities more
@@ -659,8 +631,8 @@ diverse.</p>
 <li><p class="first">AMQP heartbeats are now disabled by default.</p>
 <blockquote>
 <div><p>Some users experiences issues with heartbeats enabled,
-and it&#8217;s not strictly necessary to use them.</p>
-<p>If you&#8217;re experiencing problems detecting connection failures,
+and it’s not strictly necessary to use them.</p>
+<p>If you’re experiencing problems detecting connection failures,
 you can re-enable heartbeats by configuring the <a class="reference internal" href="../configuration.html#std:setting-BROKER_HEARTBEAT"><code class="xref std std-setting docutils literal"><span class="pre">BROKER_HEARTBEAT</span></code></a>
 setting.</p>
 </div></blockquote>
@@ -732,8 +704,8 @@ querying the pid of the instance instead of sending messages.</p>
 <div class="section" id="version-3-0-15">
 <span id="id10"></span><h2><a class="toc-backref" href="#id34">3.0.15</a><a class="headerlink" href="#version-3-0-15" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2013-02-11 04:30:00 P.M UTC</td>
 </tr>
@@ -749,8 +721,8 @@ querying the pid of the instance instead of sending messages.</p>
 <div class="section" id="version-3-0-14">
 <span id="id11"></span><h2><a class="toc-backref" href="#id35">3.0.14</a><a class="headerlink" href="#version-3-0-14" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2013-02-08 05:00:00 P.M UTC</td>
 </tr>
@@ -768,7 +740,7 @@ querying the pid of the instance instead of sending messages.</p>
 <div><p>It was causing too many problems for users, you can still enable
 it using the <code class="xref std std-setting docutils literal"><span class="pre">CELERYD_FORCE_EXECV</span></code> setting.</p>
 <p>execv was only enabled when transports other than amqp/redis was used,
-and it&#8217;s there to prevent deadlocks caused by mutexes not being released
+and it’s there to prevent deadlocks caused by mutexes not being released
 before the process forks.  Unfortunately it also changes the environment
 introducing many corner case bugs that is hard to fix without adding
 horrible hacks.  Deadlock issues are reported far less often than the
@@ -806,12 +778,12 @@ retried/ignored.</p>
 <li><p class="first"><code class="docutils literal"><span class="pre">subtask.id</span></code> added as an alias to <code class="docutils literal"><span class="pre">subtask['options'].id</span></code></p>
 <blockquote>
 <div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">add</span><span class="o">.</span><span class="n">s</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="s1">&#39;my-id&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="p">[</span><span class="s1">&#39;options&#39;</span><span class="p">]</span>
-<span class="go">{&#39;task_id&#39;: &#39;my-id&#39;}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="s1">'my-id'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="p">[</span><span class="s1">'options'</span><span class="p">]</span>
+<span class="go">{'task_id': 'my-id'}</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">id</span>
-<span class="go">&#39;my-id&#39;</span>
+<span class="go">'my-id'</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -821,7 +793,7 @@ when restarting after connection failure (<a class="reference external" href="ht
 </li>
 <li><p class="first">Adds new signal <code class="xref std std-signal docutils literal"><span class="pre">task-retried</span></code> (<a class="reference external" href="https://github.com/celery/celery/issues/1169"><span class="xref issue">Issue #1169</span></a>).</p>
 </li>
-<li><p class="first"><cite>celery events &#8211;dumper</cite> now handles connection loss.</p>
+<li><p class="first"><cite>celery events –dumper</cite> now handles connection loss.</p>
 </li>
 <li><p class="first">Will now retry sending the task-sent event in case of connection failure.</p>
 </li>
@@ -854,7 +826,7 @@ rate at which broker connection heartbeats are monitored.</p>
 <div><p>Contributed by Mher Movsisyan.</p>
 </div></blockquote>
 </li>
-<li><p class="first">Adds the ability to modify the chord unlock task&#8217;s countdown
+<li><p class="first">Adds the ability to modify the chord unlock task’s countdown
 argument (<a class="reference external" href="https://github.com/celery/celery/issues/1146"><span class="xref issue">Issue #1146</span></a>).</p>
 <blockquote>
 <div><p>Contributed by Jun Sakai</p>
@@ -881,8 +853,8 @@ by default.</p>
 <div class="section" id="version-3-0-13">
 <span id="id12"></span><h2><a class="toc-backref" href="#id36">3.0.13</a><a class="headerlink" href="#version-3-0-13" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2013-01-07 04:00:00 P.M UTC</td>
 </tr>
@@ -964,7 +936,7 @@ task modules will always use the correct app instance (<a class="reference exter
 (using <code class="docutils literal"><span class="pre">result.ready()</span></code> and friends, <code class="docutils literal"><span class="pre">result.get()</span></code> will not do this
 in this version).</p>
 </li>
-<li><p class="first">Crontab schedule values can now &#8220;wrap around&#8221;</p>
+<li><p class="first">Crontab schedule values can now “wrap around”</p>
 <blockquote>
 <div><p>This means that values like <code class="docutils literal"><span class="pre">11-1</span></code> translates to <code class="docutils literal"><span class="pre">[11,</span> <span class="pre">12,</span> <span class="pre">1]</span></code>.</p>
 <p>Contributed by Loren Abrams.</p>
@@ -986,7 +958,7 @@ caused by accidentally passing <code class="docutils literal"><span class="pre">
 </li>
 <li><p class="first">Rate limit values can now be float</p>
 <blockquote>
-<div><p>This also extends the string format so that values like <code class="docutils literal"><span class="pre">&quot;0.5/s&quot;</span></code> works.</p>
+<div><p>This also extends the string format so that values like <code class="docutils literal"><span class="pre">"0.5/s"</span></code> works.</p>
 <p>Contributed by Christoph Krybus</p>
 </div></blockquote>
 </li>
@@ -1039,8 +1011,8 @@ the addition of new queues so that they survived connection failure
 <div class="section" id="id13">
 <h2><a class="toc-backref" href="#id37">3.0.12</a><a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2012-11-06 02:00 P.M UTC</td>
 </tr>
@@ -1118,7 +1090,7 @@ task base class, the task decorator in that module now inherits from the new.</p
 </li>
 <li><p class="first">Fixed missing whitespace in <code class="docutils literal"><span class="pre">bdist_rpm</span></code> requirements (<a class="reference external" href="https://github.com/celery/celery/issues/1046"><span class="xref issue">Issue #1046</span></a>).</p>
 </li>
-<li><p class="first">Event state&#8217;s <code class="docutils literal"><span class="pre">tasks_by_name</span></code> applied limit before filtering by name.</p>
+<li><p class="first">Event state’s <code class="docutils literal"><span class="pre">tasks_by_name</span></code> applied limit before filtering by name.</p>
 <blockquote>
 <div><p>Fix contributed by Alexander A. Sosnovskiy.</p>
 </div></blockquote>
@@ -1128,8 +1100,8 @@ task base class, the task decorator in that module now inherits from the new.</p
 <div class="section" id="version-3-0-11">
 <span id="id14"></span><h2><a class="toc-backref" href="#id38">3.0.11</a><a class="headerlink" href="#version-3-0-11" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2012-09-26 04:00 P.M UTC</td>
 </tr>
@@ -1141,8 +1113,8 @@ task base class, the task decorator in that module now inherits from the new.</p
 <li><p class="first">[security:low] generic-init.d scripts changed permissions of /var/log &amp; /var/run</p>
 <blockquote>
 <div><p>In the daemonization tutorial the recommended directories were as follows:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nv">CELERYD_LOG_FILE</span><span class="o">=</span><span class="s2">&quot;/var/log/celery/%n.log&quot;</span>
-<span class="nv">CELERYD_PID_FILE</span><span class="o">=</span><span class="s2">&quot;/var/run/celery/%n.pid&quot;</span>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nv">CELERYD_LOG_FILE</span><span class="o">=</span><span class="s2">"/var/log/celery/%n.log"</span>
+<span class="nv">CELERYD_PID_FILE</span><span class="o">=</span><span class="s2">"/var/run/celery/%n.pid"</span>
 </pre></div>
 </div>
 <p>But in the scripts themselves the default files were <code class="docutils literal"><span class="pre">/var/log/celery%n.log</span></code>
@@ -1193,7 +1165,7 @@ and sends a <code class="docutils literal"><span class="pre">task-revoked</span>
 </li>
 <li><p class="first">Generic worker init script now waits for workers to shutdown by default.</p>
 </li>
-<li><p class="first">Multi: No longer parses &#8211;app option (<a class="reference external" href="https://github.com/celery/celery/issues/1008"><span class="xref issue">Issue #1008</span></a>).</p>
+<li><p class="first">Multi: No longer parses –app option (<a class="reference external" href="https://github.com/celery/celery/issues/1008"><span class="xref issue">Issue #1008</span></a>).</p>
 </li>
 <li><p class="first">Multi: stop_verify command renamed to stopwait.</p>
 </li>
@@ -1218,8 +1190,8 @@ Congratulations on opening bug #1000!</p>
 <div class="section" id="version-3-0-10">
 <span id="id15"></span><h2><a class="toc-backref" href="#id39">3.0.10</a><a class="headerlink" href="#version-3-0-10" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2012-09-20 05:30 P.M BST</td>
 </tr>
@@ -1241,7 +1213,7 @@ to terminate processes that have signal handlers blocked by C extensions.</p>
 </li>
 <li><p class="first">Billiard now installs even if the C extension cannot be built.</p>
 <blockquote>
-<div><p>It&#8217;s still recommended to build the C extension if you are using
+<div><p>It’s still recommended to build the C extension if you are using
 a transport other than rabbitmq/redis (or use forced execv for some
 other reason).</p>
 </div></blockquote>
@@ -1263,7 +1235,7 @@ so that:</p>
 </div>
 <p>at the second time the ids for the tasks would be the same as in the
 previous invocation.  This is now fixed, so that calling a subtask
-won&#8217;t mutate any options.</p>
+won’t mutate any options.</p>
 </div></blockquote>
 </li>
 <li><p class="first">Canvas: Chaining a chord to another task now works (<a class="reference external" href="https://github.com/celery/celery/issues/965"><span class="xref issue">Issue #965</span></a>).</p>
@@ -1284,7 +1256,7 @@ or events after return.</p>
 
 <span class="nd">@task</span>
 <span class="k">def</span> <span class="nf">custom_revokes</span><span class="p">():</span>
-    <span class="k">if</span> <span class="n">redis</span><span class="o">.</span><span class="n">sismember</span><span class="p">(</span><span class="s1">&#39;tasks.revoked&#39;</span><span class="p">,</span> <span class="n">custom_revokes</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">id</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">redis</span><span class="o">.</span><span class="n">sismember</span><span class="p">(</span><span class="s1">'tasks.revoked'</span><span class="p">,</span> <span class="n">custom_revokes</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">id</span><span class="p">):</span>
         <span class="k">raise</span> <span class="n">Ignore</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -1328,7 +1300,7 @@ documented.</p>
 </li>
 <li><p class="first">Worker: Log messages when connection established and lost have been improved.</p>
 </li>
-<li><p class="first">The repr of a crontab schedule value of &#8216;0&#8217; should be &#8216;*&#8217;  (<a class="reference external" href="https://github.com/celery/celery/issues/972"><span class="xref issue">Issue #972</span></a>).</p>
+<li><p class="first">The repr of a crontab schedule value of ‘0’ should be ‘*’  (<a class="reference external" href="https://github.com/celery/celery/issues/972"><span class="xref issue">Issue #972</span></a>).</p>
 </li>
 <li><p class="first">Revoked tasks are now removed from reserved/active state in the worker
 (<a class="reference external" href="https://github.com/celery/celery/issues/969"><span class="xref issue">Issue #969</span></a>)</p>
@@ -1362,8 +1334,8 @@ when using gevent</p>
 <div class="section" id="id16">
 <h2><a class="toc-backref" href="#id40">3.0.9</a><a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2012-08-31 06:00 P.M BST</td>
 </tr>
@@ -1414,7 +1386,7 @@ your timezone, then you are now <em>encouraged to re-enable it</em>.</p>
 <div><p>This calls the new <a class="reference internal" href="../reference/celery.html#celery.Celery.close" title="celery.Celery.close"><code class="xref py py-meth docutils literal"><span class="pre">app.close()</span></code></a> method at exit, which
 cleans up after the app like closing pool connections.</p>
 <p>Note that this is only necessary when dynamically creating apps,
-e.g. for &#8220;temporary&#8221; apps.</p>
+e.g. for “temporary” apps.</p>
 </div></blockquote>
 </li>
 <li><p class="first">Support for piping a subtask to a chain.</p>
@@ -1437,8 +1409,8 @@ e.g. for &#8220;temporary&#8221; apps.</p>
 <div class="section" id="version-3-0-8">
 <span id="id17"></span><h2><a class="toc-backref" href="#id41">3.0.8</a><a class="headerlink" href="#version-3-0-8" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2012-08-29 05:00 P.M BST</td>
 </tr>
@@ -1489,8 +1461,8 @@ patched.</p>
 <div class="section" id="version-3-0-7">
 <span id="id18"></span><h2><a class="toc-backref" href="#id42">3.0.7</a><a class="headerlink" href="#version-3-0-7" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2012-08-24 05:00 P.M BST</td>
 </tr>
@@ -1556,8 +1528,8 @@ C extensions were not installed.</p>
 <div class="section" id="version-3-0-6">
 <span id="id19"></span><h2><a class="toc-backref" href="#id43">3.0.6</a><a class="headerlink" href="#version-3-0-6" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2012-08-17 11:00 P.M BST</td>
 </tr>
@@ -1575,7 +1547,7 @@ in the queue.</p>
 </li>
 <li><p class="first">Crontab schedules now properly respects <a class="reference internal" href="../configuration.html#std:setting-CELERY_TIMEZONE"><code class="xref std std-setting docutils literal"><span class="pre">CELERY_TIMEZONE</span></code></a> setting.</p>
 <blockquote>
-<div><p>It&#8217;s important to note that crontab schedules uses UTC time by default
+<div><p>It’s important to note that crontab schedules uses UTC time by default
 unless this setting is set.</p>
 <p><a class="reference external" href="https://github.com/celery/celery/issues/904"><span class="xref issue">Issue #904</span></a> and django-celery #150.</p>
 </div></blockquote>
@@ -1585,7 +1557,7 @@ unless this setting is set.</p>
 <li><p class="first">The transport is now properly shown by <strong class="program">celery report</strong>
 (<a class="reference external" href="https://github.com/celery/celery/issues/913"><span class="xref issue">Issue #913</span></a>).</p>
 </li>
-<li><p class="first">The <cite>&#8211;app</cite> argument now works if the last part is a module name
+<li><p class="first">The <cite>–app</cite> argument now works if the last part is a module name
 (<a class="reference external" href="https://github.com/celery/celery/issues/921"><span class="xref issue">Issue #921</span></a>).</p>
 </li>
 <li><p class="first">Fixed problem with unpickleable exceptions (billiard #12).</p>
@@ -1597,7 +1569,7 @@ unless this setting is set.</p>
 default (<a class="reference external" href="https://github.com/celery/celery/issues/918"><span class="xref issue">Issue #918</span></a>).</p>
 <blockquote>
 <div><p>A regression long ago disabled magic kwargs for these, and since
-no one has complained about it we don&#8217;t have any incentive to fix it now.</p>
+no one has complained about it we don’t have any incentive to fix it now.</p>
 </div></blockquote>
 </li>
 <li><p class="first">The <code class="docutils literal"><span class="pre">inspect</span> <span class="pre">reserved</span></code> control command did not work properly.</p>
@@ -1634,7 +1606,7 @@ are imported before eventlet is patched.</p>
 </li>
 <li><p class="first">Improved event and camera examples in the monitoring guide.</p>
 </li>
-<li><p class="first">Disables celery command setuptools entrypoints if the command can&#8217;t be
+<li><p class="first">Disables celery command setuptools entrypoints if the command can’t be
 loaded.</p>
 </li>
 <li><p class="first">Fixed broken <code class="docutils literal"><span class="pre">dump_request</span></code> example in the tasks guide.</p>
@@ -1644,8 +1616,8 @@ loaded.</p>
 <div class="section" id="version-3-0-5">
 <span id="id20"></span><h2><a class="toc-backref" href="#id44">3.0.5</a><a class="headerlink" href="#version-3-0-5" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2012-08-01 04:00 P.M BST</td>
 </tr>
@@ -1680,8 +1652,8 @@ see <a class="reference internal" href="index.html#history"><span>History</span>
 <div class="section" id="version-3-0-4">
 <span id="id21"></span><h2><a class="toc-backref" href="#id45">3.0.4</a><a class="headerlink" href="#version-3-0-4" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2012-07-26 07:00 P.M BST</td>
 </tr>
@@ -1730,7 +1702,7 @@ transport.</p>
 </li>
 <li><p class="first">Delivery info is no longer passed directly through.</p>
 <blockquote>
-<div><p>It was discovered that the SQS transport adds objects that can&#8217;t
+<div><p>It was discovered that the SQS transport adds objects that can’t
 be pickled to the delivery info mapping, so we had to go back
 to using the whitelist again.</p>
 <p>Fixing this bug also means that the SQS transport is now working again.</p>
@@ -1764,8 +1736,8 @@ option, used when none is specified, which also means that the default
 interval can also be changed using annotations:</p>
 <blockquote>
 <div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">CELERY_ANNOTATIONS</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;celery.chord_unlock&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;default_retry_delay&#39;</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">,</span>
+    <span class="s1">'celery.chord_unlock'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">'default_retry_delay'</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">,</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -1779,7 +1751,7 @@ interval can also be changed using annotations:</p>
 dicts to the applications configuration.</p>
 <blockquote>
 <div><p>For example:</p>
-<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;FOO&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">}</span>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'FOO'</span><span class="p">:</span> <span class="mi">10</span><span class="p">}</span>
 
 <span class="n">app</span><span class="o">.</span><span class="n">add_defaults</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
 </pre></div>
@@ -1789,7 +1761,7 @@ copied, and that it will not be pickled when the worker spawns child
 processes.</p>
 <p>In addition the method accepts a callable:</p>
 <div class="highlight-python3"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">initialize_config</span><span class="p">():</span>
-    <span class="c1"># insert heavy stuff that can&#39;t be done at import time here.</span>
+    <span class="c1"># insert heavy stuff that can't be done at import time here.</span>
 
 <span class="n">app</span><span class="o">.</span><span class="n">add_defaults</span><span class="p">(</span><span class="n">initialize_config</span><span class="p">)</span>
 </pre></div>
@@ -1833,8 +1805,8 @@ has been closed (<a class="reference external" href="https://github.com/celery/c
 <div class="section" id="version-3-0-3">
 <span id="id22"></span><h2><a class="toc-backref" href="#id46">3.0.3</a><a class="headerlink" href="#version-3-0-3" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2012-07-20 09:17 P.M BST</td>
 </tr>
@@ -1844,14 +1816,14 @@ has been closed (<a class="reference external" href="https://github.com/celery/c
 </table>
 <ul class="simple">
 <li>amqplib passes the channel object as part of the delivery_info
-and it&#8217;s not pickleable, so we now remove it.</li>
+and it’s not pickleable, so we now remove it.</li>
 </ul>
 </div>
 <div class="section" id="version-3-0-2">
 <span id="id23"></span><h2><a class="toc-backref" href="#id47">3.0.2</a><a class="headerlink" href="#version-3-0-2" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2012-07-20 04:00 P.M BST</td>
 </tr>
@@ -1878,13 +1850,13 @@ and it&#8217;s not pickleable, so we now remove it.</li>
 </li>
 <li><p class="first">Task Request: <code class="docutils literal"><span class="pre">delivery_info</span></code> is now passed through as-is (<a class="reference external" href="https://github.com/celery/celery/issues/807"><span class="xref issue">Issue #807</span></a>).</p>
 </li>
-<li><p class="first">The eta argument now supports datetime&#8217;s with a timezone set (<a class="reference external" href="https://github.com/celery/celery/issues/855"><span class="xref issue">Issue #855</span></a>).</p>
+<li><p class="first">The eta argument now supports datetime’s with a timezone set (<a class="reference external" href="https://github.com/celery/celery/issues/855"><span class="xref issue">Issue #855</span></a>).</p>
 </li>
-<li><p class="first">The worker&#8217;s banner displayed the autoscale settings in the wrong order
+<li><p class="first">The worker’s banner displayed the autoscale settings in the wrong order
 (<a class="reference external" href="https://github.com/celery/celery/issues/859"><span class="xref issue">Issue #859</span></a>).</p>
 </li>
 <li><p class="first">Extension commands are now loaded after concurrency is set up
-so that they don&#8217;t interfere with e.g. eventlet patching.</p>
+so that they don’t interfere with e.g. eventlet patching.</p>
 </li>
 <li><p class="first">Fixed bug in the threaded pool (<a class="reference external" href="https://github.com/celery/celery/issues/863"><span class="xref issue">Issue #863</span></a>)</p>
 </li>
@@ -1933,8 +1905,8 @@ one from the pool.</p>
 <div class="section" id="version-3-0-1">
 <span id="id24"></span><h2><a class="toc-backref" href="#id48">3.0.1</a><a class="headerlink" href="#version-3-0-1" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2012-07-10 06:00 P.M BST</td>
 </tr>
@@ -1950,7 +1922,7 @@ one from the pool.</p>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Beat: now works with timezone aware datetime&#8217;s.</p>
+<li><p class="first">Beat: now works with timezone aware datetime’s.</p>
 </li>
 <li><p class="first">Task classes inheriting <code class="docutils literal"><span class="pre">from</span> <span class="pre">celery</span> <span class="pre">import</span> <span class="pre">Task</span></code>
 mistakingly enabled <code class="docutils literal"><span class="pre">accept_magic_kwargs</span></code>.</p>
@@ -1971,8 +1943,8 @@ using setuptools entry-points.</p>
 command by adding an entry-point like:</p>
 <div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">setup</span><span class="p">(</span>
     <span class="n">entry_points</span><span class="o">=</span><span class="p">[</span>
-        <span class="s1">&#39;celery.commands&#39;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="s1">&#39;foo = my.module:Command&#39;</span><span class="p">,</span>
+        <span class="s1">'celery.commands'</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s1">'foo = my.module:Command'</span><span class="p">,</span>
     <span class="p">],</span>
 <span class="p">],</span>
 <span class="o">...</span><span class="p">)</span>
@@ -2003,8 +1975,8 @@ fields.</p>
 <div class="section" id="chiastic-slide">
 <span id="version-3-0-0"></span><h2><a class="toc-backref" href="#id49">3.0.0 (Chiastic Slide)</a><a class="headerlink" href="#chiastic-slide" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2012-07-07 01:30 P.M BST</td>
 </tr>
@@ -2012,36 +1984,18 @@ fields.</p>
 </tr>
 </tbody>
 </table>
-<p>See <a class="reference internal" href="../whatsnew-3.0.html#whatsnew-3-0"><span>What&#8217;s new in Celery 3.0 (Chiastic Slide)</span></a>.</p>
+<p>See <a class="reference internal" href="../whatsnew-3.0.html#whatsnew-3-0"><span>What’s new in Celery 3.0 (Chiastic Slide)</span></a>.</p>
+</div>
+</div>
+</div>
 </div>
 </div>
 
+<div class="clearer"></div>
+</div>
 
-          </div>
-        </div>
-      </div>
+<div class="footer" role="contentinfo">
+        © <a href="../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="changelog-2.5.html" title="Change history for Celery 2.5"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="index.html" title="History"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" >History</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &copy; <a href="../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
-    </div>
-  </body>
+</body>
 </html>

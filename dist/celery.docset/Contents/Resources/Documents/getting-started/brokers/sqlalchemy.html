@@ -1,17 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Using SQLAlchemy &mdash; Celery 3.1.23 documentation</title>
-    
-    <link rel="stylesheet" href="../../_static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>Using SQLAlchemy — Celery 3.1.23 documentation</title>
+<link href="../../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
         VERSION:     '3.1.23',
@@ -20,59 +16,34 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="copyright" title="Copyright" href="../../copyright.html" />
-    <link rel="top" title="Celery 3.1.23 documentation" href="../../index.html" />
-    <link rel="up" title="Brokers" href="index.html" />
-    <link rel="next" title="Using the Django Database" href="django.html" />
-    <link rel="prev" title="Using Redis" href="redis.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="django.html" title="Using the Django Database"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="redis.html" title="Using Redis"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" >Getting Started</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U">Brokers</a> &raquo;</li> 
-      </ul>
-    </div>  
+<script src="../../_static/jquery.js" type="text/javascript"></script>
+<script src="../../_static/underscore.js" type="text/javascript"></script>
+<script src="../../_static/doctools.js" type="text/javascript"></script>
+<link href="../../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="index.html" rel="up" title="Brokers"/>
+<link href="django.html" rel="next" title="Using the Django Database"/>
+<link href="redis.html" rel="prev" title="Using Redis"/>
+</head>
+<body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
 <div class="deck">
-
-    
-        <p>
+<p>
         This document describes the current stable version of Celery (3.1). For development docs,
         <a href="http://docs.celeryproject.org/en/master/getting-started/brokers/sqlalchemy.html">go here</a>.
         </p>
-    
-
 </div>
-    <div class="section" id="using-sqlalchemy">
+<div class="section" id="using-sqlalchemy">
 <span id="broker-sqlalchemy"></span><h1>Using SQLAlchemy<a class="headerlink" href="#using-sqlalchemy" title="Permalink to this headline">¶</a></h1>
 <div class="admonition-experimental-status admonition">
 <p class="first admonition-title">Experimental Status</p>
 <p class="last">The SQLAlchemy transport is unstable in many areas and there are
-several issues open.  Unfortunately we don&#8217;t have the resources or funds
-required to improve the situation, so we&#8217;re looking for contributors
+several issues open.  Unfortunately we don’t have the resources or funds
+required to improve the situation, so we’re looking for contributors
 and partners willing to help.</p>
 </div>
 <div class="section" id="installation">
@@ -81,25 +52,25 @@ and partners willing to help.</p>
 <div class="section" id="configuration">
 <span id="broker-sqlalchemy-configuration"></span><h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
 <p>Celery needs to know the location of your database, which should be the usual
-SQLAlchemy connection string, but with &#8216;sqla+&#8217; prepended to it:</p>
-<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">BROKER_URL</span> <span class="o">=</span> <span class="s1">&#39;sqla+sqlite:///celerydb.sqlite&#39;</span>
+SQLAlchemy connection string, but with ‘sqla+’ prepended to it:</p>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">BROKER_URL</span> <span class="o">=</span> <span class="s1">'sqla+sqlite:///celerydb.sqlite'</span>
 </pre></div>
 </div>
 <p>This transport uses only the <a class="reference internal" href="../../configuration.html#std:setting-BROKER_URL"><code class="xref std std-setting docutils literal"><span class="pre">BROKER_URL</span></code></a> setting, which have to be
 an SQLAlchemy database URI.</p>
 <p>Please see <a class="reference external" href="http://www.sqlalchemy.org/docs/core/engines.html#supported-databases">SQLAlchemy: Supported Databases</a> for a table of supported databases.</p>
-<p>Here&#8217;s a list of examples using a selection of other <a class="reference external" href="http://www.sqlalchemy.org/docs/core/engines.html#database-urls">SQLAlchemy Connection Strings</a>:</p>
+<p>Here’s a list of examples using a selection of other <a class="reference external" href="http://www.sqlalchemy.org/docs/core/engines.html#database-urls">SQLAlchemy Connection Strings</a>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># sqlite (filename)</span>
-<span class="n">BROKER_URL</span> <span class="o">=</span> <span class="s1">&#39;sqla+sqlite:///celerydb.sqlite&#39;</span>
+<span class="n">BROKER_URL</span> <span class="o">=</span> <span class="s1">'sqla+sqlite:///celerydb.sqlite'</span>
 
 <span class="c1"># mysql</span>
-<span class="n">BROKER_URL</span> <span class="o">=</span> <span class="s1">&#39;sqla+mysql://scott:tiger@localhost/foo&#39;</span>
+<span class="n">BROKER_URL</span> <span class="o">=</span> <span class="s1">'sqla+mysql://scott:tiger@localhost/foo'</span>
 
 <span class="c1"># postgresql</span>
-<span class="n">BROKER_URL</span> <span class="o">=</span> <span class="s1">&#39;sqla+postgresql://scott:tiger@localhost/mydatabase&#39;</span>
+<span class="n">BROKER_URL</span> <span class="o">=</span> <span class="s1">'sqla+postgresql://scott:tiger@localhost/mydatabase'</span>
 
 <span class="c1"># oracle</span>
-<span class="n">BROKER_URL</span> <span class="o">=</span> <span class="s1">&#39;sqla+oracle://scott:tiger@127.0.0.1:1521/sidname&#39;</span>
+<span class="n">BROKER_URL</span> <span class="o">=</span> <span class="s1">'sqla+oracle://scott:tiger@127.0.0.1:1521/sidname'</span>
 </pre></div>
 </div>
 <div class="section" id="results">
@@ -121,34 +92,15 @@ multiple times).</li>
 </div></blockquote>
 </div>
 </div>
+</div>
+</div>
+</div>
 
+<div class="clearer"></div>
+</div>
 
-          </div>
-        </div>
-      </div>
+<div class="footer" role="contentinfo">
+        © <a href="../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="django.html" title="Using the Django Database"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="redis.html" title="Using Redis"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" >Getting Started</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="index.html" >Brokers</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &copy; <a href="../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
-    </div>
-  </body>
+</body>
 </html>

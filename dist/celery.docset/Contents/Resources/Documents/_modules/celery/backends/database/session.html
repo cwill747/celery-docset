@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>celery.backends.database.session — Celery 3.1.23 documentation</title>
+<link href="../../../../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../../../../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '3.1.23',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+<script src="../../../../_static/jquery.js" type="text/javascript"></script>
+<script src="../../../../_static/underscore.js" type="text/javascript"></script>
+<script src="../../../../_static/doctools.js" type="text/javascript"></script>
+<link href="../../../../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../../../../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="../database.html" rel="up" title="celery.backends.database"/>
+</head>
+<body role="document">
+
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
+<div class="deck">
+<p>
+        This document describes the current stable version of Celery (3.1). For development docs,
+        <a href="http://docs.celeryproject.org/en/master/_modules/celery/backends/database/session.html">go here</a>.
+        </p>
+</div>
+<h1>Source code for celery.backends.database.session</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">"""</span>
+<span class="sd">    celery.backends.database.session</span>
+<span class="sd">    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
+
+<span class="sd">    SQLAlchemy sessions.</span>
+
+<span class="sd">"""</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
+
+<span class="kn">from</span> <span class="nn">billiard.util</span> <span class="kn">import</span> <span class="n">register_after_fork</span>
+
+<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">create_engine</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.ext.declarative</span> <span class="kn">import</span> <span class="n">declarative_base</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">sessionmaker</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.pool</span> <span class="kn">import</span> <span class="n">NullPool</span>
+
+<span class="n">ResultModelBase</span> <span class="o">=</span> <span class="n">declarative_base</span><span class="p">()</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'SessionManager'</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="SessionManager"><a class="viewcode-back" href="../../../../internals/reference/celery.backends.database.session.html#celery.backends.database.session.SessionManager">[docs]</a><span class="k">class</span> <span class="nc">SessionManager</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_engines</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sessions</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">forked</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prepared</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">register_after_fork</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_after_fork</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_after_fork</span><span class="p">(</span><span class="bp">self</span><span class="p">,):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">forked</span> <span class="o">=</span> <span class="bp">True</span>
+
+<div class="viewcode-block" id="SessionManager.get_engine"><a class="viewcode-back" href="../../../../internals/reference/celery.backends.database.session.html#celery.backends.database.session.SessionManager.get_engine">[docs]</a>    <span class="k">def</span> <span class="nf">get_engine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dburi</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">forked</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engines</span><span class="p">[</span><span class="n">dburi</span><span class="p">]</span>
+            <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                <span class="n">engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engines</span><span class="p">[</span><span class="n">dburi</span><span class="p">]</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">dburi</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">engine</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s1">'poolclass'</span><span class="p">]</span> <span class="o">=</span> <span class="n">NullPool</span>
+            <span class="k">return</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">dburi</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="SessionManager.create_session"><a class="viewcode-back" href="../../../../internals/reference/celery.backends.database.session.html#celery.backends.database.session.SessionManager.create_session">[docs]</a>    <span class="k">def</span> <span class="nf">create_session</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dburi</span><span class="p">,</span> <span class="n">short_lived_sessions</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_engine</span><span class="p">(</span><span class="n">dburi</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">forked</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">short_lived_sessions</span> <span class="ow">or</span> <span class="n">dburi</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sessions</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_sessions</span><span class="p">[</span><span class="n">dburi</span><span class="p">]</span> <span class="o">=</span> <span class="n">sessionmaker</span><span class="p">(</span><span class="n">bind</span><span class="o">=</span><span class="n">engine</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">engine</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sessions</span><span class="p">[</span><span class="n">dburi</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">engine</span><span class="p">,</span> <span class="n">sessionmaker</span><span class="p">(</span><span class="n">bind</span><span class="o">=</span><span class="n">engine</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="SessionManager.prepare_models"><a class="viewcode-back" href="../../../../internals/reference/celery.backends.database.session.html#celery.backends.database.session.SessionManager.prepare_models">[docs]</a>    <span class="k">def</span> <span class="nf">prepare_models</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">engine</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">prepared</span><span class="p">:</span>
+            <span class="n">ResultModelBase</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">create_all</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">prepared</span> <span class="o">=</span> <span class="bp">True</span></div>
+
+<div class="viewcode-block" id="SessionManager.session_factory"><a class="viewcode-back" href="../../../../internals/reference/celery.backends.database.session.html#celery.backends.database.session.SessionManager.session_factory">[docs]</a>    <span class="k">def</span> <span class="nf">session_factory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dburi</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">engine</span><span class="p">,</span> <span class="n">session</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_session</span><span class="p">(</span><span class="n">dburi</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prepare_models</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">session</span><span class="p">()</span></div></div>
+</pre></div>
+</div>
+</div>
+</div>
+
+<div class="clearer"></div>
+</div>
+
+<div class="footer" role="contentinfo">
+        © <a href="../../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
+    </div>
+</body>
+</html>

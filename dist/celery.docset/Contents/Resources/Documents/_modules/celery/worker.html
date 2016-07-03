@@ -1,17 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>celery.worker &mdash; Celery 3.1.23 documentation</title>
-    
-    <link rel="stylesheet" href="../../_static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>celery.worker — Celery 3.1.23 documentation</title>
+<link href="../../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
         VERSION:     '3.1.23',
@@ -20,46 +16,28 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="copyright" title="Copyright" href="../../copyright.html" />
-    <link rel="top" title="Celery 3.1.23 documentation" href="../../index.html" />
-    <link rel="up" title="Module code" href="../index.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
-      </ul>
-    </div>  
+<script src="../../_static/jquery.js" type="text/javascript"></script>
+<script src="../../_static/underscore.js" type="text/javascript"></script>
+<script src="../../_static/doctools.js" type="text/javascript"></script>
+<link href="../../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="../index.html" rel="up" title="Module code"/>
+</head>
+<body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
 <div class="deck">
-
-    
-        <p>
+<p>
         This document describes the current stable version of Celery (3.1). For development docs,
         <a href="http://docs.celeryproject.org/en/master/_modules/celery/worker.html">go here</a>.
         </p>
-    
-
 </div>
-    <h1>Source code for celery.worker</h1><div class="highlight"><pre>
+<h1>Source code for celery.worker</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="sd">    celery.worker</span>
 <span class="sd">    ~~~~~~~~~~~~~</span>
 
@@ -68,7 +46,7 @@
 <span class="sd">    The worker consists of several components, all managed by bootsteps</span>
 <span class="sd">    (mod:`celery.bootsteps`).</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
 
 <span class="kn">import</span> <span class="nn">os</span>
@@ -99,33 +77,33 @@
 
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">state</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;WorkController&#39;</span><span class="p">,</span> <span class="s1">&#39;default_nodename&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'WorkController'</span><span class="p">,</span> <span class="s1">'default_nodename'</span><span class="p">]</span>
 
 <span class="c1">#: Default socket timeout at shutdown.</span>
 <span class="n">SHUTDOWN_SOCKET_TIMEOUT</span> <span class="o">=</span> <span class="mf">5.0</span>
 
-<span class="n">SELECT_UNKNOWN_QUEUE</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="n">SELECT_UNKNOWN_QUEUE</span> <span class="o">=</span> <span class="s2">"""</span><span class="se">\</span>
 <span class="s2">Trying to select queue subset of {0!r}, but queue {1} is not</span>
 <span class="s2">defined in the CELERY_QUEUES setting.</span>
 
 <span class="s2">If you want to automatically declare unknown queues you can</span>
 <span class="s2">enable the CELERY_CREATE_MISSING_QUEUES setting.</span>
-<span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">"""</span>
 
-<span class="n">DESELECT_UNKNOWN_QUEUE</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="n">DESELECT_UNKNOWN_QUEUE</span> <span class="o">=</span> <span class="s2">"""</span><span class="se">\</span>
 <span class="s2">Trying to deselect queue subset of {0!r}, but queue {1} is not</span>
 <span class="s2">defined in the CELERY_QUEUES setting.</span>
-<span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">"""</span>
 
 
 <span class="k">def</span> <span class="nf">str_to_list</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">string_t</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">','</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">s</span>
 
 
 <div class="viewcode-block" id="WorkController"><a class="viewcode-back" href="../../reference/celery.worker.html#celery.worker.WorkController">[docs]</a><span class="k">class</span> <span class="nc">WorkController</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Unmanaged worker instance.&quot;&quot;&quot;</span>
+    <span class="sd">"""Unmanaged worker instance."""</span>
     <span class="n">app</span> <span class="o">=</span> <span class="bp">None</span>
 
     <span class="n">pidlock</span> <span class="o">=</span> <span class="bp">None</span>
@@ -134,18 +112,18 @@
     <span class="n">semaphore</span> <span class="o">=</span> <span class="bp">None</span>
 
 <div class="viewcode-block" id="WorkController.Blueprint"><a class="viewcode-back" href="../../reference/celery.worker.html#celery.worker.WorkController.Blueprint">[docs]</a>    <span class="k">class</span> <span class="nc">Blueprint</span><span class="p">(</span><span class="n">bootsteps</span><span class="o">.</span><span class="n">Blueprint</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Worker bootstep blueprint.&quot;&quot;&quot;</span>
-        <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Worker&#39;</span>
+        <span class="sd">"""Worker bootstep blueprint."""</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="s1">'Worker'</span>
         <span class="n">default_steps</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span>
-            <span class="s1">&#39;celery.worker.components:Hub&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;celery.worker.components:Queues&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;celery.worker.components:Pool&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;celery.worker.components:Beat&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;celery.worker.components:Timer&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;celery.worker.components:StateDB&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;celery.worker.components:Consumer&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;celery.worker.autoscale:WorkerComponent&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;celery.worker.autoreload:WorkerComponent&#39;</span><span class="p">,</span>
+            <span class="s1">'celery.worker.components:Hub'</span><span class="p">,</span>
+            <span class="s1">'celery.worker.components:Queues'</span><span class="p">,</span>
+            <span class="s1">'celery.worker.components:Pool'</span><span class="p">,</span>
+            <span class="s1">'celery.worker.components:Beat'</span><span class="p">,</span>
+            <span class="s1">'celery.worker.components:Timer'</span><span class="p">,</span>
+            <span class="s1">'celery.worker.components:StateDB'</span><span class="p">,</span>
+            <span class="s1">'celery.worker.components:Consumer'</span><span class="p">,</span>
+            <span class="s1">'celery.worker.autoscale:WorkerComponent'</span><span class="p">,</span>
+            <span class="s1">'celery.worker.autoreload:WorkerComponent'</span><span class="p">,</span>
 
         <span class="p">])</span></div>
 
@@ -261,28 +239,28 @@
         <span class="n">signals</span><span class="o">.</span><span class="n">worker_shutdown</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">sender</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
 
 <div class="viewcode-block" id="WorkController.start"><a class="viewcode-back" href="../../reference/celery.worker.html#celery.worker.WorkController.start">[docs]</a>    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Starts the workers main loop.&quot;&quot;&quot;</span>
+        <span class="sd">"""Starts the workers main loop."""</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">blueprint</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="k">except</span> <span class="n">WorkerTerminate</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">terminate</span><span class="p">()</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Unrecoverable error: </span><span class="si">%r</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">'Unrecoverable error: </span><span class="si">%r</span><span class="s1">'</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
         <span class="k">except</span> <span class="p">(</span><span class="ne">KeyboardInterrupt</span><span class="p">,</span> <span class="ne">SystemExit</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="WorkController.register_with_event_loop"><a class="viewcode-back" href="../../reference/celery.worker.html#celery.worker.WorkController.register_with_event_loop">[docs]</a>    <span class="k">def</span> <span class="nf">register_with_event_loop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hub</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">blueprint</span><span class="o">.</span><span class="n">send_all</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;register_with_event_loop&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">hub</span><span class="p">,</span> <span class="p">),</span>
-            <span class="n">description</span><span class="o">=</span><span class="s1">&#39;hub.register&#39;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="s1">'register_with_event_loop'</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">hub</span><span class="p">,</span> <span class="p">),</span>
+            <span class="n">description</span><span class="o">=</span><span class="s1">'hub.register'</span><span class="p">,</span>
         <span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_process_task_sem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">req</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_quick_acquire</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_process_task</span><span class="p">,</span> <span class="n">req</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_process_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">req</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Process task by sending it to the pool of workers.&quot;&quot;&quot;</span>
+        <span class="sd">"""Process task by sending it to the pool of workers."""</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">req</span><span class="o">.</span><span class="n">execute_using_pool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="p">)</span>
         <span class="k">except</span> <span class="n">TaskRevokedError</span><span class="p">:</span>
@@ -291,7 +269,7 @@
             <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
                 <span class="k">pass</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="s1">&#39;Internal error: </span><span class="si">%r</span><span class="se">\n</span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="s1">'Internal error: </span><span class="si">%r</span><span class="se">\n</span><span class="si">%s</span><span class="s1">'</span><span class="p">,</span>
                             <span class="n">exc</span><span class="p">,</span> <span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">(),</span> <span class="n">exc_info</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
 <div class="viewcode-block" id="WorkController.signal_consumer_close"><a class="viewcode-back" href="../../reference/celery.worker.html#celery.worker.WorkController.signal_consumer_close">[docs]</a>    <span class="k">def</span> <span class="nf">signal_consumer_close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -301,18 +279,18 @@
             <span class="k">pass</span></div>
 
 <div class="viewcode-block" id="WorkController.should_use_eventloop"><a class="viewcode-back" href="../../reference/celery.worker.html#celery.worker.WorkController.should_use_eventloop">[docs]</a>    <span class="k">def</span> <span class="nf">should_use_eventloop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">(</span><span class="n">detect_environment</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;default&#39;</span> <span class="ow">and</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">detect_environment</span><span class="p">()</span> <span class="o">==</span> <span class="s1">'default'</span> <span class="ow">and</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_conninfo</span><span class="o">.</span><span class="n">is_evented</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">IS_WINDOWS</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="WorkController.stop"><a class="viewcode-back" href="../../reference/celery.worker.html#celery.worker.WorkController.stop">[docs]</a>    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">in_sighandler</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Graceful shutdown of the worker server.&quot;&quot;&quot;</span>
+        <span class="sd">"""Graceful shutdown of the worker server."""</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">blueprint</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="n">RUN</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">signal_consumer_close</span><span class="p">()</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">in_sighandler</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="o">.</span><span class="n">signal_safe</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_shutdown</span><span class="p">(</span><span class="n">warm</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="WorkController.terminate"><a class="viewcode-back" href="../../reference/celery.worker.html#celery.worker.WorkController.terminate">[docs]</a>    <span class="k">def</span> <span class="nf">terminate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">in_sighandler</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Not so graceful shutdown of the worker server.&quot;&quot;&quot;</span>
+        <span class="sd">"""Not so graceful shutdown of the worker server."""</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">blueprint</span><span class="o">.</span><span class="n">state</span> <span class="o">!=</span> <span class="n">TERMINATE</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">signal_consumer_close</span><span class="p">()</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">in_sighandler</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="o">.</span><span class="n">signal_safe</span><span class="p">:</span>
@@ -332,10 +310,10 @@
 
         <span class="k">for</span> <span class="n">module</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">modules</span> <span class="ow">or</span> <span class="p">()):</span>
             <span class="k">if</span> <span class="n">module</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
-                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;importing module </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">module</span><span class="p">)</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">'importing module </span><span class="si">%s</span><span class="s1">'</span><span class="p">,</span> <span class="n">module</span><span class="p">)</span>
                 <span class="n">imp</span><span class="p">(</span><span class="n">module</span><span class="p">)</span>
             <span class="k">elif</span> <span class="nb">reload</span><span class="p">:</span>
-                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;reloading module </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">module</span><span class="p">)</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">'reloading module </span><span class="si">%s</span><span class="s1">'</span><span class="p">,</span> <span class="n">module</span><span class="p">)</span>
                 <span class="n">reload_from_cwd</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="n">module</span><span class="p">],</span> <span class="n">reloader</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">consumer</span><span class="p">:</span>
@@ -347,31 +325,31 @@
             <span class="k">pass</span></div>
 
 <div class="viewcode-block" id="WorkController.info"><a class="viewcode-back" href="../../reference/celery.worker.html#celery.worker.WorkController.info">[docs]</a>    <span class="k">def</span> <span class="nf">info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;total&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">total_count</span><span class="p">,</span>
-                <span class="s1">&#39;pid&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">getpid</span><span class="p">(),</span>
-                <span class="s1">&#39;clock&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">clock</span><span class="p">)}</span></div>
+        <span class="k">return</span> <span class="p">{</span><span class="s1">'total'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">total_count</span><span class="p">,</span>
+                <span class="s1">'pid'</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">getpid</span><span class="p">(),</span>
+                <span class="s1">'clock'</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">clock</span><span class="p">)}</span></div>
 
 <div class="viewcode-block" id="WorkController.rusage"><a class="viewcode-back" href="../../reference/celery.worker.html#celery.worker.WorkController.rusage">[docs]</a>    <span class="k">def</span> <span class="nf">rusage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">resource</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;rusage not supported by this platform&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">'rusage not supported by this platform'</span><span class="p">)</span>
         <span class="n">s</span> <span class="o">=</span> <span class="n">resource</span><span class="o">.</span><span class="n">getrusage</span><span class="p">(</span><span class="n">resource</span><span class="o">.</span><span class="n">RUSAGE_SELF</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">{</span>
-            <span class="s1">&#39;utime&#39;</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">ru_utime</span><span class="p">,</span>
-            <span class="s1">&#39;stime&#39;</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">ru_stime</span><span class="p">,</span>
-            <span class="s1">&#39;maxrss&#39;</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">ru_maxrss</span><span class="p">,</span>
-            <span class="s1">&#39;ixrss&#39;</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">ru_ixrss</span><span class="p">,</span>
-            <span class="s1">&#39;idrss&#39;</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">ru_idrss</span><span class="p">,</span>
-            <span class="s1">&#39;isrss&#39;</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">ru_isrss</span><span class="p">,</span>
-            <span class="s1">&#39;minflt&#39;</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">ru_minflt</span><span class="p">,</span>
-            <span class="s1">&#39;majflt&#39;</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">ru_majflt</span><span class="p">,</span>
-            <span class="s1">&#39;nswap&#39;</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">ru_nswap</span><span class="p">,</span>
-            <span class="s1">&#39;inblock&#39;</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">ru_inblock</span><span class="p">,</span>
-            <span class="s1">&#39;oublock&#39;</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">ru_oublock</span><span class="p">,</span>
-            <span class="s1">&#39;msgsnd&#39;</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">ru_msgsnd</span><span class="p">,</span>
-            <span class="s1">&#39;msgrcv&#39;</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">ru_msgrcv</span><span class="p">,</span>
-            <span class="s1">&#39;nsignals&#39;</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">ru_nsignals</span><span class="p">,</span>
-            <span class="s1">&#39;nvcsw&#39;</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">ru_nvcsw</span><span class="p">,</span>
-            <span class="s1">&#39;nivcsw&#39;</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">ru_nivcsw</span><span class="p">,</span>
+            <span class="s1">'utime'</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">ru_utime</span><span class="p">,</span>
+            <span class="s1">'stime'</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">ru_stime</span><span class="p">,</span>
+            <span class="s1">'maxrss'</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">ru_maxrss</span><span class="p">,</span>
+            <span class="s1">'ixrss'</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">ru_ixrss</span><span class="p">,</span>
+            <span class="s1">'idrss'</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">ru_idrss</span><span class="p">,</span>
+            <span class="s1">'isrss'</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">ru_isrss</span><span class="p">,</span>
+            <span class="s1">'minflt'</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">ru_minflt</span><span class="p">,</span>
+            <span class="s1">'majflt'</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">ru_majflt</span><span class="p">,</span>
+            <span class="s1">'nswap'</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">ru_nswap</span><span class="p">,</span>
+            <span class="s1">'inblock'</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">ru_inblock</span><span class="p">,</span>
+            <span class="s1">'oublock'</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">ru_oublock</span><span class="p">,</span>
+            <span class="s1">'msgsnd'</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">ru_msgsnd</span><span class="p">,</span>
+            <span class="s1">'msgrcv'</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">ru_msgrcv</span><span class="p">,</span>
+            <span class="s1">'nsignals'</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">ru_nsignals</span><span class="p">,</span>
+            <span class="s1">'nvcsw'</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">ru_nvcsw</span><span class="p">,</span>
+            <span class="s1">'nivcsw'</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">ru_nivcsw</span><span class="p">,</span>
         <span class="p">}</span></div>
 
 <div class="viewcode-block" id="WorkController.stats"><a class="viewcode-back" href="../../reference/celery.worker.html#celery.worker.WorkController.stats">[docs]</a>    <span class="k">def</span> <span class="nf">stats</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -379,13 +357,13 @@
         <span class="n">info</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">blueprint</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
         <span class="n">info</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">consumer</span><span class="o">.</span><span class="n">blueprint</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">consumer</span><span class="p">))</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">info</span><span class="p">[</span><span class="s1">&#39;rusage&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rusage</span><span class="p">()</span>
+            <span class="n">info</span><span class="p">[</span><span class="s1">'rusage'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rusage</span><span class="p">()</span>
         <span class="k">except</span> <span class="ne">NotImplementedError</span><span class="p">:</span>
-            <span class="n">info</span><span class="p">[</span><span class="s1">&#39;rusage&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;N/A&#39;</span>
+            <span class="n">info</span><span class="p">[</span><span class="s1">'rusage'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'N/A'</span>
         <span class="k">return</span> <span class="n">info</span></div>
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s1">&#39;&lt;Worker: {self.hostname} ({state})&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="k">return</span> <span class="s1">'&lt;Worker: {self.hostname} ({state})&gt;'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">blueprint</span><span class="o">.</span><span class="n">human_state</span><span class="p">(),</span>
         <span class="p">)</span>
 
@@ -406,70 +384,59 @@
                        <span class="n">task_time_limit</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">task_soft_time_limit</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
                        <span class="n">max_tasks_per_child</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">prefetch_multiplier</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
                        <span class="n">disable_rate_limits</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">worker_lost_wait</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">_kw</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">concurrency</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getopt</span><span class="p">(</span><span class="s1">&#39;concurrency&#39;</span><span class="p">,</span> <span class="n">concurrency</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">loglevel</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getopt</span><span class="p">(</span><span class="s1">&#39;log_level&#39;</span><span class="p">,</span> <span class="n">loglevel</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">logfile</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getopt</span><span class="p">(</span><span class="s1">&#39;log_file&#39;</span><span class="p">,</span> <span class="n">logfile</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">send_events</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getopt</span><span class="p">(</span><span class="s1">&#39;send_events&#39;</span><span class="p">,</span> <span class="n">send_events</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">pool_cls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getopt</span><span class="p">(</span><span class="s1">&#39;pool&#39;</span><span class="p">,</span> <span class="n">pool_cls</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">consumer_cls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getopt</span><span class="p">(</span><span class="s1">&#39;consumer&#39;</span><span class="p">,</span> <span class="n">consumer_cls</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">timer_cls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getopt</span><span class="p">(</span><span class="s1">&#39;timer&#39;</span><span class="p">,</span> <span class="n">timer_cls</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">timer_precision</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getopt</span><span class="p">(</span><span class="s1">&#39;timer_precision&#39;</span><span class="p">,</span> <span class="n">timer_precision</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">autoscaler_cls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getopt</span><span class="p">(</span><span class="s1">&#39;autoscaler&#39;</span><span class="p">,</span> <span class="n">autoscaler_cls</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">autoreloader_cls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getopt</span><span class="p">(</span><span class="s1">&#39;autoreloader&#39;</span><span class="p">,</span> <span class="n">autoreloader_cls</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">pool_putlocks</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getopt</span><span class="p">(</span><span class="s1">&#39;pool_putlocks&#39;</span><span class="p">,</span> <span class="n">pool_putlocks</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">pool_restarts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getopt</span><span class="p">(</span><span class="s1">&#39;pool_restarts&#39;</span><span class="p">,</span> <span class="n">pool_restarts</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">force_execv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getopt</span><span class="p">(</span><span class="s1">&#39;force_execv&#39;</span><span class="p">,</span> <span class="n">force_execv</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">state_db</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getopt</span><span class="p">(</span><span class="s1">&#39;state_db&#39;</span><span class="p">,</span> <span class="n">state_db</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">concurrency</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getopt</span><span class="p">(</span><span class="s1">'concurrency'</span><span class="p">,</span> <span class="n">concurrency</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">loglevel</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getopt</span><span class="p">(</span><span class="s1">'log_level'</span><span class="p">,</span> <span class="n">loglevel</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logfile</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getopt</span><span class="p">(</span><span class="s1">'log_file'</span><span class="p">,</span> <span class="n">logfile</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">send_events</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getopt</span><span class="p">(</span><span class="s1">'send_events'</span><span class="p">,</span> <span class="n">send_events</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pool_cls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getopt</span><span class="p">(</span><span class="s1">'pool'</span><span class="p">,</span> <span class="n">pool_cls</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">consumer_cls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getopt</span><span class="p">(</span><span class="s1">'consumer'</span><span class="p">,</span> <span class="n">consumer_cls</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timer_cls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getopt</span><span class="p">(</span><span class="s1">'timer'</span><span class="p">,</span> <span class="n">timer_cls</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timer_precision</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getopt</span><span class="p">(</span><span class="s1">'timer_precision'</span><span class="p">,</span> <span class="n">timer_precision</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">autoscaler_cls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getopt</span><span class="p">(</span><span class="s1">'autoscaler'</span><span class="p">,</span> <span class="n">autoscaler_cls</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">autoreloader_cls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getopt</span><span class="p">(</span><span class="s1">'autoreloader'</span><span class="p">,</span> <span class="n">autoreloader_cls</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pool_putlocks</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getopt</span><span class="p">(</span><span class="s1">'pool_putlocks'</span><span class="p">,</span> <span class="n">pool_putlocks</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pool_restarts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getopt</span><span class="p">(</span><span class="s1">'pool_restarts'</span><span class="p">,</span> <span class="n">pool_restarts</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">force_execv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getopt</span><span class="p">(</span><span class="s1">'force_execv'</span><span class="p">,</span> <span class="n">force_execv</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state_db</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getopt</span><span class="p">(</span><span class="s1">'state_db'</span><span class="p">,</span> <span class="n">state_db</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">schedule_filename</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getopt</span><span class="p">(</span>
-            <span class="s1">&#39;schedule_filename&#39;</span><span class="p">,</span> <span class="n">schedule_filename</span><span class="p">,</span>
+            <span class="s1">'schedule_filename'</span><span class="p">,</span> <span class="n">schedule_filename</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">scheduler_cls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getopt</span><span class="p">(</span>
-            <span class="s1">&#39;celerybeat_scheduler&#39;</span><span class="p">,</span> <span class="n">scheduler_cls</span><span class="p">,</span>
+            <span class="s1">'celerybeat_scheduler'</span><span class="p">,</span> <span class="n">scheduler_cls</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">task_time_limit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getopt</span><span class="p">(</span>
-            <span class="s1">&#39;task_time_limit&#39;</span><span class="p">,</span> <span class="n">task_time_limit</span><span class="p">,</span>
+            <span class="s1">'task_time_limit'</span><span class="p">,</span> <span class="n">task_time_limit</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">task_soft_time_limit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getopt</span><span class="p">(</span>
-            <span class="s1">&#39;task_soft_time_limit&#39;</span><span class="p">,</span> <span class="n">task_soft_time_limit</span><span class="p">,</span>
+            <span class="s1">'task_soft_time_limit'</span><span class="p">,</span> <span class="n">task_soft_time_limit</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">max_tasks_per_child</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getopt</span><span class="p">(</span>
-            <span class="s1">&#39;max_tasks_per_child&#39;</span><span class="p">,</span> <span class="n">max_tasks_per_child</span><span class="p">,</span>
+            <span class="s1">'max_tasks_per_child'</span><span class="p">,</span> <span class="n">max_tasks_per_child</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">prefetch_multiplier</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_getopt</span><span class="p">(</span>
-            <span class="s1">&#39;prefetch_multiplier&#39;</span><span class="p">,</span> <span class="n">prefetch_multiplier</span><span class="p">,</span>
+            <span class="s1">'prefetch_multiplier'</span><span class="p">,</span> <span class="n">prefetch_multiplier</span><span class="p">,</span>
         <span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">disable_rate_limits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getopt</span><span class="p">(</span>
-            <span class="s1">&#39;disable_rate_limits&#39;</span><span class="p">,</span> <span class="n">disable_rate_limits</span><span class="p">,</span>
+            <span class="s1">'disable_rate_limits'</span><span class="p">,</span> <span class="n">disable_rate_limits</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">worker_lost_wait</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getopt</span><span class="p">(</span>
-            <span class="s1">&#39;worker_lost_wait&#39;</span><span class="p">,</span> <span class="n">worker_lost_wait</span><span class="p">,</span>
+            <span class="s1">'worker_lost_wait'</span><span class="p">,</span> <span class="n">worker_lost_wait</span><span class="p">,</span>
         <span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_getopt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">value</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">find_value_for_key</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">namespace</span><span class="o">=</span><span class="s1">&#39;celeryd&#39;</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">find_value_for_key</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">namespace</span><span class="o">=</span><span class="s1">'celeryd'</span><span class="p">)</span></div>
 </pre></div>
+</div>
+</div>
+</div>
 
-          </div>
-        </div>
-      </div>
+<div class="clearer"></div>
+</div>
+
+<div class="footer" role="contentinfo">
+        © <a href="../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &copy; <a href="../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
-    </div>
-  </body>
+</body>
 </html>

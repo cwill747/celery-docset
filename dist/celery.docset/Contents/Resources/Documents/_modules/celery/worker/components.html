@@ -1,17 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>celery.worker.components &mdash; Celery 3.1.23 documentation</title>
-    
-    <link rel="stylesheet" href="../../../_static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>celery.worker.components — Celery 3.1.23 documentation</title>
+<link href="../../../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
         VERSION:     '3.1.23',
@@ -20,53 +16,34 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="copyright" title="Copyright" href="../../../copyright.html" />
-    <link rel="top" title="Celery 3.1.23 documentation" href="../../../index.html" />
-    <link rel="up" title="celery.worker" href="../worker.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="../worker.html" accesskey="U">celery.worker</a> &raquo;</li> 
-      </ul>
-    </div>  
+<script src="../../../_static/jquery.js" type="text/javascript"></script>
+<script src="../../../_static/underscore.js" type="text/javascript"></script>
+<script src="../../../_static/doctools.js" type="text/javascript"></script>
+<link href="../../../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../../../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="../worker.html" rel="up" title="celery.worker"/>
+</head>
+<body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
 <div class="deck">
-
-    
-        <p>
+<p>
         This document describes the current stable version of Celery (3.1). For development docs,
         <a href="http://docs.celeryproject.org/en/master/_modules/celery/worker/components.html">go here</a>.
         </p>
-    
-
 </div>
-    <h1>Source code for celery.worker.components</h1><div class="highlight"><pre>
+<h1>Source code for celery.worker.components</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="sd">    celery.worker.components</span>
 <span class="sd">    ~~~~~~~~~~~~~~~~~~~~~~~~</span>
 
 <span class="sd">    Default worker bootsteps.</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
 
 <span class="kn">import</span> <span class="nn">atexit</span>
@@ -82,22 +59,22 @@
 <span class="kn">from</span> <span class="nn">celery.five</span> <span class="kn">import</span> <span class="n">string_t</span>
 <span class="kn">from</span> <span class="nn">celery.utils.log</span> <span class="kn">import</span> <span class="n">worker_logger</span> <span class="k">as</span> <span class="n">logger</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Timer&#39;</span><span class="p">,</span> <span class="s1">&#39;Hub&#39;</span><span class="p">,</span> <span class="s1">&#39;Queues&#39;</span><span class="p">,</span> <span class="s1">&#39;Pool&#39;</span><span class="p">,</span> <span class="s1">&#39;Beat&#39;</span><span class="p">,</span> <span class="s1">&#39;StateDB&#39;</span><span class="p">,</span> <span class="s1">&#39;Consumer&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Timer'</span><span class="p">,</span> <span class="s1">'Hub'</span><span class="p">,</span> <span class="s1">'Queues'</span><span class="p">,</span> <span class="s1">'Pool'</span><span class="p">,</span> <span class="s1">'Beat'</span><span class="p">,</span> <span class="s1">'StateDB'</span><span class="p">,</span> <span class="s1">'Consumer'</span><span class="p">]</span>
 
-<span class="n">ERR_B_GREEN</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
-<span class="s2">-B option doesn&#39;t work with eventlet/gevent pools: </span><span class="se">\</span>
+<span class="n">ERR_B_GREEN</span> <span class="o">=</span> <span class="s2">"""</span><span class="se">\</span>
+<span class="s2">-B option doesn't work with eventlet/gevent pools: </span><span class="se">\</span>
 <span class="s2">use standalone beat instead.</span><span class="se">\</span>
-<span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">"""</span>
 
-<span class="n">W_POOL_SETTING</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="n">W_POOL_SETTING</span> <span class="o">=</span> <span class="s2">"""</span>
 <span class="s2">The CELERYD_POOL setting should not be used to select the eventlet/gevent</span>
 <span class="s2">pools, instead you *must use the -P* argument so that patches are applied</span>
 <span class="s2">as early as possible.</span>
-<span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">"""</span>
 
 
 <div class="viewcode-block" id="Timer"><a class="viewcode-back" href="../../../internals/reference/celery.worker.components.html#celery.worker.components.Timer">[docs]</a><span class="k">class</span> <span class="nc">Timer</span><span class="p">(</span><span class="n">bootsteps</span><span class="o">.</span><span class="n">Step</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This step initializes the internal timer used by the worker.&quot;&quot;&quot;</span>
+    <span class="sd">"""This step initializes the internal timer used by the worker."""</span>
 
 <div class="viewcode-block" id="Timer.create"><a class="viewcode-back" href="../../../internals/reference/celery.worker.components.html#celery.worker.components.Timer.create">[docs]</a>    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">w</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">w</span><span class="o">.</span><span class="n">use_eventloop</span><span class="p">:</span>
@@ -114,10 +91,10 @@
                                        <span class="n">on_timer_tick</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">on_timer_tick</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Timer.on_timer_error"><a class="viewcode-back" href="../../../internals/reference/celery.worker.components.html#celery.worker.components.Timer.on_timer_error">[docs]</a>    <span class="k">def</span> <span class="nf">on_timer_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc</span><span class="p">):</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Timer error: </span><span class="si">%r</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span></div>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">'Timer error: </span><span class="si">%r</span><span class="s1">'</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Timer.on_timer_tick"><a class="viewcode-back" href="../../../internals/reference/celery.worker.components.html#celery.worker.components.Timer.on_timer_tick">[docs]</a>    <span class="k">def</span> <span class="nf">on_timer_tick</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">delay</span><span class="p">):</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Timer wake-up! Next eta </span><span class="si">%s</span><span class="s1"> secs.&#39;</span><span class="p">,</span> <span class="n">delay</span><span class="p">)</span></div></div>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">'Timer wake-up! Next eta </span><span class="si">%s</span><span class="s1"> secs.'</span><span class="p">,</span> <span class="n">delay</span><span class="p">)</span></div></div>
 
 
 <div class="viewcode-block" id="Hub"><a class="viewcode-back" href="../../../internals/reference/celery.worker.components.html#celery.worker.components.Hub">[docs]</a><span class="k">class</span> <span class="nc">Hub</span><span class="p">(</span><span class="n">bootsteps</span><span class="o">.</span><span class="n">StartStopStep</span><span class="p">):</span>
@@ -148,7 +125,7 @@
     <span class="k">def</span> <span class="nf">_patch_thread_primitives</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">w</span><span class="p">):</span>
         <span class="c1"># make clock use dummy lock</span>
         <span class="n">w</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">clock</span><span class="o">.</span><span class="n">mutex</span> <span class="o">=</span> <span class="n">DummyLock</span><span class="p">()</span>
-        <span class="c1"># multiprocessing&#39;s ApplyResult uses this lock.</span>
+        <span class="c1"># multiprocessing's ApplyResult uses this lock.</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="kn">from</span> <span class="nn">billiard</span> <span class="kn">import</span> <span class="n">pool</span>
         <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
@@ -158,9 +135,9 @@
 
 
 <div class="viewcode-block" id="Queues"><a class="viewcode-back" href="../../../internals/reference/celery.worker.components.html#celery.worker.components.Queues">[docs]</a><span class="k">class</span> <span class="nc">Queues</span><span class="p">(</span><span class="n">bootsteps</span><span class="o">.</span><span class="n">Step</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This bootstep initializes the internal queues</span>
-<span class="sd">    used by the worker.&quot;&quot;&quot;</span>
-    <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Queues (intra)&#39;</span>
+    <span class="sd">"""This bootstep initializes the internal queues</span>
+<span class="sd">    used by the worker."""</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="s1">'Queues (intra)'</span>
     <span class="n">requires</span> <span class="o">=</span> <span class="p">(</span><span class="n">Hub</span><span class="p">,</span> <span class="p">)</span>
 
 <div class="viewcode-block" id="Queues.create"><a class="viewcode-back" href="../../../internals/reference/celery.worker.components.html#celery.worker.components.Queues.create">[docs]</a>    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">w</span><span class="p">):</span>
@@ -171,7 +148,7 @@
 
 
 <div class="viewcode-block" id="Pool"><a class="viewcode-back" href="../../../internals/reference/celery.worker.components.html#celery.worker.components.Pool">[docs]</a><span class="k">class</span> <span class="nc">Pool</span><span class="p">(</span><span class="n">bootsteps</span><span class="o">.</span><span class="n">StartStopStep</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Bootstep managing the worker pool.</span>
+    <span class="sd">"""Bootstep managing the worker pool.</span>
 
 <span class="sd">    Describes how to initialize the worker pool, and starts and stops</span>
 <span class="sd">    the pool during worker startup/shutdown.</span>
@@ -183,13 +160,13 @@
 <span class="sd">        * max_concurrency</span>
 <span class="sd">        * min_concurrency</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">requires</span> <span class="o">=</span> <span class="p">(</span><span class="n">Queues</span><span class="p">,</span> <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">autoscale</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">autoreload</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
                  <span class="n">no_execv</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">optimization</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">autoscale</span><span class="p">,</span> <span class="n">string_t</span><span class="p">):</span>
-            <span class="n">max_c</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">min_c</span> <span class="o">=</span> <span class="n">autoscale</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+            <span class="n">max_c</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">min_c</span> <span class="o">=</span> <span class="n">autoscale</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="s1">','</span><span class="p">)</span>
             <span class="n">autoscale</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">max_c</span><span class="p">),</span> <span class="n">min_c</span> <span class="ow">and</span> <span class="nb">int</span><span class="p">(</span><span class="n">min_c</span><span class="p">)</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">]</span>
         <span class="n">w</span><span class="o">.</span><span class="n">autoscale</span> <span class="o">=</span> <span class="n">autoscale</span>
         <span class="n">w</span><span class="o">.</span><span class="n">pool</span> <span class="o">=</span> <span class="bp">None</span>
@@ -210,7 +187,7 @@
             <span class="n">w</span><span class="o">.</span><span class="n">pool</span><span class="o">.</span><span class="n">terminate</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="Pool.create"><a class="viewcode-back" href="../../../internals/reference/celery.worker.components.html#celery.worker.components.Pool.create">[docs]</a>    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">semaphore</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">max_restarts</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">w</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">CELERYD_POOL</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;eventlet&#39;</span><span class="p">,</span> <span class="s1">&#39;gevent&#39;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">w</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">CELERYD_POOL</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">'eventlet'</span><span class="p">,</span> <span class="s1">'gevent'</span><span class="p">):</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="ne">UserWarning</span><span class="p">(</span><span class="n">W_POOL_SETTING</span><span class="p">))</span>
         <span class="n">threaded</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">w</span><span class="o">.</span><span class="n">use_eventloop</span>
         <span class="n">procs</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">min_concurrency</span>
@@ -240,20 +217,20 @@
         <span class="k">return</span> <span class="n">pool</span></div>
 
 <div class="viewcode-block" id="Pool.info"><a class="viewcode-back" href="../../../internals/reference/celery.worker.components.html#celery.worker.components.Pool.info">[docs]</a>    <span class="k">def</span> <span class="nf">info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">w</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;pool&#39;</span><span class="p">:</span> <span class="n">w</span><span class="o">.</span><span class="n">pool</span><span class="o">.</span><span class="n">info</span> <span class="k">if</span> <span class="n">w</span><span class="o">.</span><span class="n">pool</span> <span class="k">else</span> <span class="s1">&#39;N/A&#39;</span><span class="p">}</span></div>
+        <span class="k">return</span> <span class="p">{</span><span class="s1">'pool'</span><span class="p">:</span> <span class="n">w</span><span class="o">.</span><span class="n">pool</span><span class="o">.</span><span class="n">info</span> <span class="k">if</span> <span class="n">w</span><span class="o">.</span><span class="n">pool</span> <span class="k">else</span> <span class="s1">'N/A'</span><span class="p">}</span></div>
 
 <div class="viewcode-block" id="Pool.register_with_event_loop"><a class="viewcode-back" href="../../../internals/reference/celery.worker.components.html#celery.worker.components.Pool.register_with_event_loop">[docs]</a>    <span class="k">def</span> <span class="nf">register_with_event_loop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">hub</span><span class="p">):</span>
         <span class="n">w</span><span class="o">.</span><span class="n">pool</span><span class="o">.</span><span class="n">register_with_event_loop</span><span class="p">(</span><span class="n">hub</span><span class="p">)</span></div></div>
 
 
 <div class="viewcode-block" id="Beat"><a class="viewcode-back" href="../../../internals/reference/celery.worker.components.html#celery.worker.components.Beat">[docs]</a><span class="k">class</span> <span class="nc">Beat</span><span class="p">(</span><span class="n">bootsteps</span><span class="o">.</span><span class="n">StartStopStep</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Step used to embed a beat process.</span>
+    <span class="sd">"""Step used to embed a beat process.</span>
 
 <span class="sd">    This will only be enabled if the ``beat``</span>
 <span class="sd">    argument is set.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Beat&#39;</span>
+<span class="sd">    """</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="s1">'Beat'</span>
     <span class="n">conditional</span> <span class="o">=</span> <span class="bp">True</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">beat</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -262,7 +239,7 @@
 
 <div class="viewcode-block" id="Beat.create"><a class="viewcode-back" href="../../../internals/reference/celery.worker.components.html#celery.worker.components.Beat.create">[docs]</a>    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">w</span><span class="p">):</span>
         <span class="kn">from</span> <span class="nn">celery.beat</span> <span class="kn">import</span> <span class="n">EmbeddedService</span>
-        <span class="k">if</span> <span class="n">w</span><span class="o">.</span><span class="n">pool_cls</span><span class="o">.</span><span class="n">__module__</span><span class="o">.</span><span class="n">endswith</span><span class="p">((</span><span class="s1">&#39;gevent&#39;</span><span class="p">,</span> <span class="s1">&#39;eventlet&#39;</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">w</span><span class="o">.</span><span class="n">pool_cls</span><span class="o">.</span><span class="n">__module__</span><span class="o">.</span><span class="n">endswith</span><span class="p">((</span><span class="s1">'gevent'</span><span class="p">,</span> <span class="s1">'eventlet'</span><span class="p">)):</span>
             <span class="k">raise</span> <span class="n">ImproperlyConfigured</span><span class="p">(</span><span class="n">ERR_B_GREEN</span><span class="p">)</span>
         <span class="n">b</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">beat</span> <span class="o">=</span> <span class="n">EmbeddedService</span><span class="p">(</span><span class="n">w</span><span class="o">.</span><span class="n">app</span><span class="p">,</span>
                                      <span class="n">schedule_filename</span><span class="o">=</span><span class="n">w</span><span class="o">.</span><span class="n">schedule_filename</span><span class="p">,</span>
@@ -271,7 +248,7 @@
 
 
 <div class="viewcode-block" id="StateDB"><a class="viewcode-back" href="../../../internals/reference/celery.worker.components.html#celery.worker.components.StateDB">[docs]</a><span class="k">class</span> <span class="nc">StateDB</span><span class="p">(</span><span class="n">bootsteps</span><span class="o">.</span><span class="n">Step</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This bootstep sets up the workers state db if enabled.&quot;&quot;&quot;</span>
+    <span class="sd">"""This bootstep sets up the workers state db if enabled."""</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">enabled</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">state_db</span>
@@ -307,27 +284,15 @@
         <span class="p">)</span>
         <span class="k">return</span> <span class="n">c</span></div></div>
 </pre></div>
+</div>
+</div>
+</div>
 
-          </div>
-        </div>
-      </div>
+<div class="clearer"></div>
+</div>
+
+<div class="footer" role="contentinfo">
+        © <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="../worker.html" >celery.worker</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &copy; <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
-    </div>
-  </body>
+</body>
 </html>

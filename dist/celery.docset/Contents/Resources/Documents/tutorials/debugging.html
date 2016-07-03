@@ -1,17 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Debugging Tasks Remotely (using pdb) &mdash; Celery 3.1.23 documentation</title>
-    
-    <link rel="stylesheet" href="../_static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>Debugging Tasks Remotely (using pdb) — Celery 3.1.23 documentation</title>
+<link href="../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
         VERSION:     '3.1.23',
@@ -20,52 +16,28 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="copyright" title="Copyright" href="../copyright.html" />
-    <link rel="top" title="Celery 3.1.23 documentation" href="../index.html" />
-    <link rel="up" title="Tutorials" href="index.html" />
-    <link rel="next" title="Task Cookbook" href="task-cookbook.html" />
-    <link rel="prev" title="Running the worker as a daemon" href="daemonizing.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="task-cookbook.html" title="Task Cookbook"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="daemonizing.html" title="Running the worker as a daemon"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Tutorials</a> &raquo;</li> 
-      </ul>
-    </div>  
+<script src="../_static/jquery.js" type="text/javascript"></script>
+<script src="../_static/underscore.js" type="text/javascript"></script>
+<script src="../_static/doctools.js" type="text/javascript"></script>
+<link href="../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="index.html" rel="up" title="Tutorials"/>
+<link href="task-cookbook.html" rel="next" title="Task Cookbook"/>
+<link href="daemonizing.html" rel="prev" title="Running the worker as a daemon"/>
+</head>
+<body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
 <div class="deck">
-
-    
-        <p>
+<p>
         This document describes the current stable version of Celery (3.1). For development docs,
         <a href="http://docs.celeryproject.org/en/master/tutorials/debugging.html">go here</a>.
         </p>
-    
-
 </div>
-    <div class="section" id="debugging-tasks-remotely-using-pdb">
+<div class="section" id="debugging-tasks-remotely-using-pdb">
 <span id="tut-remote-debug"></span><h1>Debugging Tasks Remotely (using pdb)<a class="headerlink" href="#debugging-tasks-remotely-using-pdb" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="basics">
 <h2>Basics<a class="headerlink" href="#basics" title="Permalink to this headline">¶</a></h2>
@@ -108,7 +80,7 @@ information:</p>
 with a <cite>pdb</cite> shell:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ telnet localhost 6900
 Connected to localhost.
-Escape character is <span class="s1">&#39;^]&#39;</span>.
+Escape character is <span class="s1">'^]'</span>.
 &gt; /opt/devel/demoapp/tasks.py<span class="o">(</span>128<span class="o">)</span>add<span class="o">()</span>
 -&gt; <span class="k">return</span> result
 <span class="o">(</span>Pdb<span class="o">)</span>
@@ -121,7 +93,7 @@ you have never used <cite>pdb</cite> before.</p>
 change it and continue execution of the task:</p>
 <div class="highlight-python3"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">result</span>
 <span class="mi">4</span>
-<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">result</span> <span class="o">=</span> <span class="s1">&#39;hello from rdb&#39;</span>
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">result</span> <span class="o">=</span> <span class="s1">'hello from rdb'</span>
 <span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="k">continue</span>
 <span class="n">Connection</span> <span class="n">closed</span> <span class="n">by</span> <span class="n">foreign</span> <span class="n">host</span><span class="o">.</span>
 </pre></div>
@@ -129,7 +101,7 @@ change it and continue execution of the task:</p>
 <p>The result of our vandalism can be seen in the worker logs:</p>
 <div class="highlight-python3"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">2011</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">18</span> <span class="mi">14</span><span class="p">:</span><span class="mi">35</span><span class="p">:</span><span class="mi">36</span><span class="p">,</span><span class="mi">599</span><span class="p">:</span> <span class="n">INFO</span><span class="o">/</span><span class="n">MainProcess</span><span class="p">]</span> <span class="n">Task</span>
     <span class="n">tasks</span><span class="o">.</span><span class="n">add</span><span class="p">[</span><span class="n">d7261c71</span><span class="o">-</span><span class="mi">4962</span><span class="o">-</span><span class="mi">47</span><span class="n">e5</span><span class="o">-</span><span class="n">b342</span><span class="o">-</span><span class="mi">2448</span><span class="n">bedd20e8</span><span class="p">]</span> <span class="n">succeeded</span>
-    <span class="ow">in</span> <span class="mf">61.481</span><span class="n">s</span><span class="p">:</span> <span class="s1">&#39;hello from rdb&#39;</span>
+    <span class="ow">in</span> <span class="mf">61.481</span><span class="n">s</span><span class="p">:</span> <span class="s1">'hello from rdb'</span>
 </pre></div>
 </div>
 </div>
@@ -151,33 +123,15 @@ This is the case for both main and worker processes.</p>
 </div>
 </div>
 </div>
+</div>
+</div>
+</div>
 
+<div class="clearer"></div>
+</div>
 
-          </div>
-        </div>
-      </div>
+<div class="footer" role="contentinfo">
+        © <a href="../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="task-cookbook.html" title="Task Cookbook"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="daemonizing.html" title="Running the worker as a daemon"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" >Tutorials</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &copy; <a href="../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
-    </div>
-  </body>
+</body>
 </html>

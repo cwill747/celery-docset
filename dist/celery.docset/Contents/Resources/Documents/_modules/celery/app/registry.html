@@ -1,17 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>celery.app.registry &mdash; Celery 3.1.23 documentation</title>
-    
-    <link rel="stylesheet" href="../../../_static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>celery.app.registry — Celery 3.1.23 documentation</title>
+<link href="../../../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
         VERSION:     '3.1.23',
@@ -20,53 +16,34 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="copyright" title="Copyright" href="../../../copyright.html" />
-    <link rel="top" title="Celery 3.1.23 documentation" href="../../../index.html" />
-    <link rel="up" title="celery.app" href="../app.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="../app.html" accesskey="U">celery.app</a> &raquo;</li> 
-      </ul>
-    </div>  
+<script src="../../../_static/jquery.js" type="text/javascript"></script>
+<script src="../../../_static/underscore.js" type="text/javascript"></script>
+<script src="../../../_static/doctools.js" type="text/javascript"></script>
+<link href="../../../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../../../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="../app.html" rel="up" title="celery.app"/>
+</head>
+<body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
 <div class="deck">
-
-    
-        <p>
+<p>
         This document describes the current stable version of Celery (3.1). For development docs,
         <a href="http://docs.celeryproject.org/en/master/_modules/celery/app/registry.html">go here</a>.
         </p>
-    
-
 </div>
-    <h1>Source code for celery.app.registry</h1><div class="highlight"><pre>
+<h1>Source code for celery.app.registry</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="sd">    celery.app.registry</span>
 <span class="sd">    ~~~~~~~~~~~~~~~~~~~</span>
 
 <span class="sd">    Registry of available tasks.</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
 
 <span class="kn">import</span> <span class="nn">inspect</span>
@@ -77,7 +54,7 @@
 <span class="kn">from</span> <span class="nn">celery.exceptions</span> <span class="kn">import</span> <span class="n">NotRegistered</span>
 <span class="kn">from</span> <span class="nn">celery.five</span> <span class="kn">import</span> <span class="n">items</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;TaskRegistry&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'TaskRegistry'</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="TaskRegistry"><a class="viewcode-back" href="../../../reference/celery.app.registry.html#celery.app.registry.TaskRegistry">[docs]</a><span class="k">class</span> <span class="nc">TaskRegistry</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
@@ -87,16 +64,16 @@
         <span class="k">raise</span> <span class="bp">self</span><span class="o">.</span><span class="n">NotRegistered</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
 
 <div class="viewcode-block" id="TaskRegistry.register"><a class="viewcode-back" href="../../../reference/celery.app.registry.html#celery.app.registry.TaskRegistry.register">[docs]</a>    <span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Register a task in the task registry.</span>
+        <span class="sd">"""Register a task in the task registry.</span>
 
 <span class="sd">        The task will be automatically instantiated if not already an</span>
 <span class="sd">        instance.</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">self</span><span class="p">[</span><span class="n">task</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">isclass</span><span class="p">(</span><span class="n">task</span><span class="p">)</span> <span class="ow">and</span> <span class="n">task</span><span class="p">()</span> <span class="ow">or</span> <span class="n">task</span></div>
 
 <div class="viewcode-block" id="TaskRegistry.unregister"><a class="viewcode-back" href="../../../reference/celery.app.registry.html#celery.app.registry.TaskRegistry.unregister">[docs]</a>    <span class="k">def</span> <span class="nf">unregister</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Unregister task by name.</span>
+        <span class="sd">"""Unregister task by name.</span>
 
 <span class="sd">        :param name: name of the task to unregister, or a</span>
 <span class="sd">            :class:`celery.task.base.Task` with a valid `name` attribute.</span>
@@ -104,22 +81,22 @@
 <span class="sd">        :raises celery.exceptions.NotRegistered: if the task has not</span>
 <span class="sd">            been registered.</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="s1">'name'</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
             <span class="k">raise</span> <span class="bp">self</span><span class="o">.</span><span class="n">NotRegistered</span><span class="p">(</span><span class="n">name</span><span class="p">)</span></div>
 
     <span class="c1"># -- these methods are irrelevant now and will be removed in 4.0</span>
 <div class="viewcode-block" id="TaskRegistry.regular"><a class="viewcode-back" href="../../../reference/celery.app.registry.html#celery.app.registry.TaskRegistry.regular">[docs]</a>    <span class="k">def</span> <span class="nf">regular</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_types</span><span class="p">(</span><span class="s1">&#39;regular&#39;</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_types</span><span class="p">(</span><span class="s1">'regular'</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TaskRegistry.periodic"><a class="viewcode-back" href="../../../reference/celery.app.registry.html#celery.app.registry.TaskRegistry.periodic">[docs]</a>    <span class="k">def</span> <span class="nf">periodic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_types</span><span class="p">(</span><span class="s1">&#39;periodic&#39;</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_types</span><span class="p">(</span><span class="s1">'periodic'</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TaskRegistry.filter_types"><a class="viewcode-back" href="../../../reference/celery.app.registry.html#celery.app.registry.TaskRegistry.filter_types">[docs]</a>    <span class="k">def</span> <span class="nf">filter_types</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">type</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">dict</span><span class="p">((</span><span class="n">name</span><span class="p">,</span> <span class="n">task</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">items</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-                    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="s1">&#39;regular&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="nb">type</span><span class="p">)</span></div></div>
+                    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="s1">'type'</span><span class="p">,</span> <span class="s1">'regular'</span><span class="p">)</span> <span class="o">==</span> <span class="nb">type</span><span class="p">)</span></div></div>
 
 
 <span class="k">def</span> <span class="nf">_unpickle_task</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
@@ -131,27 +108,15 @@
         <span class="n">import_module</span><span class="p">(</span><span class="n">module</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">get_current_app</span><span class="p">()</span><span class="o">.</span><span class="n">tasks</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
 </pre></div>
+</div>
+</div>
+</div>
 
-          </div>
-        </div>
-      </div>
+<div class="clearer"></div>
+</div>
+
+<div class="footer" role="contentinfo">
+        © <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="../app.html" >celery.app</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &copy; <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
-    </div>
-  </body>
+</body>
 </html>

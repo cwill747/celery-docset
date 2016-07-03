@@ -1,17 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>celery.events.snapshot &mdash; Celery 3.1.23 documentation</title>
-    
-    <link rel="stylesheet" href="../../../_static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>celery.events.snapshot — Celery 3.1.23 documentation</title>
+<link href="../../../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
         VERSION:     '3.1.23',
@@ -20,47 +16,28 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="copyright" title="Copyright" href="../../../copyright.html" />
-    <link rel="top" title="Celery 3.1.23 documentation" href="../../../index.html" />
-    <link rel="up" title="celery.events" href="../events.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="../events.html" accesskey="U">celery.events</a> &raquo;</li> 
-      </ul>
-    </div>  
+<script src="../../../_static/jquery.js" type="text/javascript"></script>
+<script src="../../../_static/underscore.js" type="text/javascript"></script>
+<script src="../../../_static/doctools.js" type="text/javascript"></script>
+<link href="../../../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../../../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="../events.html" rel="up" title="celery.events"/>
+</head>
+<body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
 <div class="deck">
-
-    
-        <p>
+<p>
         This document describes the current stable version of Celery (3.1). For development docs,
         <a href="http://docs.celeryproject.org/en/master/_modules/celery/events/snapshot.html">go here</a>.
         </p>
-    
-
 </div>
-    <h1>Source code for celery.events.snapshot</h1><div class="highlight"><pre>
+<h1>Source code for celery.events.snapshot</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="sd">    celery.events.snapshot</span>
 <span class="sd">    ~~~~~~~~~~~~~~~~~~~~~~</span>
 
@@ -70,7 +47,7 @@
 <span class="sd">    implementation of this writing the snapshots to a database</span>
 <span class="sd">    in :mod:`djcelery.snapshots` in the `django-celery` distribution.</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
 
 <span class="kn">from</span> <span class="nn">kombu.utils.limits</span> <span class="kn">import</span> <span class="n">TokenBucket</span>
@@ -83,14 +60,14 @@
 <span class="kn">from</span> <span class="nn">celery.utils.log</span> <span class="kn">import</span> <span class="n">get_logger</span>
 <span class="kn">from</span> <span class="nn">celery.utils.timeutils</span> <span class="kn">import</span> <span class="n">rate</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Polaroid&#39;</span><span class="p">,</span> <span class="s1">&#39;evcam&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Polaroid'</span><span class="p">,</span> <span class="s1">'evcam'</span><span class="p">]</span>
 
-<span class="n">logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="s1">&#39;celery.evcam&#39;</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="s1">'celery.evcam'</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="Polaroid"><a class="viewcode-back" href="../../../internals/reference/celery.events.snapshot.html#celery.events.snapshot.Polaroid">[docs]</a><span class="k">class</span> <span class="nc">Polaroid</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="n">timer</span> <span class="o">=</span> <span class="bp">None</span>
-    <span class="n">shutter_signal</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="n">providing_args</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;state&#39;</span><span class="p">,</span> <span class="p">))</span>
+    <span class="n">shutter_signal</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="n">providing_args</span><span class="o">=</span><span class="p">(</span><span class="s1">'state'</span><span class="p">,</span> <span class="p">))</span>
     <span class="n">cleanup_signal</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">()</span>
     <span class="n">clear_after</span> <span class="o">=</span> <span class="bp">False</span>
 
@@ -120,13 +97,13 @@
         <span class="k">pass</span></div>
 
 <div class="viewcode-block" id="Polaroid.cleanup"><a class="viewcode-back" href="../../../internals/reference/celery.events.snapshot.html#celery.events.snapshot.Polaroid.cleanup">[docs]</a>    <span class="k">def</span> <span class="nf">cleanup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Cleanup: Running...&#39;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">'Cleanup: Running...'</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cleanup_signal</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">on_cleanup</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="Polaroid.shutter"><a class="viewcode-back" href="../../../internals/reference/celery.events.snapshot.html#celery.events.snapshot.Polaroid.shutter">[docs]</a>    <span class="k">def</span> <span class="nf">shutter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">maxrate</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">maxrate</span><span class="o">.</span><span class="n">can_consume</span><span class="p">():</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Shutter: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">'Shutter: </span><span class="si">%s</span><span class="s1">'</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">shutter_signal</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">on_shutter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">)</span></div>
 
@@ -157,14 +134,14 @@
 
     <span class="n">app</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">setup_logging_subsystem</span><span class="p">(</span><span class="n">loglevel</span><span class="p">,</span> <span class="n">logfile</span><span class="p">)</span>
 
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;-&gt; evcam: Taking snapshots with {0} (every {1} secs.)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'-&gt; evcam: Taking snapshots with {0} (every {1} secs.)'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
         <span class="n">camera</span><span class="p">,</span> <span class="n">freq</span><span class="p">))</span>
     <span class="n">state</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">State</span><span class="p">()</span>
     <span class="n">cam</span> <span class="o">=</span> <span class="n">instantiate</span><span class="p">(</span><span class="n">camera</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="n">freq</span><span class="p">,</span>
                       <span class="n">maxrate</span><span class="o">=</span><span class="n">maxrate</span><span class="p">,</span> <span class="n">timer</span><span class="o">=</span><span class="n">timer</span><span class="p">)</span>
     <span class="n">cam</span><span class="o">.</span><span class="n">install</span><span class="p">()</span>
     <span class="n">conn</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">connection</span><span class="p">()</span>
-    <span class="n">recv</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">Receiver</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">handlers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;*&#39;</span><span class="p">:</span> <span class="n">state</span><span class="o">.</span><span class="n">event</span><span class="p">})</span>
+    <span class="n">recv</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">Receiver</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">handlers</span><span class="o">=</span><span class="p">{</span><span class="s1">'*'</span><span class="p">:</span> <span class="n">state</span><span class="o">.</span><span class="n">event</span><span class="p">})</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">recv</span><span class="o">.</span><span class="n">capture</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
@@ -174,27 +151,15 @@
         <span class="n">cam</span><span class="o">.</span><span class="n">cancel</span><span class="p">()</span>
         <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 </pre></div>
+</div>
+</div>
+</div>
 
-          </div>
-        </div>
-      </div>
+<div class="clearer"></div>
+</div>
+
+<div class="footer" role="contentinfo">
+        © <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="../events.html" >celery.events</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &copy; <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
-    </div>
-  </body>
+</body>
 </html>

@@ -1,17 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>celery.backends.rpc &mdash; Celery 3.1.23 documentation</title>
-    
-    <link rel="stylesheet" href="../../../_static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>celery.backends.rpc — Celery 3.1.23 documentation</title>
+<link href="../../../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
         VERSION:     '3.1.23',
@@ -20,53 +16,34 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="copyright" title="Copyright" href="../../../copyright.html" />
-    <link rel="top" title="Celery 3.1.23 documentation" href="../../../index.html" />
-    <link rel="up" title="celery.backends" href="../backends.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="../backends.html" accesskey="U">celery.backends</a> &raquo;</li> 
-      </ul>
-    </div>  
+<script src="../../../_static/jquery.js" type="text/javascript"></script>
+<script src="../../../_static/underscore.js" type="text/javascript"></script>
+<script src="../../../_static/doctools.js" type="text/javascript"></script>
+<link href="../../../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../../../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="../backends.html" rel="up" title="celery.backends"/>
+</head>
+<body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
 <div class="deck">
-
-    
-        <p>
+<p>
         This document describes the current stable version of Celery (3.1). For development docs,
         <a href="http://docs.celeryproject.org/en/master/_modules/celery/backends/rpc.html">go here</a>.
         </p>
-    
-
 </div>
-    <h1>Source code for celery.backends.rpc</h1><div class="highlight"><pre>
+<h1>Source code for celery.backends.rpc</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="sd">    celery.backends.rpc</span>
 <span class="sd">    ~~~~~~~~~~~~~~~~~~~</span>
 
 <span class="sd">    RPC-style result backend, using reply-to and one queue per client.</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
 
 <span class="kn">from</span> <span class="nn">kombu</span> <span class="kn">import</span> <span class="n">Consumer</span><span class="p">,</span> <span class="n">Exchange</span>
@@ -76,7 +53,7 @@
 <span class="kn">from</span> <span class="nn">celery</span> <span class="kn">import</span> <span class="n">current_task</span>
 <span class="kn">from</span> <span class="nn">celery.backends</span> <span class="kn">import</span> <span class="n">amqp</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;RPCBackend&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'RPCBackend'</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="RPCBackend"><a class="viewcode-back" href="../../../internals/reference/celery.backends.rpc.html#celery.backends.rpc.RPCBackend">[docs]</a><span class="k">class</span> <span class="nc">RPCBackend</span><span class="p">(</span><span class="n">amqp</span><span class="o">.</span><span class="n">AMQPBackend</span><span class="p">):</span>
@@ -85,7 +62,7 @@
 <div class="viewcode-block" id="RPCBackend.Consumer"><a class="viewcode-back" href="../../../internals/reference/celery.backends.rpc.html#celery.backends.rpc.RPCBackend.Consumer">[docs]</a>    <span class="k">class</span> <span class="nc">Consumer</span><span class="p">(</span><span class="n">Consumer</span><span class="p">):</span>
         <span class="n">auto_declare</span> <span class="o">=</span> <span class="bp">False</span></div>
 
-    <span class="k">def</span> <span class="nf">_create_exchange</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;direct&#39;</span><span class="p">,</span> <span class="n">delivery_mode</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_create_exchange</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">'direct'</span><span class="p">,</span> <span class="n">delivery_mode</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
         <span class="c1"># uses direct to queue routing (anon exchange).</span>
         <span class="k">return</span> <span class="n">Exchange</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
 
@@ -108,7 +85,7 @@
             <span class="n">request</span> <span class="o">=</span> <span class="n">request</span> <span class="ow">or</span> <span class="n">current_task</span><span class="o">.</span><span class="n">request</span>
         <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
-                <span class="s1">&#39;RPC backend missing task request for {0!r}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">task_id</span><span class="p">),</span>
+                <span class="s1">'RPC backend missing task request for {0!r}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">task_id</span><span class="p">),</span>
             <span class="p">)</span>
         <span class="k">return</span> <span class="n">request</span><span class="o">.</span><span class="n">reply_to</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">correlation_id</span> <span class="ow">or</span> <span class="n">task_id</span></div>
 
@@ -116,7 +93,7 @@
         <span class="k">pass</span></div>
 
 <div class="viewcode-block" id="RPCBackend.as_uri"><a class="viewcode-back" href="../../../internals/reference/celery.backends.rpc.html#celery.backends.rpc.RPCBackend.as_uri">[docs]</a>    <span class="k">def</span> <span class="nf">as_uri</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">include_password</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s1">&#39;rpc://&#39;</span></div>
+        <span class="k">return</span> <span class="s1">'rpc://'</span></div>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">binding</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -127,27 +104,15 @@
 <div class="viewcode-block" id="RPCBackend.oid"><a class="viewcode-back" href="../../../internals/reference/celery.backends.rpc.html#celery.backends.rpc.RPCBackend.oid">[docs]</a>    <span class="k">def</span> <span class="nf">oid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">oid</span></div></div>
 </pre></div>
+</div>
+</div>
+</div>
 
-          </div>
-        </div>
-      </div>
+<div class="clearer"></div>
+</div>
+
+<div class="footer" role="contentinfo">
+        © <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="../backends.html" >celery.backends</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &copy; <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
-    </div>
-  </body>
+</body>
 </html>

@@ -1,17 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>celery.utils.timeutils &mdash; Celery 3.1.23 documentation</title>
-    
-    <link rel="stylesheet" href="../../../_static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>celery.utils.timeutils — Celery 3.1.23 documentation</title>
+<link href="../../../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
         VERSION:     '3.1.23',
@@ -20,53 +16,34 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="copyright" title="Copyright" href="../../../copyright.html" />
-    <link rel="top" title="Celery 3.1.23 documentation" href="../../../index.html" />
-    <link rel="up" title="celery.utils" href="../utils.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="../utils.html" accesskey="U">celery.utils</a> &raquo;</li> 
-      </ul>
-    </div>  
+<script src="../../../_static/jquery.js" type="text/javascript"></script>
+<script src="../../../_static/underscore.js" type="text/javascript"></script>
+<script src="../../../_static/doctools.js" type="text/javascript"></script>
+<link href="../../../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../../../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="../utils.html" rel="up" title="celery.utils"/>
+</head>
+<body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
 <div class="deck">
-
-    
-        <p>
+<p>
         This document describes the current stable version of Celery (3.1). For development docs,
         <a href="http://docs.celeryproject.org/en/master/_modules/celery/utils/timeutils.html">go here</a>.
         </p>
-    
-
 </div>
-    <h1>Source code for celery.utils.timeutils</h1><div class="highlight"><pre>
+<h1>Source code for celery.utils.timeutils</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="sd">    celery.utils.timeutils</span>
 <span class="sd">    ~~~~~~~~~~~~~~~~~~~~~~</span>
 
 <span class="sd">    This module contains various utilities related to dates and times.</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
 
 <span class="kn">import</span> <span class="nn">numbers</span>
@@ -88,28 +65,28 @@
 <span class="kn">from</span> <span class="nn">.iso8601</span> <span class="kn">import</span> <span class="n">parse_iso8601</span>
 <span class="kn">from</span> <span class="nn">.text</span> <span class="kn">import</span> <span class="n">pluralize</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;LocalTimezone&#39;</span><span class="p">,</span> <span class="s1">&#39;timezone&#39;</span><span class="p">,</span> <span class="s1">&#39;maybe_timedelta&#39;</span><span class="p">,</span> <span class="s1">&#39;timedelta_seconds&#39;</span><span class="p">,</span>
-           <span class="s1">&#39;delta_resolution&#39;</span><span class="p">,</span> <span class="s1">&#39;remaining&#39;</span><span class="p">,</span> <span class="s1">&#39;rate&#39;</span><span class="p">,</span> <span class="s1">&#39;weekday&#39;</span><span class="p">,</span>
-           <span class="s1">&#39;humanize_seconds&#39;</span><span class="p">,</span> <span class="s1">&#39;maybe_iso8601&#39;</span><span class="p">,</span> <span class="s1">&#39;is_naive&#39;</span><span class="p">,</span> <span class="s1">&#39;make_aware&#39;</span><span class="p">,</span>
-           <span class="s1">&#39;localize&#39;</span><span class="p">,</span> <span class="s1">&#39;to_utc&#39;</span><span class="p">,</span> <span class="s1">&#39;maybe_make_aware&#39;</span><span class="p">,</span> <span class="s1">&#39;ffwd&#39;</span><span class="p">,</span> <span class="s1">&#39;utcoffset&#39;</span><span class="p">,</span>
-           <span class="s1">&#39;adjust_timestamp&#39;</span><span class="p">,</span> <span class="s1">&#39;maybe_s_to_ms&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'LocalTimezone'</span><span class="p">,</span> <span class="s1">'timezone'</span><span class="p">,</span> <span class="s1">'maybe_timedelta'</span><span class="p">,</span> <span class="s1">'timedelta_seconds'</span><span class="p">,</span>
+           <span class="s1">'delta_resolution'</span><span class="p">,</span> <span class="s1">'remaining'</span><span class="p">,</span> <span class="s1">'rate'</span><span class="p">,</span> <span class="s1">'weekday'</span><span class="p">,</span>
+           <span class="s1">'humanize_seconds'</span><span class="p">,</span> <span class="s1">'maybe_iso8601'</span><span class="p">,</span> <span class="s1">'is_naive'</span><span class="p">,</span> <span class="s1">'make_aware'</span><span class="p">,</span>
+           <span class="s1">'localize'</span><span class="p">,</span> <span class="s1">'to_utc'</span><span class="p">,</span> <span class="s1">'maybe_make_aware'</span><span class="p">,</span> <span class="s1">'ffwd'</span><span class="p">,</span> <span class="s1">'utcoffset'</span><span class="p">,</span>
+           <span class="s1">'adjust_timestamp'</span><span class="p">,</span> <span class="s1">'maybe_s_to_ms'</span><span class="p">]</span>
 
 <span class="n">PY3</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span>
 <span class="n">PY33</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 
-<span class="n">C_REMDEBUG</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;C_REMDEBUG&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+<span class="n">C_REMDEBUG</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'C_REMDEBUG'</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
 
-<span class="n">DAYNAMES</span> <span class="o">=</span> <span class="s1">&#39;sun&#39;</span><span class="p">,</span> <span class="s1">&#39;mon&#39;</span><span class="p">,</span> <span class="s1">&#39;tue&#39;</span><span class="p">,</span> <span class="s1">&#39;wed&#39;</span><span class="p">,</span> <span class="s1">&#39;thu&#39;</span><span class="p">,</span> <span class="s1">&#39;fri&#39;</span><span class="p">,</span> <span class="s1">&#39;sat&#39;</span>
+<span class="n">DAYNAMES</span> <span class="o">=</span> <span class="s1">'sun'</span><span class="p">,</span> <span class="s1">'mon'</span><span class="p">,</span> <span class="s1">'tue'</span><span class="p">,</span> <span class="s1">'wed'</span><span class="p">,</span> <span class="s1">'thu'</span><span class="p">,</span> <span class="s1">'fri'</span><span class="p">,</span> <span class="s1">'sat'</span>
 <span class="n">WEEKDAYS</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">DAYNAMES</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">)))</span>
 
-<span class="n">RATE_MODIFIER_MAP</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;s&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">n</span><span class="p">,</span>
-                     <span class="s1">&#39;m&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">n</span> <span class="o">/</span> <span class="mf">60.0</span><span class="p">,</span>
-                     <span class="s1">&#39;h&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">n</span> <span class="o">/</span> <span class="mf">60.0</span> <span class="o">/</span> <span class="mf">60.0</span><span class="p">}</span>
+<span class="n">RATE_MODIFIER_MAP</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'s'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">n</span><span class="p">,</span>
+                     <span class="s1">'m'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">n</span> <span class="o">/</span> <span class="mf">60.0</span><span class="p">,</span>
+                     <span class="s1">'h'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">n</span> <span class="o">/</span> <span class="mf">60.0</span> <span class="o">/</span> <span class="mf">60.0</span><span class="p">}</span>
 
-<span class="n">TIME_UNITS</span> <span class="o">=</span> <span class="p">((</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mf">24.0</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="s1">&#39;.2f&#39;</span><span class="p">)),</span>
-              <span class="p">(</span><span class="s1">&#39;hour&#39;</span><span class="p">,</span> <span class="mi">60</span> <span class="o">*</span> <span class="mf">60.0</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="s1">&#39;.2f&#39;</span><span class="p">)),</span>
-              <span class="p">(</span><span class="s1">&#39;minute&#39;</span><span class="p">,</span> <span class="mf">60.0</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="s1">&#39;.2f&#39;</span><span class="p">)),</span>
-              <span class="p">(</span><span class="s1">&#39;second&#39;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="s1">&#39;.2f&#39;</span><span class="p">)))</span>
+<span class="n">TIME_UNITS</span> <span class="o">=</span> <span class="p">((</span><span class="s1">'day'</span><span class="p">,</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mf">24.0</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="s1">'.2f'</span><span class="p">)),</span>
+              <span class="p">(</span><span class="s1">'hour'</span><span class="p">,</span> <span class="mi">60</span> <span class="o">*</span> <span class="mf">60.0</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="s1">'.2f'</span><span class="p">)),</span>
+              <span class="p">(</span><span class="s1">'minute'</span><span class="p">,</span> <span class="mf">60.0</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="s1">'.2f'</span><span class="p">)),</span>
+              <span class="p">(</span><span class="s1">'second'</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="s1">'.2f'</span><span class="p">)))</span>
 
 <span class="n">ZERO</span> <span class="o">=</span> <span class="n">timedelta</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
@@ -117,10 +94,10 @@
 
 
 <div class="viewcode-block" id="LocalTimezone"><a class="viewcode-back" href="../../../internals/reference/celery.utils.timeutils.html#celery.utils.timeutils.LocalTimezone">[docs]</a><span class="k">class</span> <span class="nc">LocalTimezone</span><span class="p">(</span><span class="n">tzinfo</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Local time implementation taken from Python&#39;s docs.</span>
+    <span class="sd">"""Local time implementation taken from Python's docs.</span>
 
 <span class="sd">    Used only when UTC is not enabled.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">_offset_cache</span> <span class="o">=</span> <span class="p">{}</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -135,7 +112,7 @@
         <span class="n">tzinfo</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s1">&#39;&lt;LocalTimezone: UTC{0:+03d}&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="k">return</span> <span class="s1">'&lt;LocalTimezone: UTC{0:+03d}&gt;'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
             <span class="nb">int</span><span class="p">(</span><span class="n">timedelta_seconds</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">DSTOFFSET</span><span class="p">)</span> <span class="o">/</span> <span class="mi">3600</span><span class="p">),</span>
         <span class="p">)</span>
 
@@ -154,8 +131,8 @@
             <span class="c1"># The base tzinfo class no longer implements a DST</span>
             <span class="c1"># offset aware .fromutc() in Python3 (Issue #2306).</span>
 
-            <span class="c1"># I&#39;d rather rely on pytz to do this, than port</span>
-            <span class="c1"># the C code from cpython&#39;s fromutc [asksol]</span>
+            <span class="c1"># I'd rather rely on pytz to do this, than port</span>
+            <span class="c1"># the C code from cpython's fromutc [asksol]</span>
             <span class="n">offset</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">utcoffset</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span><span class="o">.</span><span class="n">seconds</span> <span class="o">/</span> <span class="mf">60.0</span><span class="p">)</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">tz</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_offset_cache</span><span class="p">[</span><span class="n">offset</span><span class="p">]</span>
@@ -212,26 +189,26 @@
 
     <span class="nd">@cached_property</span>
     <span class="k">def</span> <span class="nf">utc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_timezone</span><span class="p">(</span><span class="s1">&#39;UTC&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_timezone</span><span class="p">(</span><span class="s1">'UTC'</span><span class="p">)</span>
 <span class="n">timezone</span> <span class="o">=</span> <span class="n">_Zone</span><span class="p">()</span>
 
 
 <div class="viewcode-block" id="maybe_timedelta"><a class="viewcode-back" href="../../../internals/reference/celery.utils.timeutils.html#celery.utils.timeutils.maybe_timedelta">[docs]</a><span class="k">def</span> <span class="nf">maybe_timedelta</span><span class="p">(</span><span class="n">delta</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Coerces integer to timedelta if `delta` is an integer.&quot;&quot;&quot;</span>
+    <span class="sd">"""Coerces integer to timedelta if `delta` is an integer."""</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">delta</span><span class="p">,</span> <span class="n">numbers</span><span class="o">.</span><span class="n">Real</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="n">delta</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">delta</span></div>
 
 
 <div class="viewcode-block" id="delta_resolution"><a class="viewcode-back" href="../../../internals/reference/celery.utils.timeutils.html#celery.utils.timeutils.delta_resolution">[docs]</a><span class="k">def</span> <span class="nf">delta_resolution</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">delta</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Round a datetime to the resolution of a timedelta.</span>
+    <span class="sd">"""Round a datetime to the resolution of a timedelta.</span>
 
 <span class="sd">    If the timedelta is in days, the datetime will be rounded</span>
 <span class="sd">    to the nearest days, if the timedelta is in hours the datetime</span>
 <span class="sd">    will be rounded to the nearest hour, and so on until seconds</span>
 <span class="sd">    which will just return the original datetime.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">delta</span> <span class="o">=</span> <span class="n">timedelta_seconds</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span>
 
     <span class="n">resolutions</span> <span class="o">=</span> <span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">/</span> <span class="mi">86400</span><span class="p">),</span>
@@ -246,9 +223,9 @@
 
 
 <div class="viewcode-block" id="remaining"><a class="viewcode-back" href="../../../internals/reference/celery.utils.timeutils.html#celery.utils.timeutils.remaining">[docs]</a><span class="k">def</span> <span class="nf">remaining</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">ends_in</span><span class="p">,</span> <span class="n">now</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">relative</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Calculate the remaining time for a start date and a timedelta.</span>
+    <span class="sd">"""Calculate the remaining time for a start date and a timedelta.</span>
 
-<span class="sd">    e.g. &quot;how many seconds left for 30 seconds after start?&quot;</span>
+<span class="sd">    e.g. "how many seconds left for 30 seconds after start?"</span>
 
 <span class="sd">    :param start: Start :class:`~datetime.datetime`.</span>
 <span class="sd">    :param ends_in: The end delta as a :class:`~datetime.timedelta`.</span>
@@ -258,38 +235,38 @@
 <span class="sd">    :keyword now: Function returning the current time and date,</span>
 <span class="sd">        defaults to :func:`datetime.utcnow`.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">now</span> <span class="o">=</span> <span class="n">now</span> <span class="ow">or</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span>
     <span class="n">end_date</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="n">ends_in</span>
     <span class="k">if</span> <span class="n">relative</span><span class="p">:</span>
         <span class="n">end_date</span> <span class="o">=</span> <span class="n">delta_resolution</span><span class="p">(</span><span class="n">end_date</span><span class="p">,</span> <span class="n">ends_in</span><span class="p">)</span>
     <span class="n">ret</span> <span class="o">=</span> <span class="n">end_date</span> <span class="o">-</span> <span class="n">now</span>
     <span class="k">if</span> <span class="n">C_REMDEBUG</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
-        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;rem: NOW:</span><span class="si">%r</span><span class="s1"> START:</span><span class="si">%r</span><span class="s1"> ENDS_IN:</span><span class="si">%r</span><span class="s1"> END_DATE:</span><span class="si">%s</span><span class="s1"> REM:</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">'rem: NOW:</span><span class="si">%r</span><span class="s1"> START:</span><span class="si">%r</span><span class="s1"> ENDS_IN:</span><span class="si">%r</span><span class="s1"> END_DATE:</span><span class="si">%s</span><span class="s1"> REM:</span><span class="si">%s</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span>
             <span class="n">now</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">ends_in</span><span class="p">,</span> <span class="n">end_date</span><span class="p">,</span> <span class="n">ret</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">ret</span></div>
 
 
 <div class="viewcode-block" id="rate"><a class="viewcode-back" href="../../../internals/reference/celery.utils.timeutils.html#celery.utils.timeutils.rate">[docs]</a><span class="k">def</span> <span class="nf">rate</span><span class="p">(</span><span class="n">rate</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Parse rate strings, such as `&quot;100/m&quot;`, `&quot;2/h&quot;` or `&quot;0.5/s&quot;`</span>
-<span class="sd">    and convert them to seconds.&quot;&quot;&quot;</span>
+    <span class="sd">"""Parse rate strings, such as `"100/m"`, `"2/h"` or `"0.5/s"`</span>
+<span class="sd">    and convert them to seconds."""</span>
     <span class="k">if</span> <span class="n">rate</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">rate</span><span class="p">,</span> <span class="n">string_t</span><span class="p">):</span>
-            <span class="n">ops</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">modifier</span> <span class="o">=</span> <span class="n">rate</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
-            <span class="k">return</span> <span class="n">RATE_MODIFIER_MAP</span><span class="p">[</span><span class="n">modifier</span> <span class="ow">or</span> <span class="s1">&#39;s&#39;</span><span class="p">](</span><span class="nb">float</span><span class="p">(</span><span class="n">ops</span><span class="p">))</span> <span class="ow">or</span> <span class="mi">0</span>
+            <span class="n">ops</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">modifier</span> <span class="o">=</span> <span class="n">rate</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="s1">'/'</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">RATE_MODIFIER_MAP</span><span class="p">[</span><span class="n">modifier</span> <span class="ow">or</span> <span class="s1">'s'</span><span class="p">](</span><span class="nb">float</span><span class="p">(</span><span class="n">ops</span><span class="p">))</span> <span class="ow">or</span> <span class="mi">0</span>
         <span class="k">return</span> <span class="n">rate</span> <span class="ow">or</span> <span class="mi">0</span>
     <span class="k">return</span> <span class="mi">0</span></div>
 
 
 <div class="viewcode-block" id="weekday"><a class="viewcode-back" href="../../../internals/reference/celery.utils.timeutils.html#celery.utils.timeutils.weekday">[docs]</a><span class="k">def</span> <span class="nf">weekday</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return the position of a weekday (0 - 7, where 0 is Sunday).</span>
+    <span class="sd">"""Return the position of a weekday (0 - 7, where 0 is Sunday).</span>
 
 <span class="sd">    Example::</span>
 
-<span class="sd">        &gt;&gt;&gt; weekday(&#39;sunday&#39;), weekday(&#39;sun&#39;), weekday(&#39;mon&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; weekday('sunday'), weekday('sun'), weekday('mon')</span>
 <span class="sd">        (0, 0, 1)</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">abbreviation</span> <span class="o">=</span> <span class="n">name</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">WEEKDAYS</span><span class="p">[</span><span class="n">abbreviation</span><span class="p">]</span>
@@ -298,25 +275,25 @@
         <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">name</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="humanize_seconds"><a class="viewcode-back" href="../../../internals/reference/celery.utils.timeutils.html#celery.utils.timeutils.humanize_seconds">[docs]</a><span class="k">def</span> <span class="nf">humanize_seconds</span><span class="p">(</span><span class="n">secs</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">now</span><span class="o">=</span><span class="s1">&#39;now&#39;</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Show seconds in human form, e.g. 60 is &quot;1 minute&quot;, 7200 is &quot;2</span>
-<span class="sd">    hours&quot;.</span>
+<div class="viewcode-block" id="humanize_seconds"><a class="viewcode-back" href="../../../internals/reference/celery.utils.timeutils.html#celery.utils.timeutils.humanize_seconds">[docs]</a><span class="k">def</span> <span class="nf">humanize_seconds</span><span class="p">(</span><span class="n">secs</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">now</span><span class="o">=</span><span class="s1">'now'</span><span class="p">):</span>
+    <span class="sd">"""Show seconds in human form, e.g. 60 is "1 minute", 7200 is "2</span>
+<span class="sd">    hours".</span>
 
 <span class="sd">    :keyword prefix: Can be used to add a preposition to the output,</span>
-<span class="sd">        e.g. &#39;in&#39; will give &#39;in 1 second&#39;, but add nothing to &#39;now&#39;.</span>
+<span class="sd">        e.g. 'in' will give 'in 1 second', but add nothing to 'now'.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">secs</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">secs</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">unit</span><span class="p">,</span> <span class="n">divider</span><span class="p">,</span> <span class="n">formatter</span> <span class="ow">in</span> <span class="n">TIME_UNITS</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">secs</span> <span class="o">&gt;=</span> <span class="n">divider</span><span class="p">:</span>
             <span class="n">w</span> <span class="o">=</span> <span class="n">secs</span> <span class="o">/</span> <span class="n">divider</span>
-            <span class="k">return</span> <span class="s1">&#39;{0}{1}{2} {3}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="n">sep</span><span class="p">,</span> <span class="n">formatter</span><span class="p">(</span><span class="n">w</span><span class="p">),</span>
+            <span class="k">return</span> <span class="s1">'{0}{1}{2} {3}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="n">sep</span><span class="p">,</span> <span class="n">formatter</span><span class="p">(</span><span class="n">w</span><span class="p">),</span>
                                           <span class="n">pluralize</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">unit</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">now</span></div>
 
 
 <div class="viewcode-block" id="maybe_iso8601"><a class="viewcode-back" href="../../../internals/reference/celery.utils.timeutils.html#celery.utils.timeutils.maybe_iso8601">[docs]</a><span class="k">def</span> <span class="nf">maybe_iso8601</span><span class="p">(</span><span class="n">dt</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;`Either datetime | str -&gt; datetime or None -&gt; None`&quot;&quot;&quot;</span>
+    <span class="sd">"""`Either datetime | str -&gt; datetime or None -&gt; None`"""</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">dt</span><span class="p">:</span>
         <span class="k">return</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">datetime</span><span class="p">):</span>
@@ -325,13 +302,13 @@
 
 
 <div class="viewcode-block" id="is_naive"><a class="viewcode-back" href="../../../internals/reference/celery.utils.timeutils.html#celery.utils.timeutils.is_naive">[docs]</a><span class="k">def</span> <span class="nf">is_naive</span><span class="p">(</span><span class="n">dt</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return :const:`True` if the datetime is naive</span>
-<span class="sd">    (does not have timezone information).&quot;&quot;&quot;</span>
+    <span class="sd">"""Return :const:`True` if the datetime is naive</span>
+<span class="sd">    (does not have timezone information)."""</span>
     <span class="k">return</span> <span class="n">dt</span><span class="o">.</span><span class="n">tzinfo</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">dt</span><span class="o">.</span><span class="n">tzinfo</span><span class="o">.</span><span class="n">utcoffset</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span> <span class="ow">is</span> <span class="bp">None</span></div>
 
 
 <div class="viewcode-block" id="make_aware"><a class="viewcode-back" href="../../../internals/reference/celery.utils.timeutils.html#celery.utils.timeutils.make_aware">[docs]</a><span class="k">def</span> <span class="nf">make_aware</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">tz</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Sets the timezone for a datetime object.&quot;&quot;&quot;</span>
+    <span class="sd">"""Sets the timezone for a datetime object."""</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">_localize</span> <span class="o">=</span> <span class="n">tz</span><span class="o">.</span><span class="n">localize</span>
     <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
@@ -346,7 +323,7 @@
 
 
 <div class="viewcode-block" id="localize"><a class="viewcode-back" href="../../../internals/reference/celery.utils.timeutils.html#celery.utils.timeutils.localize">[docs]</a><span class="k">def</span> <span class="nf">localize</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">tz</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Convert aware datetime to another timezone.&quot;&quot;&quot;</span>
+    <span class="sd">"""Convert aware datetime to another timezone."""</span>
     <span class="n">dt</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">astimezone</span><span class="p">(</span><span class="n">tz</span><span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">_normalize</span> <span class="o">=</span> <span class="n">tz</span><span class="o">.</span><span class="n">normalize</span>
@@ -363,7 +340,7 @@
 
 
 <div class="viewcode-block" id="to_utc"><a class="viewcode-back" href="../../../internals/reference/celery.utils.timeutils.html#celery.utils.timeutils.to_utc">[docs]</a><span class="k">def</span> <span class="nf">to_utc</span><span class="p">(</span><span class="n">dt</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Converts naive datetime to UTC&quot;&quot;&quot;</span>
+    <span class="sd">"""Converts naive datetime to UTC"""</span>
     <span class="k">return</span> <span class="n">make_aware</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span></div>
 
 
@@ -376,7 +353,7 @@
 
 
 <div class="viewcode-block" id="ffwd"><a class="viewcode-back" href="../../../internals/reference/celery.utils.timeutils.html#celery.utils.timeutils.ffwd">[docs]</a><span class="k">class</span> <span class="nc">ffwd</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Version of relativedelta that only supports addition.&quot;&quot;&quot;</span>
+    <span class="sd">"""Version of relativedelta that only supports addition."""</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">weeks</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">weekday</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
                  <span class="n">hour</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">minute</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">second</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">microsecond</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
@@ -394,7 +371,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_has_time</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hour</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">minute</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span>
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">reprcall</span><span class="p">(</span><span class="s1">&#39;ffwd&#39;</span><span class="p">,</span> <span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fields</span><span class="p">(</span><span class="n">weeks</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">weeks</span><span class="p">,</span>
+        <span class="k">return</span> <span class="n">reprcall</span><span class="p">(</span><span class="s1">'ffwd'</span><span class="p">,</span> <span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fields</span><span class="p">(</span><span class="n">weeks</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">weeks</span><span class="p">,</span>
                                                  <span class="n">weekday</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">weekday</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">__radd__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
@@ -411,9 +388,9 @@
 
     <span class="k">def</span> <span class="nf">_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">extra</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">dictfilter</span><span class="p">({</span>
-            <span class="s1">&#39;year&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="s1">&#39;day&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">day</span><span class="p">,</span>
-            <span class="s1">&#39;hour&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">hour</span><span class="p">,</span> <span class="s1">&#39;minute&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">minute</span><span class="p">,</span>
-            <span class="s1">&#39;second&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">second</span><span class="p">,</span> <span class="s1">&#39;microsecond&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">microsecond</span><span class="p">,</span>
+            <span class="s1">'year'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="s1">'month'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="s1">'day'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">day</span><span class="p">,</span>
+            <span class="s1">'hour'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">hour</span><span class="p">,</span> <span class="s1">'minute'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">minute</span><span class="p">,</span>
+            <span class="s1">'second'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">second</span><span class="p">,</span> <span class="s1">'microsecond'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">microsecond</span><span class="p">,</span>
         <span class="p">},</span> <span class="o">**</span><span class="n">extra</span><span class="p">)</span></div>
 
 
@@ -430,27 +407,15 @@
 <div class="viewcode-block" id="maybe_s_to_ms"><a class="viewcode-back" href="../../../internals/reference/celery.utils.timeutils.html#celery.utils.timeutils.maybe_s_to_ms">[docs]</a><span class="k">def</span> <span class="nf">maybe_s_to_ms</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
     <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1000.0</span><span class="p">)</span> <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="k">else</span> <span class="n">v</span></div>
 </pre></div>
+</div>
+</div>
+</div>
 
-          </div>
-        </div>
-      </div>
+<div class="clearer"></div>
+</div>
+
+<div class="footer" role="contentinfo">
+        © <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="../utils.html" >celery.utils</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &copy; <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
-    </div>
-  </body>
+</body>
 </html>

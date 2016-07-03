@@ -1,17 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Change history for Celery 1.0 &mdash; Celery 3.1.23 documentation</title>
-    
-    <link rel="stylesheet" href="../_static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>Change history for Celery 1.0 — Celery 3.1.23 documentation</title>
+<link href="../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
         VERSION:     '3.1.23',
@@ -20,52 +16,28 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="copyright" title="Copyright" href="../copyright.html" />
-    <link rel="top" title="Celery 3.1.23 documentation" href="../index.html" />
-    <link rel="up" title="History" href="index.html" />
-    <link rel="next" title="Glossary" href="../glossary.html" />
-    <link rel="prev" title="Change history for Celery 2.0" href="changelog-2.0.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="../glossary.html" title="Glossary"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="changelog-2.0.html" title="Change history for Celery 2.0"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">History</a> &raquo;</li> 
-      </ul>
-    </div>  
+<script src="../_static/jquery.js" type="text/javascript"></script>
+<script src="../_static/underscore.js" type="text/javascript"></script>
+<script src="../_static/doctools.js" type="text/javascript"></script>
+<link href="../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="index.html" rel="up" title="History"/>
+<link href="../glossary.html" rel="next" title="Glossary"/>
+<link href="changelog-2.0.html" rel="prev" title="Change history for Celery 2.0"/>
+</head>
+<body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
 <div class="deck">
-
-    
-        <p>
+<p>
         This document describes the current stable version of Celery (3.1). For development docs,
         <a href="http://docs.celeryproject.org/en/master/history/changelog-1.0.html">go here</a>.
         </p>
-    
-
 </div>
-    <div class="section" id="change-history-for-celery-1-0">
+<div class="section" id="change-history-for-celery-1-0">
 <span id="changelog-1-0"></span><h1>Change history for Celery 1.0<a class="headerlink" href="#change-history-for-celery-1-0" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
@@ -141,8 +113,8 @@
 <div class="section" id="version-1-0-6">
 <span id="id1"></span><h2><a class="toc-backref" href="#id41">1.0.6</a><a class="headerlink" href="#version-1-0-6" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2010-06-30 09:57 A.M CEST</td>
 </tr>
@@ -153,7 +125,7 @@
 <ul>
 <li><p class="first">RabbitMQ 1.8.0 has extended their exchange equivalence tests to
 include <cite>auto_delete</cite> and <cite>durable</cite>. This broke the AMQP backend.</p>
-<p>If you&#8217;ve already used the AMQP backend this means you have to
+<p>If you’ve already used the AMQP backend this means you have to
 delete the previous definitions:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ camqadm exchange.delete celeryresults
 </pre></div>
@@ -168,8 +140,8 @@ delete the previous definitions:</p>
 <div class="section" id="version-1-0-5">
 <span id="id2"></span><h2><a class="toc-backref" href="#id42">1.0.5</a><a class="headerlink" href="#version-1-0-5" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2010-06-01 02:36 P.M CEST</td>
 </tr>
@@ -198,7 +170,7 @@ the consumers.</p>
 now it correctly logs the exceptions and shuts down.</p>
 </li>
 <li><p class="first">worker: Prefetch counts was set too late. QoS is now set as early as possible,
-so the worker: can&#8217;t slurp in all the messages at start-up.</p>
+so the worker: can’t slurp in all the messages at start-up.</p>
 </li>
 </ul>
 </div>
@@ -244,8 +216,8 @@ on error.</p>
 <div class="section" id="version-1-0-4">
 <span id="id3"></span><h2><a class="toc-backref" href="#id45">1.0.4</a><a class="headerlink" href="#version-1-0-4" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2010-05-31 09:54 A.M CEST</td>
 </tr>
@@ -260,8 +232,8 @@ on error.</p>
 <div class="section" id="version-1-0-3">
 <span id="id4"></span><h2><a class="toc-backref" href="#id46">1.0.3</a><a class="headerlink" href="#version-1-0-3" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2010-05-15 03:00 P.M CEST</td>
 </tr>
@@ -274,7 +246,7 @@ on error.</p>
 <ul>
 <li><p class="first">Messages are now acknowledged <em>just before</em> the task function is executed.</p>
 <blockquote>
-<div><p>This is the behavior we&#8217;ve wanted all along, but couldn&#8217;t have because of
+<div><p>This is the behavior we’ve wanted all along, but couldn’t have because of
 limitations in the multiprocessing module.
 The previous behavior was not good, and the situation worsened with the
 release of 1.0.1, so this change will definitely improve
@@ -331,7 +303,7 @@ applications, but desirable for others.</p>
 <blockquote>
 <div><p>Like a cron job, you can specify units of time of when
 you would like the task to execute. While not a full implementation
-of cron&#8217;s features, it should provide a fair degree of common scheduling
+of cron’s features, it should provide a fair degree of common scheduling
 needs.</p>
 <p>You can specify a minute (0-59), an hour (0-23), and/or a day of the
 week (0-6 where 0 is Sunday, or by names: sun, mon, tue, wed, thu, fri,
@@ -342,21 +314,21 @@ sat).</p>
 
 <span class="nd">@periodic_task</span><span class="p">(</span><span class="n">run_every</span><span class="o">=</span><span class="n">crontab</span><span class="p">(</span><span class="n">hour</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">minute</span><span class="o">=</span><span class="mi">30</span><span class="p">))</span>
 <span class="k">def</span> <span class="nf">every_morning</span><span class="p">():</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Runs every morning at 7:30a.m&quot;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">"Runs every morning at 7:30a.m"</span><span class="p">)</span>
 
-<span class="nd">@periodic_task</span><span class="p">(</span><span class="n">run_every</span><span class="o">=</span><span class="n">crontab</span><span class="p">(</span><span class="n">hour</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">minute</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">day_of_week</span><span class="o">=</span><span class="s2">&quot;mon&quot;</span><span class="p">))</span>
+<span class="nd">@periodic_task</span><span class="p">(</span><span class="n">run_every</span><span class="o">=</span><span class="n">crontab</span><span class="p">(</span><span class="n">hour</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">minute</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">day_of_week</span><span class="o">=</span><span class="s2">"mon"</span><span class="p">))</span>
 <span class="k">def</span> <span class="nf">every_monday_morning</span><span class="p">():</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Run every monday morning at 7:30a.m&quot;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">"Run every monday morning at 7:30a.m"</span><span class="p">)</span>
 
 <span class="nd">@periodic_task</span><span class="p">(</span><span class="n">run_every</span><span class="o">=</span><span class="n">crontab</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="mi">30</span><span class="p">))</span>
 <span class="k">def</span> <span class="nf">every_hour</span><span class="p">():</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Runs every hour on the clock. e.g. 1:30, 2:30, 3:30 etc.&quot;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">"Runs every hour on the clock. e.g. 1:30, 2:30, 3:30 etc."</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">This a late addition. While we have unittests, due to the
-nature of this feature we haven&#8217;t been able to completely test this
+nature of this feature we haven’t been able to completely test this
 in practice, so consider this experimental.</p>
 </div>
 </div></blockquote>
@@ -377,10 +349,10 @@ sets of tasks.</p>
 <li><p class="first">Added experimental support for a <em>started</em> status on tasks.</p>
 <blockquote>
 <div><p>If <cite>Task.track_started</cite> is enabled the task will report its status
-as &#8220;started&#8221; when the task is executed by a worker.</p>
+as “started” when the task is executed by a worker.</p>
 <p>The default value is <cite>False</cite> as the normal behaviour is to not
 report that level of granularity. Tasks are either pending, finished,
-or waiting to be retried. Having a &#8220;started&#8221; status can be useful for
+or waiting to be retried. Having a “started” status can be useful for
 when there are long running tasks and there is a need to report which
 task is currently running.</p>
 <p>The global default can be overridden by the <a class="reference internal" href="../configuration.html#std:setting-CELERY_TRACK_STARTED"><code class="xref std std-setting docutils literal"><span class="pre">CELERY_TRACK_STARTED</span></code></a>
@@ -408,23 +380,23 @@ is the maximum number of replies to get.</p>
 <ul>
 <li><p class="first">rate_limit(task_name, destination=all, reply=False, timeout=1, limit=0)</p>
 <blockquote>
-<div><p>Worker returns <cite>{&#8220;ok&#8221;: message}</cite> on success,
-or <cite>{&#8220;failure&#8221;: message}</cite> on failure.</p>
+<div><p>Worker returns <cite>{“ok”: message}</cite> on success,
+or <cite>{“failure”: message}</cite> on failure.</p>
 <div class="highlight-python3"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">celery.task.control</span> <span class="k">import</span> <span class="n">rate_limit</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">rate_limit</span><span class="p">(</span><span class="s2">&quot;tasks.add&quot;</span><span class="p">,</span> <span class="s2">&quot;10/s&quot;</span><span class="p">,</span> <span class="n">reply</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="go">[{&#39;worker1&#39;: {&#39;ok&#39;: &#39;new rate limit set successfully&#39;}},</span>
-<span class="go"> {&#39;worker2&#39;: {&#39;ok&#39;: &#39;new rate limit set successfully&#39;}}]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rate_limit</span><span class="p">(</span><span class="s2">"tasks.add"</span><span class="p">,</span> <span class="s2">"10/s"</span><span class="p">,</span> <span class="n">reply</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">[{'worker1': {'ok': 'new rate limit set successfully'}},</span>
+<span class="go"> {'worker2': {'ok': 'new rate limit set successfully'}}]</span>
 </pre></div>
 </div>
 </div></blockquote>
 </li>
 <li><p class="first">ping(destination=all, reply=False, timeout=1, limit=0)</p>
 <blockquote>
-<div><p>Worker returns the simple message <cite>&#8220;pong&#8221;</cite>.</p>
+<div><p>Worker returns the simple message <cite>“pong”</cite>.</p>
 <div class="highlight-python3"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">celery.task.control</span> <span class="k">import</span> <span class="n">ping</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ping</span><span class="p">(</span><span class="n">reply</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="go">[{&#39;worker1&#39;: &#39;pong&#39;},</span>
-<span class="go"> {&#39;worker2&#39;: &#39;pong&#39;},</span>
+<span class="go">[{'worker1': 'pong'},</span>
+<span class="go"> {'worker2': 'pong'},</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -433,9 +405,9 @@ or <cite>{&#8220;failure&#8221;: message}</cite> on failure.</p>
 <blockquote>
 <div><p>Worker simply returns <cite>True</cite>.</p>
 <div class="highlight-python3"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">celery.task.control</span> <span class="k">import</span> <span class="n">revoke</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">revoke</span><span class="p">(</span><span class="s2">&quot;419e46eb-cf6a-4271-86a8-442b7124132c&quot;</span><span class="p">,</span> <span class="n">reply</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="go">[{&#39;worker1&#39;: True},</span>
-<span class="go"> {&#39;worker2&#39;; True}]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">revoke</span><span class="p">(</span><span class="s2">"419e46eb-cf6a-4271-86a8-442b7124132c"</span><span class="p">,</span> <span class="n">reply</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">[{'worker1': True},</span>
+<span class="go"> {'worker2'; True}]</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -453,21 +425,21 @@ registry. Registering a command is done using
 <span class="nd">@Panel.register</span>
 <span class="k">def</span> <span class="nf">reset_broker_connection</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="n">state</span><span class="o">.</span><span class="n">consumer</span><span class="o">.</span><span class="n">reset_connection</span><span class="p">()</span>
-    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;ok&quot;</span><span class="p">:</span> <span class="s2">&quot;connection re-established&quot;</span><span class="p">}</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">"ok"</span><span class="p">:</span> <span class="s2">"connection re-established"</span><span class="p">}</span>
 </pre></div>
 </div>
 <p>With this module imported in the worker, you can launch the command
 using <cite>celery.task.control.broadcast</cite>:</p>
 <div class="highlight-python3"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">celery.task.control</span> <span class="k">import</span> <span class="n">broadcast</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">broadcast</span><span class="p">(</span><span class="s2">&quot;reset_broker_connection&quot;</span><span class="p">,</span> <span class="n">reply</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="go">[{&#39;worker1&#39;: {&#39;ok&#39;: &#39;connection re-established&#39;},</span>
-<span class="go"> {&#39;worker2&#39;: {&#39;ok&#39;: &#39;connection re-established&#39;}}]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">broadcast</span><span class="p">(</span><span class="s2">"reset_broker_connection"</span><span class="p">,</span> <span class="n">reply</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">[{'worker1': {'ok': 'connection re-established'},</span>
+<span class="go"> {'worker2': {'ok': 'connection re-established'}}]</span>
 </pre></div>
 </div>
 <p><strong>TIP</strong> You can choose the worker(s) to receive the command
 by using the <cite>destination</cite> argument:</p>
-<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">broadcast</span><span class="p">(</span><span class="s2">&quot;reset_broker_connection&quot;</span><span class="p">,</span> <span class="n">destination</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;worker1&quot;</span><span class="p">])</span>
-<span class="go">[{&#39;worker1&#39;: {&#39;ok&#39;: &#39;connection re-established&#39;}]</span>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">broadcast</span><span class="p">(</span><span class="s2">"reset_broker_connection"</span><span class="p">,</span> <span class="n">destination</span><span class="o">=</span><span class="p">[</span><span class="s2">"worker1"</span><span class="p">])</span>
+<span class="go">[{'worker1': {'ok': 'connection re-established'}]</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -476,8 +448,8 @@ by using the <cite>destination</cite> argument:</p>
 <blockquote>
 <div><p>Dumps tasks reserved by the worker, waiting to be executed:</p>
 <div class="highlight-python3"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">celery.task.control</span> <span class="k">import</span> <span class="n">broadcast</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">broadcast</span><span class="p">(</span><span class="s2">&quot;dump_reserved&quot;</span><span class="p">,</span> <span class="n">reply</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="go">[{&#39;myworker1&#39;: [&lt;TaskRequest ....&gt;]}]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">broadcast</span><span class="p">(</span><span class="s2">"dump_reserved"</span><span class="p">,</span> <span class="n">reply</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">[{'myworker1': [&lt;TaskRequest ....&gt;]}]</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -488,27 +460,27 @@ by using the <cite>destination</cite> argument:</p>
 These are tasks with an <cite>eta</cite> (or <cite>countdown</cite>) argument
 waiting to be executed by the worker.</p>
 <div class="highlight-python3"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">celery.task.control</span> <span class="k">import</span> <span class="n">broadcast</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">broadcast</span><span class="p">(</span><span class="s2">&quot;dump_schedule&quot;</span><span class="p">,</span> <span class="n">reply</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="go">[{&#39;w1&#39;: []},</span>
-<span class="go"> {&#39;w3&#39;: []},</span>
-<span class="go"> {&#39;w2&#39;: [&#39;0. 2010-05-12 11:06:00 pri0 &lt;TaskRequest</span>
-<span class="go">            {name:&quot;opalfeeds.tasks.refresh_feed_slice&quot;,</span>
-<span class="go">             id:&quot;95b45760-4e73-4ce8-8eac-f100aa80273a&quot;,</span>
-<span class="go">             args:&quot;(&lt;Feeds freq_max:3600 freq_min:60</span>
-<span class="go">                           start:2184.0 stop:3276.0&gt;,)&quot;,</span>
-<span class="go">             kwargs:&quot;{&#39;page&#39;: 2}&quot;}&gt;&#39;]},</span>
-<span class="go"> {&#39;w4&#39;: [&#39;0. 2010-05-12 11:00:00 pri0 &lt;TaskRequest</span>
-<span class="go">            {name:&quot;opalfeeds.tasks.refresh_feed_slice&quot;,</span>
-<span class="go">             id:&quot;c053480b-58fb-422f-ae68-8d30a464edfe&quot;,</span>
-<span class="go">             args:&quot;(&lt;Feeds freq_max:3600 freq_min:60</span>
-<span class="go">                           start:1092.0 stop:2184.0&gt;,)&quot;,</span>
-<span class="go">             kwargs:&quot;{\&#39;page\&#39;: 1}&quot;}&gt;&#39;,</span>
-<span class="go">        &#39;1. 2010-05-12 11:12:00 pri0 &lt;TaskRequest</span>
-<span class="go">            {name:&quot;opalfeeds.tasks.refresh_feed_slice&quot;,</span>
-<span class="go">             id:&quot;ab8bc59e-6cf8-44b8-88d0-f1af57789758&quot;,</span>
-<span class="go">             args:&quot;(&lt;Feeds freq_max:3600 freq_min:60</span>
-<span class="go">                           start:3276.0 stop:4365&gt;,)&quot;,</span>
-<span class="go">             kwargs:&quot;{\&#39;page\&#39;: 3}&quot;}&gt;&#39;]}]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">broadcast</span><span class="p">(</span><span class="s2">"dump_schedule"</span><span class="p">,</span> <span class="n">reply</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">[{'w1': []},</span>
+<span class="go"> {'w3': []},</span>
+<span class="go"> {'w2': ['0. 2010-05-12 11:06:00 pri0 &lt;TaskRequest</span>
+<span class="go">            {name:"opalfeeds.tasks.refresh_feed_slice",</span>
+<span class="go">             id:"95b45760-4e73-4ce8-8eac-f100aa80273a",</span>
+<span class="go">             args:"(&lt;Feeds freq_max:3600 freq_min:60</span>
+<span class="go">                           start:2184.0 stop:3276.0&gt;,)",</span>
+<span class="go">             kwargs:"{'page': 2}"}&gt;']},</span>
+<span class="go"> {'w4': ['0. 2010-05-12 11:00:00 pri0 &lt;TaskRequest</span>
+<span class="go">            {name:"opalfeeds.tasks.refresh_feed_slice",</span>
+<span class="go">             id:"c053480b-58fb-422f-ae68-8d30a464edfe",</span>
+<span class="go">             args:"(&lt;Feeds freq_max:3600 freq_min:60</span>
+<span class="go">                           start:1092.0 stop:2184.0&gt;,)",</span>
+<span class="go">             kwargs:"{\'page\': 1}"}&gt;',</span>
+<span class="go">        '1. 2010-05-12 11:12:00 pri0 &lt;TaskRequest</span>
+<span class="go">            {name:"opalfeeds.tasks.refresh_feed_slice",</span>
+<span class="go">             id:"ab8bc59e-6cf8-44b8-88d0-f1af57789758",</span>
+<span class="go">             args:"(&lt;Feeds freq_max:3600 freq_min:60</span>
+<span class="go">                           start:3276.0 stop:4365&gt;,)",</span>
+<span class="go">             kwargs:"{\'page\': 3}"}&gt;']}]</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -539,8 +511,8 @@ not empty string.</p>
 <div class="section" id="version-1-0-2">
 <span id="id5"></span><h2><a class="toc-backref" href="#id51">1.0.2</a><a class="headerlink" href="#version-1-0-2" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2010-03-31 12:50 P.M CET</td>
 </tr>
@@ -568,14 +540,14 @@ can easily be traced.</p>
 </dd>
 </dl>
 <p>To revert to the previous behavior you can set:</p>
-<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">CELERYD_TASK_LOG_FORMAT</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">CELERYD_TASK_LOG_FORMAT</span> <span class="o">=</span> <span class="s2">"""</span>
 <span class="s2">    [</span><span class="si">%(asctime)s</span><span class="s2">: </span><span class="si">%(levelname)s</span><span class="s2">/</span><span class="si">%(processName)s</span><span class="s2">] </span><span class="si">%(message)s</span><span class="s2"></span>
-<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="s2">"""</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
 </pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p class="first">Unit tests: Don&#8217;t disable the django test database tear down,
+<li><p class="first">Unit tests: Don’t disable the django test database tear down,
 instead fixed the underlying issue which was caused by modifications
 to the <cite>DATABASE_NAME</cite> setting (<a class="reference external" href="https://github.com/celery/celery/issues/82"><span class="xref issue">Issue #82</span></a>).</p>
 </li>
@@ -584,7 +556,7 @@ tasks to reuse the same database connection)</p>
 <blockquote>
 <div><p>The default is to use a new connection for every task.
 We would very much like to reuse the connection, but a safe number of
-reuses is not known, and we don&#8217;t have any way to handle the errors
+reuses is not known, and we don’t have any way to handle the errors
 that might happen, which may even be database dependent.</p>
 <p>See: <a class="reference external" href="http://bit.ly/94fwdd">http://bit.ly/94fwdd</a></p>
 </div></blockquote>
@@ -594,10 +566,10 @@ that might happen, which may even be database dependent.</p>
 <code class="xref std std-setting docutils literal"><span class="pre">CELERYD_ETA_SCHEDULER</span></code>.</p>
 <blockquote>
 <div><p>The default configuration is as follows:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">CELERYD_POOL</span> <span class="o">=</span> <span class="s2">&quot;celery.concurrency.processes.TaskPool&quot;</span>
-<span class="n">CELERYD_MEDIATOR</span> <span class="o">=</span> <span class="s2">&quot;celery.worker.controllers.Mediator&quot;</span>
-<span class="n">CELERYD_ETA_SCHEDULER</span> <span class="o">=</span> <span class="s2">&quot;celery.worker.controllers.ScheduleController&quot;</span>
-<span class="n">CELERYD_CONSUMER</span> <span class="o">=</span> <span class="s2">&quot;celery.worker.consumer.Consumer&quot;</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">CELERYD_POOL</span> <span class="o">=</span> <span class="s2">"celery.concurrency.processes.TaskPool"</span>
+<span class="n">CELERYD_MEDIATOR</span> <span class="o">=</span> <span class="s2">"celery.worker.controllers.Mediator"</span>
+<span class="n">CELERYD_ETA_SCHEDULER</span> <span class="o">=</span> <span class="s2">"celery.worker.controllers.ScheduleController"</span>
+<span class="n">CELERYD_CONSUMER</span> <span class="o">=</span> <span class="s2">"celery.worker.consumer.Consumer"</span>
 </pre></div>
 </div>
 <p>The <a class="reference internal" href="../configuration.html#std:setting-CELERYD_POOL"><code class="xref std std-setting docutils literal"><span class="pre">CELERYD_POOL</span></code></a> setting makes it easy to swap out the
@@ -639,8 +611,8 @@ emitting an error message.</p>
 <div class="section" id="version-1-0-1">
 <span id="id6"></span><h2><a class="toc-backref" href="#id52">1.0.1</a><a class="headerlink" href="#version-1-0-1" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2010-02-24 07:05 P.M CET</td>
 </tr>
@@ -660,7 +632,7 @@ all the way into the pool needs to be executed before the worker can
 safely terminate (this is at most the number of pool workers, multiplied
 by the <a class="reference internal" href="../configuration.html#std:setting-CELERYD_PREFETCH_MULTIPLIER"><code class="xref std std-setting docutils literal"><span class="pre">CELERYD_PREFETCH_MULTIPLIER</span></code></a> setting.)</p>
 <p>We multiply the prefetch count by default to increase the performance at
-times with bursts of tasks with a short execution time. If this doesn&#8217;t
+times with bursts of tasks with a short execution time. If this doesn’t
 apply to your use case, you should be able to set the prefetch multiplier
 to zero, without sacrificing performance.</p>
 <div class="admonition note">
@@ -680,14 +652,14 @@ this means it tries to terminate as soon as possible.</p>
 <li><p class="first">Caching of results now moved to the base backend classes, so no need
 to implement this functionality in the base classes.</p>
 </li>
-<li><p class="first">Caches are now also limited in size, so their memory usage doesn&#8217;t grow
+<li><p class="first">Caches are now also limited in size, so their memory usage doesn’t grow
 out of control.</p>
 <blockquote>
 <div><p>You can set the maximum number of results the cache
 can hold using the <a class="reference internal" href="../configuration.html#std:setting-CELERY_MAX_CACHED_RESULTS"><code class="xref std std-setting docutils literal"><span class="pre">CELERY_MAX_CACHED_RESULTS</span></code></a> setting (the
 default is five thousand results). In addition, you can refetch already
 retrieved results using <cite>backend.reload_task_result</cite> +
-<cite>backend.reload_taskset_result</cite> (that&#8217;s for those who want to send
+<cite>backend.reload_taskset_result</cite> (that’s for those who want to send
 results incrementally).</p>
 </div></blockquote>
 </li>
@@ -695,7 +667,7 @@ results incrementally).</p>
 <blockquote>
 <div><div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p>If you&#8217;re using Celery with Django, you can&#8217;t use <cite>project.settings</cite>
+<p>If you’re using Celery with Django, you can’t use <cite>project.settings</cite>
 as the settings module name, but the following should work:</p>
 <div class="last highlight-bash"><div class="highlight"><pre><span></span>$ python manage.py celeryd --settings<span class="o">=</span>settings
 </pre></div>
@@ -715,9 +687,9 @@ introduced, which can apply tasks using just the task name (useful
 if the client does not have the destination task in its task registry).</p>
 <p>Example:</p>
 <div class="highlight-python3"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">celery.execute</span> <span class="k">import</span> <span class="n">send_task</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">send_task</span><span class="p">(</span><span class="s2">&quot;celery.ping&quot;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[],</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">send_task</span><span class="p">(</span><span class="s2">"celery.ping"</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[],</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-<span class="go">&#39;pong&#39;</span>
+<span class="go">'pong'</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -763,7 +735,7 @@ memory leak it can result in.</p>
 <li><p class="first">The ETA scheduler now deletes any revoked tasks it might encounter.</p>
 <blockquote>
 <div><p>As revokes are not yet persistent, this is done to make sure the task
-is revoked even though it&#8217;s currently being hold because its eta is e.g.
+is revoked even though it’s currently being hold because its eta is e.g.
 a week into the future.</p>
 </div></blockquote>
 </li>
@@ -781,16 +753,16 @@ exchange/routing_key.</p>
 <li><p class="first">Events: Fields was not passed by <cite>.send()</cite> (fixes the UUID key errors
 in celerymon)</p>
 </li>
-<li><p class="first">Added <cite>&#8211;schedule</cite>/<cite>-s</cite> option to the worker, so it is possible to
+<li><p class="first">Added <cite>–schedule</cite>/<cite>-s</cite> option to the worker, so it is possible to
 specify a custom schedule filename when using an embedded celerybeat
-server (the <cite>-B</cite>/<cite>&#8211;beat</cite>) option.</p>
+server (the <cite>-B</cite>/<cite>–beat</cite>) option.</p>
 </li>
 <li><p class="first">Better Python 2.4 compatibility. The test suite now passes.</p>
 </li>
 <li><p class="first">task decorators: Now preserve docstring as <cite>cls.__doc__</cite>, (was previously
 copied to <cite>cls.run.__doc__</cite>)</p>
 </li>
-<li><p class="first">The <cite>testproj</cite> directory has been renamed to <cite>tests</cite> and we&#8217;re now using
+<li><p class="first">The <cite>testproj</cite> directory has been renamed to <cite>tests</cite> and we’re now using
 <cite>nose</cite> + <cite>django-nose</cite> for test discovery, and <cite>unittest2</cite> for test
 cases.</p>
 </li>
@@ -817,8 +789,8 @@ virtualenv.</p>
 <div class="section" id="version-1-0-0">
 <span id="id7"></span><h2><a class="toc-backref" href="#id53">1.0.0</a><a class="headerlink" href="#version-1-0-0" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2010-02-10 04:00 P.M CET</td>
 </tr>
@@ -833,7 +805,7 @@ virtualenv.</p>
 available on your platform, or something like Supervisord to make
 celeryd/celerybeat/celerymon into background processes.</p>
 <blockquote>
-<div><p>We&#8217;ve had too many problems with the worker daemonizing itself, so it was
+<div><p>We’ve had too many problems with the worker daemonizing itself, so it was
 decided it has to be removed. Example startup scripts has been added to
 the <cite>extra/</cite> directory:</p>
 <ul>
@@ -856,23 +828,23 @@ the <cite>extra/</cite> directory:</p>
 </div></blockquote>
 </li>
 </ul>
-<p>In addition to <cite>&#8211;detach</cite>, the following program arguments has been
-removed: <cite>&#8211;uid</cite>, <cite>&#8211;gid</cite>, <cite>&#8211;workdir</cite>, <cite>&#8211;chroot</cite>, <cite>&#8211;pidfile</cite>,
-<cite>&#8211;umask</cite>. All good daemonization tools should support equivalent
-functionality, so don&#8217;t worry.</p>
+<p>In addition to <cite>–detach</cite>, the following program arguments has been
+removed: <cite>–uid</cite>, <cite>–gid</cite>, <cite>–workdir</cite>, <cite>–chroot</cite>, <cite>–pidfile</cite>,
+<cite>–umask</cite>. All good daemonization tools should support equivalent
+functionality, so don’t worry.</p>
 <p>Also the following configuration keys has been removed:
 <cite>CELERYD_PID_FILE</cite>, <cite>CELERYBEAT_PID_FILE</cite>, <cite>CELERYMON_PID_FILE</cite>.</p>
 </div></blockquote>
 </li>
 <li><p class="first">Default worker loglevel is now <cite>WARN</cite>, to enable the previous log level
-start the worker with <cite>&#8211;loglevel=INFO</cite>.</p>
+start the worker with <cite>–loglevel=INFO</cite>.</p>
 </li>
 <li><p class="first">Tasks are automatically registered.</p>
 <blockquote>
 <div><p>This means you no longer have to register your tasks manually.
-You don&#8217;t have to change your old code right away, as it doesn&#8217;t matter if
+You don’t have to change your old code right away, as it doesn’t matter if
 a task is registered twice.</p>
-<p>If you don&#8217;t want your task to be automatically registered you can set
+<p>If you don’t want your task to be automatically registered you can set
 the <cite>abstract</cite> attribute</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyTask</span><span class="p">(</span><span class="n">Task</span><span class="p">):</span>
     <span class="n">abstract</span> <span class="o">=</span> <span class="bp">True</span>
@@ -880,10 +852,10 @@ the <cite>abstract</cite> attribute</p>
 </div>
 <p>By using <cite>abstract</cite> only tasks subclassing this task will be automatically
 registered (this works like the Django ORM).</p>
-<p>If you don&#8217;t want subclasses to be registered either, you can set the
+<p>If you don’t want subclasses to be registered either, you can set the
 <cite>autoregister</cite> attribute to <cite>False</cite>.</p>
 <p>Incidentally, this change also fixes the problems with automatic name
-assignment and relative imports. So you also don&#8217;t have to specify a task name
+assignment and relative imports. So you also don’t have to specify a task name
 anymore if you use relative imports.</p>
 </div></blockquote>
 </li>
@@ -891,7 +863,7 @@ anymore if you use relative imports.</p>
 <blockquote>
 <div><p>This change was added
 because it makes the internals a lot more clean and simple. However, you can
-now turn functions into tasks by using the <cite>&#64;task</cite> decorator:</p>
+now turn functions into tasks by using the <cite>@task</cite> decorator:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">celery.decorators</span> <span class="kn">import</span> <span class="n">task</span>
 
 <span class="nd">@task</span><span class="p">()</span>
@@ -923,14 +895,14 @@ periodic tasks will also be executed twice.</p>
 </li>
 <li><p class="first">The supervisor has been removed.</p>
 <blockquote>
-<div><p>This means the <cite>-S</cite> and <cite>&#8211;supervised</cite> options to <cite>celeryd</cite> is
+<div><p>This means the <cite>-S</cite> and <cite>–supervised</cite> options to <cite>celeryd</cite> is
 no longer supported. Please use something like <a class="reference external" href="http://supervisord.org">http://supervisord.org</a>
 instead.</p>
 </div></blockquote>
 </li>
 <li><p class="first"><cite>TaskSet.join</cite> has been removed, use <cite>TaskSetResult.join</cite> instead.</p>
 </li>
-<li><p class="first">The task status <cite>&#8220;DONE&#8221;</cite> has been renamed to <cite>&#8220;SUCCESS&#8221;</cite>.</p>
+<li><p class="first">The task status <cite>“DONE”</cite> has been renamed to <cite>“SUCCESS”</cite>.</p>
 </li>
 <li><p class="first"><cite>AsyncResult.is_done</cite> has been removed, use <cite>AsyncResult.successful</cite>
 instead.</p>
@@ -940,18 +912,18 @@ revert to the previous behaviour set
 <a class="reference internal" href="../configuration.html#std:setting-CELERY_STORE_ERRORS_EVEN_IF_IGNORED"><code class="xref std std-setting docutils literal"><span class="pre">CELERY_STORE_ERRORS_EVEN_IF_IGNORED</span></code></a> to <cite>True</cite>.</p>
 </li>
 <li><p class="first">The statistics functionality has been removed in favor of events,
-so the <cite>-S</cite> and &#8211;statistics` switches has been removed.</p>
+so the <cite>-S</cite> and –statistics` switches has been removed.</p>
 </li>
 <li><p class="first">The module <cite>celery.task.strategy</cite> has been removed.</p>
 </li>
-<li><p class="first"><cite>celery.discovery</cite> has been removed, and it&#8217;s <cite>autodiscover</cite> function is
+<li><p class="first"><cite>celery.discovery</cite> has been removed, and it’s <cite>autodiscover</cite> function is
 now in <cite>celery.loaders.djangoapp</cite>. Reason: Internal API.</p>
 </li>
 <li><p class="first">The <span class="target" id="index-1"></span><code class="xref std std-envvar docutils literal"><span class="pre">CELERY_LOADER</span></code> environment variable now needs loader class name
 in addition to module name,</p>
 <blockquote>
-<div><p>E.g. where you previously had: <cite>&#8220;celery.loaders.default&#8221;</cite>, you now need
-<cite>&#8220;celery.loaders.default.Loader&#8221;</cite>, using the previous syntax will result
+<div><p>E.g. where you previously had: <cite>“celery.loaders.default”</cite>, you now need
+<cite>“celery.loaders.default.Loader”</cite>, using the previous syntax will result
 in a <cite>DeprecationWarning</cite>.</p>
 </div></blockquote>
 </li>
@@ -1031,7 +1003,7 @@ task-[received/succeeded/failed/retried],
 </li>
 <li><p class="first">You can now delete (revoke) tasks that has already been applied.</p>
 </li>
-<li><p class="first">You can now set the hostname the worker identifies as using the <cite>&#8211;hostname</cite>
+<li><p class="first">You can now set the hostname the worker identifies as using the <cite>–hostname</cite>
 argument.</p>
 </li>
 <li><p class="first">Cache backend now respects the <a class="reference internal" href="../configuration.html#std:setting-CELERY_TASK_RESULT_EXPIRES"><code class="xref std std-setting docutils literal"><span class="pre">CELERY_TASK_RESULT_EXPIRES</span></code></a> setting.</p>
@@ -1049,9 +1021,9 @@ can set <cite>PeriodicTask.relative = True</cite>.</p>
 </div></blockquote>
 </li>
 <li><p class="first">Now supports passing execute options to a TaskSets list of args, e.g.:</p>
-<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ts</span> <span class="o">=</span> <span class="n">TaskSet</span><span class="p">(</span><span class="n">add</span><span class="p">,</span> <span class="p">[([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">{},</span> <span class="p">{</span><span class="s2">&quot;countdown&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}),</span>
-<span class="gp">... </span>                  <span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">{},</span> <span class="p">{</span><span class="s2">&quot;countdown&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}),</span>
-<span class="gp">... </span>                  <span class="p">([</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">{},</span> <span class="p">{</span><span class="s2">&quot;countdown&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">})])</span>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ts</span> <span class="o">=</span> <span class="n">TaskSet</span><span class="p">(</span><span class="n">add</span><span class="p">,</span> <span class="p">[([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">{},</span> <span class="p">{</span><span class="s2">"countdown"</span><span class="p">:</span> <span class="mi">1</span><span class="p">}),</span>
+<span class="gp">... </span>                  <span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">{},</span> <span class="p">{</span><span class="s2">"countdown"</span><span class="p">:</span> <span class="mi">2</span><span class="p">}),</span>
+<span class="gp">... </span>                  <span class="p">([</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">{},</span> <span class="p">{</span><span class="s2">"countdown"</span><span class="p">:</span> <span class="mi">3</span><span class="p">})])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ts</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -1067,7 +1039,7 @@ is set to <cite>4</cite> by default.</p>
 <blockquote>
 <div><p><cite>celery.task.rest</cite> is now deprecated, replaced with the new and shiny
 <a class="reference internal" href="../userguide/remote-tasks.html#module-celery.task.http" title="celery.task.http"><code class="xref py py-mod docutils literal"><span class="pre">celery.task.http</span></code></a>. With more reflective names, sensible interface,
-and it&#8217;s possible to override the methods used to perform HTTP requests.</p>
+and it’s possible to override the methods used to perform HTTP requests.</p>
 </div></blockquote>
 </li>
 <li><p class="first">The results of task sets are now cached by storing it in the result
@@ -1104,7 +1076,7 @@ now also executes the task callbacks and signals.</p>
 </li>
 <li><p class="first">Now using a proper scheduler for the tasks with an ETA.</p>
 <blockquote>
-<div><p>This means waiting eta tasks are sorted by time, so we don&#8217;t have
+<div><p>This means waiting eta tasks are sorted by time, so we don’t have
 to poll the whole list all the time.</p>
 </div></blockquote>
 </li>
@@ -1141,7 +1113,7 @@ and <cite>TaskRegistry.__getitem__`+`pop</cite> raises <cite>NotRegistered</cite
 <li><p class="first">You can set the loader via the <span class="target" id="index-3"></span><code class="xref std std-envvar docutils literal"><span class="pre">CELERY_LOADER</span></code> environment variable.</p>
 </li>
 <li><p class="first">You can now set <a class="reference internal" href="../configuration.html#std:setting-CELERY_IGNORE_RESULT"><code class="xref std std-setting docutils literal"><span class="pre">CELERY_IGNORE_RESULT</span></code></a> to ignore task results by
-default (if enabled, tasks doesn&#8217;t save results or errors to the backend used).</p>
+default (if enabled, tasks doesn’t save results or errors to the backend used).</p>
 </li>
 <li><p class="first">The worker now correctly handles malformed messages by throwing away and
 acknowledging the message, instead of crashing.</p>
@@ -1166,8 +1138,8 @@ reference.</li>
 <div class="section" id="version-0-8-4">
 <span id="id10"></span><h2><a class="toc-backref" href="#id60">0.8.4</a><a class="headerlink" href="#version-0-8-4" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2010-02-05 01:52 P.M CEST</td>
 </tr>
@@ -1176,8 +1148,8 @@ reference.</li>
 </tbody>
 </table>
 <ul class="simple">
-<li>Now emits a warning if the &#8211;detach argument is used.
-&#8211;detach should not be used anymore, as it has several not easily fixed
+<li>Now emits a warning if the –detach argument is used.
+–detach should not be used anymore, as it has several not easily fixed
 bugs related to it. Instead, use something like start-stop-daemon,
 Supervisord or launchd (os x).</li>
 <li>Make sure logger class is process aware, even if running Python &gt;= 2.6.</li>
@@ -1187,8 +1159,8 @@ Supervisord or launchd (os x).</li>
 <div class="section" id="version-0-8-3">
 <span id="id11"></span><h2><a class="toc-backref" href="#id61">0.8.3</a><a class="headerlink" href="#version-0-8-3" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2009-12-22 09:43 A.M CEST</td>
 </tr>
@@ -1206,8 +1178,8 @@ Buildout will correctly install the programs celeryd and celeryinit.</li>
 <div class="section" id="version-0-8-2">
 <span id="id12"></span><h2><a class="toc-backref" href="#id62">0.8.2</a><a class="headerlink" href="#version-0-8-2" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2009-11-20 03:40 P.M CEST</td>
 </tr>
@@ -1217,15 +1189,15 @@ Buildout will correctly install the programs celeryd and celeryinit.</li>
 </table>
 <ul class="simple">
 <li>QOS Prefetch count was not applied properly, as it was set for every message
-received (which apparently behaves like, &#8220;receive one more&#8221;), instead of only
+received (which apparently behaves like, “receive one more”), instead of only
 set when our wanted value changed.</li>
 </ul>
 </div>
 <div class="section" id="version-0-8-1">
 <span id="id13"></span><h2><a class="toc-backref" href="#id63">0.8.1</a><a class="headerlink" href="#version-0-8-1" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2009-11-16 05:21 P.M CEST</td>
 </tr>
@@ -1243,37 +1215,37 @@ development servers before rolling it out to production!</p>
 <div class="section" id="important-changes">
 <span id="v081-important"></span><h3><a class="toc-backref" href="#id65">Important changes</a><a class="headerlink" href="#important-changes" title="Permalink to this headline">¶</a></h3>
 <ul>
-<li><p class="first">If you&#8217;re using Python &lt; 2.6 and you use the multiprocessing backport, then
+<li><p class="first">If you’re using Python &lt; 2.6 and you use the multiprocessing backport, then
 multiprocessing version 2.6.2.1 is required.</p>
 </li>
 <li><p class="first">All AMQP_* settings has been renamed to BROKER_*, and in addition
 AMQP_SERVER has been renamed to BROKER_HOST, so before where you had:</p>
-<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">AMQP_SERVER</span> <span class="o">=</span> <span class="s2">&quot;localhost&quot;</span>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">AMQP_SERVER</span> <span class="o">=</span> <span class="s2">"localhost"</span>
 <span class="n">AMQP_PORT</span> <span class="o">=</span> <span class="mi">5678</span>
-<span class="n">AMQP_USER</span> <span class="o">=</span> <span class="s2">&quot;myuser&quot;</span>
-<span class="n">AMQP_PASSWORD</span> <span class="o">=</span> <span class="s2">&quot;mypassword&quot;</span>
-<span class="n">AMQP_VHOST</span> <span class="o">=</span> <span class="s2">&quot;celery&quot;</span>
+<span class="n">AMQP_USER</span> <span class="o">=</span> <span class="s2">"myuser"</span>
+<span class="n">AMQP_PASSWORD</span> <span class="o">=</span> <span class="s2">"mypassword"</span>
+<span class="n">AMQP_VHOST</span> <span class="o">=</span> <span class="s2">"celery"</span>
 </pre></div>
 </div>
 <p>You need to change that to:</p>
-<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">BROKER_HOST</span> <span class="o">=</span> <span class="s2">&quot;localhost&quot;</span>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">BROKER_HOST</span> <span class="o">=</span> <span class="s2">"localhost"</span>
 <span class="n">BROKER_PORT</span> <span class="o">=</span> <span class="mi">5678</span>
-<span class="n">BROKER_USER</span> <span class="o">=</span> <span class="s2">&quot;myuser&quot;</span>
-<span class="n">BROKER_PASSWORD</span> <span class="o">=</span> <span class="s2">&quot;mypassword&quot;</span>
-<span class="n">BROKER_VHOST</span> <span class="o">=</span> <span class="s2">&quot;celery&quot;</span>
+<span class="n">BROKER_USER</span> <span class="o">=</span> <span class="s2">"myuser"</span>
+<span class="n">BROKER_PASSWORD</span> <span class="o">=</span> <span class="s2">"mypassword"</span>
+<span class="n">BROKER_VHOST</span> <span class="o">=</span> <span class="s2">"celery"</span>
 </pre></div>
 </div>
 </li>
 <li><p class="first">Custom carrot backends now need to include the backend class name, so before
 where you had:</p>
-<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">CARROT_BACKEND</span> <span class="o">=</span> <span class="s2">&quot;mycustom.backend.module&quot;</span>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">CARROT_BACKEND</span> <span class="o">=</span> <span class="s2">"mycustom.backend.module"</span>
 </pre></div>
 </div>
 <p>you need to change it to:</p>
-<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">CARROT_BACKEND</span> <span class="o">=</span> <span class="s2">&quot;mycustom.backend.module.Backend&quot;</span>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">CARROT_BACKEND</span> <span class="o">=</span> <span class="s2">"mycustom.backend.module.Backend"</span>
 </pre></div>
 </div>
-<p>where <cite>Backend</cite> is the class name. This is probably <cite>&#8220;Backend&#8221;</cite>, as
+<p>where <cite>Backend</cite> is the class name. This is probably <cite>“Backend”</cite>, as
 that was the previously implied name.</p>
 </li>
 <li><p class="first">New version requirement for carrot: 0.8.0</p>
@@ -1285,7 +1257,7 @@ that was the previously implied name.</p>
 <ul class="simple">
 <li>Incorporated the multiprocessing backport patch that fixes the
 <cite>processName</cite> error.</li>
-<li>Ignore the result of PeriodicTask&#8217;s by default.</li>
+<li>Ignore the result of PeriodicTask’s by default.</li>
 <li>Added a Redis result store backend</li>
 <li>Allow /etc/default/celeryd to define additional options for the celeryd init
 script.</li>
@@ -1308,8 +1280,8 @@ is used.</li>
 <div class="section" id="version-0-8-0">
 <span id="id15"></span><h2><a class="toc-backref" href="#id67">0.8.0</a><a class="headerlink" href="#version-0-8-0" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2009-09-22 03:06 P.M CEST</td>
 </tr>
@@ -1362,7 +1334,7 @@ be sure to initialize tables (django: <cite>syncdb</cite>, python: <cite>celeryi
 </li>
 <li><p class="first">We now have an AMQP result store backend.</p>
 <blockquote>
-<div><p>It uses messages to publish task return value and status. And it&#8217;s
+<div><p>It uses messages to publish task return value and status. And it’s
 incredibly fast!</p>
 <p>See <a class="reference external" href="https://github.com/celery/celery/issues/6"><span class="xref issue">issue #6</span></a> for more info!</p>
 </div></blockquote>
@@ -1411,7 +1383,7 @@ is encouraged to improve this situation.</p>
 </div></blockquote>
 </li>
 <li><p class="first">The worker now survives a restart of the AMQP server!</p>
-<p>Automatically re-establish AMQP broker connection if it&#8217;s lost.</p>
+<p>Automatically re-establish AMQP broker connection if it’s lost.</p>
 <p>New settings:</p>
 <blockquote>
 <div><ul>
@@ -1494,7 +1466,7 @@ detaching.</p>
 </li>
 <li><p class="first">jail() refactored into <code class="xref py py-class docutils literal"><span class="pre">celery.execute.ExecuteWrapper</span></code>.</p>
 </li>
-<li><p class="first"><cite>views.apply</cite> now correctly sets mime-type to &#8220;application/json&#8221;</p>
+<li><p class="first"><cite>views.apply</cite> now correctly sets mime-type to “application/json”</p>
 </li>
 <li><p class="first"><cite>views.task_status</cite> now returns exception if state is <a class="reference internal" href="../userguide/tasks.html#std:state-RETRY"><code class="xref std std-state docutils literal"><span class="pre">RETRY</span></code></a></p>
 </li>
@@ -1520,8 +1492,8 @@ detaching.</p>
 <div class="section" id="version-0-6-0">
 <span id="id19"></span><h2><a class="toc-backref" href="#id71">0.6.0</a><a class="headerlink" href="#version-0-6-0" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2009-08-07 06:54 A.M CET</td>
 </tr>
@@ -1534,7 +1506,7 @@ detaching.</p>
 <ul>
 <li><dl class="first docutils">
 <dt>Fixed a bug where tasks raising unpickleable exceptions crashed pool</dt>
-<dd><p class="first last">workers. So if you&#8217;ve had pool workers mysteriously disappearing, or
+<dd><p class="first last">workers. So if you’ve had pool workers mysteriously disappearing, or
 problems with the worker stopping working, this has been fixed in this
 version.</p>
 </dd>
@@ -1551,8 +1523,8 @@ a new one.</p>
 </li>
 <li><dl class="first docutils">
 <dt>Task.name is now automatically generated out of class module+name, e.g.</dt>
-<dd><p class="first last"><cite>&#8220;djangotwitter.tasks.UpdateStatusesTask&#8221;</cite>. Very convenient. No idea why
-we didn&#8217;t do this before. Some documentation is updated to not manually
+<dd><p class="first last"><cite>“djangotwitter.tasks.UpdateStatusesTask”</cite>. Very convenient. No idea why
+we didn’t do this before. Some documentation is updated to not manually
 specify a task name.</p>
 </dd>
 </dl>
@@ -1596,7 +1568,7 @@ engines)</p>
 </li>
 <li><dl class="first docutils">
 <dt>A lot more debugging information is now available by turning on the</dt>
-<dd><p class="first last"><cite>DEBUG</cite> log level (<cite>&#8211;loglevel=DEBUG</cite>).</p>
+<dd><p class="first last"><cite>DEBUG</cite> log level (<cite>–loglevel=DEBUG</cite>).</p>
 </dd>
 </dl>
 </li>
@@ -1619,8 +1591,8 @@ includes the ETA for the task (if any).</p>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>Acknowledgement now happens in the pool callback. Can&#8217;t do ack in the job</dt>
-<dd><p class="first last">target, as it&#8217;s not pickleable (can&#8217;t share AMQP connection, etc.)).</p>
+<dt>Acknowledgement now happens in the pool callback. Can’t do ack in the job</dt>
+<dd><p class="first last">target, as it’s not pickleable (can’t share AMQP connection, etc.)).</p>
 </dd>
 </dl>
 </li>
@@ -1644,8 +1616,8 @@ includes the ETA for the task (if any).</p>
 <div class="section" id="version-0-4-1">
 <span id="id22"></span><h2><a class="toc-backref" href="#id74">0.4.1</a><a class="headerlink" href="#version-0-4-1" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2009-07-02 01:42 P.M CET</td>
 </tr>
@@ -1661,8 +1633,8 @@ includes the ETA for the task (if any).</p>
 <div class="section" id="version-0-4-0">
 <span id="id23"></span><h2><a class="toc-backref" href="#id75">0.4.0</a><a class="headerlink" href="#version-0-4-0" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2009-07-01 07:29 P.M CET</td>
 </tr>
@@ -1683,8 +1655,8 @@ celery to always run tasks locally by setting the
 <div class="section" id="version-0-3-20">
 <span id="id24"></span><h2><a class="toc-backref" href="#id76">0.3.20</a><a class="headerlink" href="#version-0-3-20" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2009-06-25 08:42 P.M CET</td>
 </tr>
@@ -1719,8 +1691,8 @@ instance has been removed. To get this information instead use:</p>
 </li>
 <li><p class="first"><cite>Taskset.run()</cite> now respects extra message options from the task class.</p>
 </li>
-<li><p class="first">Task: Add attribute <cite>ignore_result</cite>: Don&#8217;t store the status and
-return value. This means you can&#8217;t use the
+<li><p class="first">Task: Add attribute <cite>ignore_result</cite>: Don’t store the status and
+return value. This means you can’t use the
 <cite>celery.result.AsyncResult</cite> to check if the task is
 done, or get its return value. Only use if you need the performance
 and is able live without these features. Any exceptions raised will
@@ -1729,19 +1701,19 @@ store the return value/status as usual.</p>
 <li><p class="first">Task: Add attribute <cite>disable_error_emails</cite> to disable sending error
 emails for that task.</p>
 </li>
-<li><p class="first">Should now work on Windows (although running in the background won&#8217;t
-work, so using the <cite>&#8211;detach</cite> argument results in an exception
+<li><p class="first">Should now work on Windows (although running in the background won’t
+work, so using the <cite>–detach</cite> argument results in an exception
 being raised.)</p>
 </li>
 <li><p class="first">Added support for statistics for profiling and monitoring.
 To start sending statistics start the worker with the
-<cite>&#8211;statistics option. Then after a while you can dump the results
+<cite>–statistics option. Then after a while you can dump the results
 by running `python manage.py celerystats</cite>. See
 <cite>celery.monitoring</cite> for more information.</p>
 </li>
 <li><p class="first">The celery daemon can now be supervised (i.e. it is automatically
 restarted if it crashes). To use this start the worker with the
-&#8211;supervised` option (or alternatively <cite>-S</cite>).</p>
+–supervised` option (or alternatively <cite>-S</cite>).</p>
 </li>
 <li><p class="first">views.apply: View calling a task. Example</p>
 <blockquote>
@@ -1755,7 +1727,7 @@ without first ensuring that your code is safe!</p>
 </div>
 </div></blockquote>
 </li>
-<li><p class="first">Refactored <cite>celery.task</cite>. It&#8217;s now split into three modules:</p>
+<li><p class="first">Refactored <cite>celery.task</cite>. It’s now split into three modules:</p>
 <blockquote>
 <div><ul>
 <li><p class="first">celery.task</p>
@@ -1784,8 +1756,8 @@ shortcuts, plus imports objects from <cite>celery.task.base</cite> and
 <div class="section" id="version-0-3-7">
 <span id="id25"></span><h2><a class="toc-backref" href="#id77">0.3.7</a><a class="headerlink" href="#version-0-3-7" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2008-06-16 11:41 P.M CET</td>
 </tr>
@@ -1795,7 +1767,7 @@ shortcuts, plus imports objects from <cite>celery.task.base</cite> and
 </table>
 <ul>
 <li><p class="first"><strong>IMPORTANT</strong> Now uses AMQP`s <cite>basic.consume</cite> instead of
-<cite>basic.get</cite>. This means we&#8217;re no longer polling the broker for
+<cite>basic.get</cite>. This means we’re no longer polling the broker for
 new messages.</p>
 </li>
 <li><p class="first"><strong>IMPORTANT</strong> Default concurrency limit is now set to the number of CPUs
@@ -1803,11 +1775,11 @@ available on the system.</p>
 </li>
 <li><p class="first"><strong>IMPORTANT</strong> <cite>tasks.register</cite>: Renamed <cite>task_name</cite> argument to
 <cite>name</cite>, so</p>
-<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tasks</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">task_name</span><span class="o">=</span><span class="s2">&quot;mytask&quot;</span><span class="p">)</span>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tasks</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">task_name</span><span class="o">=</span><span class="s2">"mytask"</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>has to be replaced with:</p>
-<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tasks</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;mytask&quot;</span><span class="p">)</span>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tasks</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"mytask"</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
@@ -1820,7 +1792,7 @@ available on the system.</p>
 <li><p class="first"><cite>AsyncResult.read()</cite> was always returning <cite>True</cite>.</p>
 </li>
 <li><p class="first">Only use README as long_description if the file exists so easy_install
-doesn&#8217;t break.</p>
+doesn’t break.</p>
 </li>
 <li><p class="first"><cite>celery.view</cite>: JSON responses now properly set its mime-type.</p>
 </li>
@@ -1828,20 +1800,20 @@ doesn&#8217;t break.</p>
 can re-use the same AMQP connection if you want to execute
 more than one task.</p>
 </li>
-<li><p class="first">Handle failures in task_status view such that it won&#8217;t throw 500s.</p>
+<li><p class="first">Handle failures in task_status view such that it won’t throw 500s.</p>
 </li>
 <li><p class="first">Fixed typo <cite>AMQP_SERVER</cite> in documentation to <cite>AMQP_HOST</cite>.</p>
 </li>
 <li><p class="first">Worker exception emails sent to administrators now works properly.</p>
 </li>
-<li><p class="first">No longer depends on <cite>django</cite>, so installing <cite>celery</cite> won&#8217;t affect
+<li><p class="first">No longer depends on <cite>django</cite>, so installing <cite>celery</cite> won’t affect
 the preferred Django version installed.</p>
 </li>
 <li><p class="first">Now works with PostgreSQL (psycopg2) again by registering the
 <cite>PickledObject</cite> field.</p>
 </li>
-<li><p class="first">Worker: Added <cite>&#8211;detach</cite> option as an alias to <cite>&#8211;daemon</cite>, and
-it&#8217;s the term used in the documentation from now on.</p>
+<li><p class="first">Worker: Added <cite>–detach</cite> option as an alias to <cite>–daemon</cite>, and
+it’s the term used in the documentation from now on.</p>
 </li>
 <li><p class="first">Make sure the pool and periodic task worker thread is terminated
 properly at exit. (So <cite>Ctrl-C</cite> works again).</p>
@@ -1861,8 +1833,8 @@ executed.</p>
 <div class="section" id="version-0-3-3">
 <span id="id26"></span><h2><a class="toc-backref" href="#id78">0.3.3</a><a class="headerlink" href="#version-0-3-3" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2009-06-08 01:07 P.M CET</td>
 </tr>
@@ -1878,8 +1850,8 @@ for periodic tasks to execute.</li>
 <div class="section" id="version-0-3-2">
 <span id="id27"></span><h2><a class="toc-backref" href="#id79">0.3.2</a><a class="headerlink" href="#version-0-3-2" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2009-06-08 01:07 P.M CET</td>
 </tr>
@@ -1888,16 +1860,16 @@ for periodic tasks to execute.</li>
 </tbody>
 </table>
 <ul class="simple">
-<li>worker: Added option <cite>&#8211;discard</cite>: Discard (delete!) all waiting
+<li>worker: Added option <cite>–discard</cite>: Discard (delete!) all waiting
 messages in the queue.</li>
-<li>Worker: The <cite>&#8211;wakeup-after</cite> option was not handled as a float.</li>
+<li>Worker: The <cite>–wakeup-after</cite> option was not handled as a float.</li>
 </ul>
 </div>
 <div class="section" id="version-0-3-1">
 <span id="id28"></span><h2><a class="toc-backref" href="#id80">0.3.1</a><a class="headerlink" href="#version-0-3-1" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2009-06-08 01:07 P.M CET</td>
 </tr>
@@ -1914,8 +1886,8 @@ of blocking the <cite>TaskController</cite> loop.</li>
 <div class="section" id="version-0-3-0">
 <span id="id29"></span><h2><a class="toc-backref" href="#id81">0.3.0</a><a class="headerlink" href="#version-0-3-0" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2009-06-08 12:41 P.M CET</td>
 </tr>
@@ -1968,8 +1940,8 @@ been renamed, while others are new:</p>
 <li><p class="first">Task errors are now logged using log level <cite>ERROR</cite> instead of <cite>INFO</cite>,
 and stacktraces are dumped. Thanks to Grégoire Cachet.</p>
 </li>
-<li><p class="first">Make every new worker process re-establish it&#8217;s Django DB connection,
-this solving the &#8220;MySQL connection died?&#8221; exceptions.
+<li><p class="first">Make every new worker process re-establish it’s Django DB connection,
+this solving the “MySQL connection died?” exceptions.
 Thanks to Vitaly Babiy and Jirka Vejrazka.</p>
 </li>
 <li><p class="first"><strong>IMPORTANT</strong> Now using pickle to encode task arguments. This means you
@@ -1995,8 +1967,8 @@ stability.</p>
 <div class="section" id="version-0-2-0">
 <span id="id30"></span><h2><a class="toc-backref" href="#id82">0.2.0</a><a class="headerlink" href="#version-0-2-0" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2009-05-20 05:14 P.M CET</td>
 </tr>
@@ -2014,8 +1986,8 @@ from the database backend.</li>
 <div class="section" id="pre3">
 <span id="version-0-2-0-pre3"></span><h2><a class="toc-backref" href="#id83">0.2.0-pre3</a><a class="headerlink" href="#pre3" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2009-05-20 05:14 P.M CET</td>
 </tr>
@@ -2032,8 +2004,8 @@ original exception.</li>
 <div class="section" id="pre2">
 <span id="version-0-2-0-pre2"></span><h2><a class="toc-backref" href="#id84">0.2.0-pre2</a><a class="headerlink" href="#pre2" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2009-05-20 01:56 P.M CET</td>
 </tr>
@@ -2049,8 +2021,8 @@ subclasses of <cite>django.core.exception.MultipleObjectsReturned</cite>).</li>
 <div class="section" id="pre1">
 <span id="version-0-2-0-pre1"></span><h2><a class="toc-backref" href="#id85">0.2.0-pre1</a><a class="headerlink" href="#pre1" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2009-05-20 12:33 P.M CET</td>
 </tr>
@@ -2059,7 +2031,7 @@ subclasses of <cite>django.core.exception.MultipleObjectsReturned</cite>).</li>
 </tbody>
 </table>
 <ul class="simple">
-<li>It&#8217;s getting quite stable, with a lot of new features, so bump
+<li>It’s getting quite stable, with a lot of new features, so bump
 version to 0.2. This is a pre-release.</li>
 <li><cite>celery.task.mark_as_read()</cite> and <cite>celery.task.mark_as_failure()</cite> has
 been removed. Use <cite>celery.backends.default_backend.mark_as_read()</cite>,
@@ -2069,8 +2041,8 @@ and <cite>celery.backends.default_backend.mark_as_failure()</cite> instead.</li>
 <div class="section" id="version-0-1-15">
 <span id="id31"></span><h2><a class="toc-backref" href="#id86">0.1.15</a><a class="headerlink" href="#version-0-1-15" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2009-05-19 04:13 P.M CET</td>
 </tr>
@@ -2087,8 +2059,8 @@ errors in <cite>rabbit.log</cite>, please contact us!</li>
 <div class="section" id="version-0-1-14">
 <span id="id32"></span><h2><a class="toc-backref" href="#id87">0.1.14</a><a class="headerlink" href="#version-0-1-14" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2009-05-19 01:08 P.M CET</td>
 </tr>
@@ -2104,8 +2076,8 @@ errors in <cite>rabbit.log</cite>, please contact us!</li>
 <div class="section" id="version-0-1-13">
 <span id="id33"></span><h2><a class="toc-backref" href="#id88">0.1.13</a><a class="headerlink" href="#version-0-1-13" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2009-05-19 12:36 P.M CET</td>
 </tr>
@@ -2139,8 +2111,8 @@ $ make html
 <div class="section" id="version-0-1-12">
 <span id="id34"></span><h2><a class="toc-backref" href="#id89">0.1.12</a><a class="headerlink" href="#version-0-1-12" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2009-05-18 04:38 P.M CET</td>
 </tr>
@@ -2179,10 +2151,10 @@ distributed to the celery server. Example:</p>
 <li><p class="first">Refactored the task metadata cache and database backends, and added
 a new backend for Tokyo Tyrant. You can set the backend in your django
 settings file. E.g.:</p>
-<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">CELERY_RESULT_BACKEND</span> <span class="o">=</span> <span class="s2">&quot;database&quot;</span><span class="p">;</span> <span class="c1"># Uses the database</span>
-<span class="n">CELERY_RESULT_BACKEND</span> <span class="o">=</span> <span class="s2">&quot;cache&quot;</span><span class="p">;</span> <span class="c1"># Uses the django cache framework</span>
-<span class="n">CELERY_RESULT_BACKEND</span> <span class="o">=</span> <span class="s2">&quot;tyrant&quot;</span><span class="p">;</span> <span class="c1"># Uses Tokyo Tyrant</span>
-<span class="n">TT_HOST</span> <span class="o">=</span> <span class="s2">&quot;localhost&quot;</span><span class="p">;</span> <span class="c1"># Hostname for the Tokyo Tyrant server.</span>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">CELERY_RESULT_BACKEND</span> <span class="o">=</span> <span class="s2">"database"</span><span class="p">;</span> <span class="c1"># Uses the database</span>
+<span class="n">CELERY_RESULT_BACKEND</span> <span class="o">=</span> <span class="s2">"cache"</span><span class="p">;</span> <span class="c1"># Uses the django cache framework</span>
+<span class="n">CELERY_RESULT_BACKEND</span> <span class="o">=</span> <span class="s2">"tyrant"</span><span class="p">;</span> <span class="c1"># Uses Tokyo Tyrant</span>
+<span class="n">TT_HOST</span> <span class="o">=</span> <span class="s2">"localhost"</span><span class="p">;</span> <span class="c1"># Hostname for the Tokyo Tyrant server.</span>
 <span class="n">TT_PORT</span> <span class="o">=</span> <span class="mi">6657</span><span class="p">;</span> <span class="c1"># Port of the Tokyo Tyrant server.</span>
 </pre></div>
 </div>
@@ -2192,8 +2164,8 @@ settings file. E.g.:</p>
 <div class="section" id="version-0-1-11">
 <span id="id35"></span><h2><a class="toc-backref" href="#id90">0.1.11</a><a class="headerlink" href="#version-0-1-11" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2009-05-12 02:08 P.M CET</td>
 </tr>
@@ -2209,8 +2181,8 @@ servers stopping with the EMFILES (too many open files) error. (fixed)</li>
 <div class="section" id="version-0-1-10">
 <span id="id36"></span><h2><a class="toc-backref" href="#id91">0.1.10</a><a class="headerlink" href="#version-0-1-10" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2009-05-11 12:46 P.M CET</td>
 </tr>
@@ -2227,8 +2199,8 @@ servers stopping with the EMFILES (too many open files) error. (fixed)</li>
 <div class="section" id="version-0-1-8">
 <span id="id37"></span><h2><a class="toc-backref" href="#id92">0.1.8</a><a class="headerlink" href="#version-0-1-8" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2009-05-07 12:27 P.M CET</td>
 </tr>
@@ -2239,15 +2211,15 @@ servers stopping with the EMFILES (too many open files) error. (fixed)</li>
 <ul class="simple">
 <li>Better test coverage</li>
 <li>More documentation</li>
-<li>The worker doesn&#8217;t emit <cite>Queue is empty</cite> message if
+<li>The worker doesn’t emit <cite>Queue is empty</cite> message if
 <cite>settings.CELERYD_EMPTY_MSG_EMIT_EVERY</cite> is 0.</li>
 </ul>
 </div>
 <div class="section" id="version-0-1-7">
 <span id="id38"></span><h2><a class="toc-backref" href="#id93">0.1.7</a><a class="headerlink" href="#version-0-1-7" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2009-04-30 01:50 P.M CET</td>
 </tr>
@@ -2269,8 +2241,8 @@ and <cite>settings.CELERY_AMQP_CONSUMER_QUEUE</cite>.</li>
 <div class="section" id="version-0-1-6">
 <span id="id39"></span><h2><a class="toc-backref" href="#id94">0.1.6</a><a class="headerlink" href="#version-0-1-6" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2009-04-28 02:13 P.M CET</td>
 </tr>
@@ -2284,7 +2256,7 @@ find out how many, or if all them, are done (excellent for progress
 bars and such)</p>
 </li>
 <li><p class="first">Now catches all exceptions when running <cite>Task.__call__</cite>, so the
-daemon doesn&#8217;t die. This doesn&#8217;t happen for pure functions yet, only
+daemon doesn’t die. This doesn’t happen for pure functions yet, only
 <cite>Task</cite> classes.</p>
 </li>
 <li><p class="first"><cite>autodiscover()</cite> now works with zipped eggs.</p>
@@ -2301,7 +2273,7 @@ for the worker and it will add that to <cite>sys.path</cite> for easy launching.
 <li><p class="first">Can now check if a task has been executed or not via HTTP.</p>
 </li>
 <li><p class="first">You can do this by including the celery <cite>urls.py</cite> into your project,</p>
-<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">url</span><span class="p">(</span><span class="s1">r&#39;^celery/$&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="s2">&quot;celery.urls&quot;</span><span class="p">))</span>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">url</span><span class="p">(</span><span class="s1">r'^celery/$'</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="s2">"celery.urls"</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>then visiting the following url,:</p>
@@ -2309,7 +2281,7 @@ for the worker and it will add that to <cite>sys.path</cite> for easy launching.
 </pre></div>
 </div>
 <p>this will return a JSON dictionary like e.g:</p>
-<div class="highlight-python3"><div class="highlight"><pre><span></span>&gt;&gt;&gt; {&quot;task&quot;: {&quot;id&quot;: $task_id, &quot;executed&quot;: true}}
+<div class="highlight-python3"><div class="highlight"><pre><span></span>&gt;&gt;&gt; {"task": {"id": $task_id, "executed": true}}
 </pre></div>
 </div>
 </li>
@@ -2325,8 +2297,8 @@ the name change request is in <cite>docs/name_change_request.txt</cite>.</p>
 <div class="section" id="version-0-1-0">
 <span id="id40"></span><h2><a class="toc-backref" href="#id95">0.1.0</a><a class="headerlink" href="#version-0-1-0" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">release-date:</th><td class="field-body">2009-04-24 11:28 A.M CET</td>
 </tr>
@@ -2339,33 +2311,15 @@ the name change request is in <cite>docs/name_change_request.txt</cite>.</p>
 </ul>
 </div>
 </div>
+</div>
+</div>
+</div>
 
+<div class="clearer"></div>
+</div>
 
-          </div>
-        </div>
-      </div>
+<div class="footer" role="contentinfo">
+        © <a href="../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="../glossary.html" title="Glossary"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="changelog-2.0.html" title="Change history for Celery 2.0"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" >History</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &copy; <a href="../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
-    </div>
-  </body>
+</body>
 </html>

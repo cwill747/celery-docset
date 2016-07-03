@@ -1,17 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>celery.security.certificate &mdash; Celery 3.1.23 documentation</title>
-    
-    <link rel="stylesheet" href="../../../_static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>celery.security.certificate — Celery 3.1.23 documentation</title>
+<link href="../../../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
         VERSION:     '3.1.23',
@@ -20,53 +16,34 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="copyright" title="Copyright" href="../../../copyright.html" />
-    <link rel="top" title="Celery 3.1.23 documentation" href="../../../index.html" />
-    <link rel="up" title="celery.security" href="../security.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="../security.html" accesskey="U">celery.security</a> &raquo;</li> 
-      </ul>
-    </div>  
+<script src="../../../_static/jquery.js" type="text/javascript"></script>
+<script src="../../../_static/underscore.js" type="text/javascript"></script>
+<script src="../../../_static/doctools.js" type="text/javascript"></script>
+<link href="../../../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../../../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="../security.html" rel="up" title="celery.security"/>
+</head>
+<body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
 <div class="deck">
-
-    
-        <p>
+<p>
         This document describes the current stable version of Celery (3.1). For development docs,
         <a href="http://docs.celeryproject.org/en/master/_modules/celery/security/certificate.html">go here</a>.
         </p>
-    
-
 </div>
-    <h1>Source code for celery.security.certificate</h1><div class="highlight"><pre>
+<h1>Source code for celery.security.certificate</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="sd">    celery.security.certificate</span>
 <span class="sd">    ~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
 
 <span class="sd">    X.509 certificates.</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
 
 <span class="kn">import</span> <span class="nn">glob</span>
@@ -79,101 +56,89 @@
 
 <span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">crypto</span><span class="p">,</span> <span class="n">reraise_errors</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Certificate&#39;</span><span class="p">,</span> <span class="s1">&#39;CertStore&#39;</span><span class="p">,</span> <span class="s1">&#39;FSCertStore&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Certificate'</span><span class="p">,</span> <span class="s1">'CertStore'</span><span class="p">,</span> <span class="s1">'FSCertStore'</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="Certificate"><a class="viewcode-back" href="../../../internals/reference/celery.security.certificate.html#celery.security.certificate.Certificate">[docs]</a><span class="k">class</span> <span class="nc">Certificate</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;X.509 certificate.&quot;&quot;&quot;</span>
+    <span class="sd">"""X.509 certificate."""</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cert</span><span class="p">):</span>
         <span class="k">assert</span> <span class="n">crypto</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span>
-        <span class="k">with</span> <span class="n">reraise_errors</span><span class="p">(</span><span class="s1">&#39;Invalid certificate: {0!r}&#39;</span><span class="p">):</span>
+        <span class="k">with</span> <span class="n">reraise_errors</span><span class="p">(</span><span class="s1">'Invalid certificate: {0!r}'</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_cert</span> <span class="o">=</span> <span class="n">crypto</span><span class="o">.</span><span class="n">load_certificate</span><span class="p">(</span><span class="n">crypto</span><span class="o">.</span><span class="n">FILETYPE_PEM</span><span class="p">,</span> <span class="n">cert</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Certificate.has_expired"><a class="viewcode-back" href="../../../internals/reference/celery.security.certificate.html#celery.security.certificate.Certificate.has_expired">[docs]</a>    <span class="k">def</span> <span class="nf">has_expired</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Check if the certificate has expired.&quot;&quot;&quot;</span>
+        <span class="sd">"""Check if the certificate has expired."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cert</span><span class="o">.</span><span class="n">has_expired</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="Certificate.get_serial_number"><a class="viewcode-back" href="../../../internals/reference/celery.security.certificate.html#celery.security.certificate.Certificate.get_serial_number">[docs]</a>    <span class="k">def</span> <span class="nf">get_serial_number</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the serial number in the certificate.&quot;&quot;&quot;</span>
+        <span class="sd">"""Return the serial number in the certificate."""</span>
         <span class="k">return</span> <span class="n">bytes_to_str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cert</span><span class="o">.</span><span class="n">get_serial_number</span><span class="p">())</span></div>
 
 <div class="viewcode-block" id="Certificate.get_issuer"><a class="viewcode-back" href="../../../internals/reference/celery.security.certificate.html#celery.security.certificate.Certificate.get_issuer">[docs]</a>    <span class="k">def</span> <span class="nf">get_issuer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return issuer (CA) as a string&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">bytes_to_str</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span>
+        <span class="sd">"""Return issuer (CA) as a string"""</span>
+        <span class="k">return</span> <span class="s1">' '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">bytes_to_str</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">_cert</span><span class="o">.</span><span class="n">get_issuer</span><span class="p">()</span><span class="o">.</span><span class="n">get_components</span><span class="p">())</span></div>
 
 <div class="viewcode-block" id="Certificate.get_id"><a class="viewcode-back" href="../../../internals/reference/celery.security.certificate.html#celery.security.certificate.Certificate.get_id">[docs]</a>    <span class="k">def</span> <span class="nf">get_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Serial number/issuer pair uniquely identifies a certificate&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="s1">&#39;{0} {1}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_issuer</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_serial_number</span><span class="p">())</span></div>
+        <span class="sd">"""Serial number/issuer pair uniquely identifies a certificate"""</span>
+        <span class="k">return</span> <span class="s1">'{0} {1}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_issuer</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_serial_number</span><span class="p">())</span></div>
 
 <div class="viewcode-block" id="Certificate.verify"><a class="viewcode-back" href="../../../internals/reference/celery.security.certificate.html#celery.security.certificate.Certificate.verify">[docs]</a>    <span class="k">def</span> <span class="nf">verify</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">signature</span><span class="p">,</span> <span class="n">digest</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Verifies the signature for string containing data.&quot;&quot;&quot;</span>
-        <span class="k">with</span> <span class="n">reraise_errors</span><span class="p">(</span><span class="s1">&#39;Bad signature: {0!r}&#39;</span><span class="p">):</span>
+        <span class="sd">"""Verifies the signature for string containing data."""</span>
+        <span class="k">with</span> <span class="n">reraise_errors</span><span class="p">(</span><span class="s1">'Bad signature: {0!r}'</span><span class="p">):</span>
             <span class="n">crypto</span><span class="o">.</span><span class="n">verify</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cert</span><span class="p">,</span> <span class="n">signature</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">digest</span><span class="p">)</span></div></div>
 
 
 <div class="viewcode-block" id="CertStore"><a class="viewcode-back" href="../../../internals/reference/celery.security.certificate.html#celery.security.certificate.CertStore">[docs]</a><span class="k">class</span> <span class="nc">CertStore</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Base class for certificate stores&quot;&quot;&quot;</span>
+    <span class="sd">"""Base class for certificate stores"""</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_certs</span> <span class="o">=</span> <span class="p">{}</span>
 
 <div class="viewcode-block" id="CertStore.itercerts"><a class="viewcode-back" href="../../../internals/reference/celery.security.certificate.html#celery.security.certificate.CertStore.itercerts">[docs]</a>    <span class="k">def</span> <span class="nf">itercerts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;an iterator over the certificates&quot;&quot;&quot;</span>
+        <span class="sd">"""an iterator over the certificates"""</span>
         <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">values</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_certs</span><span class="p">):</span>
             <span class="k">yield</span> <span class="n">c</span></div>
 
     <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;get certificate by id&quot;&quot;&quot;</span>
+        <span class="sd">"""get certificate by id"""</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_certs</span><span class="p">[</span><span class="n">bytes_to_str</span><span class="p">(</span><span class="nb">id</span><span class="p">)]</span>
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">SecurityError</span><span class="p">(</span><span class="s1">&#39;Unknown certificate: {0!r}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">id</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="n">SecurityError</span><span class="p">(</span><span class="s1">'Unknown certificate: {0!r}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">id</span><span class="p">))</span>
 
 <div class="viewcode-block" id="CertStore.add_cert"><a class="viewcode-back" href="../../../internals/reference/celery.security.certificate.html#celery.security.certificate.CertStore.add_cert">[docs]</a>    <span class="k">def</span> <span class="nf">add_cert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cert</span><span class="p">):</span>
         <span class="n">cert_id</span> <span class="o">=</span> <span class="n">bytes_to_str</span><span class="p">(</span><span class="n">cert</span><span class="o">.</span><span class="n">get_id</span><span class="p">())</span>
         <span class="k">if</span> <span class="n">cert_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_certs</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">SecurityError</span><span class="p">(</span><span class="s1">&#39;Duplicate certificate: {0!r}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">id</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="n">SecurityError</span><span class="p">(</span><span class="s1">'Duplicate certificate: {0!r}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">id</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_certs</span><span class="p">[</span><span class="n">cert_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">cert</span></div></div>
 
 
 <div class="viewcode-block" id="FSCertStore"><a class="viewcode-back" href="../../../internals/reference/celery.security.certificate.html#celery.security.certificate.FSCertStore">[docs]</a><span class="k">class</span> <span class="nc">FSCertStore</span><span class="p">(</span><span class="n">CertStore</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;File system certificate store&quot;&quot;&quot;</span>
+    <span class="sd">"""File system certificate store"""</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
         <span class="n">CertStore</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
-            <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;*&#39;</span><span class="p">)</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">'*'</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
             <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
                 <span class="n">cert</span> <span class="o">=</span> <span class="n">Certificate</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
                 <span class="k">if</span> <span class="n">cert</span><span class="o">.</span><span class="n">has_expired</span><span class="p">():</span>
                     <span class="k">raise</span> <span class="n">SecurityError</span><span class="p">(</span>
-                        <span class="s1">&#39;Expired certificate: {0!r}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cert</span><span class="o">.</span><span class="n">get_id</span><span class="p">()))</span>
+                        <span class="s1">'Expired certificate: {0!r}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cert</span><span class="o">.</span><span class="n">get_id</span><span class="p">()))</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">add_cert</span><span class="p">(</span><span class="n">cert</span><span class="p">)</span></div>
 </pre></div>
+</div>
+</div>
+</div>
 
-          </div>
-        </div>
-      </div>
+<div class="clearer"></div>
+</div>
+
+<div class="footer" role="contentinfo">
+        © <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="../security.html" >celery.security</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &copy; <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
-    </div>
-  </body>
+</body>
 </html>

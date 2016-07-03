@@ -1,17 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>celery._state &mdash; Celery 3.1.23 documentation</title>
-    
-    <link rel="stylesheet" href="../../_static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>celery._state — Celery 3.1.23 documentation</title>
+<link href="../../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
         VERSION:     '3.1.23',
@@ -20,55 +16,37 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="copyright" title="Copyright" href="../../copyright.html" />
-    <link rel="top" title="Celery 3.1.23 documentation" href="../../index.html" />
-    <link rel="up" title="Module code" href="../index.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
-      </ul>
-    </div>  
+<script src="../../_static/jquery.js" type="text/javascript"></script>
+<script src="../../_static/underscore.js" type="text/javascript"></script>
+<script src="../../_static/doctools.js" type="text/javascript"></script>
+<link href="../../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="../index.html" rel="up" title="Module code"/>
+</head>
+<body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
 <div class="deck">
-
-    
-        <p>
+<p>
         This document describes the current stable version of Celery (3.1). For development docs,
         <a href="http://docs.celeryproject.org/en/master/_modules/celery/_state.html">go here</a>.
         </p>
-    
-
 </div>
-    <h1>Source code for celery._state</h1><div class="highlight"><pre>
+<h1>Source code for celery._state</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="sd">    celery._state</span>
 <span class="sd">    ~~~~~~~~~~~~~~~</span>
 
 <span class="sd">    This is an internal module containing thread state</span>
 <span class="sd">    like the ``current_app``, and ``current_task``.</span>
 
-<span class="sd">    This module shouldn&#39;t be used directly.</span>
+<span class="sd">    This module shouldn't be used directly.</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">print_function</span>
 
 <span class="kn">import</span> <span class="nn">os</span>
@@ -104,9 +82,9 @@
                 <span class="k">while</span> <span class="n">dirty</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_refs</span><span class="o">.</span><span class="n">discard</span><span class="p">(</span><span class="n">dirty</span><span class="o">.</span><span class="n">pop</span><span class="p">())</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;set_default_app&#39;</span><span class="p">,</span> <span class="s1">&#39;get_current_app&#39;</span><span class="p">,</span> <span class="s1">&#39;get_current_task&#39;</span><span class="p">,</span>
-           <span class="s1">&#39;get_current_worker_task&#39;</span><span class="p">,</span> <span class="s1">&#39;current_app&#39;</span><span class="p">,</span> <span class="s1">&#39;current_task&#39;</span><span class="p">,</span>
-           <span class="s1">&#39;connect_on_app_finalize&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'set_default_app'</span><span class="p">,</span> <span class="s1">'get_current_app'</span><span class="p">,</span> <span class="s1">'get_current_task'</span><span class="p">,</span>
+           <span class="s1">'get_current_worker_task'</span><span class="p">,</span> <span class="s1">'current_app'</span><span class="p">,</span> <span class="s1">'current_task'</span><span class="p">,</span>
+           <span class="s1">'connect_on_app_finalize'</span><span class="p">]</span>
 
 <span class="c1">#: Global default app used when no current app.</span>
 <span class="n">default_app</span> <span class="o">=</span> <span class="bp">None</span>
@@ -162,8 +140,8 @@
         <span class="c1">#: creates the global fallback app instance.</span>
         <span class="kn">from</span> <span class="nn">celery.app</span> <span class="kn">import</span> <span class="n">Celery</span>
         <span class="n">set_default_app</span><span class="p">(</span><span class="n">Celery</span><span class="p">(</span>
-            <span class="s1">&#39;default&#39;</span><span class="p">,</span>
-            <span class="n">loader</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;CELERY_LOADER&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="s1">&#39;default&#39;</span><span class="p">,</span>
+            <span class="s1">'default'</span><span class="p">,</span>
+            <span class="n">loader</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'CELERY_LOADER'</span><span class="p">)</span> <span class="ow">or</span> <span class="s1">'default'</span><span class="p">,</span>
             <span class="n">fixups</span><span class="o">=</span><span class="p">[],</span>
             <span class="n">set_as_current</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">accept_magic_kwargs</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
         <span class="p">))</span>
@@ -174,12 +152,12 @@
     <span class="n">_tls</span><span class="o">.</span><span class="n">current_app</span> <span class="o">=</span> <span class="n">app</span>
 
 
-<span class="n">C_STRICT_APP</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;C_STRICT_APP&#39;</span><span class="p">)</span>
-<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;C_STRICT_APP&#39;</span><span class="p">):</span>  <span class="c1"># pragma: no cover</span>
+<span class="n">C_STRICT_APP</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'C_STRICT_APP'</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'C_STRICT_APP'</span><span class="p">):</span>  <span class="c1"># pragma: no cover</span>
 <div class="viewcode-block" id="get_current_app"><a class="viewcode-back" href="../../internals/reference/celery._state.html#celery._state.get_current_app">[docs]</a>    <span class="k">def</span> <span class="nf">get_current_app</span><span class="p">():</span>
-        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;USES CURRENT APP&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">'USES CURRENT APP'</span><span class="p">)</span>
         <span class="kn">import</span> <span class="nn">traceback</span>
-        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;-- USES CURRENT_APP&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>  <span class="c1"># noqa+</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">'-- USES CURRENT_APP'</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>  <span class="c1"># noqa+</span>
         <span class="n">traceback</span><span class="o">.</span><span class="n">print_stack</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">_get_current_app</span><span class="p">()</span></div>
 <span class="k">else</span><span class="p">:</span>
@@ -187,18 +165,18 @@
 
 
 <div class="viewcode-block" id="get_current_task"><a class="viewcode-back" href="../../internals/reference/celery._state.html#celery._state.get_current_task">[docs]</a><span class="k">def</span> <span class="nf">get_current_task</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;Currently executing task.&quot;&quot;&quot;</span>
+    <span class="sd">"""Currently executing task."""</span>
     <span class="k">return</span> <span class="n">_task_stack</span><span class="o">.</span><span class="n">top</span></div>
 
 
 <div class="viewcode-block" id="get_current_worker_task"><a class="viewcode-back" href="../../internals/reference/celery._state.html#celery._state.get_current_worker_task">[docs]</a><span class="k">def</span> <span class="nf">get_current_worker_task</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;Currently executing task, that was applied by the worker.</span>
+    <span class="sd">"""Currently executing task, that was applied by the worker.</span>
 
 <span class="sd">    This is used to differentiate between the actual task</span>
 <span class="sd">    executed by the worker and any task that was called within</span>
 <span class="sd">    a task (using ``task.__call__`` or ``task.apply``)</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">_task_stack</span><span class="o">.</span><span class="n">stack</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">task</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">called_directly</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">task</span></div>
@@ -218,26 +196,15 @@
 <span class="k">def</span> <span class="nf">_get_active_apps</span><span class="p">():</span>
     <span class="k">return</span> <span class="n">_apps</span>
 </pre></div>
+</div>
+</div>
+</div>
 
-          </div>
-        </div>
-      </div>
+<div class="clearer"></div>
+</div>
+
+<div class="footer" role="contentinfo">
+        © <a href="../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &copy; <a href="../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
-    </div>
-  </body>
+</body>
 </html>

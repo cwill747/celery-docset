@@ -1,17 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Optimizing &mdash; Celery 3.1.23 documentation</title>
-    
-    <link rel="stylesheet" href="../_static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>Optimizing — Celery 3.1.23 documentation</title>
+<link href="../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
         VERSION:     '3.1.23',
@@ -20,56 +16,32 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="copyright" title="Copyright" href="../copyright.html" />
-    <link rel="top" title="Celery 3.1.23 documentation" href="../index.html" />
-    <link rel="up" title="User Guide" href="index.html" />
-    <link rel="next" title="Concurrency" href="concurrency/index.html" />
-    <link rel="prev" title="Security" href="security.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="concurrency/index.html" title="Concurrency"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="security.html" title="Security"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">User Guide</a> &raquo;</li> 
-      </ul>
-    </div>  
+<script src="../_static/jquery.js" type="text/javascript"></script>
+<script src="../_static/underscore.js" type="text/javascript"></script>
+<script src="../_static/doctools.js" type="text/javascript"></script>
+<link href="../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="index.html" rel="up" title="User Guide"/>
+<link href="concurrency/index.html" rel="next" title="Concurrency"/>
+<link href="security.html" rel="prev" title="Security"/>
+</head>
+<body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
 <div class="deck">
-
-    
-        <p>
+<p>
         This document describes the current stable version of Celery (3.1). For development docs,
         <a href="http://docs.celeryproject.org/en/master/userguide/optimizing.html">go here</a>.
         </p>
-    
-
 </div>
-    <div class="section" id="optimizing">
+<div class="section" id="optimizing">
 <span id="guide-optimizing"></span><h1>Optimizing<a class="headerlink" href="#optimizing" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
-<p>The default configuration makes a lot of compromises.  It&#8217;s not optimal for
+<p>The default configuration makes a lot of compromises.  It’s not optimal for
 any single case, but works well enough for most situations.</p>
 <p>There are optimizations that can be applied based on specific use cases.</p>
 <p>Optimizations can apply to different properties of the running environment,
@@ -88,14 +60,14 @@ Back of the envelope calculations can be used as a means to plan for this
 ahead of time.</p>
 <p>In Celery; If a task takes 10 minutes to complete,
 and there are 10 new tasks coming in every minute, the queue will never
-be empty.  This is why it&#8217;s very important
+be empty.  This is why it’s very important
 that you monitor queue lengths!</p>
 <p>A way to do this is by <a class="reference internal" href="monitoring.html#monitoring-munin"><span>using Munin</span></a>.
 You should set up alerts, that will notify you as soon as any queue has
 reached an unacceptable size.  This way you can take appropriate action
 like adding new worker nodes, or revoking unnecessary tasks.</p>
 <table class="docutils footnote" frame="void" id="id2" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
+<colgroup><col class="label"></col><col></col></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id1">[*]</a></td><td>The chapter is available to read for free here:
 <a class="reference external" href="http://books.google.com/books?id=kse_7qbWbjsC&amp;pg=PA67">The back of the envelope</a>.  The book is a classic text. Highly
@@ -107,12 +79,12 @@ recommended.</td></tr>
 <span id="optimizing-general-settings"></span><h2>General Settings<a class="headerlink" href="#general-settings" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="librabbitmq-python-2-only">
 <span id="optimizing-librabbitmq"></span><h3>librabbitmq (Python 2 only)<a class="headerlink" href="#librabbitmq-python-2-only" title="Permalink to this headline">¶</a></h3>
-<p>If you&#8217;re using RabbitMQ (AMQP) as the broker then you can install the
+<p>If you’re using RabbitMQ (AMQP) as the broker then you can install the
 <code class="xref py py-mod docutils literal"><span class="pre">librabbitmq</span></code> module to use an optimized client written in C:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ pip install librabbitmq
 </pre></div>
 </div>
-<p>The &#8216;amqp&#8217; transport will automatically use the librabbitmq module if it&#8217;s
+<p>The ‘amqp’ transport will automatically use the librabbitmq module if it’s
 installed, or you can also specify the transport you want directly by using
 the <code class="docutils literal"><span class="pre">pyamqp://</span></code> or <code class="docutils literal"><span class="pre">librabbitmq://</span></code> prefixes.</p>
 </div>
@@ -128,14 +100,14 @@ active threads/greenthreads using broker connections.</p>
 <p>Queues created by Celery are persistent by default.  This means that
 the broker will write messages to disk to ensure that the tasks will
 be executed even if the broker is restarted.</p>
-<p>But in some cases it&#8217;s fine that the message is lost, so not all tasks
+<p>But in some cases it’s fine that the message is lost, so not all tasks
 require durability.  You can create a <em>transient</em> queue for these tasks
 to improve performance:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">kombu</span> <span class="kn">import</span> <span class="n">Exchange</span><span class="p">,</span> <span class="n">Queue</span>
 
 <span class="n">CELERY_QUEUES</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="n">Queue</span><span class="p">(</span><span class="s1">&#39;celery&#39;</span><span class="p">,</span> <span class="n">routing_key</span><span class="o">=</span><span class="s1">&#39;celery&#39;</span><span class="p">),</span>
-    <span class="n">Queue</span><span class="p">(</span><span class="s1">&#39;transient&#39;</span><span class="p">,</span> <span class="n">routing_key</span><span class="o">=</span><span class="s1">&#39;transient&#39;</span><span class="p">,</span>
+    <span class="n">Queue</span><span class="p">(</span><span class="s1">'celery'</span><span class="p">,</span> <span class="n">routing_key</span><span class="o">=</span><span class="s1">'celery'</span><span class="p">),</span>
+    <span class="n">Queue</span><span class="p">(</span><span class="s1">'transient'</span><span class="p">,</span> <span class="n">routing_key</span><span class="o">=</span><span class="s1">'transient'</span><span class="p">,</span>
           <span class="n">delivery_mode</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
 <span class="p">)</span>
 </pre></div>
@@ -145,7 +117,7 @@ A value of 1 means that the message will not be written to disk, and a value
 of 2 (default) means that the message can be written to disk.</p>
 <p>To direct a task to your new transient queue you can specify the queue
 argument (or use the <a class="reference internal" href="../configuration.html#std:setting-CELERY_ROUTES"><code class="xref std std-setting docutils literal"><span class="pre">CELERY_ROUTES</span></code></a> setting):</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">task</span><span class="o">.</span><span class="n">apply_async</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">queue</span><span class="o">=</span><span class="s1">&#39;transient&#39;</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">task</span><span class="o">.</span><span class="n">apply_async</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">queue</span><span class="o">=</span><span class="s1">'transient'</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>For more information see the <a class="reference internal" href="routing.html#guide-routing"><span>routing guide</span></a>.</p>
@@ -162,13 +134,13 @@ can reserve for itself.  If it is zero, the worker will keep
 consuming messages, not respecting that there may be other
 available worker nodes that may be able to process them sooner <a class="footnote-reference" href="#id4" id="id3">[†]</a>,
 or that the messages may not even fit in memory.</p>
-<p>The workers&#8217; default prefetch count is the
+<p>The workers’ default prefetch count is the
 <a class="reference internal" href="../configuration.html#std:setting-CELERYD_PREFETCH_MULTIPLIER"><code class="xref std std-setting docutils literal"><span class="pre">CELERYD_PREFETCH_MULTIPLIER</span></code></a> setting multiplied by the number
 of concurrency slots[*]_ (processes/threads/greenthreads).</p>
 <p>If you have many tasks with a long duration you want
 the multiplier value to be 1, which means it will only reserve one
 task per worker process at a time.</p>
-<p>However &#8211; If you have many short-running tasks, and throughput/round trip
+<p>However – If you have many short-running tasks, and throughput/round trip
 latency is important to you, this number should be large. The worker is
 able to process more tasks per second if the messages have already been
 prefetched, and is available in memory.  You may have to experiment to find
@@ -178,17 +150,17 @@ these circumstances. Say 64, or 128.</p>
 is to use two worker nodes that are configured separately, and route
 the tasks according to the run-time. (see <a class="reference internal" href="routing.html#guide-routing"><span>Routing Tasks</span></a>).</p>
 <table class="docutils footnote" frame="void" id="id4" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
+<colgroup><col class="label"></col><col></col></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id3">[†]</a></td><td>RabbitMQ and other brokers deliver messages round-robin,
-so this doesn&#8217;t apply to an active system.  If there is no prefetch
+so this doesn’t apply to an active system.  If there is no prefetch
 limit and you restart the cluster, there will be timing delays between
 nodes starting. If there are 3 offline nodes and one active node,
 all messages will be delivered to the active node.</td></tr>
 </tbody>
 </table>
 <table class="docutils footnote" frame="void" id="id5" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
+<colgroup><col class="label"></col><col></col></colgroup>
 <tbody valign="top">
 <tr><td class="label">[‡]</td><td>This is the concurrency setting; <a class="reference internal" href="../configuration.html#std:setting-CELERYD_CONCURRENCY"><code class="xref std std-setting docutils literal"><span class="pre">CELERYD_CONCURRENCY</span></code></a> or the
 <code class="xref std std-option docutils literal"><span class="pre">-c</span></code> option to the <strong class="program">celery worker</strong> program.</td></tr>
@@ -200,7 +172,7 @@ all messages will be delivered to the active node.</td></tr>
 <p>When using early acknowledgement (default), a prefetch multiplier of 1
 means the worker will reserve at most one extra task for every active
 worker process.</p>
-<p>When users ask if it&#8217;s possible to disable &#8220;prefetching of tasks&#8221;, often
+<p>When users ask if it’s possible to disable “prefetching of tasks”, often
 what they really want is to have a worker only reserve as many tasks as there
 are child processes.</p>
 <p>But this is not possible without enabling late acknowledgements
@@ -258,33 +230,15 @@ available for work, disabling the prefetch behavior:</p>
 </div>
 </div>
 </div>
+</div>
+</div>
+</div>
 
+<div class="clearer"></div>
+</div>
 
-          </div>
-        </div>
-      </div>
+<div class="footer" role="contentinfo">
+        © <a href="../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="concurrency/index.html" title="Concurrency"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="security.html" title="Security"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" >User Guide</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &copy; <a href="../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
-    </div>
-  </body>
+</body>
 </html>

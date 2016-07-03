@@ -1,17 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>celery.utils.text &mdash; Celery 3.1.23 documentation</title>
-    
-    <link rel="stylesheet" href="../../../_static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>celery.utils.text — Celery 3.1.23 documentation</title>
+<link href="../../../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
         VERSION:     '3.1.23',
@@ -20,89 +16,70 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="copyright" title="Copyright" href="../../../copyright.html" />
-    <link rel="top" title="Celery 3.1.23 documentation" href="../../../index.html" />
-    <link rel="up" title="celery.utils" href="../utils.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="../utils.html" accesskey="U">celery.utils</a> &raquo;</li> 
-      </ul>
-    </div>  
+<script src="../../../_static/jquery.js" type="text/javascript"></script>
+<script src="../../../_static/underscore.js" type="text/javascript"></script>
+<script src="../../../_static/doctools.js" type="text/javascript"></script>
+<link href="../../../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../../../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="../utils.html" rel="up" title="celery.utils"/>
+</head>
+<body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
 <div class="deck">
-
-    
-        <p>
+<p>
         This document describes the current stable version of Celery (3.1). For development docs,
         <a href="http://docs.celeryproject.org/en/master/_modules/celery/utils/text.html">go here</a>.
         </p>
-    
-
 </div>
-    <h1>Source code for celery.utils.text</h1><div class="highlight"><pre>
+<h1>Source code for celery.utils.text</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="sd">    celery.utils.text</span>
 <span class="sd">    ~~~~~~~~~~~~~~~~~</span>
 
 <span class="sd">    Text formatting utilities</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
 
 <span class="kn">from</span> <span class="nn">textwrap</span> <span class="kn">import</span> <span class="n">fill</span>
 
 <span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pformat</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;dedent_initial&#39;</span><span class="p">,</span> <span class="s1">&#39;dedent&#39;</span><span class="p">,</span> <span class="s1">&#39;fill_paragraphs&#39;</span><span class="p">,</span> <span class="s1">&#39;join&#39;</span><span class="p">,</span>
-           <span class="s1">&#39;ensure_2lines&#39;</span><span class="p">,</span> <span class="s1">&#39;abbr&#39;</span><span class="p">,</span> <span class="s1">&#39;abbrtask&#39;</span><span class="p">,</span> <span class="s1">&#39;indent&#39;</span><span class="p">,</span> <span class="s1">&#39;truncate&#39;</span><span class="p">,</span>
-           <span class="s1">&#39;pluralize&#39;</span><span class="p">,</span> <span class="s1">&#39;pretty&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'dedent_initial'</span><span class="p">,</span> <span class="s1">'dedent'</span><span class="p">,</span> <span class="s1">'fill_paragraphs'</span><span class="p">,</span> <span class="s1">'join'</span><span class="p">,</span>
+           <span class="s1">'ensure_2lines'</span><span class="p">,</span> <span class="s1">'abbr'</span><span class="p">,</span> <span class="s1">'abbrtask'</span><span class="p">,</span> <span class="s1">'indent'</span><span class="p">,</span> <span class="s1">'truncate'</span><span class="p">,</span>
+           <span class="s1">'pluralize'</span><span class="p">,</span> <span class="s1">'pretty'</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="dedent_initial"><a class="viewcode-back" href="../../../internals/reference/celery.utils.text.html#celery.utils.text.dedent_initial">[docs]</a><span class="k">def</span> <span class="nf">dedent_initial</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">s</span><span class="p">[</span><span class="n">n</span><span class="p">:]</span> <span class="k">if</span> <span class="n">s</span><span class="p">[:</span><span class="n">n</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39; &#39;</span> <span class="o">*</span> <span class="n">n</span> <span class="k">else</span> <span class="n">s</span></div>
+    <span class="k">return</span> <span class="n">s</span><span class="p">[</span><span class="n">n</span><span class="p">:]</span> <span class="k">if</span> <span class="n">s</span><span class="p">[:</span><span class="n">n</span><span class="p">]</span> <span class="o">==</span> <span class="s1">' '</span> <span class="o">*</span> <span class="n">n</span> <span class="k">else</span> <span class="n">s</span></div>
 
 
-<div class="viewcode-block" id="dedent"><a class="viewcode-back" href="../../../internals/reference/celery.utils.text.html#celery.utils.text.dedent">[docs]</a><span class="k">def</span> <span class="nf">dedent</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="dedent"><a class="viewcode-back" href="../../../internals/reference/celery.utils.text.html#celery.utils.text.dedent">[docs]</a><span class="k">def</span> <span class="nf">dedent</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dedent_initial</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">splitlines</span><span class="p">())</span></div>
 
 
-<div class="viewcode-block" id="fill_paragraphs"><a class="viewcode-back" href="../../../internals/reference/celery.utils.text.html#celery.utils.text.fill_paragraphs">[docs]</a><span class="k">def</span> <span class="nf">fill_paragraphs</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="fill_paragraphs"><a class="viewcode-back" href="../../../internals/reference/celery.utils.text.html#celery.utils.text.fill_paragraphs">[docs]</a><span class="k">def</span> <span class="nf">fill_paragraphs</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">fill</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">width</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">sep</span><span class="p">))</span></div>
 
 
-<div class="viewcode-block" id="join"><a class="viewcode-back" href="../../../internals/reference/celery.utils.text.html#celery.utils.text.join">[docs]</a><span class="k">def</span> <span class="nf">join</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="join"><a class="viewcode-back" href="../../../internals/reference/celery.utils.text.html#celery.utils.text.join">[docs]</a><span class="k">def</span> <span class="nf">join</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">l</span> <span class="k">if</span> <span class="n">v</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="ensure_2lines"><a class="viewcode-back" href="../../../internals/reference/celery.utils.text.html#celery.utils.text.ensure_2lines">[docs]</a><span class="k">def</span> <span class="nf">ensure_2lines</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="ensure_2lines"><a class="viewcode-back" href="../../../internals/reference/celery.utils.text.html#celery.utils.text.ensure_2lines">[docs]</a><span class="k">def</span> <span class="nf">ensure_2lines</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">):</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">splitlines</span><span class="p">())</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">s</span> <span class="o">+</span> <span class="n">sep</span>
     <span class="k">return</span> <span class="n">s</span></div>
 
 
-<div class="viewcode-block" id="abbr"><a class="viewcode-back" href="../../../internals/reference/celery.utils.text.html#celery.utils.text.abbr">[docs]</a><span class="k">def</span> <span class="nf">abbr</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="nb">max</span><span class="p">,</span> <span class="n">ellipsis</span><span class="o">=</span><span class="s1">&#39;...&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="abbr"><a class="viewcode-back" href="../../../internals/reference/celery.utils.text.html#celery.utils.text.abbr">[docs]</a><span class="k">def</span> <span class="nf">abbr</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="nb">max</span><span class="p">,</span> <span class="n">ellipsis</span><span class="o">=</span><span class="s1">'...'</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">S</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s1">&#39;???&#39;</span>
+        <span class="k">return</span> <span class="s1">'???'</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">S</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">max</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">ellipsis</span> <span class="ow">and</span> <span class="p">(</span><span class="n">S</span><span class="p">[:</span><span class="nb">max</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">ellipsis</span><span class="p">)]</span> <span class="o">+</span> <span class="n">ellipsis</span><span class="p">)</span> <span class="ow">or</span> <span class="n">S</span><span class="p">[:</span><span class="nb">max</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">S</span></div>
@@ -110,63 +87,51 @@
 
 <div class="viewcode-block" id="abbrtask"><a class="viewcode-back" href="../../../internals/reference/celery.utils.text.html#celery.utils.text.abbrtask">[docs]</a><span class="k">def</span> <span class="nf">abbrtask</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="nb">max</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">S</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s1">&#39;???&#39;</span>
+        <span class="k">return</span> <span class="s1">'???'</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">S</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">max</span><span class="p">:</span>
-        <span class="n">module</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">cls</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">rpartition</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+        <span class="n">module</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">cls</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">rpartition</span><span class="p">(</span><span class="s1">'.'</span><span class="p">)</span>
         <span class="n">module</span> <span class="o">=</span> <span class="n">abbr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="nb">max</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">cls</span><span class="p">)</span> <span class="o">-</span> <span class="mi">3</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">module</span> <span class="o">+</span> <span class="s1">&#39;[.]&#39;</span> <span class="o">+</span> <span class="n">cls</span>
+        <span class="k">return</span> <span class="n">module</span> <span class="o">+</span> <span class="s1">'[.]'</span> <span class="o">+</span> <span class="n">cls</span>
     <span class="k">return</span> <span class="n">S</span></div>
 
 
-<div class="viewcode-block" id="indent"><a class="viewcode-back" href="../../../internals/reference/celery.utils.text.html#celery.utils.text.indent">[docs]</a><span class="k">def</span> <span class="nf">indent</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Indent text.&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39; &#39;</span> <span class="o">*</span> <span class="n">indent</span> <span class="o">+</span> <span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">t</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">sep</span><span class="p">))</span></div>
+<div class="viewcode-block" id="indent"><a class="viewcode-back" href="../../../internals/reference/celery.utils.text.html#celery.utils.text.indent">[docs]</a><span class="k">def</span> <span class="nf">indent</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">):</span>
+    <span class="sd">"""Indent text."""</span>
+    <span class="k">return</span> <span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">' '</span> <span class="o">*</span> <span class="n">indent</span> <span class="o">+</span> <span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">t</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">sep</span><span class="p">))</span></div>
 
 
-<div class="viewcode-block" id="truncate"><a class="viewcode-back" href="../../../internals/reference/celery.utils.text.html#celery.utils.text.truncate">[docs]</a><span class="k">def</span> <span class="nf">truncate</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">maxlen</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s1">&#39;...&#39;</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Truncates text to a maximum number of characters.&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="truncate"><a class="viewcode-back" href="../../../internals/reference/celery.utils.text.html#celery.utils.text.truncate">[docs]</a><span class="k">def</span> <span class="nf">truncate</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">maxlen</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s1">'...'</span><span class="p">):</span>
+    <span class="sd">"""Truncates text to a maximum number of characters."""</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">maxlen</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">text</span><span class="p">[:</span><span class="n">maxlen</span><span class="p">]</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">suffix</span>
+        <span class="k">return</span> <span class="n">text</span><span class="p">[:</span><span class="n">maxlen</span><span class="p">]</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">' '</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">suffix</span>
     <span class="k">return</span> <span class="n">text</span></div>
 
 
-<div class="viewcode-block" id="pluralize"><a class="viewcode-back" href="../../../internals/reference/celery.utils.text.html#celery.utils.text.pluralize">[docs]</a><span class="k">def</span> <span class="nf">pluralize</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="pluralize"><a class="viewcode-back" href="../../../internals/reference/celery.utils.text.html#celery.utils.text.pluralize">[docs]</a><span class="k">def</span> <span class="nf">pluralize</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s1">'s'</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">text</span> <span class="o">+</span> <span class="n">suffix</span>
     <span class="k">return</span> <span class="n">text</span></div>
 
 
-<div class="viewcode-block" id="pretty"><a class="viewcode-back" href="../../../internals/reference/celery.utils.text.html#celery.utils.text.pretty">[docs]</a><span class="k">def</span> <span class="nf">pretty</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">nl_width</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+<div class="viewcode-block" id="pretty"><a class="viewcode-back" href="../../../internals/reference/celery.utils.text.html#celery.utils.text.pretty">[docs]</a><span class="k">def</span> <span class="nf">pretty</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">nl_width</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s1">&#39;{{{0} {1}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sep</span><span class="p">,</span> <span class="n">pformat</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">nl_width</span><span class="p">)[</span><span class="mi">1</span><span class="p">:])</span>
+        <span class="k">return</span> <span class="s1">'{{{0} {1}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sep</span><span class="p">,</span> <span class="n">pformat</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">nl_width</span><span class="p">)[</span><span class="mi">1</span><span class="p">:])</span>
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s1">&#39;{0}{1}{2}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-            <span class="n">sep</span><span class="p">,</span> <span class="s1">&#39; &#39;</span> <span class="o">*</span> <span class="mi">4</span><span class="p">,</span> <span class="n">pformat</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">nl_width</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">),</span>
+        <span class="k">return</span> <span class="s1">'{0}{1}{2}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">sep</span><span class="p">,</span> <span class="s1">' '</span> <span class="o">*</span> <span class="mi">4</span><span class="p">,</span> <span class="n">pformat</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">nl_width</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">),</span>
         <span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">pformat</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span></div>
 </pre></div>
+</div>
+</div>
+</div>
 
-          </div>
-        </div>
-      </div>
+<div class="clearer"></div>
+</div>
+
+<div class="footer" role="contentinfo">
+        © <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="../utils.html" >celery.utils</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &copy; <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
-    </div>
-  </body>
+</body>
 </html>

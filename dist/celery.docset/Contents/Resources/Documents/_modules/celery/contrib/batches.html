@@ -1,17 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>celery.contrib.batches &mdash; Celery 3.1.23 documentation</title>
-    
-    <link rel="stylesheet" href="../../../_static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>celery.contrib.batches — Celery 3.1.23 documentation</title>
+<link href="../../../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
         VERSION:     '3.1.23',
@@ -20,46 +16,28 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="copyright" title="Copyright" href="../../../copyright.html" />
-    <link rel="top" title="Celery 3.1.23 documentation" href="../../../index.html" />
-    <link rel="up" title="Module code" href="../../index.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
-      </ul>
-    </div>  
+<script src="../../../_static/jquery.js" type="text/javascript"></script>
+<script src="../../../_static/underscore.js" type="text/javascript"></script>
+<script src="../../../_static/doctools.js" type="text/javascript"></script>
+<link href="../../../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../../../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="../../index.html" rel="up" title="Module code"/>
+</head>
+<body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
 <div class="deck">
-
-    
-        <p>
+<p>
         This document describes the current stable version of Celery (3.1). For development docs,
         <a href="http://docs.celeryproject.org/en/master/_modules/celery/contrib/batches.html">go here</a>.
         </p>
-    
-
 </div>
-    <h1>Source code for celery.contrib.batches</h1><div class="highlight"><pre>
+<h1>Source code for celery.contrib.batches</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="sd">celery.contrib.batches</span>
 <span class="sd">======================</span>
 
@@ -86,14 +64,14 @@
 <span class="sd">    @app.task(base=Batches, flush_every=100, flush_interval=10)</span>
 <span class="sd">    def count_click(requests):</span>
 <span class="sd">        from collections import Counter</span>
-<span class="sd">        count = Counter(request.kwargs[&#39;url&#39;] for request in requests)</span>
+<span class="sd">        count = Counter(request.kwargs['url'] for request in requests)</span>
 <span class="sd">        for url, count in count.items():</span>
-<span class="sd">            print(&#39;&gt;&gt;&gt; Clicks: {0} -&gt; {1}&#39;.format(url, count))</span>
+<span class="sd">            print('&gt;&gt;&gt; Clicks: {0} -&gt; {1}'.format(url, count))</span>
 
 
 <span class="sd">Then you can ask for a click to be counted by doing::</span>
 
-<span class="sd">    &gt;&gt;&gt; count_click.delay(&#39;http://example.com&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; count_click.delay('http://example.com')</span>
 
 <span class="sd">**Example returning results**</span>
 
@@ -107,7 +85,7 @@
 
 <span class="sd">    from celery.contrib.batches import Batches</span>
 
-<span class="sd">    wot_api_target = &#39;https://api.mywot.com/0.4/public_link_json&#39;</span>
+<span class="sd">    wot_api_target = 'https://api.mywot.com/0.4/public_link_json'</span>
 
 <span class="sd">    @app.task(base=Batches, flush_every=100, flush_interval=10)</span>
 <span class="sd">    def wot_api(requests):</span>
@@ -124,23 +102,23 @@
 <span class="sd">        domains = [urlparse(url).netloc for url in urls]</span>
 <span class="sd">        response = requests.get(</span>
 <span class="sd">            wot_api_target,</span>
-<span class="sd">            params={&#39;hosts&#39;: (&#39;/&#39;).join(set(domains)) + &#39;/&#39;}</span>
+<span class="sd">            params={'hosts': ('/').join(set(domains)) + '/'}</span>
 <span class="sd">        )</span>
 <span class="sd">        return [response.json[domain] for domain in domains]</span>
 
 <span class="sd">Using the API is done as follows::</span>
 
-<span class="sd">    &gt;&gt;&gt; wot_api.delay(&#39;http://example.com&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; wot_api.delay('http://example.com')</span>
 
 <span class="sd">.. note::</span>
 
-<span class="sd">    If you don&#39;t have an ``app`` instance then use the current app proxy</span>
+<span class="sd">    If you don't have an ``app`` instance then use the current app proxy</span>
 <span class="sd">    instead::</span>
 
 <span class="sd">        from celery import current_app</span>
 <span class="sd">        app.backend.mark_as_done(request.id, response)</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
 
 <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">count</span>
@@ -151,13 +129,13 @@
 <span class="kn">from</span> <span class="nn">celery.worker.job</span> <span class="kn">import</span> <span class="n">Request</span>
 <span class="kn">from</span> <span class="nn">celery.utils</span> <span class="kn">import</span> <span class="n">noop</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Batches&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Batches'</span><span class="p">]</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">consume_queue</span><span class="p">(</span><span class="n">queue</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Iterator yielding all immediately available items in a</span>
+    <span class="sd">"""Iterator yielding all immediately available items in a</span>
 <span class="sd">    :class:`Queue.Queue`.</span>
 
 <span class="sd">    The iterator stops as soon as the queue raises :exc:`Queue.Empty`.</span>
@@ -171,7 +149,7 @@
 <span class="sd">        &gt;&gt;&gt; list(consume_queue(q))</span>
 <span class="sd">        []</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">get</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">get_nowait</span>
     <span class="k">while</span> <span class="mi">1</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
@@ -186,14 +164,14 @@
         <span class="n">result</span> <span class="o">=</span> <span class="n">task</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
         <span class="n">result</span> <span class="o">=</span> <span class="bp">None</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Error: </span><span class="si">%r</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">'Error: </span><span class="si">%r</span><span class="s1">'</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="k">finally</span><span class="p">:</span>
         <span class="n">task</span><span class="o">.</span><span class="n">pop_request</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">result</span>
 
 
 <div class="viewcode-block" id="SimpleRequest"><a class="viewcode-back" href="../../../reference/celery.contrib.batches.html#celery.contrib.batches.SimpleRequest">[docs]</a><span class="k">class</span> <span class="nc">SimpleRequest</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Pickleable request.&quot;&quot;&quot;</span>
+    <span class="sd">"""Pickleable request."""</span>
 
     <span class="c1">#: task id</span>
     <span class="nb">id</span> <span class="o">=</span> <span class="bp">None</span>
@@ -243,7 +221,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_pool</span> <span class="o">=</span> <span class="bp">None</span>
 
 <div class="viewcode-block" id="Batches.run"><a class="viewcode-back" href="../../../reference/celery.contrib.batches.html#celery.contrib.batches.Batches.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">requests</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;must implement run(requests)&#39;</span><span class="p">)</span></div>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">'must implement run(requests)'</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Batches.Strategy"><a class="viewcode-back" href="../../../reference/celery.contrib.batches.html#celery.contrib.batches.Batches.Strategy">[docs]</a>    <span class="k">def</span> <span class="nf">Strategy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task</span><span class="p">,</span> <span class="n">app</span><span class="p">,</span> <span class="n">consumer</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_pool</span> <span class="o">=</span> <span class="n">consumer</span><span class="o">.</span><span class="n">pool</span>
@@ -277,15 +255,15 @@
                                              <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">requests</span><span class="p">],</span> <span class="p">))</span></div>
 
     <span class="k">def</span> <span class="nf">_do_flush</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Batches: Wake-up to flush buffer...&#39;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">'Batches: Wake-up to flush buffer...'</span><span class="p">)</span>
         <span class="n">requests</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_buffer</span><span class="o">.</span><span class="n">qsize</span><span class="p">():</span>
             <span class="n">requests</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">consume_queue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_buffer</span><span class="p">))</span>
             <span class="k">if</span> <span class="n">requests</span><span class="p">:</span>
-                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Batches: Buffer complete: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">requests</span><span class="p">))</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">'Batches: Buffer complete: </span><span class="si">%s</span><span class="s1">'</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">requests</span><span class="p">))</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">flush</span><span class="p">(</span><span class="n">requests</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">requests</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Batches: Canceling timer: Nothing in buffer.&#39;</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">'Batches: Canceling timer: Nothing in buffer.'</span><span class="p">)</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tref</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_tref</span><span class="o">.</span><span class="n">cancel</span><span class="p">()</span>  <span class="c1"># cancel timer.</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_tref</span> <span class="o">=</span> <span class="bp">None</span>
@@ -308,26 +286,15 @@
             <span class="n">callback</span><span class="o">=</span><span class="n">acks_late</span><span class="p">[</span><span class="bp">True</span><span class="p">]</span> <span class="ow">and</span> <span class="n">on_return</span> <span class="ow">or</span> <span class="n">noop</span><span class="p">,</span>
         <span class="p">)</span></div></div>
 </pre></div>
+</div>
+</div>
+</div>
 
-          </div>
-        </div>
-      </div>
+<div class="clearer"></div>
+</div>
+
+<div class="footer" role="contentinfo">
+        © <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &copy; <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
-    </div>
-  </body>
+</body>
 </html>

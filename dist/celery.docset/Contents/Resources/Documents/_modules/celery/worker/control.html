@@ -1,17 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>celery.worker.control &mdash; Celery 3.1.23 documentation</title>
-    
-    <link rel="stylesheet" href="../../../_static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>celery.worker.control — Celery 3.1.23 documentation</title>
+<link href="../../../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
         VERSION:     '3.1.23',
@@ -20,53 +16,34 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="copyright" title="Copyright" href="../../../copyright.html" />
-    <link rel="top" title="Celery 3.1.23 documentation" href="../../../index.html" />
-    <link rel="up" title="celery.worker" href="../worker.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="../worker.html" accesskey="U">celery.worker</a> &raquo;</li> 
-      </ul>
-    </div>  
+<script src="../../../_static/jquery.js" type="text/javascript"></script>
+<script src="../../../_static/underscore.js" type="text/javascript"></script>
+<script src="../../../_static/doctools.js" type="text/javascript"></script>
+<link href="../../../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../../../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="../worker.html" rel="up" title="celery.worker"/>
+</head>
+<body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
 <div class="deck">
-
-    
-        <p>
+<p>
         This document describes the current stable version of Celery (3.1). For development docs,
         <a href="http://docs.celeryproject.org/en/master/_modules/celery/worker/control.html">go here</a>.
         </p>
-    
-
 </div>
-    <h1>Source code for celery.worker.control</h1><div class="highlight"><pre>
+<h1>Source code for celery.worker.control</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="sd">    celery.worker.control</span>
 <span class="sd">    ~~~~~~~~~~~~~~~~~~~~~</span>
 
 <span class="sd">    Remote control commands.</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
 
 <span class="kn">import</span> <span class="nn">io</span>
@@ -86,8 +63,8 @@
 <span class="kn">from</span> <span class="nn">.state</span> <span class="kn">import</span> <span class="n">revoked</span>
 <span class="kn">from</span> <span class="nn">.job</span> <span class="kn">import</span> <span class="n">Request</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Panel&#39;</span><span class="p">]</span>
-<span class="n">DEFAULT_TASK_INFO_ITEMS</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;exchange&#39;</span><span class="p">,</span> <span class="s1">&#39;routing_key&#39;</span><span class="p">,</span> <span class="s1">&#39;rate_limit&#39;</span><span class="p">)</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Panel'</span><span class="p">]</span>
+<span class="n">DEFAULT_TASK_INFO_ITEMS</span> <span class="o">=</span> <span class="p">(</span><span class="s1">'exchange'</span><span class="p">,</span> <span class="s1">'routing_key'</span><span class="p">,</span> <span class="s1">'rate_limit'</span><span class="p">)</span>
 <span class="n">logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
 
 
@@ -117,11 +94,11 @@
     <span class="k">def</span> <span class="nf">reqinfo</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">req</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">state</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
 
-    <span class="n">reqs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">((</span><span class="n">req</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;reserved&#39;</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">info</span><span class="p">()))</span>
+    <span class="n">reqs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">((</span><span class="n">req</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="p">(</span><span class="s1">'reserved'</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">info</span><span class="p">()))</span>
                 <span class="k">for</span> <span class="n">req</span> <span class="ow">in</span> <span class="n">_find_requests_by_id</span><span class="p">(</span>
                     <span class="n">ids</span><span class="p">,</span> <span class="n">worker_state</span><span class="o">.</span><span class="n">reserved_requests</span><span class="p">))</span>
     <span class="n">reqs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span>
-        <span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;active&#39;</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">info</span><span class="p">()))</span>
+        <span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="p">(</span><span class="s1">'active'</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">info</span><span class="p">()))</span>
         <span class="k">for</span> <span class="n">req</span> <span class="ow">in</span> <span class="n">_find_requests_by_id</span><span class="p">(</span>
             <span class="n">ids</span><span class="p">,</span> <span class="n">worker_state</span><span class="o">.</span><span class="n">active_requests</span><span class="p">,</span>
         <span class="p">)</span>
@@ -132,7 +109,7 @@
 
 <span class="nd">@Panel.register</span>
 <span class="k">def</span> <span class="nf">revoke</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">task_id</span><span class="p">,</span> <span class="n">terminate</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">signal</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Revoke task by task id.&quot;&quot;&quot;</span>
+    <span class="sd">"""Revoke task by task id."""</span>
     <span class="c1"># supports list argument since 3.1</span>
     <span class="n">task_ids</span><span class="p">,</span> <span class="n">task_id</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">maybe_list</span><span class="p">(</span><span class="n">task_id</span><span class="p">)</span> <span class="ow">or</span> <span class="p">[]),</span> <span class="bp">None</span>
     <span class="n">size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">task_ids</span><span class="p">)</span>
@@ -140,7 +117,7 @@
 
     <span class="n">revoked</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">task_ids</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">terminate</span><span class="p">:</span>
-        <span class="n">signum</span> <span class="o">=</span> <span class="n">_signals</span><span class="o">.</span><span class="n">signum</span><span class="p">(</span><span class="n">signal</span> <span class="ow">or</span> <span class="s1">&#39;TERM&#39;</span><span class="p">)</span>
+        <span class="n">signum</span> <span class="o">=</span> <span class="n">_signals</span><span class="o">.</span><span class="n">signum</span><span class="p">(</span><span class="n">signal</span> <span class="ow">or</span> <span class="s1">'TERM'</span><span class="p">)</span>
         <span class="c1"># reserved_requests changes size during iteration</span>
         <span class="c1"># so need to consume the items first, then terminate after.</span>
         <span class="n">requests</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">_find_requests_by_id</span><span class="p">(</span>
@@ -150,84 +127,84 @@
         <span class="k">for</span> <span class="n">request</span> <span class="ow">in</span> <span class="n">requests</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">terminated</span><span class="p">:</span>
                 <span class="n">terminated</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
-                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Terminating </span><span class="si">%s</span><span class="s1"> (</span><span class="si">%s</span><span class="s1">)&#39;</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">signum</span><span class="p">)</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">'Terminating </span><span class="si">%s</span><span class="s1"> (</span><span class="si">%s</span><span class="s1">)'</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">signum</span><span class="p">)</span>
                 <span class="n">request</span><span class="o">.</span><span class="n">terminate</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">consumer</span><span class="o">.</span><span class="n">pool</span><span class="p">,</span> <span class="n">signal</span><span class="o">=</span><span class="n">signum</span><span class="p">)</span>
                 <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">terminated</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">size</span><span class="p">:</span>
                     <span class="k">break</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">terminated</span><span class="p">:</span>
-            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;ok&#39;</span><span class="p">:</span> <span class="s1">&#39;terminate: tasks unknown&#39;</span><span class="p">}</span>
-        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;ok&#39;</span><span class="p">:</span> <span class="s1">&#39;terminate: {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">terminated</span><span class="p">))}</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s1">'ok'</span><span class="p">:</span> <span class="s1">'terminate: tasks unknown'</span><span class="p">}</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s1">'ok'</span><span class="p">:</span> <span class="s1">'terminate: {0}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">terminated</span><span class="p">))}</span>
 
-    <span class="n">idstr</span> <span class="o">=</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">task_ids</span><span class="p">)</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Tasks flagged as revoked: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">idstr</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;ok&#39;</span><span class="p">:</span> <span class="s1">&#39;tasks {0} flagged as revoked&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">idstr</span><span class="p">)}</span>
+    <span class="n">idstr</span> <span class="o">=</span> <span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">task_ids</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">'Tasks flagged as revoked: </span><span class="si">%s</span><span class="s1">'</span><span class="p">,</span> <span class="n">idstr</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">'ok'</span><span class="p">:</span> <span class="s1">'tasks {0} flagged as revoked'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">idstr</span><span class="p">)}</span>
 
 
 <span class="nd">@Panel.register</span>
 <span class="k">def</span> <span class="nf">report</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;ok&#39;</span><span class="p">:</span> <span class="n">state</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">bugreport</span><span class="p">()}</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">'ok'</span><span class="p">:</span> <span class="n">state</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">bugreport</span><span class="p">()}</span>
 
 
 <span class="nd">@Panel.register</span>
 <span class="k">def</span> <span class="nf">enable_events</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
     <span class="n">dispatcher</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">consumer</span><span class="o">.</span><span class="n">event_dispatcher</span>
-    <span class="k">if</span> <span class="n">dispatcher</span><span class="o">.</span><span class="n">groups</span> <span class="ow">and</span> <span class="s1">&#39;task&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">dispatcher</span><span class="o">.</span><span class="n">groups</span><span class="p">:</span>
-        <span class="n">dispatcher</span><span class="o">.</span><span class="n">groups</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;task&#39;</span><span class="p">)</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Events of group {task} enabled by remote.&#39;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;ok&#39;</span><span class="p">:</span> <span class="s1">&#39;task events enabled&#39;</span><span class="p">}</span>
-    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;ok&#39;</span><span class="p">:</span> <span class="s1">&#39;task events already enabled&#39;</span><span class="p">}</span>
+    <span class="k">if</span> <span class="n">dispatcher</span><span class="o">.</span><span class="n">groups</span> <span class="ow">and</span> <span class="s1">'task'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">dispatcher</span><span class="o">.</span><span class="n">groups</span><span class="p">:</span>
+        <span class="n">dispatcher</span><span class="o">.</span><span class="n">groups</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">'task'</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">'Events of group {task} enabled by remote.'</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s1">'ok'</span><span class="p">:</span> <span class="s1">'task events enabled'</span><span class="p">}</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">'ok'</span><span class="p">:</span> <span class="s1">'task events already enabled'</span><span class="p">}</span>
 
 
 <span class="nd">@Panel.register</span>
 <span class="k">def</span> <span class="nf">disable_events</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
     <span class="n">dispatcher</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">consumer</span><span class="o">.</span><span class="n">event_dispatcher</span>
-    <span class="k">if</span> <span class="s1">&#39;task&#39;</span> <span class="ow">in</span> <span class="n">dispatcher</span><span class="o">.</span><span class="n">groups</span><span class="p">:</span>
-        <span class="n">dispatcher</span><span class="o">.</span><span class="n">groups</span><span class="o">.</span><span class="n">discard</span><span class="p">(</span><span class="s1">&#39;task&#39;</span><span class="p">)</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Events of group {task} disabled by remote.&#39;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;ok&#39;</span><span class="p">:</span> <span class="s1">&#39;task events disabled&#39;</span><span class="p">}</span>
-    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;ok&#39;</span><span class="p">:</span> <span class="s1">&#39;task events already disabled&#39;</span><span class="p">}</span>
+    <span class="k">if</span> <span class="s1">'task'</span> <span class="ow">in</span> <span class="n">dispatcher</span><span class="o">.</span><span class="n">groups</span><span class="p">:</span>
+        <span class="n">dispatcher</span><span class="o">.</span><span class="n">groups</span><span class="o">.</span><span class="n">discard</span><span class="p">(</span><span class="s1">'task'</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">'Events of group {task} disabled by remote.'</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s1">'ok'</span><span class="p">:</span> <span class="s1">'task events disabled'</span><span class="p">}</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">'ok'</span><span class="p">:</span> <span class="s1">'task events already disabled'</span><span class="p">}</span>
 
 
 <span class="nd">@Panel.register</span>
 <span class="k">def</span> <span class="nf">heartbeat</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Heartbeat requested by remote.&#39;</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">'Heartbeat requested by remote.'</span><span class="p">)</span>
     <span class="n">dispatcher</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">consumer</span><span class="o">.</span><span class="n">event_dispatcher</span>
-    <span class="n">dispatcher</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s1">&#39;worker-heartbeat&#39;</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="o">**</span><span class="n">worker_state</span><span class="o">.</span><span class="n">SOFTWARE_INFO</span><span class="p">)</span>
+    <span class="n">dispatcher</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s1">'worker-heartbeat'</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="o">**</span><span class="n">worker_state</span><span class="o">.</span><span class="n">SOFTWARE_INFO</span><span class="p">)</span>
 
 
 <span class="nd">@Panel.register</span>
 <span class="k">def</span> <span class="nf">rate_limit</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">task_name</span><span class="p">,</span> <span class="n">rate_limit</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set new rate limit for a task type.</span>
+    <span class="sd">"""Set new rate limit for a task type.</span>
 
 <span class="sd">    See :attr:`celery.task.base.Task.rate_limit`.</span>
 
 <span class="sd">    :param task_name: Type of task.</span>
 <span class="sd">    :param rate_limit: New rate limit.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">try</span><span class="p">:</span>
         <span class="n">timeutils</span><span class="o">.</span><span class="n">rate</span><span class="p">(</span><span class="n">rate_limit</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Invalid rate limit string: {0!r}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">exc</span><span class="p">)}</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s1">'error'</span><span class="p">:</span> <span class="s1">'Invalid rate limit string: {0!r}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">exc</span><span class="p">)}</span>
 
     <span class="k">try</span><span class="p">:</span>
         <span class="n">state</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tasks</span><span class="p">[</span><span class="n">task_name</span><span class="p">]</span><span class="o">.</span><span class="n">rate_limit</span> <span class="o">=</span> <span class="n">rate_limit</span>
     <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Rate limit attempt for unknown task </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">'Rate limit attempt for unknown task </span><span class="si">%s</span><span class="s1">'</span><span class="p">,</span>
                      <span class="n">task_name</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;unknown task&#39;</span><span class="p">}</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s1">'error'</span><span class="p">:</span> <span class="s1">'unknown task'</span><span class="p">}</span>
 
     <span class="n">state</span><span class="o">.</span><span class="n">consumer</span><span class="o">.</span><span class="n">reset_rate_limits</span><span class="p">()</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">rate_limit</span><span class="p">:</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Rate limits disabled for tasks of type </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">task_name</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;ok&#39;</span><span class="p">:</span> <span class="s1">&#39;rate limit disabled successfully&#39;</span><span class="p">}</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">'Rate limits disabled for tasks of type </span><span class="si">%s</span><span class="s1">'</span><span class="p">,</span> <span class="n">task_name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s1">'ok'</span><span class="p">:</span> <span class="s1">'rate limit disabled successfully'</span><span class="p">}</span>
 
-    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;New rate limit for tasks of type </span><span class="si">%s</span><span class="s1">: </span><span class="si">%s</span><span class="s1">.&#39;</span><span class="p">,</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">'New rate limit for tasks of type </span><span class="si">%s</span><span class="s1">: </span><span class="si">%s</span><span class="s1">.'</span><span class="p">,</span>
                 <span class="n">task_name</span><span class="p">,</span> <span class="n">rate_limit</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;ok&#39;</span><span class="p">:</span> <span class="s1">&#39;new rate limit set successfully&#39;</span><span class="p">}</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">'ok'</span><span class="p">:</span> <span class="s1">'new rate limit set successfully'</span><span class="p">}</span>
 
 
 <span class="nd">@Panel.register</span>
@@ -235,16 +212,16 @@
     <span class="k">try</span><span class="p">:</span>
         <span class="n">task</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tasks</span><span class="p">[</span><span class="n">task_name</span><span class="p">]</span>
     <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Change time limit attempt for unknown task </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">'Change time limit attempt for unknown task </span><span class="si">%s</span><span class="s1">'</span><span class="p">,</span>
                      <span class="n">task_name</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;unknown task&#39;</span><span class="p">}</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s1">'error'</span><span class="p">:</span> <span class="s1">'unknown task'</span><span class="p">}</span>
 
     <span class="n">task</span><span class="o">.</span><span class="n">soft_time_limit</span> <span class="o">=</span> <span class="n">soft</span>
     <span class="n">task</span><span class="o">.</span><span class="n">time_limit</span> <span class="o">=</span> <span class="n">hard</span>
 
-    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;New time limits for tasks of type </span><span class="si">%s</span><span class="s1">: soft=</span><span class="si">%s</span><span class="s1"> hard=</span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">'New time limits for tasks of type </span><span class="si">%s</span><span class="s1">: soft=</span><span class="si">%s</span><span class="s1"> hard=</span><span class="si">%s</span><span class="s1">'</span><span class="p">,</span>
                 <span class="n">task_name</span><span class="p">,</span> <span class="n">soft</span><span class="p">,</span> <span class="n">hard</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;ok&#39;</span><span class="p">:</span> <span class="s1">&#39;time limits set successfully&#39;</span><span class="p">}</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">'ok'</span><span class="p">:</span> <span class="s1">'time limits set successfully'</span><span class="p">}</span>
 
 
 <span class="nd">@Panel.register</span>
@@ -258,9 +235,9 @@
                 <span class="k">continue</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg0</span><span class="p">,</span> <span class="n">Request</span><span class="p">):</span>
-                    <span class="k">yield</span> <span class="p">{</span><span class="s1">&#39;eta&#39;</span><span class="p">:</span> <span class="n">arg0</span><span class="o">.</span><span class="n">eta</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span> <span class="k">if</span> <span class="n">arg0</span><span class="o">.</span><span class="n">eta</span> <span class="k">else</span> <span class="bp">None</span><span class="p">,</span>
-                           <span class="s1">&#39;priority&#39;</span><span class="p">:</span> <span class="n">waiting</span><span class="o">.</span><span class="n">priority</span><span class="p">,</span>
-                           <span class="s1">&#39;request&#39;</span><span class="p">:</span> <span class="n">arg0</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">safe</span><span class="o">=</span><span class="n">safe</span><span class="p">)}</span>
+                    <span class="k">yield</span> <span class="p">{</span><span class="s1">'eta'</span><span class="p">:</span> <span class="n">arg0</span><span class="o">.</span><span class="n">eta</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span> <span class="k">if</span> <span class="n">arg0</span><span class="o">.</span><span class="n">eta</span> <span class="k">else</span> <span class="bp">None</span><span class="p">,</span>
+                           <span class="s1">'priority'</span><span class="p">:</span> <span class="n">waiting</span><span class="o">.</span><span class="n">priority</span><span class="p">,</span>
+                           <span class="s1">'request'</span><span class="p">:</span> <span class="n">arg0</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">safe</span><span class="o">=</span><span class="n">safe</span><span class="p">)}</span>
     <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">prepare_entries</span><span class="p">())</span>
 
 
@@ -284,21 +261,21 @@
 
 
 <span class="nd">@Panel.register</span>
-<span class="k">def</span> <span class="nf">objgraph</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;Request&#39;</span><span class="p">):</span>  <span class="c1"># pragma: no cover</span>
+<span class="k">def</span> <span class="nf">objgraph</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">'Request'</span><span class="p">):</span>  <span class="c1"># pragma: no cover</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="kn">import</span> <span class="nn">objgraph</span>
     <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s1">&#39;Requires the objgraph library&#39;</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Dumping graph for type </span><span class="si">%r</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">type</span><span class="p">,</span> <span class="p">))</span>
-    <span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">NamedTemporaryFile</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;cobjg&#39;</span><span class="p">,</span>
-                                     <span class="n">suffix</span><span class="o">=</span><span class="s1">&#39;.png&#39;</span><span class="p">,</span> <span class="n">delete</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s1">'Requires the objgraph library'</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'Dumping graph for type </span><span class="si">%r</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="nb">type</span><span class="p">,</span> <span class="p">))</span>
+    <span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">NamedTemporaryFile</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s1">'cobjg'</span><span class="p">,</span>
+                                     <span class="n">suffix</span><span class="o">=</span><span class="s1">'.png'</span><span class="p">,</span> <span class="n">delete</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
         <span class="n">objects</span> <span class="o">=</span> <span class="n">objgraph</span><span class="o">.</span><span class="n">by_type</span><span class="p">(</span><span class="nb">type</span><span class="p">)[:</span><span class="n">num</span><span class="p">]</span>
         <span class="n">objgraph</span><span class="o">.</span><span class="n">show_backrefs</span><span class="p">(</span>
             <span class="n">objects</span><span class="p">,</span>
             <span class="n">max_depth</span><span class="o">=</span><span class="n">max_depth</span><span class="p">,</span> <span class="n">highlight</span><span class="o">=</span><span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">objects</span><span class="p">,</span>
             <span class="n">filename</span><span class="o">=</span><span class="n">fh</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
         <span class="p">)</span>
-        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;filename&#39;</span><span class="p">:</span> <span class="n">fh</span><span class="o">.</span><span class="n">name</span><span class="p">}</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s1">'filename'</span><span class="p">:</span> <span class="n">fh</span><span class="o">.</span><span class="n">name</span><span class="p">}</span>
 
 
 <span class="nd">@Panel.register</span>
@@ -317,7 +294,7 @@
 
 <span class="nd">@Panel.register</span>
 <span class="k">def</span> <span class="nf">clock</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;clock&#39;</span><span class="p">:</span> <span class="n">state</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">clock</span><span class="o">.</span><span class="n">value</span><span class="p">}</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">'clock'</span><span class="p">:</span> <span class="n">state</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">clock</span><span class="o">.</span><span class="n">value</span><span class="p">}</span>
 
 
 <span class="nd">@Panel.register</span>
@@ -328,11 +305,11 @@
 <span class="nd">@Panel.register</span>
 <span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">from_node</span><span class="p">,</span> <span class="n">revoked</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">from_node</span> <span class="o">!=</span> <span class="n">state</span><span class="o">.</span><span class="n">hostname</span><span class="p">:</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;sync with </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">from_node</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">'sync with </span><span class="si">%s</span><span class="s1">'</span><span class="p">,</span> <span class="n">from_node</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">revoked</span><span class="p">:</span>
             <span class="n">worker_state</span><span class="o">.</span><span class="n">revoked</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">revoked</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;revoked&#39;</span><span class="p">:</span> <span class="n">worker_state</span><span class="o">.</span><span class="n">revoked</span><span class="o">.</span><span class="n">_data</span><span class="p">,</span>
-                <span class="s1">&#39;clock&#39;</span><span class="p">:</span> <span class="n">state</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">clock</span><span class="o">.</span><span class="n">forward</span><span class="p">()}</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s1">'revoked'</span><span class="p">:</span> <span class="n">worker_state</span><span class="o">.</span><span class="n">revoked</span><span class="o">.</span><span class="n">_data</span><span class="p">,</span>
+                <span class="s1">'clock'</span><span class="p">:</span> <span class="n">state</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">clock</span><span class="o">.</span><span class="n">forward</span><span class="p">()}</span>
 
 
 <span class="nd">@Panel.register</span>
@@ -341,15 +318,15 @@
     <span class="n">taskinfoitems</span> <span class="o">=</span> <span class="n">taskinfoitems</span> <span class="ow">or</span> <span class="n">DEFAULT_TASK_INFO_ITEMS</span>
 
     <span class="n">tasks</span> <span class="o">=</span> <span class="n">reg</span> <span class="k">if</span> <span class="n">builtins</span> <span class="k">else</span> <span class="p">(</span>
-        <span class="n">task</span> <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">reg</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">task</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;celery.&#39;</span><span class="p">))</span>
+        <span class="n">task</span> <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">reg</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">task</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">'celery.'</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">_extract_info</span><span class="p">(</span><span class="n">task</span><span class="p">):</span>
         <span class="n">fields</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">((</span><span class="n">field</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="bp">None</span><span class="p">)))</span>
                       <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">taskinfoitems</span>
                       <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">fields</span><span class="p">:</span>
-            <span class="n">info</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;=&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">items</span><span class="p">(</span><span class="n">fields</span><span class="p">)]</span>
-            <span class="k">return</span> <span class="s1">&#39;{0} [{1}]&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">info</span><span class="p">))</span>
+            <span class="n">info</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'='</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">items</span><span class="p">(</span><span class="n">fields</span><span class="p">)]</span>
+            <span class="k">return</span> <span class="s1">'{0} [{1}]'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">' '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">info</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">task</span><span class="o">.</span><span class="n">name</span>
 
     <span class="k">return</span> <span class="p">[</span><span class="n">_extract_info</span><span class="p">(</span><span class="n">reg</span><span class="p">[</span><span class="n">task</span><span class="p">])</span> <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">tasks</span><span class="p">)]</span>
@@ -357,7 +334,7 @@
 
 <span class="nd">@Panel.register</span>
 <span class="k">def</span> <span class="nf">ping</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;ok&#39;</span><span class="p">:</span> <span class="s1">&#39;pong&#39;</span><span class="p">}</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">'ok'</span><span class="p">:</span> <span class="s1">'pong'</span><span class="p">}</span>
 
 
 <span class="nd">@Panel.register</span>
@@ -367,7 +344,7 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="n">state</span><span class="o">.</span><span class="n">consumer</span><span class="o">.</span><span class="n">pool</span><span class="o">.</span><span class="n">grow</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
         <span class="n">state</span><span class="o">.</span><span class="n">consumer</span><span class="o">.</span><span class="n">_update_prefetch_count</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;ok&#39;</span><span class="p">:</span> <span class="s1">&#39;pool will grow&#39;</span><span class="p">}</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">'ok'</span><span class="p">:</span> <span class="s1">'pool will grow'</span><span class="p">}</span>
 
 
 <span class="nd">@Panel.register</span>
@@ -377,16 +354,16 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="n">state</span><span class="o">.</span><span class="n">consumer</span><span class="o">.</span><span class="n">pool</span><span class="o">.</span><span class="n">shrink</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
         <span class="n">state</span><span class="o">.</span><span class="n">consumer</span><span class="o">.</span><span class="n">_update_prefetch_count</span><span class="p">(</span><span class="o">-</span><span class="n">n</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;ok&#39;</span><span class="p">:</span> <span class="s1">&#39;pool will shrink&#39;</span><span class="p">}</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">'ok'</span><span class="p">:</span> <span class="s1">'pool will shrink'</span><span class="p">}</span>
 
 
 <span class="nd">@Panel.register</span>
 <span class="k">def</span> <span class="nf">pool_restart</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">modules</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="nb">reload</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">reloader</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">CELERYD_POOL_RESTARTS</span><span class="p">:</span>
         <span class="n">state</span><span class="o">.</span><span class="n">consumer</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">reload</span><span class="p">(</span><span class="n">modules</span><span class="p">,</span> <span class="nb">reload</span><span class="p">,</span> <span class="n">reloader</span><span class="o">=</span><span class="n">reloader</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;ok&#39;</span><span class="p">:</span> <span class="s1">&#39;reload started&#39;</span><span class="p">}</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s1">'ok'</span><span class="p">:</span> <span class="s1">'reload started'</span><span class="p">}</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Pool restarts not enabled&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">'Pool restarts not enabled'</span><span class="p">)</span>
 
 
 <span class="nd">@Panel.register</span>
@@ -394,12 +371,12 @@
     <span class="n">autoscaler</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">consumer</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">autoscaler</span>
     <span class="k">if</span> <span class="n">autoscaler</span><span class="p">:</span>
         <span class="n">max_</span><span class="p">,</span> <span class="n">min_</span> <span class="o">=</span> <span class="n">autoscaler</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">max</span><span class="p">,</span> <span class="nb">min</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;ok&#39;</span><span class="p">:</span> <span class="s1">&#39;autoscale now min={0} max={1}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">max_</span><span class="p">,</span> <span class="n">min_</span><span class="p">)}</span>
-    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Autoscale not enabled&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s1">'ok'</span><span class="p">:</span> <span class="s1">'autoscale now min={0} max={1}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">max_</span><span class="p">,</span> <span class="n">min_</span><span class="p">)}</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">'Autoscale not enabled'</span><span class="p">)</span>
 
 
 <span class="nd">@Panel.register</span>
-<span class="k">def</span> <span class="nf">shutdown</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Got shutdown from remote&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">shutdown</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">'Got shutdown from remote'</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
     <span class="k">raise</span> <span class="n">WorkerShutdown</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
@@ -409,18 +386,18 @@
                  <span class="n">routing_key</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
     <span class="n">state</span><span class="o">.</span><span class="n">consumer</span><span class="o">.</span><span class="n">add_task_queue</span><span class="p">(</span><span class="n">queue</span><span class="p">,</span> <span class="n">exchange</span><span class="p">,</span> <span class="n">exchange_type</span><span class="p">,</span>
                                   <span class="n">routing_key</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;ok&#39;</span><span class="p">:</span> <span class="s1">&#39;add consumer {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">queue</span><span class="p">)}</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">'ok'</span><span class="p">:</span> <span class="s1">'add consumer {0}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">queue</span><span class="p">)}</span>
 
 
 <span class="nd">@Panel.register</span>
 <span class="k">def</span> <span class="nf">cancel_consumer</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">queue</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">_</span><span class="p">):</span>
     <span class="n">state</span><span class="o">.</span><span class="n">consumer</span><span class="o">.</span><span class="n">cancel_task_queue</span><span class="p">(</span><span class="n">queue</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;ok&#39;</span><span class="p">:</span> <span class="s1">&#39;no longer consuming from {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">queue</span><span class="p">)}</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">'ok'</span><span class="p">:</span> <span class="s1">'no longer consuming from {0}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">queue</span><span class="p">)}</span>
 
 
 <span class="nd">@Panel.register</span>
 <span class="k">def</span> <span class="nf">active_queues</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return information about the queues a worker consumes from.&quot;&quot;&quot;</span>
+    <span class="sd">"""Return information about the queues a worker consumes from."""</span>
     <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">consumer</span><span class="o">.</span><span class="n">task_consumer</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="n">queue</span><span class="o">.</span><span class="n">as_dict</span><span class="p">(</span><span class="n">recurse</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
                 <span class="k">for</span> <span class="n">queue</span> <span class="ow">in</span> <span class="n">state</span><span class="o">.</span><span class="n">consumer</span><span class="o">.</span><span class="n">task_consumer</span><span class="o">.</span><span class="n">queues</span><span class="p">]</span>
@@ -430,7 +407,7 @@
 <span class="k">def</span> <span class="nf">_wanted_config_key</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">string_t</span><span class="p">)</span> <span class="ow">and</span>
             <span class="n">key</span><span class="o">.</span><span class="n">isupper</span><span class="p">()</span> <span class="ow">and</span>
-            <span class="ow">not</span> <span class="n">key</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;__&#39;</span><span class="p">))</span>
+            <span class="ow">not</span> <span class="n">key</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">'__'</span><span class="p">))</span>
 
 
 <span class="nd">@Panel.register</span>
@@ -445,27 +422,15 @@
     <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">consumer</span><span class="o">.</span><span class="n">gossip</span><span class="p">:</span>
         <span class="n">state</span><span class="o">.</span><span class="n">consumer</span><span class="o">.</span><span class="n">gossip</span><span class="o">.</span><span class="n">election</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">topic</span><span class="p">,</span> <span class="n">action</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
+</div>
 
-          </div>
-        </div>
-      </div>
+<div class="clearer"></div>
+</div>
+
+<div class="footer" role="contentinfo">
+        © <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="../worker.html" >celery.worker</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &copy; <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
-    </div>
-  </body>
+</body>
 </html>

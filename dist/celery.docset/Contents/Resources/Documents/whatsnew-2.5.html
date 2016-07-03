@@ -1,17 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>What’s new in Celery 2.5 </title>
-    
-    <link rel="stylesheet" href="_static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>What’s new in Celery 2.5 </title>
+<link href="_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
         VERSION:     '3.1.23',
@@ -20,51 +16,28 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="copyright" title="Copyright" href="copyright.html" />
-    <link rel="top" title="Celery 3.1.23 documentation" href="index.html" />
-    <link rel="next" title="API Reference" href="reference/index.html" />
-    <link rel="prev" title="What’s new in Celery 3.0 (Chiastic Slide)" href="whatsnew-3.0.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="reference/index.html" title="API Reference"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="whatsnew-3.0.html" title="What’s new in Celery 3.0 (Chiastic Slide)"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Celery 3.1.23 documentation</a> &raquo;</li> 
-      </ul>
-    </div>  
+<script src="_static/jquery.js" type="text/javascript"></script>
+<script src="_static/underscore.js" type="text/javascript"></script>
+<script src="_static/doctools.js" type="text/javascript"></script>
+<link href="copyright.html" rel="copyright" title="Copyright"/>
+<link href="index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="reference/index.html" rel="next" title="API Reference"/>
+<link href="whatsnew-3.0.html" rel="prev" title="What’s new in Celery 3.0 (Chiastic Slide)"/>
+</head>
+<body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
 <div class="deck">
-
-    
-        <p>
+<p>
         This document describes the current stable version of Celery (3.1). For development docs,
         <a href="http://docs.celeryproject.org/en/master/whatsnew-2.5.html">go here</a>.
         </p>
-    
-
 </div>
-    <div class="section" id="what-s-new-in-celery-2-5">
-<span id="whatsnew-2-5"></span><h1>What&#8217;s new in Celery 2.5<a class="headerlink" href="#what-s-new-in-celery-2-5" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="what-s-new-in-celery-2-5">
+<span id="whatsnew-2-5"></span><h1>What’s new in Celery 2.5<a class="headerlink" href="#what-s-new-in-celery-2-5" title="Permalink to this headline">¶</a></h1>
 <p>Celery aims to be a flexible and reliable, best-of-breed solution
 to process vast amounts of messages in a distributed fashion, while
 providing operations with the tools to maintain such a system.</p>
@@ -133,7 +106,7 @@ previous exchange:</p>
 </div>
 <p>As an alternative to deleting the old exchange you can
 configure a new name for the exchange:</p>
-<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">CELERY_RESULT_EXCHANGE</span> <span class="o">=</span> <span class="s1">&#39;celeryresults2&#39;</span>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">CELERY_RESULT_EXCHANGE</span> <span class="o">=</span> <span class="s1">'celeryresults2'</span>
 </pre></div>
 </div>
 <p class="last">But you have to make sure that all clients and workers
@@ -162,7 +135,7 @@ memory usage (but many platforms are optimized, so the impact may be
 minimal).  Considering that it ensures reliability when replacing
 lost worker processes, it should be worth it.</p>
 <ul class="simple">
-<li>It&#8217;s already the default behavior on Windows.</li>
+<li>It’s already the default behavior on Windows.</li>
 <li>It will be the default behavior for all platforms in a future version.</li>
 </ul>
 </div>
@@ -304,18 +277,18 @@ and their attributes.</p>
 for tasks and return a map of attributes to change.</p>
 <p>As an example, this is an annotation to change the <code class="docutils literal"><span class="pre">rate_limit</span></code> attribute
 for the <code class="docutils literal"><span class="pre">tasks.add</span></code> task:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">CELERY_ANNOTATIONS</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;tasks.add&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;rate_limit&#39;</span><span class="p">:</span> <span class="s1">&#39;10/s&#39;</span><span class="p">}}</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">CELERY_ANNOTATIONS</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'tasks.add'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'rate_limit'</span><span class="p">:</span> <span class="s1">'10/s'</span><span class="p">}}</span>
 </pre></div>
 </div>
 <p>or change the same for all tasks:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">CELERY_ANNOTATIONS</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;*&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;rate_limit&#39;</span><span class="p">:</span> <span class="s1">&#39;10/s&#39;</span><span class="p">}}</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">CELERY_ANNOTATIONS</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'*'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'rate_limit'</span><span class="p">:</span> <span class="s1">'10/s'</span><span class="p">}}</span>
 </pre></div>
 </div>
 <p>You can change methods too, for example the <code class="docutils literal"><span class="pre">on_failure</span></code> handler:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_on_failure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span> <span class="n">task_id</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">,</span> <span class="n">einfo</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Oh no! Task failed: </span><span class="si">%r</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">exc</span><span class="p">,</span> <span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'Oh no! Task failed: </span><span class="si">%r</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">exc</span><span class="p">,</span> <span class="p">))</span>
 
-<span class="n">CELERY_ANNOTATIONS</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;*&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;on_failure&#39;</span><span class="p">:</span> <span class="n">my_on_failure</span><span class="p">}}</span>
+<span class="n">CELERY_ANNOTATIONS</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'*'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'on_failure'</span><span class="p">:</span> <span class="n">my_on_failure</span><span class="p">}}</span>
 </pre></div>
 </div>
 <p>If you need more flexibility then you can also create objects
@@ -323,8 +296,8 @@ that filter for tasks to annotate:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span>class MyAnnotate(object):
 
     def annotate(self, task):
-        if task.name.startswith(&#39;tasks.&#39;):
-            return {&#39;rate_limit&#39;: &#39;10/s&#39;}
+        if task.name.startswith('tasks.'):
+            return {'rate_limit': '10/s'}
 
 CELERY_ANNOTATIONS = (MyAnnotate(), {…})
 </pre></div>
@@ -380,9 +353,9 @@ working on.</p>
 <p>Contributed by Alec Clowes.</p>
 </div></blockquote>
 </li>
-<li><p class="first">New &#8220;detailed&#8221; mode for the Cassandra backend.</p>
+<li><p class="first">New “detailed” mode for the Cassandra backend.</p>
 <blockquote>
-<div><p>Allows to have a &#8220;detailed&#8221; mode for the Cassandra backend.
+<div><p>Allows to have a “detailed” mode for the Cassandra backend.
 Basically the idea is to keep all states using Cassandra wide columns.
 New states are then appended to the row as new columns, the last state
 being the last column.</p>
@@ -415,7 +388,7 @@ is 125 by default).</p>
 <li><p class="first">More information is now preserved in the pickleable traceback.</p>
 <blockquote>
 <div><p>This has been added so that Sentry can show more details.</p>
-<p>Contributed by Sean O&#8217;Connor.</p>
+<p>Contributed by Sean O’Connor.</p>
 </div></blockquote>
 </li>
 <li><p class="first">CentOS init script has been updated and should be more flexible.</p>
@@ -434,7 +407,7 @@ the original stack trace.</p>
 <div><p>Suggested by ojii.</p>
 </div></blockquote>
 </li>
-<li><p class="first">The <cite>&#8211;uid</cite> argument to daemons now uses <code class="docutils literal"><span class="pre">initgroups()</span></code> to set
+<li><p class="first">The <cite>–uid</cite> argument to daemons now uses <code class="docutils literal"><span class="pre">initgroups()</span></code> to set
 groups to all the groups the user is a member of.</p>
 <blockquote>
 <div><p>Contributed by Łukasz Oleś.</p>
@@ -495,7 +468,7 @@ or it can be changed individually by <code class="docutils literal"><span class=
 <div><p>Contributed by Julien Poissonnier.</p>
 </div></blockquote>
 </li>
-<li><p class="first">There&#8217;s a new <a class="reference internal" href="userguide/security.html#guide-security"><span>Security</span></a> guide in the documentation.</p>
+<li><p class="first">There’s a new <a class="reference internal" href="userguide/security.html#guide-security"><span>Security</span></a> guide in the documentation.</p>
 </li>
 <li><p class="first">The init scripts has been updated, and many bugs fixed.</p>
 <blockquote>
@@ -601,7 +574,7 @@ information.</p>
 <code class="docutils literal"><span class="pre">now</span></code> method.</p>
 </li>
 <li><p class="first">Now shows helpful error message when given a config module ending in
-<code class="docutils literal"><span class="pre">.py</span></code> that can&#8217;t be imported.</p>
+<code class="docutils literal"><span class="pre">.py</span></code> that can’t be imported.</p>
 </li>
 <li><p class="first">celeryctl: The <code class="docutils literal"><span class="pre">--expires</span></code> and <code class="docutils literal"><span class="pre">-eta</span></code> arguments to the apply command
 can now be an ISO-8601 formatted string.</p>
@@ -612,32 +585,15 @@ have been received.</p>
 </ul>
 </div>
 </div>
+</div>
+</div>
+</div>
 
+<div class="clearer"></div>
+</div>
 
-          </div>
-        </div>
-      </div>
+<div class="footer" role="contentinfo">
+        © <a href="copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="reference/index.html" title="API Reference"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="whatsnew-3.0.html" title="What’s new in Celery 3.0 (Chiastic Slide)"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Celery 3.1.23 documentation</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &copy; <a href="copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
-    </div>
-  </body>
+</body>
 </html>

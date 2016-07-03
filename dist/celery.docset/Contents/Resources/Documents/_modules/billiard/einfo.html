@@ -1,17 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>billiard.einfo &mdash; Celery 3.1.23 documentation</title>
-    
-    <link rel="stylesheet" href="../../_static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>billiard.einfo — Celery 3.1.23 documentation</title>
+<link href="../../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
         VERSION:     '3.1.23',
@@ -20,50 +16,32 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="copyright" title="Copyright" href="../../copyright.html" />
-    <link rel="top" title="Celery 3.1.23 documentation" href="../../index.html" />
-    <link rel="up" title="Module code" href="../index.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
-      </ul>
-    </div>  
+<script src="../../_static/jquery.js" type="text/javascript"></script>
+<script src="../../_static/underscore.js" type="text/javascript"></script>
+<script src="../../_static/doctools.js" type="text/javascript"></script>
+<link href="../../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="../index.html" rel="up" title="Module code"/>
+</head>
+<body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
 <div class="deck">
-
-    
-        <p>
+<p>
         This document describes the current stable version of Celery (3.1). For development docs,
         <a href="http://docs.celeryproject.org/en/master/_modules/billiard/einfo.html">go here</a>.
         </p>
-    
-
 </div>
-    <h1>Source code for billiard.einfo</h1><div class="highlight"><pre>
+<h1>Source code for billiard.einfo</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
 
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">traceback</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ExceptionInfo&#39;</span><span class="p">,</span> <span class="s1">&#39;Traceback&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'ExceptionInfo'</span><span class="p">,</span> <span class="s1">'Traceback'</span><span class="p">]</span>
 
 <span class="n">DEFAULT_MAX_FRAMES</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">getrecursionlimit</span><span class="p">()</span> <span class="o">//</span> <span class="mi">8</span>
 
@@ -78,8 +56,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">co_firstlineno</span> <span class="o">=</span> <span class="n">code</span><span class="o">.</span><span class="n">co_firstlineno</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">co_flags</span> <span class="o">=</span> <span class="n">code</span><span class="o">.</span><span class="n">co_flags</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">co_freevars</span> <span class="o">=</span> <span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">co_code</span> <span class="o">=</span> <span class="n">b</span><span class="s1">&#39;&#39;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">co_lnotab</span> <span class="o">=</span> <span class="n">b</span><span class="s1">&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">co_code</span> <span class="o">=</span> <span class="n">b</span><span class="s1">''</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">co_lnotab</span> <span class="o">=</span> <span class="n">b</span><span class="s1">''</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">co_names</span> <span class="o">=</span> <span class="n">code</span><span class="o">.</span><span class="n">co_names</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">co_nlocals</span> <span class="o">=</span> <span class="n">code</span><span class="o">.</span><span class="n">co_nlocals</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">co_stacksize</span> <span class="o">=</span> <span class="n">code</span><span class="o">.</span><span class="n">co_stacksize</span>
@@ -92,13 +70,13 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frame</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">f_builtins</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">f_globals</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">&quot;__file__&quot;</span><span class="p">:</span> <span class="n">frame</span><span class="o">.</span><span class="n">f_globals</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;__file__&quot;</span><span class="p">,</span> <span class="s2">&quot;__main__&quot;</span><span class="p">),</span>
-            <span class="s2">&quot;__name__&quot;</span><span class="p">:</span> <span class="n">frame</span><span class="o">.</span><span class="n">f_globals</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;__name__&quot;</span><span class="p">),</span>
-            <span class="s2">&quot;__loader__&quot;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
+            <span class="s2">"__file__"</span><span class="p">:</span> <span class="n">frame</span><span class="o">.</span><span class="n">f_globals</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"__file__"</span><span class="p">,</span> <span class="s2">"__main__"</span><span class="p">),</span>
+            <span class="s2">"__name__"</span><span class="p">:</span> <span class="n">frame</span><span class="o">.</span><span class="n">f_globals</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"__name__"</span><span class="p">),</span>
+            <span class="s2">"__loader__"</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
         <span class="p">}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">f_locals</span> <span class="o">=</span> <span class="n">fl</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">fl</span><span class="p">[</span><span class="s2">&quot;__traceback_hide__&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">f_locals</span><span class="p">[</span><span class="s2">&quot;__traceback_hide__&quot;</span><span class="p">]</span>
+            <span class="n">fl</span><span class="p">[</span><span class="s2">"__traceback_hide__"</span><span class="p">]</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">f_locals</span><span class="p">[</span><span class="s2">"__traceback_hide__"</span><span class="p">]</span>
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
             <span class="k">pass</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">f_trace</span> <span class="o">=</span> <span class="bp">None</span>
@@ -108,7 +86,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">f_code</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Code</span><span class="p">(</span><span class="n">frame</span><span class="o">.</span><span class="n">f_code</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">f_lineno</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">f_lineno</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">f_lasti</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">f_lasti</span>
-        <span class="c1"># don&#39;t want to hit https://bugs.python.org/issue21967</span>
+        <span class="c1"># don't want to hit https://bugs.python.org/issue21967</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">f_restricted</span> <span class="o">=</span> <span class="bp">False</span>
 
 
@@ -123,12 +101,12 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tb_lineno</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tb_frame</span> <span class="o">=</span> <span class="n">_Object</span><span class="p">(</span>
-            <span class="n">f_globals</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;__file__&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-                       <span class="s2">&quot;__name__&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-                       <span class="s2">&quot;__loader__&quot;</span><span class="p">:</span> <span class="bp">None</span><span class="p">},</span>
+            <span class="n">f_globals</span><span class="o">=</span><span class="p">{</span><span class="s2">"__file__"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+                       <span class="s2">"__name__"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+                       <span class="s2">"__loader__"</span><span class="p">:</span> <span class="bp">None</span><span class="p">},</span>
             <span class="n">f_fileno</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
-            <span class="n">f_code</span><span class="o">=</span><span class="n">_Object</span><span class="p">(</span><span class="n">co_filename</span><span class="o">=</span><span class="s2">&quot;...&quot;</span><span class="p">,</span>
-                           <span class="n">co_name</span><span class="o">=</span><span class="s2">&quot;[rest of traceback truncated]&quot;</span><span class="p">),</span>
+            <span class="n">f_code</span><span class="o">=</span><span class="n">_Object</span><span class="p">(</span><span class="n">co_filename</span><span class="o">=</span><span class="s2">"..."</span><span class="p">,</span>
+                           <span class="n">co_name</span><span class="o">=</span><span class="s2">"[rest of traceback truncated]"</span><span class="p">),</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tb_next</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tb_lasti</span> <span class="o">=</span> <span class="mi">0</span>
@@ -150,12 +128,12 @@
 
 
 <div class="viewcode-block" id="ExceptionInfo"><a class="viewcode-back" href="../../internals/reference/celery.datastructures.html#celery.datastructures.ExceptionInfo">[docs]</a><span class="k">class</span> <span class="nc">ExceptionInfo</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Exception wrapping an exception and its traceback.</span>
+    <span class="sd">"""Exception wrapping an exception and its traceback.</span>
 
 <span class="sd">    :param exc_info: The exception info tuple as returned by</span>
 <span class="sd">        :func:`sys.exc_info`.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="c1">#: Exception type.</span>
     <span class="nb">type</span> <span class="o">=</span> <span class="bp">None</span>
@@ -176,7 +154,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">exception</span><span class="p">,</span> <span class="n">tb</span> <span class="o">=</span> <span class="n">exc_info</span> <span class="ow">or</span> <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">tb</span> <span class="o">=</span> <span class="n">Traceback</span><span class="p">(</span><span class="n">tb</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">traceback</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">traceback</span> <span class="o">=</span> <span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
                 <span class="n">traceback</span><span class="o">.</span><span class="n">format_exception</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">exception</span><span class="p">,</span> <span class="n">tb</span><span class="p">),</span>
             <span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">internal</span> <span class="o">=</span> <span class="n">internal</span>
@@ -187,32 +165,21 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">traceback</span>
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s2">&quot;&lt;ExceptionInfo: </span><span class="si">%r</span><span class="s2">&gt;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">exception</span><span class="p">,</span> <span class="p">)</span>
+        <span class="k">return</span> <span class="s2">"&lt;ExceptionInfo: </span><span class="si">%r</span><span class="s2">&gt;"</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">exception</span><span class="p">,</span> <span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">exc_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">exception</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tb</span></div>
 </pre></div>
+</div>
+</div>
+</div>
 
-          </div>
-        </div>
-      </div>
+<div class="clearer"></div>
+</div>
+
+<div class="footer" role="contentinfo">
+        © <a href="../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &copy; <a href="../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
-    </div>
-  </body>
+</body>
 </html>

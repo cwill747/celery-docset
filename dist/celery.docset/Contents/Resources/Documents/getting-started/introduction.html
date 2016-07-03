@@ -1,17 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Introduction to Celery &mdash; Celery 3.1.23 documentation</title>
-    
-    <link rel="stylesheet" href="../_static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>Introduction to Celery — Celery 3.1.23 documentation</title>
+<link href="../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
         VERSION:     '3.1.23',
@@ -20,52 +16,28 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="copyright" title="Copyright" href="../copyright.html" />
-    <link rel="top" title="Celery 3.1.23 documentation" href="../index.html" />
-    <link rel="up" title="Getting Started" href="index.html" />
-    <link rel="next" title="Brokers" href="brokers/index.html" />
-    <link rel="prev" title="Getting Started" href="index.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="brokers/index.html" title="Brokers"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="index.html" title="Getting Started"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Getting Started</a> &raquo;</li> 
-      </ul>
-    </div>  
+<script src="../_static/jquery.js" type="text/javascript"></script>
+<script src="../_static/underscore.js" type="text/javascript"></script>
+<script src="../_static/doctools.js" type="text/javascript"></script>
+<link href="../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="index.html" rel="up" title="Getting Started"/>
+<link href="brokers/index.html" rel="next" title="Brokers"/>
+<link href="index.html" rel="prev" title="Getting Started"/>
+</head>
+<body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
 <div class="deck">
-
-    
-        <p>
+<p>
         This document describes the current stable version of Celery (3.1). For development docs,
         <a href="http://docs.celeryproject.org/en/master/getting-started/introduction.html">go here</a>.
         </p>
-    
-
 </div>
-    <div class="section" id="introduction-to-celery">
+<div class="section" id="introduction-to-celery">
 <span id="intro"></span><h1>Introduction to Celery<a class="headerlink" href="#introduction-to-celery" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
@@ -83,7 +55,7 @@
 <h2><a class="toc-backref" href="#id2">What is a Task Queue?</a><a class="headerlink" href="#what-is-a-task-queue" title="Permalink to this headline">¶</a></h2>
 <p>Task queues are used as a mechanism to distribute work across threads or
 machines.</p>
-<p>A task queue&#8217;s input is a unit of work called a task. Dedicated worker
+<p>A task queue’s input is a unit of work called a task. Dedicated worker
 processes constantly monitor task queues for new work to perform.</p>
 <p>Celery communicates via messages, usually using a broker
 to mediate between clients and workers.  To initiate a task, a client adds a
@@ -91,7 +63,7 @@ message to the queue, which the broker then delivers to a worker.</p>
 <p>A Celery system can consist of multiple workers and brokers, giving way
 to high availability and horizontal scaling.</p>
 <p>Celery is written in Python, but the protocol can be implemented in any
-language.  So far there&#8217;s <a class="reference external" href="http://leapfrogdevelopment.github.com/rcelery/">RCelery</a> for the Ruby programming language,
+language.  So far there’s <a class="reference external" href="http://leapfrogdevelopment.github.com/rcelery/">RCelery</a> for the Ruby programming language,
 <a class="reference external" href="https://github.com/mher/node-celery">node-celery</a> for Node.js and a <a class="reference external" href="https://github.com/gjedeer/celery-php">PHP client</a>. Language interoperability can also be achieved
 by <a class="reference internal" href="../userguide/remote-tasks.html#guide-webhooks"><span>using webhooks</span></a>.</p>
 </div>
@@ -111,14 +83,14 @@ The last version to support Python 2.4 was Celery series 2.2.</p>
 </div>
 <p><em>Celery</em> requires a message transport to send and receive messages.
 The RabbitMQ and Redis broker transports are feature complete,
-but there&#8217;s also support for a myriad of other experimental solutions, including
+but there’s also support for a myriad of other experimental solutions, including
 using SQLite for local development.</p>
 <p><em>Celery</em> can run on a single machine, on multiple machines, or even
 across data centers.</p>
 </div>
 <div class="section" id="get-started">
 <h2><a class="toc-backref" href="#id4">Get Started</a><a class="headerlink" href="#get-started" title="Permalink to this headline">¶</a></h2>
-<p>If this is the first time you&#8217;re trying to use Celery, or you are
+<p>If this is the first time you’re trying to use Celery, or you are
 new to Celery 3.0 coming from previous versions then you should read our
 getting started tutorials:</p>
 <ul class="simple">
@@ -133,17 +105,17 @@ getting started tutorials:</p>
 <ul>
 <li><p class="first"><strong>Simple</strong></p>
 <blockquote>
-<div><p>Celery is easy to use and maintain, and it <em>doesn&#8217;t need configuration files</em>.</p>
+<div><p>Celery is easy to use and maintain, and it <em>doesn’t need configuration files</em>.</p>
 <p>It has an active, friendly community you can talk to for support,
 including a <a class="reference external" href="http://groups.google.com/group/celery-users">mailing-list</a> and an <a class="reference internal" href="resources.html#irc-channel"><span>IRC channel</span></a>.</p>
-<p>Here&#8217;s one of the simplest applications you can make:</p>
+<p>Here’s one of the simplest applications you can make:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">celery</span> <span class="kn">import</span> <span class="n">Celery</span>
 
-<span class="n">app</span> <span class="o">=</span> <span class="n">Celery</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">,</span> <span class="n">broker</span><span class="o">=</span><span class="s1">&#39;amqp://guest@localhost//&#39;</span><span class="p">)</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">Celery</span><span class="p">(</span><span class="s1">'hello'</span><span class="p">,</span> <span class="n">broker</span><span class="o">=</span><span class="s1">'amqp://guest@localhost//'</span><span class="p">)</span>
 
 <span class="nd">@app.task</span>
 <span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>
-    <span class="k">return</span> <span class="s1">&#39;hello world&#39;</span>
+    <span class="k">return</span> <span class="s1">'hello world'</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -228,14 +200,14 @@ schedulers, consumers, producers, autoscalers, broker transports and much more.<
 <blockquote>
 <div><p>A stream of monitoring events is emitted by workers and
 is used by built-in and external tools to tell you what
-your cluster is doing &#8211; in real-time.</p>
+your cluster is doing – in real-time.</p>
 <p><a class="reference internal" href="../userguide/monitoring.html#guide-monitoring"><span>Read more…</span></a>.</p>
 </div></blockquote>
 </li>
 <li><p class="first"><strong>Workflows</strong></p>
 <blockquote>
 <div><p>Simple and complex workflows can be composed using
-a set of powerful primitives we call the &#8220;canvas&#8221;,
+a set of powerful primitives we call the “canvas”,
 including grouping, chaining, chunking and more.</p>
 <p><a class="reference internal" href="../userguide/canvas.html#guide-canvas"><span>Read more…</span></a>.</p>
 </div></blockquote>
@@ -288,8 +260,8 @@ are simply out of your control.</p>
 <li><p class="first"><strong>User Components</strong></p>
 <blockquote>
 <div><p>Each worker component can be customized, and additional components
-can be defined by the user.  The worker is built up using &#8220;bootsteps&#8221; — a
-dependency graph enabling fine grained control of the worker&#8217;s
+can be defined by the user.  The worker is built up using “bootsteps” — a
+dependency graph enabling fine grained control of the worker’s
 internals.</p>
 </div></blockquote>
 </li>
@@ -304,8 +276,8 @@ integration packages:</p>
 <blockquote>
 <div><table border="1" class="docutils">
 <colgroup>
-<col width="45%" />
-<col width="55%" />
+<col width="45%"></col>
+<col width="55%"></col>
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><a class="reference external" href="http://djangoproject.com/">Django</a></td>
@@ -417,22 +389,22 @@ to install Celery and the dependencies for a given feature.</p>
 <p>You can specify these in your requirements or on the <code class="docutils literal"><span class="pre">pip</span></code> comand-line
 by using brackets.  Multiple bundles can be specified by separating them by
 commas.</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ pip install <span class="s2">&quot;celery[librabbitmq]&quot;</span>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ pip install <span class="s2">"celery[librabbitmq]"</span>
 
-$ pip install <span class="s2">&quot;celery[librabbitmq,redis,auth,msgpack]&quot;</span>
+$ pip install <span class="s2">"celery[librabbitmq,redis,auth,msgpack]"</span>
 </pre></div>
 </div>
 <p>The following bundles are available:</p>
 <div class="section" id="serializers">
 <h4>Serializers<a class="headerlink" href="#serializers" title="Permalink to this headline">¶</a></h4>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">celery[auth]:</th><td class="field-body">for using the auth serializer.</td>
 </tr>
 <tr class="field-even field"><th class="field-name" colspan="2">celery[msgpack]:</th></tr>
-<tr class="field-even field"><td>&nbsp;</td><td class="field-body">for using the msgpack serializer.</td>
+<tr class="field-even field"><td> </td><td class="field-body">for using the msgpack serializer.</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">celery[yaml]:</th><td class="field-body">for using the yaml serializer.</td>
 </tr>
@@ -442,16 +414,16 @@ $ pip install <span class="s2">&quot;celery[librabbitmq,redis,auth,msgpack]&quot
 <div class="section" id="concurrency">
 <h4>Concurrency<a class="headerlink" href="#concurrency" title="Permalink to this headline">¶</a></h4>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name" colspan="2">celery[eventlet]:</th></tr>
-<tr class="field-odd field"><td>&nbsp;</td><td class="field-body">for using the eventlet pool.</td>
+<tr class="field-odd field"><td> </td><td class="field-body">for using the eventlet pool.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">celery[gevent]:</th><td class="field-body">for using the gevent pool.</td>
 </tr>
 <tr class="field-odd field"><th class="field-name" colspan="2">celery[threads]:</th></tr>
-<tr class="field-odd field"><td>&nbsp;</td><td class="field-body">for using the thread pool.</td>
+<tr class="field-odd field"><td> </td><td class="field-body">for using the thread pool.</td>
 </tr>
 </tbody>
 </table>
@@ -459,42 +431,42 @@ $ pip install <span class="s2">&quot;celery[librabbitmq,redis,auth,msgpack]&quot
 <div class="section" id="transports-and-backends">
 <h4>Transports and Backends<a class="headerlink" href="#transports-and-backends" title="Permalink to this headline">¶</a></h4>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name" colspan="2">celery[librabbitmq]:</th></tr>
-<tr class="field-odd field"><td>&nbsp;</td><td class="field-body">for using the librabbitmq C library.</td>
+<tr class="field-odd field"><td> </td><td class="field-body">for using the librabbitmq C library.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">celery[redis]:</th><td class="field-body">for using Redis as a message transport or as a result backend.</td>
 </tr>
 <tr class="field-odd field"><th class="field-name" colspan="2">celery[mongodb]:</th></tr>
-<tr class="field-odd field"><td>&nbsp;</td><td class="field-body">for using MongoDB as a message transport (<em>experimental</em>),
+<tr class="field-odd field"><td> </td><td class="field-body">for using MongoDB as a message transport (<em>experimental</em>),
 or as a result backend (<em>supported</em>).</td>
 </tr>
 <tr class="field-even field"><th class="field-name">celery[sqs]:</th><td class="field-body">for using Amazon SQS as a message transport (<em>experimental</em>).</td>
 </tr>
 <tr class="field-odd field"><th class="field-name" colspan="2">celery[memcache]:</th></tr>
-<tr class="field-odd field"><td>&nbsp;</td><td class="field-body">for using memcached as a result backend.</td>
+<tr class="field-odd field"><td> </td><td class="field-body">for using memcached as a result backend.</td>
 </tr>
 <tr class="field-even field"><th class="field-name" colspan="2">celery[cassandra]:</th></tr>
-<tr class="field-even field"><td>&nbsp;</td><td class="field-body">for using Apache Cassandra as a result backend.</td>
+<tr class="field-even field"><td> </td><td class="field-body">for using Apache Cassandra as a result backend.</td>
 </tr>
 <tr class="field-odd field"><th class="field-name" colspan="2">celery[couchdb]:</th></tr>
-<tr class="field-odd field"><td>&nbsp;</td><td class="field-body">for using CouchDB as a message transport (<em>experimental</em>).</td>
+<tr class="field-odd field"><td> </td><td class="field-body">for using CouchDB as a message transport (<em>experimental</em>).</td>
 </tr>
 <tr class="field-even field"><th class="field-name" colspan="2">celery[couchbase]:</th></tr>
-<tr class="field-even field"><td>&nbsp;</td><td class="field-body">for using CouchBase as a result backend.</td>
+<tr class="field-even field"><td> </td><td class="field-body">for using CouchBase as a result backend.</td>
 </tr>
 <tr class="field-odd field"><th class="field-name" colspan="2">celery[beanstalk]:</th></tr>
-<tr class="field-odd field"><td>&nbsp;</td><td class="field-body">for using Beanstalk as a message transport (<em>experimental</em>).</td>
+<tr class="field-odd field"><td> </td><td class="field-body">for using Beanstalk as a message transport (<em>experimental</em>).</td>
 </tr>
 <tr class="field-even field"><th class="field-name" colspan="2">celery[zookeeper]:</th></tr>
-<tr class="field-even field"><td>&nbsp;</td><td class="field-body">for using Zookeeper as a message transport.</td>
+<tr class="field-even field"><td> </td><td class="field-body">for using Zookeeper as a message transport.</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">celery[zeromq]:</th><td class="field-body">for using ZeroMQ as a message transport (<em>experimental</em>).</td>
 </tr>
 <tr class="field-even field"><th class="field-name" colspan="2">celery[sqlalchemy]:</th></tr>
-<tr class="field-even field"><td>&nbsp;</td><td class="field-body">for using SQLAlchemy as a message transport (<em>experimental</em>),
+<tr class="field-even field"><td> </td><td class="field-body">for using SQLAlchemy as a message transport (<em>experimental</em>),
 or as a result backend (<em>supported</em>).</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">celery[pyro]:</th><td class="field-body">for using the Pyro4 message transport (<em>experimental</em>).</td>
@@ -541,33 +513,15 @@ $ pip install https://github.com/celery/kombu/zipball/master#egg=kombu
 </div>
 </div>
 </div>
+</div>
+</div>
+</div>
 
+<div class="clearer"></div>
+</div>
 
-          </div>
-        </div>
-      </div>
+<div class="footer" role="contentinfo">
+        © <a href="../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="brokers/index.html" title="Brokers"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="index.html" title="Getting Started"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" >Getting Started</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &copy; <a href="../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
-    </div>
-  </body>
+</body>
 </html>

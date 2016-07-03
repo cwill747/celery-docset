@@ -1,17 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>celery.security &mdash; Celery 3.1.23 documentation</title>
-    
-    <link rel="stylesheet" href="../../_static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>celery.security — Celery 3.1.23 documentation</title>
+<link href="../../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
         VERSION:     '3.1.23',
@@ -20,52 +16,34 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="copyright" title="Copyright" href="../../copyright.html" />
-    <link rel="top" title="Celery 3.1.23 documentation" href="../../index.html" />
-    <link rel="up" title="Module code" href="../index.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
-      </ul>
-    </div>  
+<script src="../../_static/jquery.js" type="text/javascript"></script>
+<script src="../../_static/underscore.js" type="text/javascript"></script>
+<script src="../../_static/doctools.js" type="text/javascript"></script>
+<link href="../../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="../index.html" rel="up" title="Module code"/>
+</head>
+<body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
 <div class="deck">
-
-    
-        <p>
+<p>
         This document describes the current stable version of Celery (3.1). For development docs,
         <a href="http://docs.celeryproject.org/en/master/_modules/celery/security.html">go here</a>.
         </p>
-    
-
 </div>
-    <h1>Source code for celery.security</h1><div class="highlight"><pre>
+<h1>Source code for celery.security</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="sd">    celery.security</span>
 <span class="sd">    ~~~~~~~~~~~~~~~</span>
 
 <span class="sd">    Module implementing the signing message serializer.</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
 
 <span class="kn">from</span> <span class="nn">kombu.serialization</span> <span class="kn">import</span> <span class="p">(</span>
@@ -76,14 +54,14 @@
 
 <span class="kn">from</span> <span class="nn">.serialization</span> <span class="kn">import</span> <span class="n">register_auth</span>
 
-<span class="n">SSL_NOT_INSTALLED</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="n">SSL_NOT_INSTALLED</span> <span class="o">=</span> <span class="s2">"""</span><span class="se">\</span>
 <span class="s2">You need to install the pyOpenSSL library to use the auth serializer.</span>
 <span class="s2">Please install by:</span>
 
 <span class="s2">    $ pip install pyOpenSSL</span>
-<span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">"""</span>
 
-<span class="n">SETTING_MISSING</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="n">SETTING_MISSING</span> <span class="o">=</span> <span class="s2">"""</span><span class="se">\</span>
 <span class="s2">Sorry, but you have to configure the</span>
 <span class="s2">    * CELERY_SECURITY_KEY</span>
 <span class="s2">    * CELERY_SECURITY_CERTIFICATE, and the</span>
@@ -91,14 +69,14 @@
 <span class="s2">configuration settings to use the auth serializer.</span>
 
 <span class="s2">Please see the configuration reference for more information.</span>
-<span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">"""</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;setup_security&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'setup_security'</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="setup_security"><a class="viewcode-back" href="../../reference/celery.security.html#celery.security.setup_security">[docs]</a><span class="k">def</span> <span class="nf">setup_security</span><span class="p">(</span><span class="n">allowed_serializers</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">cert</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">store</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
-                   <span class="n">digest</span><span class="o">=</span><span class="s1">&#39;sha1&#39;</span><span class="p">,</span> <span class="n">serializer</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;See :meth:`@Celery.setup_security`.&quot;&quot;&quot;</span>
+                   <span class="n">digest</span><span class="o">=</span><span class="s1">'sha1'</span><span class="p">,</span> <span class="n">serializer</span><span class="o">=</span><span class="s1">'json'</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">"""See :meth:`@Celery.setup_security`."""</span>
     <span class="k">if</span> <span class="n">app</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
         <span class="kn">from</span> <span class="nn">celery</span> <span class="kn">import</span> <span class="n">current_app</span>
         <span class="n">app</span> <span class="o">=</span> <span class="n">current_app</span><span class="o">.</span><span class="n">_get_current_object</span><span class="p">()</span>
@@ -106,7 +84,7 @@
     <span class="n">_disable_insecure_serializers</span><span class="p">(</span><span class="n">allowed_serializers</span><span class="p">)</span>
 
     <span class="n">conf</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">conf</span>
-    <span class="k">if</span> <span class="n">conf</span><span class="o">.</span><span class="n">CELERY_TASK_SERIALIZER</span> <span class="o">!=</span> <span class="s1">&#39;auth&#39;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">conf</span><span class="o">.</span><span class="n">CELERY_TASK_SERIALIZER</span> <span class="o">!=</span> <span class="s1">'auth'</span><span class="p">:</span>
         <span class="k">return</span>
 
     <span class="k">try</span><span class="p">:</span>
@@ -124,32 +102,21 @@
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="k">as</span> <span class="n">kf</span><span class="p">:</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">cert</span><span class="p">)</span> <span class="k">as</span> <span class="n">cf</span><span class="p">:</span>
             <span class="n">register_auth</span><span class="p">(</span><span class="n">kf</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="n">cf</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="n">store</span><span class="p">,</span> <span class="n">digest</span><span class="p">,</span> <span class="n">serializer</span><span class="p">)</span>
-    <span class="n">registry</span><span class="o">.</span><span class="n">_set_default_serializer</span><span class="p">(</span><span class="s1">&#39;auth&#39;</span><span class="p">)</span></div>
+    <span class="n">registry</span><span class="o">.</span><span class="n">_set_default_serializer</span><span class="p">(</span><span class="s1">'auth'</span><span class="p">)</span></div>
 
 
 <span class="k">def</span> <span class="nf">disable_untrusted_serializers</span><span class="p">(</span><span class="n">whitelist</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
     <span class="n">_disable_insecure_serializers</span><span class="p">(</span><span class="n">allowed</span><span class="o">=</span><span class="n">whitelist</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
+</div>
 
-          </div>
-        </div>
-      </div>
+<div class="clearer"></div>
+</div>
+
+<div class="footer" role="contentinfo">
+        © <a href="../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &copy; <a href="../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
-    </div>
-  </body>
+</body>
 </html>

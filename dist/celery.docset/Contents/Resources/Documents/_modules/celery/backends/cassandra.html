@@ -1,17 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>celery.backends.cassandra &mdash; Celery 3.1.23 documentation</title>
-    
-    <link rel="stylesheet" href="../../../_static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>celery.backends.cassandra — Celery 3.1.23 documentation</title>
+<link href="../../../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
         VERSION:     '3.1.23',
@@ -20,53 +16,34 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="copyright" title="Copyright" href="../../../copyright.html" />
-    <link rel="top" title="Celery 3.1.23 documentation" href="../../../index.html" />
-    <link rel="up" title="celery.backends" href="../backends.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="../backends.html" accesskey="U">celery.backends</a> &raquo;</li> 
-      </ul>
-    </div>  
+<script src="../../../_static/jquery.js" type="text/javascript"></script>
+<script src="../../../_static/underscore.js" type="text/javascript"></script>
+<script src="../../../_static/doctools.js" type="text/javascript"></script>
+<link href="../../../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../../../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="../backends.html" rel="up" title="celery.backends"/>
+</head>
+<body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
 <div class="deck">
-
-    
-        <p>
+<p>
         This document describes the current stable version of Celery (3.1). For development docs,
         <a href="http://docs.celeryproject.org/en/master/_modules/celery/backends/cassandra.html">go here</a>.
         </p>
-    
-
 </div>
-    <h1>Source code for celery.backends.cassandra</h1><div class="highlight"><pre>
+<h1>Source code for celery.backends.cassandra</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -* coding: utf-8 -*-</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="sd">    celery.backends.cassandra</span>
 <span class="sd">    ~~~~~~~~~~~~~~~~~~~~~~~~~</span>
 
 <span class="sd">    Apache Cassandra result store backend.</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
 
 <span class="k">try</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
@@ -87,13 +64,13 @@
 
 <span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">BaseBackend</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;CassandraBackend&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'CassandraBackend'</span><span class="p">]</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="CassandraBackend"><a class="viewcode-back" href="../../../internals/reference/celery.backends.cassandra.html#celery.backends.cassandra.CassandraBackend">[docs]</a><span class="k">class</span> <span class="nc">CassandraBackend</span><span class="p">(</span><span class="n">BaseBackend</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Highly fault tolerant Cassandra backend.</span>
+    <span class="sd">"""Highly fault tolerant Cassandra backend.</span>
 
 <span class="sd">    .. attribute:: servers</span>
 
@@ -102,7 +79,7 @@
 <span class="sd">    :raises celery.exceptions.ImproperlyConfigured: if</span>
 <span class="sd">        module :mod:`pycassa` is not available.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">servers</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">keyspace</span> <span class="o">=</span> <span class="bp">None</span>
     <span class="n">column_family</span> <span class="o">=</span> <span class="bp">None</span>
@@ -113,39 +90,39 @@
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">servers</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">keyspace</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">column_family</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
                  <span class="n">cassandra_options</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">detailed_mode</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Initialize Cassandra backend.</span>
+        <span class="sd">"""Initialize Cassandra backend.</span>
 
 <span class="sd">        Raises :class:`celery.exceptions.ImproperlyConfigured` if</span>
 <span class="sd">        the :setting:`CASSANDRA_SERVERS` setting is not set.</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">CassandraBackend</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">expires</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;expires&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">maybe_timedelta</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">expires</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'expires'</span><span class="p">)</span> <span class="ow">or</span> <span class="n">maybe_timedelta</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">CELERY_TASK_RESULT_EXPIRES</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">pycassa</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">ImproperlyConfigured</span><span class="p">(</span>
-                <span class="s1">&#39;You need to install the pycassa library to use the &#39;</span>
-                <span class="s1">&#39;Cassandra backend. See https://github.com/pycassa/pycassa&#39;</span><span class="p">)</span>
+                <span class="s1">'You need to install the pycassa library to use the '</span>
+                <span class="s1">'Cassandra backend. See https://github.com/pycassa/pycassa'</span><span class="p">)</span>
 
         <span class="n">conf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">conf</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">servers</span> <span class="o">=</span> <span class="p">(</span><span class="n">servers</span> <span class="ow">or</span>
-                        <span class="n">conf</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;CASSANDRA_SERVERS&#39;</span><span class="p">)</span> <span class="ow">or</span>
+                        <span class="n">conf</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'CASSANDRA_SERVERS'</span><span class="p">)</span> <span class="ow">or</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">servers</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">keyspace</span> <span class="o">=</span> <span class="p">(</span><span class="n">keyspace</span> <span class="ow">or</span>
-                         <span class="n">conf</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;CASSANDRA_KEYSPACE&#39;</span><span class="p">)</span> <span class="ow">or</span>
+                         <span class="n">conf</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'CASSANDRA_KEYSPACE'</span><span class="p">)</span> <span class="ow">or</span>
                          <span class="bp">self</span><span class="o">.</span><span class="n">keyspace</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">column_family</span> <span class="o">=</span> <span class="p">(</span><span class="n">column_family</span> <span class="ow">or</span>
-                              <span class="n">conf</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;CASSANDRA_COLUMN_FAMILY&#39;</span><span class="p">)</span> <span class="ow">or</span>
+                              <span class="n">conf</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'CASSANDRA_COLUMN_FAMILY'</span><span class="p">)</span> <span class="ow">or</span>
                               <span class="bp">self</span><span class="o">.</span><span class="n">column_family</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">cassandra_options</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">conf</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;CASSANDRA_OPTIONS&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">{},</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cassandra_options</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">conf</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'CASSANDRA_OPTIONS'</span><span class="p">)</span> <span class="ow">or</span> <span class="p">{},</span>
                                       <span class="o">**</span><span class="n">cassandra_options</span> <span class="ow">or</span> <span class="p">{})</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">detailed_mode</span> <span class="o">=</span> <span class="p">(</span><span class="n">detailed_mode</span> <span class="ow">or</span>
-                              <span class="n">conf</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;CASSANDRA_DETAILED_MODE&#39;</span><span class="p">)</span> <span class="ow">or</span>
+                              <span class="n">conf</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'CASSANDRA_DETAILED_MODE'</span><span class="p">)</span> <span class="ow">or</span>
                               <span class="bp">self</span><span class="o">.</span><span class="n">detailed_mode</span><span class="p">)</span>
-        <span class="n">read_cons</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;CASSANDRA_READ_CONSISTENCY&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="s1">&#39;LOCAL_QUORUM&#39;</span>
-        <span class="n">write_cons</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;CASSANDRA_WRITE_CONSISTENCY&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="s1">&#39;LOCAL_QUORUM&#39;</span>
+        <span class="n">read_cons</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'CASSANDRA_READ_CONSISTENCY'</span><span class="p">)</span> <span class="ow">or</span> <span class="s1">'LOCAL_QUORUM'</span>
+        <span class="n">write_cons</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'CASSANDRA_WRITE_CONSISTENCY'</span><span class="p">)</span> <span class="ow">or</span> <span class="s1">'LOCAL_QUORUM'</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">read_consistency</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">pycassa</span><span class="o">.</span><span class="n">ConsistencyLevel</span><span class="p">,</span>
                                             <span class="n">read_cons</span><span class="p">)</span>
@@ -159,7 +136,7 @@
 
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">servers</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">keyspace</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">column_family</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">ImproperlyConfigured</span><span class="p">(</span>
-                <span class="s1">&#39;Cassandra backend not configured.&#39;</span><span class="p">)</span>
+                <span class="s1">'Cassandra backend not configured.'</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_column_family</span> <span class="o">=</span> <span class="bp">None</span>
 
@@ -177,7 +154,7 @@
                     <span class="n">Thrift</span><span class="o">.</span><span class="n">TException</span><span class="p">)</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">monotonic</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">ts</span><span class="p">:</span>
                     <span class="k">raise</span>
-                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Cassandra error: </span><span class="si">%r</span><span class="s1">. Retrying...&#39;</span><span class="p">,</span> <span class="n">exc</span><span class="p">)</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">'Cassandra error: </span><span class="si">%r</span><span class="s1">. Retrying...'</span><span class="p">,</span> <span class="n">exc</span><span class="p">)</span>
                 <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_retry_wait</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_get_column_family</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -198,16 +175,16 @@
 
     <span class="k">def</span> <span class="nf">_store_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_id</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span>
                       <span class="n">traceback</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Store return value and status of an executed task.&quot;&quot;&quot;</span>
+        <span class="sd">"""Store return value and status of an executed task."""</span>
 
         <span class="k">def</span> <span class="nf">_do_store</span><span class="p">():</span>
             <span class="n">cf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_column_family</span><span class="p">()</span>
             <span class="n">date_done</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
-            <span class="n">meta</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="n">status</span><span class="p">,</span>
-                    <span class="s1">&#39;date_done&#39;</span><span class="p">:</span> <span class="n">date_done</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">T%H:%M:%SZ&#39;</span><span class="p">),</span>
-                    <span class="s1">&#39;traceback&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">traceback</span><span class="p">),</span>
-                    <span class="s1">&#39;result&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">result</span><span class="p">),</span>
-                    <span class="s1">&#39;children&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+            <span class="n">meta</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'status'</span><span class="p">:</span> <span class="n">status</span><span class="p">,</span>
+                    <span class="s1">'date_done'</span><span class="p">:</span> <span class="n">date_done</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">'%Y-%m-</span><span class="si">%d</span><span class="s1">T%H:%M:%SZ'</span><span class="p">),</span>
+                    <span class="s1">'traceback'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">traceback</span><span class="p">),</span>
+                    <span class="s1">'result'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">result</span><span class="p">),</span>
+                    <span class="s1">'children'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">current_task_children</span><span class="p">(</span><span class="n">request</span><span class="p">),</span>
                     <span class="p">)}</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">detailed_mode</span><span class="p">:</span>
@@ -220,10 +197,10 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_retry_on_error</span><span class="p">(</span><span class="n">_do_store</span><span class="p">)</span>
 
 <div class="viewcode-block" id="CassandraBackend.as_uri"><a class="viewcode-back" href="../../../internals/reference/celery.backends.cassandra.html#celery.backends.cassandra.CassandraBackend.as_uri">[docs]</a>    <span class="k">def</span> <span class="nf">as_uri</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">include_password</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s1">&#39;cassandra://&#39;</span></div>
+        <span class="k">return</span> <span class="s1">'cassandra://'</span></div>
 
     <span class="k">def</span> <span class="nf">_get_task_meta_for</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_id</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Get task metadata for a task by id.&quot;&quot;&quot;</span>
+        <span class="sd">"""Get task metadata for a task by id."""</span>
 
         <span class="k">def</span> <span class="nf">_do_get</span><span class="p">():</span>
             <span class="n">cf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_column_family</span><span class="p">()</span>
@@ -235,15 +212,15 @@
                     <span class="n">obj</span> <span class="o">=</span> <span class="n">cf</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">task_id</span><span class="p">)</span>
 
                 <span class="n">meta</span> <span class="o">=</span> <span class="p">{</span>
-                    <span class="s1">&#39;task_id&#39;</span><span class="p">:</span> <span class="n">task_id</span><span class="p">,</span>
-                    <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="n">obj</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">],</span>
-                    <span class="s1">&#39;result&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">obj</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">]),</span>
-                    <span class="s1">&#39;date_done&#39;</span><span class="p">:</span> <span class="n">obj</span><span class="p">[</span><span class="s1">&#39;date_done&#39;</span><span class="p">],</span>
-                    <span class="s1">&#39;traceback&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">obj</span><span class="p">[</span><span class="s1">&#39;traceback&#39;</span><span class="p">]),</span>
-                    <span class="s1">&#39;children&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">obj</span><span class="p">[</span><span class="s1">&#39;children&#39;</span><span class="p">]),</span>
+                    <span class="s1">'task_id'</span><span class="p">:</span> <span class="n">task_id</span><span class="p">,</span>
+                    <span class="s1">'status'</span><span class="p">:</span> <span class="n">obj</span><span class="p">[</span><span class="s1">'status'</span><span class="p">],</span>
+                    <span class="s1">'result'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">obj</span><span class="p">[</span><span class="s1">'result'</span><span class="p">]),</span>
+                    <span class="s1">'date_done'</span><span class="p">:</span> <span class="n">obj</span><span class="p">[</span><span class="s1">'date_done'</span><span class="p">],</span>
+                    <span class="s1">'traceback'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">obj</span><span class="p">[</span><span class="s1">'traceback'</span><span class="p">]),</span>
+                    <span class="s1">'children'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">obj</span><span class="p">[</span><span class="s1">'children'</span><span class="p">]),</span>
                 <span class="p">}</span>
             <span class="k">except</span> <span class="p">(</span><span class="ne">KeyError</span><span class="p">,</span> <span class="n">pycassa</span><span class="o">.</span><span class="n">NotFoundException</span><span class="p">):</span>
-                <span class="n">meta</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="n">states</span><span class="o">.</span><span class="n">PENDING</span><span class="p">,</span> <span class="s1">&#39;result&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">}</span>
+                <span class="n">meta</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'status'</span><span class="p">:</span> <span class="n">states</span><span class="o">.</span><span class="n">PENDING</span><span class="p">,</span> <span class="s1">'result'</span><span class="p">:</span> <span class="bp">None</span><span class="p">}</span>
             <span class="k">return</span> <span class="n">meta</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_retry_on_error</span><span class="p">(</span><span class="n">_do_get</span><span class="p">)</span>
@@ -256,27 +233,15 @@
                  <span class="n">cassandra_options</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cassandra_options</span><span class="p">))</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">CassandraBackend</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__reduce__</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span></div>
 </pre></div>
+</div>
+</div>
+</div>
 
-          </div>
-        </div>
-      </div>
+<div class="clearer"></div>
+</div>
+
+<div class="footer" role="contentinfo">
+        © <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="../backends.html" >celery.backends</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &copy; <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
-    </div>
-  </body>
+</body>
 </html>

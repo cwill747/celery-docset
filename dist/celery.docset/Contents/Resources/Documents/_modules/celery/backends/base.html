@@ -1,17 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>celery.backends.base &mdash; Celery 3.1.23 documentation</title>
-    
-    <link rel="stylesheet" href="../../../_static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>celery.backends.base — Celery 3.1.23 documentation</title>
+<link href="../../../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
         VERSION:     '3.1.23',
@@ -20,47 +16,28 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="copyright" title="Copyright" href="../../../copyright.html" />
-    <link rel="top" title="Celery 3.1.23 documentation" href="../../../index.html" />
-    <link rel="up" title="celery.backends" href="../backends.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="../backends.html" accesskey="U">celery.backends</a> &raquo;</li> 
-      </ul>
-    </div>  
+<script src="../../../_static/jquery.js" type="text/javascript"></script>
+<script src="../../../_static/underscore.js" type="text/javascript"></script>
+<script src="../../../_static/doctools.js" type="text/javascript"></script>
+<link href="../../../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../../../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="../backends.html" rel="up" title="celery.backends"/>
+</head>
+<body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
 <div class="deck">
-
-    
-        <p>
+<p>
         This document describes the current stable version of Celery (3.1). For development docs,
         <a href="http://docs.celeryproject.org/en/master/_modules/celery/backends/base.html">go here</a>.
         </p>
-    
-
 </div>
-    <h1>Source code for celery.backends.base</h1><div class="highlight"><pre>
+<h1>Source code for celery.backends.base</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="sd">    celery.backends.base</span>
 <span class="sd">    ~~~~~~~~~~~~~~~~~~~~</span>
 
@@ -71,7 +48,7 @@
 <span class="sd">    - :class:`KeyValueStoreBackend` is a common base class</span>
 <span class="sd">      using K/V semantics like _get and _put.</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
 
 <span class="kn">import</span> <span class="nn">time</span>
@@ -104,16 +81,16 @@
     <span class="n">create_exception_cls</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;BaseBackend&#39;</span><span class="p">,</span> <span class="s1">&#39;KeyValueStoreBackend&#39;</span><span class="p">,</span> <span class="s1">&#39;DisabledBackend&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'BaseBackend'</span><span class="p">,</span> <span class="s1">'KeyValueStoreBackend'</span><span class="p">,</span> <span class="s1">'DisabledBackend'</span><span class="p">]</span>
 
-<span class="n">EXCEPTION_ABLE_CODECS</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">([</span><span class="s1">&#39;pickle&#39;</span><span class="p">])</span>
+<span class="n">EXCEPTION_ABLE_CODECS</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">([</span><span class="s1">'pickle'</span><span class="p">])</span>
 <span class="n">PY3</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">unpickle_backend</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return an unpickled backend.&quot;&quot;&quot;</span>
+    <span class="sd">"""Return an unpickled backend."""</span>
     <span class="k">return</span> <span class="n">cls</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="n">current_app</span><span class="o">.</span><span class="n">_get_current_object</span><span class="p">(),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 
@@ -148,10 +125,10 @@
     <span class="n">persistent</span> <span class="o">=</span> <span class="bp">True</span>
 
     <span class="n">retry_policy</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;max_retries&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
-        <span class="s1">&#39;interval_start&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s1">&#39;interval_step&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s1">&#39;interval_max&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s1">'max_retries'</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+        <span class="s1">'interval_start'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s1">'interval_step'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s1">'interval_max'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
     <span class="p">}</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">,</span>
@@ -171,25 +148,25 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">url</span> <span class="o">=</span> <span class="n">url</span>
 
 <div class="viewcode-block" id="BaseBackend.as_uri"><a class="viewcode-back" href="../../../internals/reference/celery.backends.base.html#celery.backends.base.BaseBackend.as_uri">[docs]</a>    <span class="k">def</span> <span class="nf">as_uri</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">include_password</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the backend as an URI, sanitizing the password or not&quot;&quot;&quot;</span>
-        <span class="c1"># when using maybe_sanitize_url(), &quot;/&quot; is added</span>
-        <span class="c1"># we&#39;re stripping it for consistency</span>
+        <span class="sd">"""Return the backend as an URI, sanitizing the password or not"""</span>
+        <span class="c1"># when using maybe_sanitize_url(), "/" is added</span>
+        <span class="c1"># we're stripping it for consistency</span>
         <span class="k">if</span> <span class="n">include_password</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">url</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="n">maybe_sanitize_url</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span> <span class="ow">or</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">url</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">url</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;:///&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="n">url</span></div>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">maybe_sanitize_url</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span> <span class="ow">or</span> <span class="s1">''</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">url</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">url</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">':///'</span><span class="p">)</span> <span class="k">else</span> <span class="n">url</span></div>
 
 <div class="viewcode-block" id="BaseBackend.mark_as_started"><a class="viewcode-back" href="../../../internals/reference/celery.backends.base.html#celery.backends.base.BaseBackend.mark_as_started">[docs]</a>    <span class="k">def</span> <span class="nf">mark_as_started</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_id</span><span class="p">,</span> <span class="o">**</span><span class="n">meta</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Mark a task as started&quot;&quot;&quot;</span>
+        <span class="sd">"""Mark a task as started"""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">store_result</span><span class="p">(</span><span class="n">task_id</span><span class="p">,</span> <span class="n">meta</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="n">states</span><span class="o">.</span><span class="n">STARTED</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="BaseBackend.mark_as_done"><a class="viewcode-back" href="../../../internals/reference/celery.backends.base.html#celery.backends.base.BaseBackend.mark_as_done">[docs]</a>    <span class="k">def</span> <span class="nf">mark_as_done</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_id</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Mark task as successfully executed.&quot;&quot;&quot;</span>
+        <span class="sd">"""Mark task as successfully executed."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">store_result</span><span class="p">(</span><span class="n">task_id</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span>
                                  <span class="n">status</span><span class="o">=</span><span class="n">states</span><span class="o">.</span><span class="n">SUCCESS</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="BaseBackend.mark_as_failure"><a class="viewcode-back" href="../../../internals/reference/celery.backends.base.html#celery.backends.base.BaseBackend.mark_as_failure">[docs]</a>    <span class="k">def</span> <span class="nf">mark_as_failure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_id</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span> <span class="n">traceback</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Mark task as executed with failure. Stores the exception.&quot;&quot;&quot;</span>
+        <span class="sd">"""Mark task as executed with failure. Stores the exception."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">store_result</span><span class="p">(</span><span class="n">task_id</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="n">states</span><span class="o">.</span><span class="n">FAILURE</span><span class="p">,</span>
                                  <span class="n">traceback</span><span class="o">=</span><span class="n">traceback</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span></div>
 
@@ -200,7 +177,7 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="n">group</span><span class="p">(</span>
                 <span class="p">[</span><span class="n">app</span><span class="o">.</span><span class="n">signature</span><span class="p">(</span><span class="n">errback</span><span class="p">)</span>
-                 <span class="k">for</span> <span class="n">errback</span> <span class="ow">in</span> <span class="n">callback</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;link_error&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">[]],</span>
+                 <span class="k">for</span> <span class="n">errback</span> <span class="ow">in</span> <span class="n">callback</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'link_error'</span><span class="p">)</span> <span class="ow">or</span> <span class="p">[]],</span>
                 <span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">,</span>
             <span class="p">)</span><span class="o">.</span><span class="n">apply_async</span><span class="p">((</span><span class="n">callback</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="p">))</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">eb_exc</span><span class="p">:</span>
@@ -219,36 +196,36 @@
             <span class="k">del</span><span class="p">(</span><span class="n">tb</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="BaseBackend.mark_as_retry"><a class="viewcode-back" href="../../../internals/reference/celery.backends.base.html#celery.backends.base.BaseBackend.mark_as_retry">[docs]</a>    <span class="k">def</span> <span class="nf">mark_as_retry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_id</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span> <span class="n">traceback</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Mark task as being retries. Stores the current</span>
-<span class="sd">        exception (if any).&quot;&quot;&quot;</span>
+        <span class="sd">"""Mark task as being retries. Stores the current</span>
+<span class="sd">        exception (if any)."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">store_result</span><span class="p">(</span><span class="n">task_id</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="n">states</span><span class="o">.</span><span class="n">RETRY</span><span class="p">,</span>
                                  <span class="n">traceback</span><span class="o">=</span><span class="n">traceback</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="BaseBackend.mark_as_revoked"><a class="viewcode-back" href="../../../internals/reference/celery.backends.base.html#celery.backends.base.BaseBackend.mark_as_revoked">[docs]</a>    <span class="k">def</span> <span class="nf">mark_as_revoked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_id</span><span class="p">,</span> <span class="n">reason</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseBackend.mark_as_revoked"><a class="viewcode-back" href="../../../internals/reference/celery.backends.base.html#celery.backends.base.BaseBackend.mark_as_revoked">[docs]</a>    <span class="k">def</span> <span class="nf">mark_as_revoked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_id</span><span class="p">,</span> <span class="n">reason</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">store_result</span><span class="p">(</span><span class="n">task_id</span><span class="p">,</span> <span class="n">TaskRevokedError</span><span class="p">(</span><span class="n">reason</span><span class="p">),</span>
                                  <span class="n">status</span><span class="o">=</span><span class="n">states</span><span class="o">.</span><span class="n">REVOKED</span><span class="p">,</span> <span class="n">traceback</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
                                  <span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="BaseBackend.prepare_exception"><a class="viewcode-back" href="../../../internals/reference/celery.backends.base.html#celery.backends.base.BaseBackend.prepare_exception">[docs]</a>    <span class="k">def</span> <span class="nf">prepare_exception</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span> <span class="n">serializer</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Prepare exception for serialization.&quot;&quot;&quot;</span>
+        <span class="sd">"""Prepare exception for serialization."""</span>
         <span class="n">serializer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">serializer</span> <span class="k">if</span> <span class="n">serializer</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="n">serializer</span>
         <span class="k">if</span> <span class="n">serializer</span> <span class="ow">in</span> <span class="n">EXCEPTION_ABLE_CODECS</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">get_pickleable_exception</span><span class="p">(</span><span class="n">exc</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;exc_type&#39;</span><span class="p">:</span> <span class="nb">type</span><span class="p">(</span><span class="n">exc</span><span class="p">)</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="s1">&#39;exc_message&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">exc</span><span class="p">)}</span></div>
+        <span class="k">return</span> <span class="p">{</span><span class="s1">'exc_type'</span><span class="p">:</span> <span class="nb">type</span><span class="p">(</span><span class="n">exc</span><span class="p">)</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="s1">'exc_message'</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">exc</span><span class="p">)}</span></div>
 
 <div class="viewcode-block" id="BaseBackend.exception_to_python"><a class="viewcode-back" href="../../../internals/reference/celery.backends.base.html#celery.backends.base.BaseBackend.exception_to_python">[docs]</a>    <span class="k">def</span> <span class="nf">exception_to_python</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Convert serialized exception to Python exception.&quot;&quot;&quot;</span>
+        <span class="sd">"""Convert serialized exception to Python exception."""</span>
         <span class="k">if</span> <span class="n">exc</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">exc</span><span class="p">,</span> <span class="ne">BaseException</span><span class="p">):</span>
                 <span class="n">exc</span> <span class="o">=</span> <span class="n">create_exception_cls</span><span class="p">(</span>
-                    <span class="n">from_utf8</span><span class="p">(</span><span class="n">exc</span><span class="p">[</span><span class="s1">&#39;exc_type&#39;</span><span class="p">]),</span> <span class="n">__name__</span><span class="p">)(</span><span class="n">exc</span><span class="p">[</span><span class="s1">&#39;exc_message&#39;</span><span class="p">])</span>
+                    <span class="n">from_utf8</span><span class="p">(</span><span class="n">exc</span><span class="p">[</span><span class="s1">'exc_type'</span><span class="p">]),</span> <span class="n">__name__</span><span class="p">)(</span><span class="n">exc</span><span class="p">[</span><span class="s1">'exc_message'</span><span class="p">])</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">serializer</span> <span class="ow">in</span> <span class="n">EXCEPTION_ABLE_CODECS</span><span class="p">:</span>
                 <span class="n">exc</span> <span class="o">=</span> <span class="n">get_pickled_exception</span><span class="p">(</span><span class="n">exc</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">exc</span></div>
 
 <div class="viewcode-block" id="BaseBackend.prepare_value"><a class="viewcode-back" href="../../../internals/reference/celery.backends.base.html#celery.backends.base.BaseBackend.prepare_value">[docs]</a>    <span class="k">def</span> <span class="nf">prepare_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Prepare value for storage.&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">serializer</span> <span class="o">!=</span> <span class="s1">&#39;pickle&#39;</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">ResultBase</span><span class="p">):</span>
+        <span class="sd">"""Prepare value for storage."""</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">serializer</span> <span class="o">!=</span> <span class="s1">'pickle'</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">ResultBase</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="n">as_tuple</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">result</span></div>
 
@@ -257,8 +234,8 @@
         <span class="k">return</span> <span class="n">payload</span></div>
 
 <div class="viewcode-block" id="BaseBackend.meta_from_decoded"><a class="viewcode-back" href="../../../internals/reference/celery.backends.base.html#celery.backends.base.BaseBackend.meta_from_decoded">[docs]</a>    <span class="k">def</span> <span class="nf">meta_from_decoded</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">meta</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">meta</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">EXCEPTION_STATES</span><span class="p">:</span>
-            <span class="n">meta</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">exception_to_python</span><span class="p">(</span><span class="n">meta</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">meta</span><span class="p">[</span><span class="s1">'status'</span><span class="p">]</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">EXCEPTION_STATES</span><span class="p">:</span>
+            <span class="n">meta</span><span class="p">[</span><span class="s1">'result'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">exception_to_python</span><span class="p">(</span><span class="n">meta</span><span class="p">[</span><span class="s1">'result'</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">meta</span></div>
 
 <div class="viewcode-block" id="BaseBackend.decode_result"><a class="viewcode-back" href="../../../internals/reference/celery.backends.base.html#celery.backends.base.BaseBackend.decode_result">[docs]</a>    <span class="k">def</span> <span class="nf">decode_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payload</span><span class="p">):</span>
@@ -273,7 +250,7 @@
 
 <div class="viewcode-block" id="BaseBackend.wait_for"><a class="viewcode-back" href="../../../internals/reference/celery.backends.base.html#celery.backends.base.BaseBackend.wait_for">[docs]</a>    <span class="k">def</span> <span class="nf">wait_for</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_id</span><span class="p">,</span>
                  <span class="n">timeout</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">no_ack</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">on_interval</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Wait for task and return its result.</span>
+        <span class="sd">"""Wait for task and return its result.</span>
 
 <span class="sd">        If the task raises an exception, this exception</span>
 <span class="sd">        will be re-raised by :func:`wait_for`.</span>
@@ -282,13 +259,13 @@
 <span class="sd">        :class:`celery.exceptions.TimeoutError` exception if the operation</span>
 <span class="sd">        takes longer than `timeout` seconds.</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
 
         <span class="n">time_elapsed</span> <span class="o">=</span> <span class="mf">0.0</span>
 
         <span class="k">while</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">meta</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_task_meta</span><span class="p">(</span><span class="n">task_id</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">meta</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">states</span><span class="o">.</span><span class="n">READY_STATES</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">meta</span><span class="p">[</span><span class="s1">'status'</span><span class="p">]</span> <span class="ow">in</span> <span class="n">states</span><span class="o">.</span><span class="n">READY_STATES</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">meta</span>
             <span class="k">if</span> <span class="n">on_interval</span><span class="p">:</span>
                 <span class="n">on_interval</span><span class="p">()</span>
@@ -296,7 +273,7 @@
             <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">interval</span><span class="p">)</span>
             <span class="n">time_elapsed</span> <span class="o">+=</span> <span class="n">interval</span>
             <span class="k">if</span> <span class="n">timeout</span> <span class="ow">and</span> <span class="n">time_elapsed</span> <span class="o">&gt;=</span> <span class="n">timeout</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="n">TimeoutError</span><span class="p">(</span><span class="s1">&#39;The operation timed out.&#39;</span><span class="p">)</span></div>
+                <span class="k">raise</span> <span class="n">TimeoutError</span><span class="p">(</span><span class="s1">'The operation timed out.'</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="BaseBackend.prepare_expires"><a class="viewcode-back" href="../../../internals/reference/celery.backends.base.html#celery.backends.base.BaseBackend.prepare_expires">[docs]</a>    <span class="k">def</span> <span class="nf">prepare_expires</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
@@ -326,7 +303,7 @@
 
 <div class="viewcode-block" id="BaseBackend.store_result"><a class="viewcode-back" href="../../../internals/reference/celery.backends.base.html#celery.backends.base.BaseBackend.store_result">[docs]</a>    <span class="k">def</span> <span class="nf">store_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_id</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span>
                      <span class="n">traceback</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Update task state and result.&quot;&quot;&quot;</span>
+        <span class="sd">"""Update task state and result."""</span>
         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encode_result</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">status</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_store_result</span><span class="p">(</span><span class="n">task_id</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span> <span class="n">traceback</span><span class="p">,</span>
                            <span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -337,24 +314,24 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_forget</span><span class="p">(</span><span class="n">task_id</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_forget</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_id</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;backend does not implement forget.&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">'backend does not implement forget.'</span><span class="p">)</span>
 
 <div class="viewcode-block" id="BaseBackend.get_status"><a class="viewcode-back" href="../../../internals/reference/celery.backends.base.html#celery.backends.base.BaseBackend.get_status">[docs]</a>    <span class="k">def</span> <span class="nf">get_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_id</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Get the status of a task.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_task_meta</span><span class="p">(</span><span class="n">task_id</span><span class="p">)[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span></div>
+        <span class="sd">"""Get the status of a task."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_task_meta</span><span class="p">(</span><span class="n">task_id</span><span class="p">)[</span><span class="s1">'status'</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="BaseBackend.get_traceback"><a class="viewcode-back" href="../../../internals/reference/celery.backends.base.html#celery.backends.base.BaseBackend.get_traceback">[docs]</a>    <span class="k">def</span> <span class="nf">get_traceback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_id</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Get the traceback for a failed task.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_task_meta</span><span class="p">(</span><span class="n">task_id</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;traceback&#39;</span><span class="p">)</span></div>
+        <span class="sd">"""Get the traceback for a failed task."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_task_meta</span><span class="p">(</span><span class="n">task_id</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'traceback'</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="BaseBackend.get_result"><a class="viewcode-back" href="../../../internals/reference/celery.backends.base.html#celery.backends.base.BaseBackend.get_result">[docs]</a>    <span class="k">def</span> <span class="nf">get_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_id</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Get the result of a task.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_task_meta</span><span class="p">(</span><span class="n">task_id</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;result&#39;</span><span class="p">)</span></div>
+        <span class="sd">"""Get the result of a task."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_task_meta</span><span class="p">(</span><span class="n">task_id</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'result'</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="BaseBackend.get_children"><a class="viewcode-back" href="../../../internals/reference/celery.backends.base.html#celery.backends.base.BaseBackend.get_children">[docs]</a>    <span class="k">def</span> <span class="nf">get_children</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_id</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Get the list of subtasks sent by a task.&quot;&quot;&quot;</span>
+        <span class="sd">"""Get the list of subtasks sent by a task."""</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_task_meta</span><span class="p">(</span><span class="n">task_id</span><span class="p">)[</span><span class="s1">&#39;children&#39;</span><span class="p">]</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_task_meta</span><span class="p">(</span><span class="n">task_id</span><span class="p">)[</span><span class="s1">'children'</span><span class="p">]</span>
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
             <span class="k">pass</span></div>
 
@@ -366,16 +343,16 @@
                 <span class="k">pass</span>
 
         <span class="n">meta</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_task_meta_for</span><span class="p">(</span><span class="n">task_id</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">cache</span> <span class="ow">and</span> <span class="n">meta</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;status&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">states</span><span class="o">.</span><span class="n">SUCCESS</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">cache</span> <span class="ow">and</span> <span class="n">meta</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'status'</span><span class="p">)</span> <span class="o">==</span> <span class="n">states</span><span class="o">.</span><span class="n">SUCCESS</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="n">task_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">meta</span>
         <span class="k">return</span> <span class="n">meta</span></div>
 
 <div class="viewcode-block" id="BaseBackend.reload_task_result"><a class="viewcode-back" href="../../../internals/reference/celery.backends.base.html#celery.backends.base.BaseBackend.reload_task_result">[docs]</a>    <span class="k">def</span> <span class="nf">reload_task_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_id</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Reload task result, even if it has been previously fetched.&quot;&quot;&quot;</span>
+        <span class="sd">"""Reload task result, even if it has been previously fetched."""</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="n">task_id</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_task_meta</span><span class="p">(</span><span class="n">task_id</span><span class="p">,</span> <span class="n">cache</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="BaseBackend.reload_group_result"><a class="viewcode-back" href="../../../internals/reference/celery.backends.base.html#celery.backends.base.BaseBackend.reload_group_result">[docs]</a>    <span class="k">def</span> <span class="nf">reload_group_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group_id</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Reload group result, even if it has been previously fetched.&quot;&quot;&quot;</span>
+        <span class="sd">"""Reload group result, even if it has been previously fetched."""</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="n">group_id</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_group_meta</span><span class="p">(</span><span class="n">group_id</span><span class="p">,</span> <span class="n">cache</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="BaseBackend.get_group_meta"><a class="viewcode-back" href="../../../internals/reference/celery.backends.base.html#celery.backends.base.BaseBackend.get_group_meta">[docs]</a>    <span class="k">def</span> <span class="nf">get_group_meta</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group_id</span><span class="p">,</span> <span class="n">cache</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
@@ -391,13 +368,13 @@
         <span class="k">return</span> <span class="n">meta</span></div>
 
 <div class="viewcode-block" id="BaseBackend.restore_group"><a class="viewcode-back" href="../../../internals/reference/celery.backends.base.html#celery.backends.base.BaseBackend.restore_group">[docs]</a>    <span class="k">def</span> <span class="nf">restore_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group_id</span><span class="p">,</span> <span class="n">cache</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Get the result for a group.&quot;&quot;&quot;</span>
+        <span class="sd">"""Get the result for a group."""</span>
         <span class="n">meta</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_group_meta</span><span class="p">(</span><span class="n">group_id</span><span class="p">,</span> <span class="n">cache</span><span class="o">=</span><span class="n">cache</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">meta</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">meta</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">]</span></div>
+            <span class="k">return</span> <span class="n">meta</span><span class="p">[</span><span class="s1">'result'</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="BaseBackend.save_group"><a class="viewcode-back" href="../../../internals/reference/celery.backends.base.html#celery.backends.base.BaseBackend.save_group">[docs]</a>    <span class="k">def</span> <span class="nf">save_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group_id</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Store the result of an executed group.&quot;&quot;&quot;</span>
+        <span class="sd">"""Store the result of an executed group."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_save_group</span><span class="p">(</span><span class="n">group_id</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="BaseBackend.delete_group"><a class="viewcode-back" href="../../../internals/reference/celery.backends.base.html#celery.backends.base.BaseBackend.delete_group">[docs]</a>    <span class="k">def</span> <span class="nf">delete_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group_id</span><span class="p">):</span>
@@ -405,12 +382,12 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_delete_group</span><span class="p">(</span><span class="n">group_id</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="BaseBackend.cleanup"><a class="viewcode-back" href="../../../internals/reference/celery.backends.base.html#celery.backends.base.BaseBackend.cleanup">[docs]</a>    <span class="k">def</span> <span class="nf">cleanup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Backend cleanup. Is run by</span>
-<span class="sd">        :class:`celery.task.DeleteExpiredTaskMetaTask`.&quot;&quot;&quot;</span>
+        <span class="sd">"""Backend cleanup. Is run by</span>
+<span class="sd">        :class:`celery.task.DeleteExpiredTaskMetaTask`."""</span>
         <span class="k">pass</span></div>
 
 <div class="viewcode-block" id="BaseBackend.process_cleanup"><a class="viewcode-back" href="../../../internals/reference/celery.backends.base.html#celery.backends.base.BaseBackend.process_cleanup">[docs]</a>    <span class="k">def</span> <span class="nf">process_cleanup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Cleanup actions to do at the end of a task worker process.&quot;&quot;&quot;</span>
+        <span class="sd">"""Cleanup actions to do at the end of a task worker process."""</span>
         <span class="k">pass</span></div>
 
 <div class="viewcode-block" id="BaseBackend.on_task_call"><a class="viewcode-back" href="../../../internals/reference/celery.backends.base.html#celery.backends.base.BaseBackend.on_task_call">[docs]</a>    <span class="k">def</span> <span class="nf">on_task_call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">producer</span><span class="p">,</span> <span class="n">task_id</span><span class="p">):</span>
@@ -421,8 +398,8 @@
 
 <div class="viewcode-block" id="BaseBackend.fallback_chord_unlock"><a class="viewcode-back" href="../../../internals/reference/celery.backends.base.html#celery.backends.base.BaseBackend.fallback_chord_unlock">[docs]</a>    <span class="k">def</span> <span class="nf">fallback_chord_unlock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group_id</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
                               <span class="n">countdown</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">as_tuple</span><span class="p">()</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">result</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tasks</span><span class="p">[</span><span class="s1">&#39;celery.chord_unlock&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply_async</span><span class="p">(</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s1">'result'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">as_tuple</span><span class="p">()</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">result</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tasks</span><span class="p">[</span><span class="s1">'celery.chord_unlock'</span><span class="p">]</span><span class="o">.</span><span class="n">apply_async</span><span class="p">(</span>
             <span class="p">(</span><span class="n">group_id</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="p">),</span> <span class="n">kwargs</span><span class="p">,</span> <span class="n">countdown</span><span class="o">=</span><span class="n">countdown</span><span class="p">,</span>
         <span class="p">)</span></div>
 
@@ -432,9 +409,9 @@
         <span class="k">return</span> <span class="n">result</span></div>
 
 <div class="viewcode-block" id="BaseBackend.current_task_children"><a class="viewcode-back" href="../../../internals/reference/celery.backends.base.html#celery.backends.base.BaseBackend.current_task_children">[docs]</a>    <span class="k">def</span> <span class="nf">current_task_children</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="n">request</span> <span class="o">=</span> <span class="n">request</span> <span class="ow">or</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">current_task</span><span class="p">(),</span> <span class="s1">&#39;request&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">request</span> <span class="ow">or</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">current_task</span><span class="p">(),</span> <span class="s1">'request'</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">request</span><span class="p">:</span>
-            <span class="k">return</span> <span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">as_tuple</span><span class="p">()</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;children&#39;</span><span class="p">,</span> <span class="p">[])]</span></div>
+            <span class="k">return</span> <span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">as_tuple</span><span class="p">()</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">'children'</span><span class="p">,</span> <span class="p">[])]</span></div>
 
     <span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(),</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{}):</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">unpickle_backend</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">))</span></div>
@@ -443,13 +420,13 @@
 
 <div class="viewcode-block" id="KeyValueStoreBackend"><a class="viewcode-back" href="../../../internals/reference/celery.backends.base.html#celery.backends.base.KeyValueStoreBackend">[docs]</a><span class="k">class</span> <span class="nc">KeyValueStoreBackend</span><span class="p">(</span><span class="n">BaseBackend</span><span class="p">):</span>
     <span class="n">key_t</span> <span class="o">=</span> <span class="n">ensure_bytes</span>
-    <span class="n">task_keyprefix</span> <span class="o">=</span> <span class="s1">&#39;celery-task-meta-&#39;</span>
-    <span class="n">group_keyprefix</span> <span class="o">=</span> <span class="s1">&#39;celery-taskset-meta-&#39;</span>
-    <span class="n">chord_keyprefix</span> <span class="o">=</span> <span class="s1">&#39;chord-unlock-&#39;</span>
+    <span class="n">task_keyprefix</span> <span class="o">=</span> <span class="s1">'celery-task-meta-'</span>
+    <span class="n">group_keyprefix</span> <span class="o">=</span> <span class="s1">'celery-taskset-meta-'</span>
+    <span class="n">chord_keyprefix</span> <span class="o">=</span> <span class="s1">'chord-unlock-'</span>
     <span class="n">implements_incr</span> <span class="o">=</span> <span class="bp">False</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key_t</span><span class="p">,</span> <span class="s1">&#39;__func__&#39;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key_t</span><span class="p">,</span> <span class="s1">'__func__'</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">key_t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_t</span><span class="o">.</span><span class="n">__func__</span>  <span class="c1"># remove binding</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_encode_prefixes</span><span class="p">()</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">KeyValueStoreBackend</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -462,46 +439,46 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">chord_keyprefix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_t</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">chord_keyprefix</span><span class="p">)</span>
 
 <div class="viewcode-block" id="KeyValueStoreBackend.get"><a class="viewcode-back" href="../../../internals/reference/celery.backends.base.html#celery.backends.base.KeyValueStoreBackend.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;Must implement the get method.&#39;</span><span class="p">)</span></div>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">'Must implement the get method.'</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="KeyValueStoreBackend.mget"><a class="viewcode-back" href="../../../internals/reference/celery.backends.base.html#celery.backends.base.KeyValueStoreBackend.mget">[docs]</a>    <span class="k">def</span> <span class="nf">mget</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keys</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;Does not support get_many&#39;</span><span class="p">)</span></div>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">'Does not support get_many'</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="KeyValueStoreBackend.set"><a class="viewcode-back" href="../../../internals/reference/celery.backends.base.html#celery.backends.base.KeyValueStoreBackend.set">[docs]</a>    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;Must implement the set method.&#39;</span><span class="p">)</span></div>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">'Must implement the set method.'</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="KeyValueStoreBackend.delete"><a class="viewcode-back" href="../../../internals/reference/celery.backends.base.html#celery.backends.base.KeyValueStoreBackend.delete">[docs]</a>    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;Must implement the delete method&#39;</span><span class="p">)</span></div>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">'Must implement the delete method'</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="KeyValueStoreBackend.incr"><a class="viewcode-back" href="../../../internals/reference/celery.backends.base.html#celery.backends.base.KeyValueStoreBackend.incr">[docs]</a>    <span class="k">def</span> <span class="nf">incr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;Does not implement incr&#39;</span><span class="p">)</span></div>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">'Does not implement incr'</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="KeyValueStoreBackend.expire"><a class="viewcode-back" href="../../../internals/reference/celery.backends.base.html#celery.backends.base.KeyValueStoreBackend.expire">[docs]</a>    <span class="k">def</span> <span class="nf">expire</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="KeyValueStoreBackend.get_key_for_task"><a class="viewcode-back" href="../../../internals/reference/celery.backends.base.html#celery.backends.base.KeyValueStoreBackend.get_key_for_task">[docs]</a>    <span class="k">def</span> <span class="nf">get_key_for_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_id</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Get the cache key for a task by id.&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="KeyValueStoreBackend.get_key_for_task"><a class="viewcode-back" href="../../../internals/reference/celery.backends.base.html#celery.backends.base.KeyValueStoreBackend.get_key_for_task">[docs]</a>    <span class="k">def</span> <span class="nf">get_key_for_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_id</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s1">''</span><span class="p">):</span>
+        <span class="sd">"""Get the cache key for a task by id."""</span>
         <span class="n">key_t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_t</span>
-        <span class="k">return</span> <span class="n">key_t</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+        <span class="k">return</span> <span class="n">key_t</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">task_keyprefix</span><span class="p">,</span> <span class="n">key_t</span><span class="p">(</span><span class="n">task_id</span><span class="p">),</span> <span class="n">key_t</span><span class="p">(</span><span class="n">key</span><span class="p">),</span>
         <span class="p">])</span></div>
 
-<div class="viewcode-block" id="KeyValueStoreBackend.get_key_for_group"><a class="viewcode-back" href="../../../internals/reference/celery.backends.base.html#celery.backends.base.KeyValueStoreBackend.get_key_for_group">[docs]</a>    <span class="k">def</span> <span class="nf">get_key_for_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group_id</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Get the cache key for a group by id.&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="KeyValueStoreBackend.get_key_for_group"><a class="viewcode-back" href="../../../internals/reference/celery.backends.base.html#celery.backends.base.KeyValueStoreBackend.get_key_for_group">[docs]</a>    <span class="k">def</span> <span class="nf">get_key_for_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group_id</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s1">''</span><span class="p">):</span>
+        <span class="sd">"""Get the cache key for a group by id."""</span>
         <span class="n">key_t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_t</span>
-        <span class="k">return</span> <span class="n">key_t</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+        <span class="k">return</span> <span class="n">key_t</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">group_keyprefix</span><span class="p">,</span> <span class="n">key_t</span><span class="p">(</span><span class="n">group_id</span><span class="p">),</span> <span class="n">key_t</span><span class="p">(</span><span class="n">key</span><span class="p">),</span>
         <span class="p">])</span></div>
 
-<div class="viewcode-block" id="KeyValueStoreBackend.get_key_for_chord"><a class="viewcode-back" href="../../../internals/reference/celery.backends.base.html#celery.backends.base.KeyValueStoreBackend.get_key_for_chord">[docs]</a>    <span class="k">def</span> <span class="nf">get_key_for_chord</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group_id</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Get the cache key for the chord waiting on group with given id.&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="KeyValueStoreBackend.get_key_for_chord"><a class="viewcode-back" href="../../../internals/reference/celery.backends.base.html#celery.backends.base.KeyValueStoreBackend.get_key_for_chord">[docs]</a>    <span class="k">def</span> <span class="nf">get_key_for_chord</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group_id</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s1">''</span><span class="p">):</span>
+        <span class="sd">"""Get the cache key for the chord waiting on group with given id."""</span>
         <span class="n">key_t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_t</span>
-        <span class="k">return</span> <span class="n">key_t</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+        <span class="k">return</span> <span class="n">key_t</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">chord_keyprefix</span><span class="p">,</span> <span class="n">key_t</span><span class="p">(</span><span class="n">group_id</span><span class="p">),</span> <span class="n">key_t</span><span class="p">(</span><span class="n">key</span><span class="p">),</span>
         <span class="p">])</span></div>
 
     <span class="k">def</span> <span class="nf">_strip_prefix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Takes bytes, emits string.&quot;&quot;&quot;</span>
+        <span class="sd">"""Takes bytes, emits string."""</span>
         <span class="n">key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_t</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">prefix</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">task_keyprefix</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">group_keyprefix</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">prefix</span><span class="p">):</span>
@@ -512,11 +489,11 @@
         <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">values</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
                 <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">decode_result</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">v</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">READY_STATES</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">v</span><span class="p">[</span><span class="s1">'status'</span><span class="p">]</span> <span class="ow">in</span> <span class="n">READY_STATES</span><span class="p">:</span>
                     <span class="k">yield</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span>
 
     <span class="k">def</span> <span class="nf">_mget_to_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">keys</span><span class="p">):</span>
-        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="s1">&#39;items&#39;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="s1">'items'</span><span class="p">):</span>
             <span class="c1"># client returns dict so mapping preserved.</span>
             <span class="k">return</span> <span class="nb">dict</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">_strip_prefix</span><span class="p">(</span><span class="n">k</span><span class="p">),</span> <span class="n">v</span><span class="p">)</span>
                         <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filter_ready</span><span class="p">(</span><span class="n">items</span><span class="p">(</span><span class="n">values</span><span class="p">)))</span>
@@ -537,7 +514,7 @@
             <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
                 <span class="k">pass</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">cached</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">READY_STATES</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">cached</span><span class="p">[</span><span class="s1">'status'</span><span class="p">]</span> <span class="ow">in</span> <span class="n">READY_STATES</span><span class="p">:</span>
                     <span class="k">yield</span> <span class="n">bytes_to_str</span><span class="p">(</span><span class="n">task_id</span><span class="p">),</span> <span class="n">cached</span>
                     <span class="n">cached_ids</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">task_id</span><span class="p">)</span>
 
@@ -552,8 +529,8 @@
             <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">items</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
                 <span class="k">yield</span> <span class="n">bytes_to_str</span><span class="p">(</span><span class="n">key</span><span class="p">),</span> <span class="n">value</span>
             <span class="k">if</span> <span class="n">timeout</span> <span class="ow">and</span> <span class="n">iterations</span> <span class="o">*</span> <span class="n">interval</span> <span class="o">&gt;=</span> <span class="n">timeout</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="n">TimeoutError</span><span class="p">(</span><span class="s1">&#39;Operation timed out ({0})&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">timeout</span><span class="p">))</span>
-            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">interval</span><span class="p">)</span>  <span class="c1"># don&#39;t busy loop.</span>
+                <span class="k">raise</span> <span class="n">TimeoutError</span><span class="p">(</span><span class="s1">'Operation timed out ({0})'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">timeout</span><span class="p">))</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">interval</span><span class="p">)</span>  <span class="c1"># don't busy loop.</span>
             <span class="n">iterations</span> <span class="o">+=</span> <span class="mi">1</span></div>
 
     <span class="k">def</span> <span class="nf">_forget</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_id</span><span class="p">):</span>
@@ -561,36 +538,36 @@
 
     <span class="k">def</span> <span class="nf">_store_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_id</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span>
                       <span class="n">traceback</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="n">meta</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="n">status</span><span class="p">,</span> <span class="s1">&#39;result&#39;</span><span class="p">:</span> <span class="n">result</span><span class="p">,</span> <span class="s1">&#39;traceback&#39;</span><span class="p">:</span> <span class="n">traceback</span><span class="p">,</span>
-                <span class="s1">&#39;children&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_task_children</span><span class="p">(</span><span class="n">request</span><span class="p">)}</span>
+        <span class="n">meta</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'status'</span><span class="p">:</span> <span class="n">status</span><span class="p">,</span> <span class="s1">'result'</span><span class="p">:</span> <span class="n">result</span><span class="p">,</span> <span class="s1">'traceback'</span><span class="p">:</span> <span class="n">traceback</span><span class="p">,</span>
+                <span class="s1">'children'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_task_children</span><span class="p">(</span><span class="n">request</span><span class="p">)}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_key_for_task</span><span class="p">(</span><span class="n">task_id</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">meta</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">result</span>
 
     <span class="k">def</span> <span class="nf">_save_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group_id</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_key_for_group</span><span class="p">(</span><span class="n">group_id</span><span class="p">),</span>
-                 <span class="bp">self</span><span class="o">.</span><span class="n">encode</span><span class="p">({</span><span class="s1">&#39;result&#39;</span><span class="p">:</span> <span class="n">result</span><span class="o">.</span><span class="n">as_tuple</span><span class="p">()}))</span>
+                 <span class="bp">self</span><span class="o">.</span><span class="n">encode</span><span class="p">({</span><span class="s1">'result'</span><span class="p">:</span> <span class="n">result</span><span class="o">.</span><span class="n">as_tuple</span><span class="p">()}))</span>
         <span class="k">return</span> <span class="n">result</span>
 
     <span class="k">def</span> <span class="nf">_delete_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group_id</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_key_for_group</span><span class="p">(</span><span class="n">group_id</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">_get_task_meta_for</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_id</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Get task metadata for a task by id.&quot;&quot;&quot;</span>
+        <span class="sd">"""Get task metadata for a task by id."""</span>
         <span class="n">meta</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_key_for_task</span><span class="p">(</span><span class="n">task_id</span><span class="p">))</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">meta</span><span class="p">:</span>
-            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="n">states</span><span class="o">.</span><span class="n">PENDING</span><span class="p">,</span> <span class="s1">&#39;result&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">}</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s1">'status'</span><span class="p">:</span> <span class="n">states</span><span class="o">.</span><span class="n">PENDING</span><span class="p">,</span> <span class="s1">'result'</span><span class="p">:</span> <span class="bp">None</span><span class="p">}</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">decode_result</span><span class="p">(</span><span class="n">meta</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_restore_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group_id</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Get task metadata for a task by id.&quot;&quot;&quot;</span>
+        <span class="sd">"""Get task metadata for a task by id."""</span>
         <span class="n">meta</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_key_for_group</span><span class="p">(</span><span class="n">group_id</span><span class="p">))</span>
         <span class="c1"># previously this was always pickled, but later this</span>
         <span class="c1"># was extended to support other serializers, so the</span>
         <span class="c1"># structure is kind of weird.</span>
         <span class="k">if</span> <span class="n">meta</span><span class="p">:</span>
             <span class="n">meta</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">meta</span><span class="p">)</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="n">meta</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">]</span>
-            <span class="n">meta</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result_from_tuple</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">meta</span><span class="p">[</span><span class="s1">'result'</span><span class="p">]</span>
+            <span class="n">meta</span><span class="p">[</span><span class="s1">'result'</span><span class="p">]</span> <span class="o">=</span> <span class="n">result_from_tuple</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">meta</span>
 
     <span class="k">def</span> <span class="nf">_apply_chord_incr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">partial_args</span><span class="p">,</span> <span class="n">group_id</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span>
@@ -612,26 +589,26 @@
             <span class="n">deps</span> <span class="o">=</span> <span class="n">GroupResult</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span><span class="n">gid</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">task</span><span class="o">.</span><span class="n">backend</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
             <span class="n">callback</span> <span class="o">=</span> <span class="n">maybe_signature</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">chord</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">)</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Chord </span><span class="si">%r</span><span class="s1"> raised: </span><span class="si">%r</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">gid</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">'Chord </span><span class="si">%r</span><span class="s1"> raised: </span><span class="si">%r</span><span class="s1">'</span><span class="p">,</span> <span class="n">gid</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">chord_error_from_stack</span><span class="p">(</span>
                 <span class="n">callback</span><span class="p">,</span>
-                <span class="n">ChordError</span><span class="p">(</span><span class="s1">&#39;Cannot restore group: {0!r}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">exc</span><span class="p">)),</span>
+                <span class="n">ChordError</span><span class="p">(</span><span class="s1">'Cannot restore group: {0!r}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">exc</span><span class="p">)),</span>
             <span class="p">)</span>
         <span class="k">if</span> <span class="n">deps</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">gid</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
                 <span class="n">callback</span> <span class="o">=</span> <span class="n">maybe_signature</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">chord</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">)</span>
-                <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Chord callback </span><span class="si">%r</span><span class="s1"> raised: </span><span class="si">%r</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">gid</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">'Chord callback </span><span class="si">%r</span><span class="s1"> raised: </span><span class="si">%r</span><span class="s1">'</span><span class="p">,</span> <span class="n">gid</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span>
                              <span class="n">exc_info</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">chord_error_from_stack</span><span class="p">(</span>
                     <span class="n">callback</span><span class="p">,</span>
-                    <span class="n">ChordError</span><span class="p">(</span><span class="s1">&#39;GroupResult {0} no longer exists&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">gid</span><span class="p">)),</span>
+                    <span class="n">ChordError</span><span class="p">(</span><span class="s1">'GroupResult {0} no longer exists'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">gid</span><span class="p">)),</span>
                 <span class="p">)</span>
         <span class="n">val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">incr</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
         <span class="n">size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">deps</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">val</span> <span class="o">&gt;</span> <span class="n">size</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Chord counter incremented too many times for </span><span class="si">%r</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">'Chord counter incremented too many times for </span><span class="si">%r</span><span class="s1">'</span><span class="p">,</span>
                            <span class="n">gid</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">val</span> <span class="o">==</span> <span class="n">size</span><span class="p">:</span>
             <span class="n">callback</span> <span class="o">=</span> <span class="n">maybe_signature</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">chord</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">)</span>
@@ -642,22 +619,22 @@
             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
                 <span class="k">try</span><span class="p">:</span>
                     <span class="n">culprit</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">deps</span><span class="o">.</span><span class="n">_failed_join_report</span><span class="p">())</span>
-                    <span class="n">reason</span> <span class="o">=</span> <span class="s1">&#39;Dependency {0.id} raised {1!r}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">reason</span> <span class="o">=</span> <span class="s1">'Dependency {0.id} raised {1!r}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                         <span class="n">culprit</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span>
                     <span class="p">)</span>
                 <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
                     <span class="n">reason</span> <span class="o">=</span> <span class="nb">repr</span><span class="p">(</span><span class="n">exc</span><span class="p">)</span>
 
-                <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Chord </span><span class="si">%r</span><span class="s1"> raised: </span><span class="si">%r</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">gid</span><span class="p">,</span> <span class="n">reason</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">'Chord </span><span class="si">%r</span><span class="s1"> raised: </span><span class="si">%r</span><span class="s1">'</span><span class="p">,</span> <span class="n">gid</span><span class="p">,</span> <span class="n">reason</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">chord_error_from_stack</span><span class="p">(</span><span class="n">callback</span><span class="p">,</span> <span class="n">ChordError</span><span class="p">(</span><span class="n">reason</span><span class="p">))</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">try</span><span class="p">:</span>
                     <span class="n">callback</span><span class="o">.</span><span class="n">delay</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
                 <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-                    <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Chord </span><span class="si">%r</span><span class="s1"> raised: </span><span class="si">%r</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">gid</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">'Chord </span><span class="si">%r</span><span class="s1"> raised: </span><span class="si">%r</span><span class="s1">'</span><span class="p">,</span> <span class="n">gid</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">chord_error_from_stack</span><span class="p">(</span>
                         <span class="n">callback</span><span class="p">,</span>
-                        <span class="n">ChordError</span><span class="p">(</span><span class="s1">&#39;Callback error: {0!r}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">exc</span><span class="p">)),</span>
+                        <span class="n">ChordError</span><span class="p">(</span><span class="s1">'Callback error: {0!r}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">exc</span><span class="p">)),</span>
                     <span class="p">)</span>
             <span class="k">finally</span><span class="p">:</span>
                 <span class="n">deps</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
@@ -674,36 +651,24 @@
 
     <span class="k">def</span> <span class="nf">_is_disabled</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
-            <span class="s1">&#39;No result backend configured.  &#39;</span>
-            <span class="s1">&#39;Please see the documentation for more information.&#39;</span><span class="p">)</span>
+            <span class="s1">'No result backend configured.  '</span>
+            <span class="s1">'Please see the documentation for more information.'</span><span class="p">)</span>
 
 <div class="viewcode-block" id="DisabledBackend.as_uri"><a class="viewcode-back" href="../../../internals/reference/celery.backends.base.html#celery.backends.base.DisabledBackend.as_uri">[docs]</a>    <span class="k">def</span> <span class="nf">as_uri</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s1">&#39;disabled://&#39;</span></div>
+        <span class="k">return</span> <span class="s1">'disabled://'</span></div>
 
     <span class="n">get_state</span> <span class="o">=</span> <span class="n">get_status</span> <span class="o">=</span> <span class="n">get_result</span> <span class="o">=</span> <span class="n">get_traceback</span> <span class="o">=</span> <span class="n">_is_disabled</span>
     <span class="n">wait_for</span> <span class="o">=</span> <span class="n">get_many</span> <span class="o">=</span> <span class="n">_is_disabled</span></div>
 </pre></div>
+</div>
+</div>
+</div>
 
-          </div>
-        </div>
-      </div>
+<div class="clearer"></div>
+</div>
+
+<div class="footer" role="contentinfo">
+        © <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="../backends.html" >celery.backends</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &copy; <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
-    </div>
-  </body>
+</body>
 </html>

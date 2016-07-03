@@ -1,17 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>celery.concurrency.threads &mdash; Celery 3.1.23 documentation</title>
-    
-    <link rel="stylesheet" href="../../../_static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>celery.concurrency.threads — Celery 3.1.23 documentation</title>
+<link href="../../../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
         VERSION:     '3.1.23',
@@ -20,60 +16,41 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="copyright" title="Copyright" href="../../../copyright.html" />
-    <link rel="top" title="Celery 3.1.23 documentation" href="../../../index.html" />
-    <link rel="up" title="celery.concurrency" href="../concurrency.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="../concurrency.html" accesskey="U">celery.concurrency</a> &raquo;</li> 
-      </ul>
-    </div>  
+<script src="../../../_static/jquery.js" type="text/javascript"></script>
+<script src="../../../_static/underscore.js" type="text/javascript"></script>
+<script src="../../../_static/doctools.js" type="text/javascript"></script>
+<link href="../../../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../../../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="../concurrency.html" rel="up" title="celery.concurrency"/>
+</head>
+<body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
 <div class="deck">
-
-    
-        <p>
+<p>
         This document describes the current stable version of Celery (3.1). For development docs,
         <a href="http://docs.celeryproject.org/en/master/_modules/celery/concurrency/threads.html">go here</a>.
         </p>
-    
-
 </div>
-    <h1>Source code for celery.concurrency.threads</h1><div class="highlight"><pre>
+<h1>Source code for celery.concurrency.threads</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="sd">    celery.concurrency.threads</span>
 <span class="sd">    ~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
 
 <span class="sd">    Pool implementation using threads.</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
 
 <span class="kn">from</span> <span class="nn">celery.five</span> <span class="kn">import</span> <span class="n">UserDict</span>
 
 <span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">apply_target</span><span class="p">,</span> <span class="n">BasePool</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;TaskPool&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'TaskPool'</span><span class="p">]</span>
 
 
 <span class="k">class</span> <span class="nc">NullDict</span><span class="p">(</span><span class="n">UserDict</span><span class="p">):</span>
@@ -89,7 +66,7 @@
             <span class="kn">import</span> <span class="nn">threadpool</span>
         <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
-                <span class="s1">&#39;The threaded pool requires the threadpool module.&#39;</span><span class="p">)</span>
+                <span class="s1">'The threaded pool requires the threadpool module.'</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">WorkRequest</span> <span class="o">=</span> <span class="n">threadpool</span><span class="o">.</span><span class="n">WorkRequest</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ThreadPool</span> <span class="o">=</span> <span class="n">threadpool</span><span class="o">.</span><span class="n">ThreadPool</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">TaskPool</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -97,7 +74,7 @@
 <div class="viewcode-block" id="TaskPool.on_start"><a class="viewcode-back" href="../../../internals/reference/celery.concurrency.threads.html#celery.concurrency.threads.TaskPool.on_start">[docs]</a>    <span class="k">def</span> <span class="nf">on_start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_pool</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ThreadPool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">limit</span><span class="p">)</span>
         <span class="c1"># threadpool stores all work requests until they are processed</span>
-        <span class="c1"># we don&#39;t need this dict, and it occupies way too much memory.</span>
+        <span class="c1"># we don't need this dict, and it occupies way too much memory.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_pool</span><span class="o">.</span><span class="n">workRequests</span> <span class="o">=</span> <span class="n">NullDict</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_quick_put</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pool</span><span class="o">.</span><span class="n">putRequest</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_quick_clear</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pool</span><span class="o">.</span><span class="n">_results_queue</span><span class="o">.</span><span class="n">queue</span><span class="o">.</span><span class="n">clear</span></div>
@@ -112,32 +89,20 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_quick_put</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
         <span class="c1"># threadpool also has callback support,</span>
         <span class="c1"># but for some reason the callback is not triggered</span>
-        <span class="c1"># before you&#39;ve collected the results.</span>
-        <span class="c1"># Clear the results (if any), so it doesn&#39;t grow too large.</span>
+        <span class="c1"># before you've collected the results.</span>
+        <span class="c1"># Clear the results (if any), so it doesn't grow too large.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_quick_clear</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">req</span></div></div>
 </pre></div>
+</div>
+</div>
+</div>
 
-          </div>
-        </div>
-      </div>
+<div class="clearer"></div>
+</div>
+
+<div class="footer" role="contentinfo">
+        © <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="../concurrency.html" >celery.concurrency</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &copy; <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
-    </div>
-  </body>
+</body>
 </html>

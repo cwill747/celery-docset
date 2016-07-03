@@ -1,17 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>kombu.utils.compat &mdash; Celery 3.1.23 documentation</title>
-    
-    <link rel="stylesheet" href="../../../_static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>kombu.utils.compat — Celery 3.1.23 documentation</title>
+<link href="../../../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
         VERSION:     '3.1.23',
@@ -20,79 +16,60 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="copyright" title="Copyright" href="../../../copyright.html" />
-    <link rel="top" title="Celery 3.1.23 documentation" href="../../../index.html" />
-    <link rel="up" title="kombu.utils" href="../utils.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="../utils.html" accesskey="U">kombu.utils</a> &raquo;</li> 
-      </ul>
-    </div>  
+<script src="../../../_static/jquery.js" type="text/javascript"></script>
+<script src="../../../_static/underscore.js" type="text/javascript"></script>
+<script src="../../../_static/doctools.js" type="text/javascript"></script>
+<link href="../../../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../../../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="../utils.html" rel="up" title="kombu.utils"/>
+</head>
+<body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
 <div class="deck">
-
-    
-        <p>
+<p>
         This document describes the current stable version of Celery (3.1). For development docs,
         <a href="http://docs.celeryproject.org/en/master/_modules/kombu/utils/compat.html">go here</a>.
         </p>
-    
-
 </div>
-    <h1>Source code for kombu.utils.compat</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;</span>
+<h1>Source code for kombu.utils.compat</h1><div class="highlight"><pre>
+<span></span><span class="sd">"""</span>
 <span class="sd">kombu.utils.compat</span>
 <span class="sd">==================</span>
 
 <span class="sd">Helps compatibility with older Python versions.</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
 
 
 <span class="c1"># ############# timedelta_seconds() -&gt; delta.total_seconds ###################</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span>
 
-<span class="n">HAVE_TIMEDELTA_TOTAL_SECONDS</span> <span class="o">=</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">timedelta</span><span class="p">,</span> <span class="s1">&#39;total_seconds&#39;</span><span class="p">)</span>
+<span class="n">HAVE_TIMEDELTA_TOTAL_SECONDS</span> <span class="o">=</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">timedelta</span><span class="p">,</span> <span class="s1">'total_seconds'</span><span class="p">)</span>
 
 
 <span class="k">if</span> <span class="n">HAVE_TIMEDELTA_TOTAL_SECONDS</span><span class="p">:</span>   <span class="c1"># pragma: no cover</span>
 
     <span class="k">def</span> <span class="nf">timedelta_seconds</span><span class="p">(</span><span class="n">delta</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Convert :class:`datetime.timedelta` to seconds.</span>
+        <span class="sd">"""Convert :class:`datetime.timedelta` to seconds.</span>
 
-<span class="sd">        Doesn&#39;t account for negative values.</span>
+<span class="sd">        Doesn't account for negative values.</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">delta</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">(),</span> <span class="mi">0</span><span class="p">)</span>
 
 <span class="k">else</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
 
 <div class="viewcode-block" id="timedelta_seconds"><a class="viewcode-back" href="../../../internals/reference/celery.utils.timeutils.html#celery.utils.timeutils.timedelta_seconds">[docs]</a>    <span class="k">def</span> <span class="nf">timedelta_seconds</span><span class="p">(</span><span class="n">delta</span><span class="p">):</span>  <span class="c1"># noqa</span>
-        <span class="sd">&quot;&quot;&quot;Convert :class:`datetime.timedelta` to seconds.</span>
+        <span class="sd">"""Convert :class:`datetime.timedelta` to seconds.</span>
 
-<span class="sd">        Doesn&#39;t account for negative values.</span>
+<span class="sd">        Doesn't account for negative values.</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">delta</span><span class="o">.</span><span class="n">days</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span> <span class="mi">0</span>
         <span class="k">return</span> <span class="n">delta</span><span class="o">.</span><span class="n">days</span> <span class="o">*</span> <span class="mi">86400</span> <span class="o">+</span> <span class="n">delta</span><span class="o">.</span><span class="n">seconds</span> <span class="o">+</span> <span class="p">(</span><span class="n">delta</span><span class="o">.</span><span class="n">microseconds</span> <span class="o">/</span> <span class="mf">10e5</span><span class="p">)</span></div>
@@ -101,8 +78,8 @@
 
 
 <span class="k">def</span> <span class="nf">get_errno</span><span class="p">(</span><span class="n">exc</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;:exc:`socket.error` and :exc:`IOError` first got</span>
-<span class="sd">    the ``.errno`` attribute in Py2.7&quot;&quot;&quot;</span>
+    <span class="sd">""":exc:`socket.error` and :exc:`IOError` first got</span>
+<span class="sd">    the ``.errno`` attribute in Py2.7"""</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">exc</span><span class="o">.</span><span class="n">errno</span>
     <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
@@ -120,27 +97,15 @@
 <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
     <span class="kn">from</span> <span class="nn">ordereddict</span> <span class="kn">import</span> <span class="n">OrderedDict</span>  <span class="c1"># noqa</span>
 </pre></div>
+</div>
+</div>
+</div>
 
-          </div>
-        </div>
-      </div>
+<div class="clearer"></div>
+</div>
+
+<div class="footer" role="contentinfo">
+        © <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="../utils.html" >kombu.utils</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &copy; <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
-    </div>
-  </body>
+</body>
 </html>

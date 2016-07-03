@@ -2,7 +2,7 @@
 
 set -e
 
-BUILD_DIR=$(pwd)
+    BUILD_DIR=$(pwd)
 
 # #
 # Setup
@@ -30,8 +30,11 @@ tar xf celery.zip -C celery --strip-components 1
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 virtualenv dash
 source dash/bin/activate
+pip install -r celery/requirements/default.txt
 pip install -r celery/requirements/pkgutils.txt
-
+pip install -r celery/requirements/docs.txt
+pip install doc2dash
+pip install beautifulsoup4
 export SPHINX_BUILD="${BUILD_DIR}/tmp/dash/bin/sphinx-build"
 cd celery/docs && make html
 
@@ -42,7 +45,7 @@ cd ${BUILD_DIR}
 
 echo -e "Generating docset with doc2dash..."
 
-doc2dash -f --name celery --icon "${BUILD_DIR}/resources/icon.png" --online-redirect-url "http://docs.celeryproject.org/en/latest/" -j --destination "${BUILD_DIR}/dist" "${BUILD_DIR}/tmp/celery/docs/.build/html"
+${BUILD_DIR}/tmp/dash/bin/doc2dash -f --name celery --icon "${BUILD_DIR}/resources/icon.png" --online-redirect-url "http://docs.celeryproject.org/en/latest/" -j --destination "${BUILD_DIR}/dist" "${BUILD_DIR}/tmp/celery/docs/.build/html"
 
 
 ## #
@@ -68,8 +71,10 @@ CELERY_DOCS_ROOT="${BUILD_DIR}/dist/celery.docset/Contents/Resources/Documents"
 
 # remove the sidebar from all documentation files
 
-find $CELERY_DOCS_ROOT -type f -name "*.html" -print0 | xargs -0 sed -i ".bkp" '/<div.*class="sphinxsidebar"/,/<div class="clearer"><\/div>/d' $CELERY_DOCS_ROOT/*.html
-find $CELERY_DOCS_ROOT -type f -name "*.html" -print0 | xargs -0 sed -i ".bkp" 's/\(<div.*class="related"\).*\(<div.*class="footer"\)/\2/' $CELERY_DOCS_ROOT/*.html
+#find $CELERY_DOCS_ROOT -type f -name "*.html" -print0 | xargs -0 sed -i ".bkp" '/<div.*class="sphinxsidebar"/,/<div class="clearer"><\/div>/d' $CELERY_DOCS_ROOT/*.html
+#find $CELERY_DOCS_ROOT -type f -name "*.html" -print0 | xargs -0 sed -i ".bkp" 's/<div[^>]*class="related"[^>]*>//g' $CELERY_DOCS_ROOT/*.html
+
+find $CELERY_DOCS_ROOT -type f -name "*.html" -exec ${BUILD_DIR}/parse_docset.py {} \;
 
 cat >> "${CELERY_DOCS_ROOT}/_static/celery.css" << EOF
 div.bodywrapper {

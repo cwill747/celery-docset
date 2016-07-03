@@ -1,17 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Using IronMQ &mdash; Celery 3.1.23 documentation</title>
-    
-    <link rel="stylesheet" href="../../_static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>Using IronMQ — Celery 3.1.23 documentation</title>
+<link href="../../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
         VERSION:     '3.1.23',
@@ -20,57 +16,32 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="copyright" title="Copyright" href="../../copyright.html" />
-    <link rel="top" title="Celery 3.1.23 documentation" href="../../index.html" />
-    <link rel="up" title="Brokers" href="index.html" />
-    <link rel="next" title="First Steps with Celery" href="../first-steps-with-celery.html" />
-    <link rel="prev" title="Using Beanstalk" href="beanstalk.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="../first-steps-with-celery.html" title="First Steps with Celery"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="beanstalk.html" title="Using Beanstalk"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" >Getting Started</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U">Brokers</a> &raquo;</li> 
-      </ul>
-    </div>  
+<script src="../../_static/jquery.js" type="text/javascript"></script>
+<script src="../../_static/underscore.js" type="text/javascript"></script>
+<script src="../../_static/doctools.js" type="text/javascript"></script>
+<link href="../../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="index.html" rel="up" title="Brokers"/>
+<link href="../first-steps-with-celery.html" rel="next" title="First Steps with Celery"/>
+<link href="beanstalk.html" rel="prev" title="Using Beanstalk"/>
+</head>
+<body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
 <div class="deck">
-
-    
-        <p>
+<p>
         This document describes the current stable version of Celery (3.1). For development docs,
         <a href="http://docs.celeryproject.org/en/master/getting-started/brokers/ironmq.html">go here</a>.
         </p>
-    
-
 </div>
-    <div class="section" id="using-ironmq">
+<div class="section" id="using-ironmq">
 <span id="broker-ironmq"></span><h1>Using IronMQ<a class="headerlink" href="#using-ironmq" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="installation">
 <span id="broker-ironmq-installation"></span><h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
-<p>For IronMQ support, you&#8217;ll need the [iron_celery](<a class="reference external" href="http://github.com/iron-io/iron_celery">http://github.com/iron-io/iron_celery</a>) library:</p>
+<p>For IronMQ support, you’ll need the [iron_celery](<a class="reference external" href="http://github.com/iron-io/iron_celery">http://github.com/iron-io/iron_celery</a>) library:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ pip install iron_celery
 </pre></div>
 </div>
@@ -78,22 +49,22 @@
 </div>
 <div class="section" id="configuration">
 <span id="broker-ironmq-configuration"></span><h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
-<p>First, you&#8217;ll need to import the iron_celery library right after you import Celery, for example:</p>
+<p>First, you’ll need to import the iron_celery library right after you import Celery, for example:</p>
 <div class="highlight-python3"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">celery</span> <span class="k">import</span> <span class="n">Celery</span>
 <span class="kn">import</span> <span class="nn">iron_celery</span>
 
-<span class="n">app</span> <span class="o">=</span> <span class="n">Celery</span><span class="p">(</span><span class="s1">&#39;mytasks&#39;</span><span class="p">,</span> <span class="n">broker</span><span class="o">=</span><span class="s1">&#39;ironmq://&#39;</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s1">&#39;ironcache://&#39;</span><span class="p">)</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">Celery</span><span class="p">(</span><span class="s1">'mytasks'</span><span class="p">,</span> <span class="n">broker</span><span class="o">=</span><span class="s1">'ironmq://'</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s1">'ironcache://'</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>You have to specify IronMQ in the broker URL:</p>
-<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">BROKER_URL</span> <span class="o">=</span> <span class="s1">&#39;ironmq://ABCDEFGHIJKLMNOPQRST:ZYXK7NiynGlTogH8Nj+P9nlE73sq3@&#39;</span>
+<div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">BROKER_URL</span> <span class="o">=</span> <span class="s1">'ironmq://ABCDEFGHIJKLMNOPQRST:ZYXK7NiynGlTogH8Nj+P9nlE73sq3@'</span>
 </pre></div>
 </div>
 <p>where the URL format is:</p>
 <div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">ironmq</span><span class="p">:</span><span class="o">//</span><span class="n">project_id</span><span class="p">:</span><span class="n">token</span><span class="o">@</span>
 </pre></div>
 </div>
-<p>you must <em>remember to include the &#8220;&#64;&#8221; at the end</em>.</p>
+<p>you must <em>remember to include the “@” at the end</em>.</p>
 <p>The login credentials can also be set using the environment variables
 <span class="target" id="index-0"></span><code class="xref std std-envvar docutils literal"><span class="pre">IRON_TOKEN</span></code> and <span class="target" id="index-1"></span><code class="xref std std-envvar docutils literal"><span class="pre">IRON_PROJECT_ID</span></code>, which are set automatically if you use the IronMQ Heroku add-on.
 And in this case the broker url may only be:</p>
@@ -115,7 +86,7 @@ as the broker URL, but changing the start to <code class="docutils literal"><spa
 <div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">ironcache</span><span class="p">::</span><span class="o">//</span><span class="n">project_id</span><span class="p">:</span><span class="n">token</span><span class="o">@</span>
 </pre></div>
 </div>
-<p>This will default to a cache named &#8220;Celery&#8221;, if you want to change that:</p>
+<p>This will default to a cache named “Celery”, if you want to change that:</p>
 <div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">ironcache</span><span class="p">::</span><span class="o">//</span><span class="n">project_id</span><span class="p">:</span><span class="n">token</span><span class="o">@/</span><span class="n">awesomecache</span>
 </pre></div>
 </div>
@@ -125,34 +96,15 @@ as the broker URL, but changing the start to <code class="docutils literal"><spa
 <p>You can find more information in the [iron_celery README](<a class="reference external" href="http://github.com/iron-io/iron_celery">http://github.com/iron-io/iron_celery</a>).</p>
 </div>
 </div>
+</div>
+</div>
+</div>
 
+<div class="clearer"></div>
+</div>
 
-          </div>
-        </div>
-      </div>
+<div class="footer" role="contentinfo">
+        © <a href="../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="../first-steps-with-celery.html" title="First Steps with Celery"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="beanstalk.html" title="Using Beanstalk"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" >Getting Started</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="index.html" >Brokers</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &copy; <a href="../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
-    </div>
-  </body>
+</body>
 </html>

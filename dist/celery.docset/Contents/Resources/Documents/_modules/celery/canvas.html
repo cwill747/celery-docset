@@ -1,17 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>celery.canvas &mdash; Celery 3.1.23 documentation</title>
-    
-    <link rel="stylesheet" href="../../_static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>celery.canvas — Celery 3.1.23 documentation</title>
+<link href="../../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
         VERSION:     '3.1.23',
@@ -20,46 +16,28 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="copyright" title="Copyright" href="../../copyright.html" />
-    <link rel="top" title="Celery 3.1.23 documentation" href="../../index.html" />
-    <link rel="up" title="Module code" href="../index.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
-      </ul>
-    </div>  
+<script src="../../_static/jquery.js" type="text/javascript"></script>
+<script src="../../_static/underscore.js" type="text/javascript"></script>
+<script src="../../_static/doctools.js" type="text/javascript"></script>
+<link href="../../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="../index.html" rel="up" title="Module code"/>
+</head>
+<body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
 <div class="deck">
-
-    
-        <p>
+<p>
         This document describes the current stable version of Celery (3.1). For development docs,
         <a href="http://docs.celeryproject.org/en/master/_modules/celery/canvas.html">go here</a>.
         </p>
-    
-
 </div>
-    <h1>Source code for celery.canvas</h1><div class="highlight"><pre>
+<h1>Source code for celery.canvas</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="sd">    celery.canvas</span>
 <span class="sd">    ~~~~~~~~~~~~~</span>
 
@@ -69,7 +47,7 @@
 <span class="sd">    You should import these from :mod:`celery` and not this module.</span>
 
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
 
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">MutableSequence</span>
@@ -87,12 +65,12 @@
 <span class="p">)</span>
 <span class="kn">from</span> <span class="nn">celery.utils.text</span> <span class="kn">import</span> <span class="n">truncate</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Signature&#39;</span><span class="p">,</span> <span class="s1">&#39;chain&#39;</span><span class="p">,</span> <span class="s1">&#39;xmap&#39;</span><span class="p">,</span> <span class="s1">&#39;xstarmap&#39;</span><span class="p">,</span> <span class="s1">&#39;chunks&#39;</span><span class="p">,</span>
-           <span class="s1">&#39;group&#39;</span><span class="p">,</span> <span class="s1">&#39;chord&#39;</span><span class="p">,</span> <span class="s1">&#39;signature&#39;</span><span class="p">,</span> <span class="s1">&#39;maybe_signature&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Signature'</span><span class="p">,</span> <span class="s1">'chain'</span><span class="p">,</span> <span class="s1">'xmap'</span><span class="p">,</span> <span class="s1">'xstarmap'</span><span class="p">,</span> <span class="s1">'chunks'</span><span class="p">,</span>
+           <span class="s1">'group'</span><span class="p">,</span> <span class="s1">'chord'</span><span class="p">,</span> <span class="s1">'signature'</span><span class="p">,</span> <span class="s1">'maybe_signature'</span><span class="p">]</span>
 
 
 <span class="k">class</span> <span class="nc">_getitem_property</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Attribute -&gt; dict key descriptor.</span>
+    <span class="sd">"""Attribute -&gt; dict key descriptor.</span>
 
 <span class="sd">    The target object must support ``__getitem__``,</span>
 <span class="sd">    and optionally ``__setitem__``.</span>
@@ -104,8 +82,8 @@
 <span class="sd">        &gt;&gt;&gt; class Me(dict):</span>
 <span class="sd">        ...     deep = defaultdict(dict)</span>
 <span class="sd">        ...</span>
-<span class="sd">        ...     foo = _getitem_property(&#39;foo&#39;)</span>
-<span class="sd">        ...     deep_thing = _getitem_property(&#39;deep.thing&#39;)</span>
+<span class="sd">        ...     foo = _getitem_property('foo')</span>
+<span class="sd">        ...     deep_thing = _getitem_property('deep.thing')</span>
 
 
 <span class="sd">        &gt;&gt;&gt; me = Me()</span>
@@ -115,20 +93,20 @@
 <span class="sd">        &gt;&gt;&gt; me.foo = 10</span>
 <span class="sd">        &gt;&gt;&gt; me.foo</span>
 <span class="sd">        10</span>
-<span class="sd">        &gt;&gt;&gt; me[&#39;foo&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; me['foo']</span>
 <span class="sd">        10</span>
 
 <span class="sd">        &gt;&gt;&gt; me.deep_thing = 42</span>
 <span class="sd">        &gt;&gt;&gt; me.deep_thing</span>
 <span class="sd">        42</span>
 <span class="sd">        &gt;&gt;&gt; me.deep</span>
-<span class="sd">        defaultdict(&lt;type &#39;dict&#39;&gt;, {&#39;thing&#39;: 42})</span>
+<span class="sd">        defaultdict(&lt;type 'dict'&gt;, {'thing': 42})</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keypath</span><span class="p">):</span>
-        <span class="n">path</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">keypath</span><span class="o">.</span><span class="n">rpartition</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">path</span> <span class="k">else</span> <span class="bp">None</span>
+        <span class="n">path</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">keypath</span><span class="o">.</span><span class="n">rpartition</span><span class="p">(</span><span class="s1">'.'</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">'.'</span><span class="p">)</span> <span class="k">if</span> <span class="n">path</span> <span class="k">else</span> <span class="bp">None</span>
 
     <span class="k">def</span> <span class="nf">_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">(</span><span class="nb">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">d</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="p">[</span><span class="n">obj</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span>
@@ -144,7 +122,7 @@
 
 
 <span class="k">def</span> <span class="nf">maybe_unroll_group</span><span class="p">(</span><span class="n">g</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Unroll group with only one member.&quot;&quot;&quot;</span>
+    <span class="sd">"""Unroll group with only one member."""</span>
     <span class="c1"># Issue #1656</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">tasks</span><span class="p">)</span>
@@ -160,13 +138,13 @@
 
 
 <span class="k">def</span> <span class="nf">_upgrade</span><span class="p">(</span><span class="n">fields</span><span class="p">,</span> <span class="n">sig</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Used by custom signatures in .from_dict, to keep common fields.&quot;&quot;&quot;</span>
-    <span class="n">sig</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">chord_size</span><span class="o">=</span><span class="n">fields</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;chord_size&#39;</span><span class="p">))</span>
+    <span class="sd">"""Used by custom signatures in .from_dict, to keep common fields."""</span>
+    <span class="n">sig</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">chord_size</span><span class="o">=</span><span class="n">fields</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'chord_size'</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">sig</span>
 
 
 <span class="k">class</span> <span class="nc">Signature</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Class that wraps the arguments and execution options</span>
+    <span class="sd">"""Class that wraps the arguments and execution options</span>
 <span class="sd">    for a single task invocation.</span>
 
 <span class="sd">    Used as the parts in a :class:`group` and other constructs,</span>
@@ -182,11 +160,11 @@
 <span class="sd">    arguments will be ignored and the values in the dict will be used</span>
 <span class="sd">    instead.</span>
 
-<span class="sd">        &gt;&gt;&gt; s = signature(&#39;tasks.add&#39;, args=(2, 2))</span>
+<span class="sd">        &gt;&gt;&gt; s = signature('tasks.add', args=(2, 2))</span>
 <span class="sd">        &gt;&gt;&gt; signature(s)</span>
-<span class="sd">        {&#39;task&#39;: &#39;tasks.add&#39;, args=(2, 2), kwargs={}, options={}}</span>
+<span class="sd">        {'task': 'tasks.add', args=(2, 2), kwargs={}, options={}}</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">TYPES</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="n">_app</span> <span class="o">=</span> <span class="n">_type</span> <span class="o">=</span> <span class="bp">None</span>
 
@@ -197,7 +175,7 @@
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="n">typ</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;subtask_type&#39;</span><span class="p">)</span>
+        <span class="n">typ</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'subtask_type'</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">typ</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">TYPES</span><span class="p">[</span><span class="n">typ</span><span class="p">]</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">kwdict</span><span class="p">(</span><span class="n">d</span><span class="p">),</span> <span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">Signature</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">)</span>
@@ -235,7 +213,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply_async</span><span class="p">(</span><span class="n">partial_args</span><span class="p">,</span> <span class="n">partial_kwargs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(),</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{},</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Apply this task locally.&quot;&quot;&quot;</span>
+        <span class="sd">"""Apply this task locally."""</span>
         <span class="c1"># For callbacks: extra args are prepended to the stored args.</span>
         <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">,</span> <span class="n">options</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_merge</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
@@ -254,11 +232,11 @@
             <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">,</span> <span class="n">opts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_merge</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">,</span> <span class="n">opts</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">,</span> <span class="n">opts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span>
-        <span class="n">s</span> <span class="o">=</span> <span class="n">Signature</span><span class="o">.</span><span class="n">from_dict</span><span class="p">({</span><span class="s1">&#39;task&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">task</span><span class="p">,</span> <span class="s1">&#39;args&#39;</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">args</span><span class="p">),</span>
-                                 <span class="s1">&#39;kwargs&#39;</span><span class="p">:</span> <span class="n">kwargs</span><span class="p">,</span> <span class="s1">&#39;options&#39;</span><span class="p">:</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">opts</span><span class="p">),</span>
-                                 <span class="s1">&#39;subtask_type&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">subtask_type</span><span class="p">,</span>
-                                 <span class="s1">&#39;chord_size&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">chord_size</span><span class="p">,</span>
-                                 <span class="s1">&#39;immutable&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">immutable</span><span class="p">},</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">Signature</span><span class="o">.</span><span class="n">from_dict</span><span class="p">({</span><span class="s1">'task'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">task</span><span class="p">,</span> <span class="s1">'args'</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">args</span><span class="p">),</span>
+                                 <span class="s1">'kwargs'</span><span class="p">:</span> <span class="n">kwargs</span><span class="p">,</span> <span class="s1">'options'</span><span class="p">:</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">opts</span><span class="p">),</span>
+                                 <span class="s1">'subtask_type'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">subtask_type</span><span class="p">,</span>
+                                 <span class="s1">'chord_size'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">chord_size</span><span class="p">,</span>
+                                 <span class="s1">'immutable'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">immutable</span><span class="p">},</span>
                                 <span class="n">app</span><span class="o">=</span><span class="n">app</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_app</span><span class="p">)</span>
         <span class="n">s</span><span class="o">.</span><span class="n">_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span>
         <span class="k">return</span> <span class="n">s</span>
@@ -267,15 +245,15 @@
     <span class="k">def</span> <span class="nf">freeze</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_id</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">group_id</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">chord</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="n">opts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">tid</span> <span class="o">=</span> <span class="n">opts</span><span class="p">[</span><span class="s1">&#39;task_id&#39;</span><span class="p">]</span>
+            <span class="n">tid</span> <span class="o">=</span> <span class="n">opts</span><span class="p">[</span><span class="s1">'task_id'</span><span class="p">]</span>
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-            <span class="n">tid</span> <span class="o">=</span> <span class="n">opts</span><span class="p">[</span><span class="s1">&#39;task_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_id</span> <span class="ow">or</span> <span class="n">uuid</span><span class="p">()</span>
-        <span class="k">if</span> <span class="s1">&#39;reply_to&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">opts</span><span class="p">:</span>
-            <span class="n">opts</span><span class="p">[</span><span class="s1">&#39;reply_to&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">oid</span>
+            <span class="n">tid</span> <span class="o">=</span> <span class="n">opts</span><span class="p">[</span><span class="s1">'task_id'</span><span class="p">]</span> <span class="o">=</span> <span class="n">_id</span> <span class="ow">or</span> <span class="n">uuid</span><span class="p">()</span>
+        <span class="k">if</span> <span class="s1">'reply_to'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">opts</span><span class="p">:</span>
+            <span class="n">opts</span><span class="p">[</span><span class="s1">'reply_to'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">oid</span>
         <span class="k">if</span> <span class="n">group_id</span><span class="p">:</span>
-            <span class="n">opts</span><span class="p">[</span><span class="s1">&#39;group_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">group_id</span>
+            <span class="n">opts</span><span class="p">[</span><span class="s1">'group_id'</span><span class="p">]</span> <span class="o">=</span> <span class="n">group_id</span>
         <span class="k">if</span> <span class="n">chord</span><span class="p">:</span>
-            <span class="n">opts</span><span class="p">[</span><span class="s1">&#39;chord&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">chord</span>
+            <span class="n">opts</span><span class="p">[</span><span class="s1">'chord'</span><span class="p">]</span> <span class="o">=</span> <span class="n">chord</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">AsyncResult</span><span class="p">(</span><span class="n">tid</span><span class="p">)</span>
     <span class="n">_freeze</span> <span class="o">=</span> <span class="n">freeze</span>
 
@@ -319,16 +297,16 @@
         <span class="k">return</span> <span class="n">value</span>
 
     <span class="k">def</span> <span class="nf">link</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">callback</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">append_to_list_option</span><span class="p">(</span><span class="s1">&#39;link&#39;</span><span class="p">,</span> <span class="n">callback</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">append_to_list_option</span><span class="p">(</span><span class="s1">'link'</span><span class="p">,</span> <span class="n">callback</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">link_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">errback</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">append_to_list_option</span><span class="p">(</span><span class="s1">&#39;link_error&#39;</span><span class="p">,</span> <span class="n">errback</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">append_to_list_option</span><span class="p">(</span><span class="s1">'link_error'</span><span class="p">,</span> <span class="n">errback</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">flatten_links</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">_chain</span><span class="o">.</span><span class="n">from_iterable</span><span class="p">(</span><span class="n">_chain</span><span class="p">(</span>
             <span class="p">[[</span><span class="bp">self</span><span class="p">]],</span>
             <span class="p">(</span><span class="n">link</span><span class="o">.</span><span class="n">flatten_links</span><span class="p">()</span>
-                <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">maybe_list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;link&#39;</span><span class="p">))</span> <span class="ow">or</span> <span class="p">[])</span>
+                <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">maybe_list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'link'</span><span class="p">))</span> <span class="ow">or</span> <span class="p">[])</span>
         <span class="p">)))</span>
 
     <span class="k">def</span> <span class="nf">__or__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
@@ -358,16 +336,16 @@
 
     <span class="k">def</span> <span class="nf">reprcall</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_merge</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">,</span> <span class="p">{})</span>
-        <span class="k">return</span> <span class="n">reprcall</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="s1">&#39;task&#39;</span><span class="p">],</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">reprcall</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="s1">'task'</span><span class="p">],</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">election</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span>
         <span class="n">app</span> <span class="o">=</span> <span class="nb">type</span><span class="o">.</span><span class="n">app</span>
-        <span class="n">tid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;task_id&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">uuid</span><span class="p">()</span>
+        <span class="n">tid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'task_id'</span><span class="p">)</span> <span class="ow">or</span> <span class="n">uuid</span><span class="p">()</span>
 
         <span class="k">with</span> <span class="n">app</span><span class="o">.</span><span class="n">producer_or_acquire</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span> <span class="k">as</span> <span class="n">P</span><span class="p">:</span>
             <span class="n">props</span> <span class="o">=</span> <span class="nb">type</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">on_task_call</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">tid</span><span class="p">)</span>
-            <span class="n">app</span><span class="o">.</span><span class="n">control</span><span class="o">.</span><span class="n">election</span><span class="p">(</span><span class="n">tid</span><span class="p">,</span> <span class="s1">&#39;task&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="n">task_id</span><span class="o">=</span><span class="n">tid</span><span class="p">,</span> <span class="o">**</span><span class="n">props</span><span class="p">),</span>
+            <span class="n">app</span><span class="o">.</span><span class="n">control</span><span class="o">.</span><span class="n">election</span><span class="p">(</span><span class="n">tid</span><span class="p">,</span> <span class="s1">'task'</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="n">task_id</span><span class="o">=</span><span class="n">tid</span><span class="p">,</span> <span class="o">**</span><span class="n">props</span><span class="p">),</span>
                                  <span class="n">connection</span><span class="o">=</span><span class="n">P</span><span class="o">.</span><span class="n">connection</span><span class="p">)</span>
             <span class="k">return</span> <span class="nb">type</span><span class="o">.</span><span class="n">AsyncResult</span><span class="p">(</span><span class="n">tid</span><span class="p">)</span>
 
@@ -376,7 +354,7 @@
 
     <span class="nd">@cached_property</span>
     <span class="k">def</span> <span class="nf">type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tasks</span><span class="p">[</span><span class="bp">self</span><span class="p">[</span><span class="s1">&#39;task&#39;</span><span class="p">]]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tasks</span><span class="p">[</span><span class="bp">self</span><span class="p">[</span><span class="s1">'task'</span><span class="p">]]</span>
 
     <span class="nd">@cached_property</span>
     <span class="k">def</span> <span class="nf">app</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -394,15 +372,15 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">apply_async</span>
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">_partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">send_task</span><span class="p">,</span> <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;task&#39;</span><span class="p">])</span>
-    <span class="nb">id</span> <span class="o">=</span> <span class="n">_getitem_property</span><span class="p">(</span><span class="s1">&#39;options.task_id&#39;</span><span class="p">)</span>
-    <span class="n">task</span> <span class="o">=</span> <span class="n">_getitem_property</span><span class="p">(</span><span class="s1">&#39;task&#39;</span><span class="p">)</span>
-    <span class="n">args</span> <span class="o">=</span> <span class="n">_getitem_property</span><span class="p">(</span><span class="s1">&#39;args&#39;</span><span class="p">)</span>
-    <span class="n">kwargs</span> <span class="o">=</span> <span class="n">_getitem_property</span><span class="p">(</span><span class="s1">&#39;kwargs&#39;</span><span class="p">)</span>
-    <span class="n">options</span> <span class="o">=</span> <span class="n">_getitem_property</span><span class="p">(</span><span class="s1">&#39;options&#39;</span><span class="p">)</span>
-    <span class="n">subtask_type</span> <span class="o">=</span> <span class="n">_getitem_property</span><span class="p">(</span><span class="s1">&#39;subtask_type&#39;</span><span class="p">)</span>
-    <span class="n">chord_size</span> <span class="o">=</span> <span class="n">_getitem_property</span><span class="p">(</span><span class="s1">&#39;chord_size&#39;</span><span class="p">)</span>
-    <span class="n">immutable</span> <span class="o">=</span> <span class="n">_getitem_property</span><span class="p">(</span><span class="s1">&#39;immutable&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">_partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">send_task</span><span class="p">,</span> <span class="bp">self</span><span class="p">[</span><span class="s1">'task'</span><span class="p">])</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">_getitem_property</span><span class="p">(</span><span class="s1">'options.task_id'</span><span class="p">)</span>
+    <span class="n">task</span> <span class="o">=</span> <span class="n">_getitem_property</span><span class="p">(</span><span class="s1">'task'</span><span class="p">)</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">_getitem_property</span><span class="p">(</span><span class="s1">'args'</span><span class="p">)</span>
+    <span class="n">kwargs</span> <span class="o">=</span> <span class="n">_getitem_property</span><span class="p">(</span><span class="s1">'kwargs'</span><span class="p">)</span>
+    <span class="n">options</span> <span class="o">=</span> <span class="n">_getitem_property</span><span class="p">(</span><span class="s1">'options'</span><span class="p">)</span>
+    <span class="n">subtask_type</span> <span class="o">=</span> <span class="n">_getitem_property</span><span class="p">(</span><span class="s1">'subtask_type'</span><span class="p">)</span>
+    <span class="n">chord_size</span> <span class="o">=</span> <span class="n">_getitem_property</span><span class="p">(</span><span class="s1">'chord_size'</span><span class="p">)</span>
+    <span class="n">immutable</span> <span class="o">=</span> <span class="n">_getitem_property</span><span class="p">(</span><span class="s1">'immutable'</span><span class="p">)</span>
 
 
 <span class="nd">@Signature.register_type</span>
@@ -412,10 +390,10 @@
         <span class="n">tasks</span> <span class="o">=</span> <span class="p">(</span><span class="n">regen</span><span class="p">(</span><span class="n">tasks</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tasks</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">is_list</span><span class="p">(</span><span class="n">tasks</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
                  <span class="k">else</span> <span class="n">tasks</span><span class="p">)</span>
         <span class="n">Signature</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;celery.chain&#39;</span><span class="p">,</span> <span class="p">(),</span> <span class="p">{</span><span class="s1">&#39;tasks&#39;</span><span class="p">:</span> <span class="n">tasks</span><span class="p">},</span> <span class="o">**</span><span class="n">options</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="s1">'celery.chain'</span><span class="p">,</span> <span class="p">(),</span> <span class="p">{</span><span class="s1">'tasks'</span><span class="p">:</span> <span class="n">tasks</span><span class="p">},</span> <span class="o">**</span><span class="n">options</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span> <span class="o">=</span> <span class="n">tasks</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">subtask_type</span> <span class="o">=</span> <span class="s1">&#39;chain&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">subtask_type</span> <span class="o">=</span> <span class="s1">'chain'</span>
 
     <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span><span class="p">:</span>
@@ -423,75 +401,75 @@
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="n">tasks</span> <span class="o">=</span> <span class="p">[</span><span class="n">maybe_signature</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;kwargs&#39;</span><span class="p">][</span><span class="s1">&#39;tasks&#39;</span><span class="p">]]</span>
-        <span class="k">if</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;args&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">tasks</span><span class="p">:</span>
+        <span class="n">tasks</span> <span class="o">=</span> <span class="p">[</span><span class="n">maybe_signature</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">d</span><span class="p">[</span><span class="s1">'kwargs'</span><span class="p">][</span><span class="s1">'tasks'</span><span class="p">]]</span>
+        <span class="k">if</span> <span class="n">d</span><span class="p">[</span><span class="s1">'args'</span><span class="p">]</span> <span class="ow">and</span> <span class="n">tasks</span><span class="p">:</span>
             <span class="c1"># partial args passed on to first task in chain (Issue #1057).</span>
-            <span class="n">tasks</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;args&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tasks</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">_merge</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;args&#39;</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">_upgrade</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">chain</span><span class="p">(</span><span class="o">*</span><span class="n">tasks</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">,</span> <span class="o">**</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;options&#39;</span><span class="p">]))</span>
+            <span class="n">tasks</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">'args'</span><span class="p">]</span> <span class="o">=</span> <span class="n">tasks</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">_merge</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s1">'args'</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">_upgrade</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">chain</span><span class="p">(</span><span class="o">*</span><span class="n">tasks</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">,</span> <span class="o">**</span><span class="n">d</span><span class="p">[</span><span class="s1">'options'</span><span class="p">]))</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tasks</span><span class="p">[</span><span class="s1">&#39;celery.chain&#39;</span><span class="p">]</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tasks</span><span class="p">[</span><span class="s1">'celery.chain'</span><span class="p">]</span>
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tasks</span><span class="p">[</span><span class="s1">&#39;celery.chain&#39;</span><span class="p">]</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tasks</span><span class="p">[</span><span class="s1">'celery.chain'</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s1">&#39; | &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="s1">' | '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span><span class="p">)</span></div>
 
 
 <span class="k">class</span> <span class="nc">_basemap</span><span class="p">(</span><span class="n">Signature</span><span class="p">):</span>
     <span class="n">_task_name</span> <span class="o">=</span> <span class="bp">None</span>
-    <span class="n">_unpack_args</span> <span class="o">=</span> <span class="n">itemgetter</span><span class="p">(</span><span class="s1">&#39;task&#39;</span><span class="p">,</span> <span class="s1">&#39;it&#39;</span><span class="p">)</span>
+    <span class="n">_unpack_args</span> <span class="o">=</span> <span class="n">itemgetter</span><span class="p">(</span><span class="s1">'task'</span><span class="p">,</span> <span class="s1">'it'</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task</span><span class="p">,</span> <span class="n">it</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
         <span class="n">Signature</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_task_name</span><span class="p">,</span> <span class="p">(),</span>
-            <span class="p">{</span><span class="s1">&#39;task&#39;</span><span class="p">:</span> <span class="n">task</span><span class="p">,</span> <span class="s1">&#39;it&#39;</span><span class="p">:</span> <span class="n">regen</span><span class="p">(</span><span class="n">it</span><span class="p">)},</span> <span class="n">immutable</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span>
+            <span class="p">{</span><span class="s1">'task'</span><span class="p">:</span> <span class="n">task</span><span class="p">,</span> <span class="s1">'it'</span><span class="p">:</span> <span class="n">regen</span><span class="p">(</span><span class="n">it</span><span class="p">)},</span> <span class="n">immutable</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">apply_async</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(),</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{},</span> <span class="o">**</span><span class="n">opts</span><span class="p">):</span>
         <span class="c1"># need to evaluate generators</span>
         <span class="n">task</span><span class="p">,</span> <span class="n">it</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unpack_args</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">apply_async</span><span class="p">(</span>
-            <span class="p">(),</span> <span class="p">{</span><span class="s1">&#39;task&#39;</span><span class="p">:</span> <span class="n">task</span><span class="p">,</span> <span class="s1">&#39;it&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">it</span><span class="p">)},</span> <span class="o">**</span><span class="n">opts</span>
+            <span class="p">(),</span> <span class="p">{</span><span class="s1">'task'</span><span class="p">:</span> <span class="n">task</span><span class="p">,</span> <span class="s1">'it'</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">it</span><span class="p">)},</span> <span class="o">**</span><span class="n">opts</span>
         <span class="p">)</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">_upgrade</span><span class="p">(</span>
-            <span class="n">d</span><span class="p">,</span> <span class="n">cls</span><span class="p">(</span><span class="o">*</span><span class="n">cls</span><span class="o">.</span><span class="n">_unpack_args</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;kwargs&#39;</span><span class="p">]),</span> <span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">,</span> <span class="o">**</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;options&#39;</span><span class="p">]),</span>
+            <span class="n">d</span><span class="p">,</span> <span class="n">cls</span><span class="p">(</span><span class="o">*</span><span class="n">cls</span><span class="o">.</span><span class="n">_unpack_args</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s1">'kwargs'</span><span class="p">]),</span> <span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">,</span> <span class="o">**</span><span class="n">d</span><span class="p">[</span><span class="s1">'options'</span><span class="p">]),</span>
         <span class="p">)</span>
 
 
 <span class="nd">@Signature.register_type</span>
 <span class="k">class</span> <span class="nc">xmap</span><span class="p">(</span><span class="n">_basemap</span><span class="p">):</span>
-    <span class="n">_task_name</span> <span class="o">=</span> <span class="s1">&#39;celery.map&#39;</span>
+    <span class="n">_task_name</span> <span class="o">=</span> <span class="s1">'celery.map'</span>
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">task</span><span class="p">,</span> <span class="n">it</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unpack_args</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="k">return</span> <span class="s1">&#39;[{0}(x) for x in {1}]&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">task</span><span class="p">,</span>
+        <span class="k">return</span> <span class="s1">'[{0}(x) for x in {1}]'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">task</span><span class="p">,</span>
                                               <span class="n">truncate</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">it</span><span class="p">),</span> <span class="mi">100</span><span class="p">))</span>
 
 
 <span class="nd">@Signature.register_type</span>
 <span class="k">class</span> <span class="nc">xstarmap</span><span class="p">(</span><span class="n">_basemap</span><span class="p">):</span>
-    <span class="n">_task_name</span> <span class="o">=</span> <span class="s1">&#39;celery.starmap&#39;</span>
+    <span class="n">_task_name</span> <span class="o">=</span> <span class="s1">'celery.starmap'</span>
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">task</span><span class="p">,</span> <span class="n">it</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unpack_args</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="k">return</span> <span class="s1">&#39;[{0}(*x) for x in {1}]&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">task</span><span class="p">,</span>
+        <span class="k">return</span> <span class="s1">'[{0}(*x) for x in {1}]'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">task</span><span class="p">,</span>
                                                <span class="n">truncate</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">it</span><span class="p">),</span> <span class="mi">100</span><span class="p">))</span>
 
 
 <span class="nd">@Signature.register_type</span>
 <span class="k">class</span> <span class="nc">chunks</span><span class="p">(</span><span class="n">Signature</span><span class="p">):</span>
-    <span class="n">_unpack_args</span> <span class="o">=</span> <span class="n">itemgetter</span><span class="p">(</span><span class="s1">&#39;task&#39;</span><span class="p">,</span> <span class="s1">&#39;it&#39;</span><span class="p">,</span> <span class="s1">&#39;n&#39;</span><span class="p">)</span>
+    <span class="n">_unpack_args</span> <span class="o">=</span> <span class="n">itemgetter</span><span class="p">(</span><span class="s1">'task'</span><span class="p">,</span> <span class="s1">'it'</span><span class="p">,</span> <span class="s1">'n'</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task</span><span class="p">,</span> <span class="n">it</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
         <span class="n">Signature</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;celery.chunks&#39;</span><span class="p">,</span> <span class="p">(),</span>
-            <span class="p">{</span><span class="s1">&#39;task&#39;</span><span class="p">:</span> <span class="n">task</span><span class="p">,</span> <span class="s1">&#39;it&#39;</span><span class="p">:</span> <span class="n">regen</span><span class="p">(</span><span class="n">it</span><span class="p">),</span> <span class="s1">&#39;n&#39;</span><span class="p">:</span> <span class="n">n</span><span class="p">},</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="s1">'celery.chunks'</span><span class="p">,</span> <span class="p">(),</span>
+            <span class="p">{</span><span class="s1">'task'</span><span class="p">:</span> <span class="n">task</span><span class="p">,</span> <span class="s1">'it'</span><span class="p">:</span> <span class="n">regen</span><span class="p">(</span><span class="n">it</span><span class="p">),</span> <span class="s1">'n'</span><span class="p">:</span> <span class="n">n</span><span class="p">},</span>
             <span class="n">immutable</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span>
         <span class="p">)</span>
 
@@ -499,7 +477,7 @@
     <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">_upgrade</span><span class="p">(</span>
             <span class="n">d</span><span class="p">,</span> <span class="n">chunks</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_unpack_args</span><span class="p">(</span>
-                <span class="n">d</span><span class="p">[</span><span class="s1">&#39;kwargs&#39;</span><span class="p">]),</span> <span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">,</span> <span class="o">**</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;options&#39;</span><span class="p">]),</span>
+                <span class="n">d</span><span class="p">[</span><span class="s1">'kwargs'</span><span class="p">]),</span> <span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">,</span> <span class="o">**</span><span class="n">d</span><span class="p">[</span><span class="s1">'options'</span><span class="p">]),</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">apply_async</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(),</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{},</span> <span class="o">**</span><span class="n">opts</span><span class="p">):</span>
@@ -542,18 +520,18 @@
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tasks</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">tasks</span> <span class="o">=</span> <span class="n">_maybe_group</span><span class="p">(</span><span class="n">tasks</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
         <span class="n">Signature</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;celery.group&#39;</span><span class="p">,</span> <span class="p">(),</span> <span class="p">{</span><span class="s1">&#39;tasks&#39;</span><span class="p">:</span> <span class="n">tasks</span><span class="p">},</span> <span class="o">**</span><span class="n">options</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="s1">'celery.group'</span><span class="p">,</span> <span class="p">(),</span> <span class="p">{</span><span class="s1">'tasks'</span><span class="p">:</span> <span class="n">tasks</span><span class="p">},</span> <span class="o">**</span><span class="n">options</span>
         <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">subtask_type</span> <span class="o">=</span> <span class="n">tasks</span><span class="p">,</span> <span class="s1">&#39;group&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">subtask_type</span> <span class="o">=</span> <span class="n">tasks</span><span class="p">,</span> <span class="s1">'group'</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="n">tasks</span> <span class="o">=</span> <span class="p">[</span><span class="n">maybe_signature</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;kwargs&#39;</span><span class="p">][</span><span class="s1">&#39;tasks&#39;</span><span class="p">]]</span>
-        <span class="k">if</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;args&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">tasks</span><span class="p">:</span>
+        <span class="n">tasks</span> <span class="o">=</span> <span class="p">[</span><span class="n">maybe_signature</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">d</span><span class="p">[</span><span class="s1">'kwargs'</span><span class="p">][</span><span class="s1">'tasks'</span><span class="p">]]</span>
+        <span class="k">if</span> <span class="n">d</span><span class="p">[</span><span class="s1">'args'</span><span class="p">]</span> <span class="ow">and</span> <span class="n">tasks</span><span class="p">:</span>
             <span class="c1"># partial args passed on to all tasks in the group (Issue #1057).</span>
             <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">tasks</span><span class="p">:</span>
-                <span class="n">task</span><span class="p">[</span><span class="s1">&#39;args&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">_merge</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;args&#39;</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">_upgrade</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">group</span><span class="p">(</span><span class="n">tasks</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">,</span> <span class="o">**</span><span class="n">kwdict</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;options&#39;</span><span class="p">])))</span>
+                <span class="n">task</span><span class="p">[</span><span class="s1">'args'</span><span class="p">]</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">_merge</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s1">'args'</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">_upgrade</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">group</span><span class="p">(</span><span class="n">tasks</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">,</span> <span class="o">**</span><span class="n">kwdict</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s1">'options'</span><span class="p">])))</span>
 
     <span class="k">def</span> <span class="nf">apply_async</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(),</span> <span class="n">kwargs</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">add_to_parent</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
         <span class="n">tasks</span> <span class="o">=</span> <span class="n">_maybe_clone</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tasks</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_app</span><span class="p">)</span>
@@ -587,19 +565,19 @@
     <span class="k">def</span> <span class="nf">freeze</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_id</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">group_id</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">chord</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="n">opts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">gid</span> <span class="o">=</span> <span class="n">opts</span><span class="p">[</span><span class="s1">&#39;task_id&#39;</span><span class="p">]</span>
+            <span class="n">gid</span> <span class="o">=</span> <span class="n">opts</span><span class="p">[</span><span class="s1">'task_id'</span><span class="p">]</span>
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-            <span class="n">gid</span> <span class="o">=</span> <span class="n">opts</span><span class="p">[</span><span class="s1">&#39;task_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">uuid</span><span class="p">()</span>
+            <span class="n">gid</span> <span class="o">=</span> <span class="n">opts</span><span class="p">[</span><span class="s1">'task_id'</span><span class="p">]</span> <span class="o">=</span> <span class="n">uuid</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">group_id</span><span class="p">:</span>
-            <span class="n">opts</span><span class="p">[</span><span class="s1">&#39;group_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">group_id</span>
+            <span class="n">opts</span><span class="p">[</span><span class="s1">'group_id'</span><span class="p">]</span> <span class="o">=</span> <span class="n">group_id</span>
         <span class="k">if</span> <span class="n">chord</span><span class="p">:</span>
-            <span class="n">opts</span><span class="p">[</span><span class="s1">&#39;chord&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">group_id</span>
+            <span class="n">opts</span><span class="p">[</span><span class="s1">'chord'</span><span class="p">]</span> <span class="o">=</span> <span class="n">group_id</span>
         <span class="n">new_tasks</span><span class="p">,</span> <span class="n">results</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span><span class="p">:</span>
             <span class="n">task</span> <span class="o">=</span> <span class="n">maybe_signature</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_app</span><span class="p">)</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
             <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">freeze</span><span class="p">(</span><span class="n">group_id</span><span class="o">=</span><span class="n">group_id</span><span class="p">,</span> <span class="n">chord</span><span class="o">=</span><span class="n">chord</span><span class="p">))</span>
             <span class="n">new_tasks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;tasks&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_tasks</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">'tasks'</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_tasks</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">GroupResult</span><span class="p">(</span><span class="n">gid</span><span class="p">,</span> <span class="n">results</span><span class="p">)</span>
     <span class="n">_freeze</span> <span class="o">=</span> <span class="n">freeze</span>
 
@@ -626,27 +604,27 @@
         <span class="c1"># taking the app from the first task in the list, there may be a</span>
         <span class="c1"># better solution for this, e.g. to consolidate tasks with the same</span>
         <span class="c1"># app and apply them in batches.</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tasks</span><span class="p">[</span><span class="bp">self</span><span class="p">[</span><span class="s1">&#39;task&#39;</span><span class="p">]]</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tasks</span><span class="p">[</span><span class="bp">self</span><span class="p">[</span><span class="s1">'task'</span><span class="p">]]</span></div>
 
 
 <span class="nd">@Signature.register_type</span>
 <div class="viewcode-block" id="chord"><a class="viewcode-back" href="../../reference/celery.html#celery.chord">[docs]</a><span class="k">class</span> <span class="nc">chord</span><span class="p">(</span><span class="n">Signature</span><span class="p">):</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">task</span><span class="o">=</span><span class="s1">&#39;celery.chord&#39;</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">task</span><span class="o">=</span><span class="s1">'celery.chord'</span><span class="p">,</span>
                  <span class="n">args</span><span class="o">=</span><span class="p">(),</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{},</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
         <span class="n">Signature</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span> <span class="n">task</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span>
             <span class="nb">dict</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="n">_maybe_group</span><span class="p">(</span><span class="n">header</span><span class="p">),</span>
                  <span class="n">body</span><span class="o">=</span><span class="n">maybe_signature</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_app</span><span class="p">)),</span> <span class="o">**</span><span class="n">options</span>
         <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">subtask_type</span> <span class="o">=</span> <span class="s1">&#39;chord&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">subtask_type</span> <span class="o">=</span> <span class="s1">'chord'</span>
 
     <span class="k">def</span> <span class="nf">freeze</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_id</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">group_id</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">chord</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">freeze</span><span class="p">(</span><span class="n">_id</span><span class="p">,</span> <span class="n">group_id</span><span class="o">=</span><span class="n">group_id</span><span class="p">,</span> <span class="n">chord</span><span class="o">=</span><span class="n">chord</span><span class="p">)</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="n">args</span><span class="p">,</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;kwargs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unpack_args</span><span class="p">(</span><span class="o">**</span><span class="n">kwdict</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;kwargs&#39;</span><span class="p">]))</span>
+        <span class="n">args</span><span class="p">,</span> <span class="n">d</span><span class="p">[</span><span class="s1">'kwargs'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unpack_args</span><span class="p">(</span><span class="o">**</span><span class="n">kwdict</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s1">'kwargs'</span><span class="p">]))</span>
         <span class="k">return</span> <span class="n">_upgrade</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="bp">self</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">,</span> <span class="o">**</span><span class="n">kwdict</span><span class="p">(</span><span class="n">d</span><span class="p">)))</span>
 
     <span class="nd">@staticmethod</span>
@@ -673,14 +651,14 @@
     <span class="k">def</span> <span class="nf">type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tasks</span><span class="p">[</span><span class="s1">&#39;celery.chord&#39;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tasks</span><span class="p">[</span><span class="s1">'celery.chord'</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">apply_async</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(),</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{},</span> <span class="n">task_id</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
                     <span class="n">producer</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">publisher</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">connection</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
                     <span class="n">router</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">result_cls</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
         <span class="n">args</span> <span class="o">=</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">+</span> <span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">args</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">immutable</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
-        <span class="n">body</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;body&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span>
+        <span class="n">body</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'body'</span><span class="p">)</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">'body'</span><span class="p">]</span>
         <span class="n">kwargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="n">body</span> <span class="o">=</span> <span class="n">body</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="o">**</span><span class="n">options</span><span class="p">)</span>
 
@@ -693,13 +671,13 @@
         <span class="k">return</span> <span class="n">res</span>
 
     <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply_async</span><span class="p">((),</span> <span class="p">{</span><span class="s1">&#39;body&#39;</span><span class="p">:</span> <span class="n">body</span><span class="p">}</span> <span class="k">if</span> <span class="n">body</span> <span class="k">else</span> <span class="p">{},</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply_async</span><span class="p">((),</span> <span class="p">{</span><span class="s1">'body'</span><span class="p">:</span> <span class="n">body</span><span class="p">}</span> <span class="k">if</span> <span class="n">body</span> <span class="k">else</span> <span class="p">{},</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">clone</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">s</span> <span class="o">=</span> <span class="n">Signature</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="c1"># need to make copy of body</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">s</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+            <span class="n">s</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">'body'</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">'body'</span><span class="p">]</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
         <span class="k">except</span> <span class="p">(</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="ne">KeyError</span><span class="p">):</span>
             <span class="k">pass</span>
         <span class="k">return</span> <span class="n">s</span>
@@ -720,10 +698,10 @@
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">body</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">reprcall</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tasks</span><span class="p">)</span>
-        <span class="k">return</span> <span class="s1">&#39;&lt;chord without body: {0.tasks!r}&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s1">'&lt;chord without body: {0.tasks!r}&gt;'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
-    <span class="n">tasks</span> <span class="o">=</span> <span class="n">_getitem_property</span><span class="p">(</span><span class="s1">&#39;kwargs.header&#39;</span><span class="p">)</span>
-    <span class="n">body</span> <span class="o">=</span> <span class="n">_getitem_property</span><span class="p">(</span><span class="s1">&#39;kwargs.body&#39;</span><span class="p">)</span></div>
+    <span class="n">tasks</span> <span class="o">=</span> <span class="n">_getitem_property</span><span class="p">(</span><span class="s1">'kwargs.header'</span><span class="p">)</span>
+    <span class="n">body</span> <span class="o">=</span> <span class="n">_getitem_property</span><span class="p">(</span><span class="s1">'kwargs.body'</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="signature"><a class="viewcode-back" href="../../reference/celery.html#celery.signature">[docs]</a><span class="k">def</span> <span class="nf">signature</span><span class="p">(</span><span class="n">varies</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(),</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{},</span> <span class="n">options</span><span class="o">=</span><span class="p">{},</span> <span class="n">app</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
@@ -747,26 +725,15 @@
         <span class="k">return</span> <span class="n">d</span>
 <span class="n">maybe_subtask</span> <span class="o">=</span> <span class="n">maybe_signature</span>  <span class="c1"># XXX compat</span>
 </pre></div>
+</div>
+</div>
+</div>
 
-          </div>
-        </div>
-      </div>
+<div class="clearer"></div>
+</div>
+
+<div class="footer" role="contentinfo">
+        © <a href="../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &copy; <a href="../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
-    </div>
-  </body>
+</body>
 </html>

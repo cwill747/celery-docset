@@ -1,17 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>What’s new in Celery 3.1 (Cipater) </title>
-    
-    <link rel="stylesheet" href="_static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>What’s new in Celery 3.1 (Cipater) </title>
+<link href="_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
         VERSION:     '3.1.23',
@@ -20,54 +16,31 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="copyright" title="Copyright" href="copyright.html" />
-    <link rel="top" title="Celery 3.1.23 documentation" href="index.html" />
-    <link rel="next" title="What’s new in Celery 3.0 (Chiastic Slide)" href="whatsnew-3.0.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="changelog.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="whatsnew-3.0.html" title="What’s new in Celery 3.0 (Chiastic Slide)"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="changelog.html" title="&lt;no title&gt;"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Celery 3.1.23 documentation</a> &raquo;</li> 
-      </ul>
-    </div>  
+<script src="_static/jquery.js" type="text/javascript"></script>
+<script src="_static/underscore.js" type="text/javascript"></script>
+<script src="_static/doctools.js" type="text/javascript"></script>
+<link href="copyright.html" rel="copyright" title="Copyright"/>
+<link href="index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="whatsnew-3.0.html" rel="next" title="What’s new in Celery 3.0 (Chiastic Slide)"/>
+<link href="changelog.html" rel="prev" title="&lt;no title&gt;"/>
+</head>
+<body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
 <div class="deck">
-
-    
-        <p>
+<p>
         This document describes the current stable version of Celery (3.1). For development docs,
         <a href="http://docs.celeryproject.org/en/master/whatsnew-3.1.html">go here</a>.
         </p>
-    
-
 </div>
-    <div class="section" id="what-s-new-in-celery-3-1-cipater">
-<span id="whatsnew-3-1"></span><h1>What&#8217;s new in Celery 3.1 (Cipater)<a class="headerlink" href="#what-s-new-in-celery-3-1-cipater" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="what-s-new-in-celery-3-1-cipater">
+<span id="whatsnew-3-1"></span><h1>What’s new in Celery 3.1 (Cipater)<a class="headerlink" href="#what-s-new-in-celery-3-1-cipater" title="Permalink to this headline">¶</a></h1>
 <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<col class="field-name"></col>
+<col class="field-body"></col>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Author:</th><td class="field-body">Ask Solem (ask at celeryproject.org)</td>
 </tr>
@@ -75,7 +48,7 @@
 </table>
 <div class="sidebar">
 <p class="first sidebar-title">Change history</p>
-<p class="last">What&#8217;s new documents describe the changes in major versions,
+<p class="last">What’s new documents describe the changes in major versions,
 we also have a <a class="reference external" href="http://kombu.readthedocs.org/en/latest/changelog.html#changelog" title="(in Kombu v3.0)"><span>Change history</span></a> that lists the changes in bugfix
 releases (0.0.x), while older series are archived under the <a class="reference internal" href="history/index.html#history"><span>History</span></a>
 section.</p>
@@ -83,14 +56,14 @@ section.</p>
 <p>Celery is a simple, flexible and reliable distributed system to
 process vast amounts of messages, while providing operations with
 the tools required to maintain such a system.</p>
-<p>It&#8217;s a task queue with focus on real-time processing, while also
+<p>It’s a task queue with focus on real-time processing, while also
 supporting task scheduling.</p>
 <p>Celery has a large and diverse community of users and contributors,
 you should come join us <a class="reference internal" href="getting-started/resources.html#irc-channel"><span>on IRC</span></a>
 or <a class="reference internal" href="getting-started/resources.html#mailing-list"><span>our mailing-list</span></a>.</p>
 <p>To read more about Celery you should go read the <a class="reference internal" href="getting-started/introduction.html#intro"><span>introduction</span></a>.</p>
 <p>While this version is backward compatible with previous versions
-it&#8217;s important that you read the following section.</p>
+it’s important that you read the following section.</p>
 <p>This version is officially supported on CPython 2.6, 2.7 and 3.3,
 and also supported on PyPy.</p>
 <div class="topic">
@@ -110,7 +83,7 @@ and also supported on PyPy.</p>
 <li><a class="reference internal" href="#prefork-pool-improvements" id="id7">Prefork Pool Improvements</a></li>
 <li><a class="reference internal" href="#django-supported-out-of-the-box" id="id8">Django supported out of the box</a></li>
 <li><a class="reference internal" href="#events-are-now-ordered-using-logical-time" id="id9">Events are now ordered using logical time</a></li>
-<li><a class="reference internal" href="#new-worker-node-name-format-name-host" id="id10">New worker node name format (<code class="docutils literal"><span class="pre">name&#64;host</span></code>)</a></li>
+<li><a class="reference internal" href="#new-worker-node-name-format-name-host" id="id10">New worker node name format (<code class="docutils literal"><span class="pre">name@host</span></code>)</a></li>
 <li><a class="reference internal" href="#bound-tasks" id="id11">Bound tasks</a></li>
 <li><a class="reference internal" href="#mingle-worker-synchronization" id="id12">Mingle: Worker synchronization</a></li>
 <li><a class="reference internal" href="#gossip-worker-worker-communication" id="id13">Gossip: Worker &lt;-&gt; Worker communication</a></li>
@@ -144,22 +117,22 @@ to find edge case bugs.</p>
 <p>The end result was that I had to rewrite the prefork pool to avoid the use
 of the POSIX semaphore.  This was extremely challenging, but after
 months of hard work the worker now finally passes the stress test suite.</p>
-<p>There&#8217;s probably more bugs to find, but the good news is
+<p>There’s probably more bugs to find, but the good news is
 that we now have a tool to reproduce them, so should you be so unlucky to
-experience a bug then we&#8217;ll write a test for it and squash it!</p>
+experience a bug then we’ll write a test for it and squash it!</p>
 <p>Note that I have also moved many broker transports into experimental status:
 the only transports recommended for production use today is RabbitMQ and
 Redis.</p>
-<p>I don&#8217;t have the resources to maintain all of them, so bugs are left
+<p>I don’t have the resources to maintain all of them, so bugs are left
 unresolved.  I wish that someone will step up and take responsibility for
 these transports or donate resources to improve them, but  as the situation
-is now I don&#8217;t think the quality is up to date with the rest of the code-base
+is now I don’t think the quality is up to date with the rest of the code-base
 so I cannot recommend them for production use.</p>
 <p>The next version of Celery 3.2 will focus on performance and removing
 rarely used parts of the library.  Work has also started on a new message
 protocol, supporting multiple languages and more.  The initial draft can
 be found <a class="reference internal" href="internals/protov2.html#protov2draft"><span>here</span></a>.</p>
-<p>This has probably been the hardest release I&#8217;ve worked on, so no
+<p>This has probably been the hardest release I’ve worked on, so no
 introduction to this changelog would be complete without a massive
 thank you to everyone who contributed and helped me test it!</p>
 <p>Thank you for your support!</p>
@@ -185,13 +158,13 @@ onwards Python 2.7 or later will be required.</p>
 for this change by explicitly allowing your worker
 to consume pickled messages using the <a class="reference internal" href="configuration.html#std:setting-CELERY_ACCEPT_CONTENT"><code class="xref std std-setting docutils literal"><span class="pre">CELERY_ACCEPT_CONTENT</span></code></a>
 setting:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">CELERY_ACCEPT_CONTENT</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;pickle&#39;</span><span class="p">,</span> <span class="s1">&#39;json&#39;</span><span class="p">,</span> <span class="s1">&#39;msgpack&#39;</span><span class="p">,</span> <span class="s1">&#39;yaml&#39;</span><span class="p">]</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">CELERY_ACCEPT_CONTENT</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'pickle'</span><span class="p">,</span> <span class="s1">'json'</span><span class="p">,</span> <span class="s1">'msgpack'</span><span class="p">,</span> <span class="s1">'yaml'</span><span class="p">]</span>
 </pre></div>
 </div>
-<p>Make sure you only select the serialization formats you&#8217;ll actually be using,
+<p>Make sure you only select the serialization formats you’ll actually be using,
 and make sure you have properly secured your broker from unwanted access
 (see the <a class="reference internal" href="userguide/security.html#guide-security"><span>Security Guide</span></a>).</p>
-<p>The worker will emit a deprecation warning if you don&#8217;t define this setting.</p>
+<p>The worker will emit a deprecation warning if you don’t define this setting.</p>
 <div class="topic">
 <p class="topic-title first">for Kombu users</p>
 <p>Kombu 3.0 no longer accepts pickled messages by default, so if you
@@ -204,13 +177,13 @@ information.</p>
 <h3><a class="toc-backref" href="#id5">Old command-line programs removed and deprecated</a><a class="headerlink" href="#old-command-line-programs-removed-and-deprecated" title="Permalink to this headline">¶</a></h3>
 <p>Everyone should move to the new <strong class="program">celery</strong> umbrella
 command, so we are incrementally deprecating the old command names.</p>
-<p>In this version we&#8217;ve removed all commands that are not used
+<p>In this version we’ve removed all commands that are not used
 in init scripts.  The rest will be removed in 3.2.</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="27%" />
-<col width="20%" />
-<col width="53%" />
+<col width="27%"></col>
+<col width="20%"></col>
+<col width="53%"></col>
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Program</th>
@@ -356,7 +329,7 @@ have a solution for Django users.</p>
 <p>The situation changes with this version as Django is now supported
 in core and new Django users coming to Celery are now expected
 to use the new API directly.</p>
-<p>The Django community has a convention where there&#8217;s a separate
+<p>The Django community has a convention where there’s a separate
 django-x package for every library, acting like a bridge between
 Django and the library.</p>
 <p>Having a separate project for Django users has been a pain for Celery,
@@ -384,7 +357,7 @@ library by creating an application:</p>
 <div><p>Celery will not automatically use the Django settings, so you can
 either configure Celery separately or you can tell it to use the Django
 settings with:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">app</span><span class="o">.</span><span class="n">config_from_object</span><span class="p">(</span><span class="s1">&#39;django.conf:settings&#39;</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">app</span><span class="o">.</span><span class="n">config_from_object</span><span class="p">(</span><span class="s1">'django.conf:settings'</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Neither will it automatically traverse your installed apps to find task
@@ -431,12 +404,12 @@ in <code class="file docutils literal"><span class="pre">examples/django</span><
 </div></blockquote>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>If you&#8217;re still using the old API when you upgrade to Celery 3.1
+<p>If you’re still using the old API when you upgrade to Celery 3.1
 then you must make sure that your settings module contains
 the <code class="docutils literal"><span class="pre">djcelery.setup_loader()</span></code> line, since this will
 no longer happen as a side-effect of importing the <code class="xref py py-mod docutils literal"><span class="pre">djcelery</span></code>
 module.</p>
-<p class="last">New users (or if you have ported to the new API) don&#8217;t need the <code class="docutils literal"><span class="pre">setup_loader</span></code>
+<p class="last">New users (or if you have ported to the new API) don’t need the <code class="docutils literal"><span class="pre">setup_loader</span></code>
 line anymore, and must make sure to remove it.</p>
 </div>
 </div>
@@ -470,26 +443,26 @@ millennia before the clock exceeds a 64 bits value.</p>
 </div>
 </div>
 <div class="section" id="new-worker-node-name-format-name-host">
-<h3><a class="toc-backref" href="#id10">New worker node name format (<code class="docutils literal"><span class="pre">name&#64;host</span></code>)</a><a class="headerlink" href="#new-worker-node-name-format-name-host" title="Permalink to this headline">¶</a></h3>
-<p>Node names are now constructed by two elements: name and hostname separated by &#8216;&#64;&#8217;.</p>
+<h3><a class="toc-backref" href="#id10">New worker node name format (<code class="docutils literal"><span class="pre">name@host</span></code>)</a><a class="headerlink" href="#new-worker-node-name-format-name-host" title="Permalink to this headline">¶</a></h3>
+<p>Node names are now constructed by two elements: name and hostname separated by ‘@’.</p>
 <p>This change was made to more easily identify multiple instances running
 on the same machine.</p>
 <p>If a custom name is not specified then the
-worker will use the name &#8216;celery&#8217; by default, resulting in a
-fully qualified node name of <a class="reference external" href="mailto:'celery&#37;&#52;&#48;hostname">'celery<span>&#64;</span>hostname</a>&#8216;:</p>
+worker will use the name ‘celery’ by default, resulting in a
+fully qualified node name of <a class="reference external" href="mailto:'celery%40hostname">'celery<span>@</span>hostname</a>‘:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ celery worker -n example.com
 celery@example.com
 </pre></div>
 </div>
-<p>To also set the name you must include the &#64;:</p>
+<p>To also set the name you must include the @:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ celery worker -n worker1@example.com
 worker1@example.com
 </pre></div>
 </div>
 <p>The worker will identify itself using the fully qualified
 node name in events and broadcast messages, so where before
-a worker would identify itself as &#8216;worker1.example.com&#8217;, it will now
-use <a class="reference external" href="mailto:'celery&#37;&#52;&#48;worker1&#46;example&#46;com">'celery<span>&#64;</span>worker1<span>&#46;</span>example<span>&#46;</span>com</a>&#8216;.</p>
+a worker would identify itself as ‘worker1.example.com’, it will now
+use <a class="reference external" href="mailto:'celery%40worker1.example.com">'celery<span>@</span>worker1<span>.</span>example<span>.</span>com</a>‘.</p>
 <p>Remember that the <code class="docutils literal"><span class="pre">-n</span></code> argument also supports simple variable
 substitutions, so if the current hostname is <em>george.example.com</em>
 then the <code class="docutils literal"><span class="pre">%h</span></code> macro will expand into that:</p>
@@ -500,8 +473,8 @@ worker1@george.example.com
 <p>The available substitutions are as follows:</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="28%" />
-<col width="72%" />
+<col width="28%"></col>
+<col width="72%"></col>
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Variable</th>
@@ -526,7 +499,7 @@ worker1@george.example.com
 </div>
 <div class="section" id="bound-tasks">
 <h3><a class="toc-backref" href="#id11">Bound tasks</a><a class="headerlink" href="#bound-tasks" title="Permalink to this headline">¶</a></h3>
-<p>The task decorator can now create &#8220;bound tasks&#8221;, which means that the
+<p>The task decorator can now create “bound tasks”, which means that the
 task will receive the <code class="docutils literal"><span class="pre">self</span></code> argument.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="nd">@app.task</span><span class="p">(</span><span class="n">bind</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">send_twitter_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">oauth</span><span class="p">,</span> <span class="n">tweet</span><span class="p">):</span>
@@ -594,10 +567,10 @@ the task is always the process to retrieve the result.</p>
 uses a unique queue for replies to be sent to.  This avoids
 the significant overhead of the original amqp result backend which creates
 one queue per task.</p>
-<p>By default results sent using this backend will not persist, so they won&#8217;t
+<p>By default results sent using this backend will not persist, so they won’t
 survive a broker restart.  You can enable
 the <a class="reference internal" href="configuration.html#std:setting-CELERY_RESULT_PERSISTENT"><code class="xref std std-setting docutils literal"><span class="pre">CELERY_RESULT_PERSISTENT</span></code></a> setting to change that.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">CELERY_RESULT_BACKEND</span> <span class="o">=</span> <span class="s1">&#39;rpc&#39;</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">CELERY_RESULT_BACKEND</span> <span class="o">=</span> <span class="s1">'rpc'</span>
 <span class="n">CELERY_RESULT_PERSISTENT</span> <span class="o">=</span> <span class="bp">True</span>
 </pre></div>
 </div>
@@ -621,10 +594,10 @@ the <a class="reference internal" href="configuration.html#std:setting-CELERY_RE
 <p>Broadcast messages are currently seen by all virtual hosts when
 using the Redis transport.  You can now fix this by enabling a prefix to all channels
 so that the messages are separated:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">BROKER_TRANSPORT_OPTIONS</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;fanout_prefix&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">}</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">BROKER_TRANSPORT_OPTIONS</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'fanout_prefix'</span><span class="p">:</span> <span class="bp">True</span><span class="p">}</span>
 </pre></div>
 </div>
-<p>Note that you&#8217;ll not be able to communicate with workers running older
+<p>Note that you’ll not be able to communicate with workers running older
 versions or workers that does not have this setting enabled.</p>
 <p>This setting will be the default in a future version.</p>
 <p>Related to <a class="reference external" href="https://github.com/celery/celery/issues/1490"><span class="xref issue">Issue #1490</span></a>.</p>
@@ -651,14 +624,14 @@ setuptools extras.</p>
 as many extras as you want.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">You can&#8217;t use the <code class="docutils literal"><span class="pre">celery-with-*</span></code> packages anymore, as these will not be
+<p class="last">You can’t use the <code class="docutils literal"><span class="pre">celery-with-*</span></code> packages anymore, as these will not be
 updated to use Celery 3.1.</p>
 </div>
 <table border="1" class="docutils">
 <colgroup>
-<col width="20%" />
-<col width="38%" />
-<col width="42%" />
+<col width="20%"></col>
+<col width="38%"></col>
+<col width="42%"></col>
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Extension</th>
@@ -733,13 +706,13 @@ calls the underlying task method.</p>
 <li><p class="first">Canvas: <code class="docutils literal"><span class="pre">group.apply_async</span></code> and <code class="docutils literal"><span class="pre">chain.apply_async</span></code> no longer starts
 separate task.</p>
 <blockquote>
-<div><p>That the group and chord primitives supported the &#8220;calling API&#8221; like other
+<div><p>That the group and chord primitives supported the “calling API” like other
 subtasks was a nice idea, but it was useless in practice and often
 confused users.  If you still want this behavior you can define a
 task to do it for you.</p>
 </div></blockquote>
 </li>
-<li><p class="first">New method <code class="docutils literal"><span class="pre">Signature.freeze()</span></code> can be used to &#8220;finalize&#8221;
+<li><p class="first">New method <code class="docutils literal"><span class="pre">Signature.freeze()</span></code> can be used to “finalize”
 signatures/subtask.</p>
 <blockquote>
 <div><p>Regular signature:</p>
@@ -780,8 +753,8 @@ optparse-style options:</p>
 <span class="kn">from</span> <span class="nn">celery.bin</span> <span class="kn">import</span> <span class="n">Option</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Celery</span><span class="p">()</span>
-<span class="n">app</span><span class="o">.</span><span class="n">user_options</span><span class="p">[</span><span class="s1">&#39;worker&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
-    <span class="n">Option</span><span class="p">(</span><span class="s1">&#39;--my-argument&#39;</span><span class="p">),</span>
+<span class="n">app</span><span class="o">.</span><span class="n">user_options</span><span class="p">[</span><span class="s1">'worker'</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="n">Option</span><span class="p">(</span><span class="s1">'--my-argument'</span><span class="p">),</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -795,7 +768,7 @@ process that sent the event.</p>
 was received by the monitor, and not the time reported by the worker.</p>
 <blockquote>
 <div><p>This means that a worker with an out-of-sync clock will no longer
-show as &#8216;Offline&#8217; in monitors.</p>
+show as ‘Offline’ in monitors.</p>
 <p>A warning is now emitted if the difference between the senders
 time and the internal time is greater than 15 seconds, suggesting
 that the clocks are out of sync.</p>
@@ -817,11 +790,11 @@ events, which is set to the time of when the event was received.</p>
 <li><p class="first"><a class="reference internal" href="reference/celery.events.html#celery.events.Events.Dispatcher" title="celery.events.Events.Dispatcher"><code class="xref py py-class docutils literal"><span class="pre">app.events.Dispatcher</span></code></a> now accepts a <code class="docutils literal"><span class="pre">groups</span></code> argument
 which decides a white-list of event groups that will be sent.</p>
 <blockquote>
-<div><p>The type of an event is a string separated by &#8216;-&#8216;, where the part
-before the first &#8216;-&#8216; is the group.  Currently there are only
+<div><p>The type of an event is a string separated by ‘-‘, where the part
+before the first ‘-‘ is the group.  Currently there are only
 two groups: <code class="docutils literal"><span class="pre">worker</span></code> and <code class="docutils literal"><span class="pre">task</span></code>.</p>
 <p>A dispatcher instantiated as follows:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">app</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">Dispatcher</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="n">groups</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;worker&#39;</span><span class="p">])</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">app</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">Dispatcher</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="n">groups</span><span class="o">=</span><span class="p">[</span><span class="s1">'worker'</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>will only send worker related events and silently drop any attempts
@@ -832,7 +805,7 @@ to send events related to any other group.</p>
 <blockquote>
 <div><p>This setting can be used to change the transport failover strategy,
 can either be a callable returning an iterable or the name of a
-Kombu built-in failover strategy.  Default is &#8220;round-robin&#8221;.</p>
+Kombu built-in failover strategy.  Default is “round-robin”.</p>
 <p>Contributed by Matt Wise.</p>
 </div></blockquote>
 </li>
@@ -852,16 +825,16 @@ to enable the eventlet/gevent pools.</p>
 <blockquote>
 <div><p>The <cite>-P</cite> option should always be used to select the eventlet/gevent pool
 to ensure that the patches are applied as early as possible.</p>
-<p>If you start the worker in a wrapper (like Django&#8217;s manage.py)
+<p>If you start the worker in a wrapper (like Django’s manage.py)
 then you must apply the patches manually, e.g. by creating an alternative
 wrapper that monkey patches at the start of the program before importing
 any other modules.</p>
 </div></blockquote>
 </li>
-<li><p class="first">There&#8217;s a now an &#8216;inspect clock&#8217; command which will collect the current
+<li><p class="first">There’s a now an ‘inspect clock’ command which will collect the current
 logical clock value from workers.</p>
 </li>
-<li><p class="first"><cite>celery inspect stats</cite> now contains the process id of the worker&#8217;s main
+<li><p class="first"><cite>celery inspect stats</cite> now contains the process id of the worker’s main
 process.</p>
 <blockquote>
 <div><p>Contributed by Mher Movsisyan.</p>
@@ -974,7 +947,7 @@ register_after_fork(engine, engine.dispose)
 <li><p class="first">A stress test suite for the Celery worker has been written.</p>
 <blockquote>
 <div><p>This is located in the <code class="docutils literal"><span class="pre">funtests/stress</span></code> directory in the git
-repository. There&#8217;s a README file there to get you started.</p>
+repository. There’s a README file there to get you started.</p>
 </div></blockquote>
 </li>
 <li><p class="first">The logger named <code class="docutils literal"><span class="pre">celery.concurrency</span></code> has been renamed to <code class="docutils literal"><span class="pre">celery.pool</span></code>.</p>
@@ -1018,7 +991,7 @@ $ celery graph workers wmax:10 tmax:3
 <blockquote>
 <div><p>Apps can now define a <code class="docutils literal"><span class="pre">__reduce_keys__</span></code> method that is used instead
 of the old <code class="docutils literal"><span class="pre">AppPickler</span></code> attribute.  E.g. if your app defines a custom
-&#8216;foo&#8217; attribute that needs to be preserved when pickling you can define
+‘foo’ attribute that needs to be preserved when pickling you can define
 a <code class="docutils literal"><span class="pre">__reduce_keys__</span></code> as such:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">celery</span>
 
@@ -1026,7 +999,7 @@ a <code class="docutils literal"><span class="pre">__reduce_keys__</span></code>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">Celery</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">foo</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">foo</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'foo'</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__reduce_keys__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">Celery</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__reduce_keys__</span><span class="p">()</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
@@ -1056,9 +1029,9 @@ occur:</p>
 <div><p>Example adding and retrieving a header value:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="nd">@app.task</span><span class="p">(</span><span class="n">bind</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">t</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sender&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'sender'</span><span class="p">)</span>
 
-<span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">apply_async</span><span class="p">(</span><span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;sender&#39;</span><span class="p">:</span> <span class="s1">&#39;George Costanza&#39;</span><span class="p">})</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">apply_async</span><span class="p">(</span><span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s1">'sender'</span><span class="p">:</span> <span class="s1">'George Costanza'</span><span class="p">})</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -1152,7 +1125,7 @@ object to get information about the task.</p>
 <blockquote>
 <div><p>The <code class="xref std std-option docutils literal"><span class="pre">-X</span></code> argument is the inverse of the <code class="xref std std-option docutils literal"><span class="pre">-Q</span></code> argument
 and accepts a list of queues to exclude (not consume from):</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># Consume from all queues in CELERY_QUEUES, but not the &#39;foo&#39; queue.</span>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># Consume from all queues in CELERY_QUEUES, but not the 'foo' queue.</span>
 $ celery worker -A proj -l info -X foo
 </pre></div>
 </div>
@@ -1200,7 +1173,7 @@ see <a class="reference internal" href="userguide/tasks.html#task-semipred-rejec
 <span id="v310-removals"></span><h2><a class="toc-backref" href="#id22">Scheduled Removals</a><a class="headerlink" href="#scheduled-removals" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><p class="first">The <code class="docutils literal"><span class="pre">BROKER_INSIST</span></code> setting and the <code class="docutils literal"><span class="pre">insist</span></code> argument
-to <code class="docutils literal"><span class="pre">~&#64;connection</span></code> is no longer supported.</p>
+to <code class="docutils literal"><span class="pre">~@connection</span></code> is no longer supported.</p>
 </li>
 <li><p class="first">The <code class="docutils literal"><span class="pre">CELERY_AMQP_TASK_RESULT_CONNECTION_MAX</span></code> setting is no longer
 supported.</p>
@@ -1225,8 +1198,8 @@ of the task class instead.  You can also do this using
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Celery</span><span class="p">()</span>
 <span class="n">app</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">CELERY_ANNOTATIONS</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;*&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;ErrorMail&#39;</span><span class="p">:</span> <span class="n">MyErrorMails</span><span class="p">,</span>
+    <span class="s1">'*'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">'ErrorMail'</span><span class="p">:</span> <span class="n">MyErrorMails</span><span class="p">,</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -1263,7 +1236,7 @@ serializer.</p>
 <blockquote>
 <div><p>Note that non-abstract task classes should not be used in the
 new API.  You should only create custom task classes when you
-use them as a base class in the <code class="docutils literal"><span class="pre">&#64;task</span></code> decorator.</p>
+use them as a base class in the <code class="docutils literal"><span class="pre">@task</span></code> decorator.</p>
 <p>This fix ensure backwards compatibility with older Celery versions
 so that non-abstract task classes works even if a module is imported
 multiple times so that the app is also instantiated multiple times.</p>
@@ -1341,32 +1314,15 @@ of <code class="docutils literal"><span class="pre">with</span> <span class="pre
 </ul>
 </div>
 </div>
+</div>
+</div>
+</div>
 
+<div class="clearer"></div>
+</div>
 
-          </div>
-        </div>
-      </div>
+<div class="footer" role="contentinfo">
+        © <a href="copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="whatsnew-3.0.html" title="What’s new in Celery 3.0 (Chiastic Slide)"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="changelog.html" title="&lt;no title&gt;"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Celery 3.1.23 documentation</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &copy; <a href="copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
-    </div>
-  </body>
+</body>
 </html>

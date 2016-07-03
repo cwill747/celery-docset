@@ -1,17 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>celery.utils.serialization &mdash; Celery 3.1.23 documentation</title>
-    
-    <link rel="stylesheet" href="../../../_static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>celery.utils.serialization — Celery 3.1.23 documentation</title>
+<link href="../../../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
         VERSION:     '3.1.23',
@@ -20,53 +16,34 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="copyright" title="Copyright" href="../../../copyright.html" />
-    <link rel="top" title="Celery 3.1.23 documentation" href="../../../index.html" />
-    <link rel="up" title="celery.utils" href="../utils.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="../utils.html" accesskey="U">celery.utils</a> &raquo;</li> 
-      </ul>
-    </div>  
+<script src="../../../_static/jquery.js" type="text/javascript"></script>
+<script src="../../../_static/underscore.js" type="text/javascript"></script>
+<script src="../../../_static/doctools.js" type="text/javascript"></script>
+<link href="../../../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../../../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="../utils.html" rel="up" title="celery.utils"/>
+</head>
+<body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
 <div class="deck">
-
-    
-        <p>
+<p>
         This document describes the current stable version of Celery (3.1). For development docs,
         <a href="http://docs.celeryproject.org/en/master/_modules/celery/utils/serialization.html">go here</a>.
         </p>
-    
-
 </div>
-    <h1>Source code for celery.utils.serialization</h1><div class="highlight"><pre>
+<h1>Source code for celery.utils.serialization</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="sd">    celery.utils.serialization</span>
 <span class="sd">    ~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
 
 <span class="sd">    Utilities for safely pickling exceptions.</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
 
 <span class="kn">from</span> <span class="nn">inspect</span> <span class="kn">import</span> <span class="n">getmro</span>
@@ -79,12 +56,12 @@
 
 <span class="kn">from</span> <span class="nn">.encoding</span> <span class="kn">import</span> <span class="n">safe_repr</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;UnpickleableExceptionWrapper&#39;</span><span class="p">,</span> <span class="s1">&#39;subclass_exception&#39;</span><span class="p">,</span>
-           <span class="s1">&#39;find_pickleable_exception&#39;</span><span class="p">,</span> <span class="s1">&#39;create_exception_cls&#39;</span><span class="p">,</span>
-           <span class="s1">&#39;get_pickleable_exception&#39;</span><span class="p">,</span> <span class="s1">&#39;get_pickleable_etype&#39;</span><span class="p">,</span>
-           <span class="s1">&#39;get_pickled_exception&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'UnpickleableExceptionWrapper'</span><span class="p">,</span> <span class="s1">'subclass_exception'</span><span class="p">,</span>
+           <span class="s1">'find_pickleable_exception'</span><span class="p">,</span> <span class="s1">'create_exception_cls'</span><span class="p">,</span>
+           <span class="s1">'get_pickleable_exception'</span><span class="p">,</span> <span class="s1">'get_pickleable_etype'</span><span class="p">,</span>
+           <span class="s1">'get_pickled_exception'</span><span class="p">]</span>
 
-<span class="c1">#: List of base classes we probably don&#39;t want to reduce to.</span>
+<span class="c1">#: List of base classes we probably don't want to reduce to.</span>
 <span class="k">try</span><span class="p">:</span>
     <span class="n">unwanted_base_classes</span> <span class="o">=</span> <span class="p">(</span><span class="ne">StandardError</span><span class="p">,</span> <span class="ne">Exception</span><span class="p">,</span> <span class="ne">BaseException</span><span class="p">,</span> <span class="nb">object</span><span class="p">)</span>
 <span class="k">except</span> <span class="ne">NameError</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
@@ -92,12 +69,12 @@
 
 
 <div class="viewcode-block" id="subclass_exception"><a class="viewcode-back" href="../../../internals/reference/celery.utils.serialization.html#celery.utils.serialization.subclass_exception">[docs]</a><span class="k">def</span> <span class="nf">subclass_exception</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">module</span><span class="p">):</span>  <span class="c1"># noqa</span>
-    <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="p">),</span> <span class="p">{</span><span class="s1">&#39;__module__&#39;</span><span class="p">:</span> <span class="n">module</span><span class="p">})</span></div>
+    <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="p">),</span> <span class="p">{</span><span class="s1">'__module__'</span><span class="p">:</span> <span class="n">module</span><span class="p">})</span></div>
 
 
 <div class="viewcode-block" id="find_pickleable_exception"><a class="viewcode-back" href="../../../internals/reference/celery.utils.serialization.html#celery.utils.serialization.find_pickleable_exception">[docs]</a><span class="k">def</span> <span class="nf">find_pickleable_exception</span><span class="p">(</span><span class="n">exc</span><span class="p">,</span> <span class="n">loads</span><span class="o">=</span><span class="n">pickle</span><span class="o">.</span><span class="n">loads</span><span class="p">,</span>
                               <span class="n">dumps</span><span class="o">=</span><span class="n">pickle</span><span class="o">.</span><span class="n">dumps</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;With an exception instance, iterate over its super classes (by mro)</span>
+    <span class="sd">"""With an exception instance, iterate over its super classes (by mro)</span>
 <span class="sd">    and find the first super exception that is pickleable.  It does</span>
 <span class="sd">    not go below :exc:`Exception` (i.e. it skips :exc:`Exception`,</span>
 <span class="sd">    :class:`BaseException` and :class:`object`).  If that happens</span>
@@ -111,8 +88,8 @@
 
 <span class="sd">    :rtype :exc:`Exception`:</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">exc_args</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">exc</span><span class="p">,</span> <span class="s1">&#39;args&#39;</span><span class="p">,</span> <span class="p">[])</span>
+<span class="sd">    """</span>
+    <span class="n">exc_args</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">exc</span><span class="p">,</span> <span class="s1">'args'</span><span class="p">,</span> <span class="p">[])</span>
     <span class="k">for</span> <span class="n">supercls</span> <span class="ow">in</span> <span class="n">itermro</span><span class="p">(</span><span class="n">exc</span><span class="o">.</span><span class="n">__class__</span><span class="p">,</span> <span class="n">unwanted_base_classes</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">superexc</span> <span class="o">=</span> <span class="n">supercls</span><span class="p">(</span><span class="o">*</span><span class="n">exc_args</span><span class="p">)</span>
@@ -129,14 +106,14 @@
 
 
 <div class="viewcode-block" id="create_exception_cls"><a class="viewcode-back" href="../../../internals/reference/celery.utils.serialization.html#celery.utils.serialization.create_exception_cls">[docs]</a><span class="k">def</span> <span class="nf">create_exception_cls</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">module</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Dynamically create an exception class.&quot;&quot;&quot;</span>
+    <span class="sd">"""Dynamically create an exception class."""</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">parent</span><span class="p">:</span>
         <span class="n">parent</span> <span class="o">=</span> <span class="ne">Exception</span>
     <span class="k">return</span> <span class="n">subclass_exception</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">module</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="UnpickleableExceptionWrapper"><a class="viewcode-back" href="../../../internals/reference/celery.utils.serialization.html#celery.utils.serialization.UnpickleableExceptionWrapper">[docs]</a><span class="k">class</span> <span class="nc">UnpickleableExceptionWrapper</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Wraps unpickleable exceptions.</span>
+    <span class="sd">"""Wraps unpickleable exceptions.</span>
 
 <span class="sd">    :param exc_module: see :attr:`exc_module`.</span>
 <span class="sd">    :param exc_cls_name: see :attr:`exc_cls_name`.</span>
@@ -157,7 +134,7 @@
 <span class="sd">        ...         )</span>
 <span class="sd">        ...         pickle.dumps(exc)  # Works fine.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="c1">#: The module of the original exception.</span>
     <span class="n">exc_module</span> <span class="o">=</span> <span class="bp">None</span>
@@ -193,12 +170,12 @@
 <div class="viewcode-block" id="UnpickleableExceptionWrapper.from_exception"><a class="viewcode-back" href="../../../internals/reference/celery.utils.serialization.html#celery.utils.serialization.UnpickleableExceptionWrapper.from_exception">[docs]</a>    <span class="k">def</span> <span class="nf">from_exception</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">exc</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">cls</span><span class="p">(</span><span class="n">exc</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__module__</span><span class="p">,</span>
                    <span class="n">exc</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span>
-                   <span class="nb">getattr</span><span class="p">(</span><span class="n">exc</span><span class="p">,</span> <span class="s1">&#39;args&#39;</span><span class="p">,</span> <span class="p">[]),</span>
+                   <span class="nb">getattr</span><span class="p">(</span><span class="n">exc</span><span class="p">,</span> <span class="s1">'args'</span><span class="p">,</span> <span class="p">[]),</span>
                    <span class="n">safe_repr</span><span class="p">(</span><span class="n">exc</span><span class="p">))</span></div></div>
 
 
 <div class="viewcode-block" id="get_pickleable_exception"><a class="viewcode-back" href="../../../internals/reference/celery.utils.serialization.html#celery.utils.serialization.get_pickleable_exception">[docs]</a><span class="k">def</span> <span class="nf">get_pickleable_exception</span><span class="p">(</span><span class="n">exc</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Make sure exception is pickleable.&quot;&quot;&quot;</span>
+    <span class="sd">"""Make sure exception is pickleable."""</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">pickle</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">pickle</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">exc</span><span class="p">))</span>
     <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
@@ -221,33 +198,21 @@
 
 
 <div class="viewcode-block" id="get_pickled_exception"><a class="viewcode-back" href="../../../internals/reference/celery.utils.serialization.html#celery.utils.serialization.get_pickled_exception">[docs]</a><span class="k">def</span> <span class="nf">get_pickled_exception</span><span class="p">(</span><span class="n">exc</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Get original exception from exception pickled using</span>
-<span class="sd">    :meth:`get_pickleable_exception`.&quot;&quot;&quot;</span>
+    <span class="sd">"""Get original exception from exception pickled using</span>
+<span class="sd">    :meth:`get_pickleable_exception`."""</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">exc</span><span class="p">,</span> <span class="n">UnpickleableExceptionWrapper</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">exc</span><span class="o">.</span><span class="n">restore</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">exc</span></div>
 </pre></div>
+</div>
+</div>
+</div>
 
-          </div>
-        </div>
-      </div>
+<div class="clearer"></div>
+</div>
+
+<div class="footer" role="contentinfo">
+        © <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="../utils.html" >celery.utils</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &copy; <a href="../../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
-    </div>
-  </body>
+</body>
 </html>

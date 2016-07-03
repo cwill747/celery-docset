@@ -1,17 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Task Message Protocol v2 (Draft Spec.) &mdash; Celery 3.1.23 documentation</title>
-    
-    <link rel="stylesheet" href="../_static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>Task Message Protocol v2 (Draft Spec.) — Celery 3.1.23 documentation</title>
+<link href="../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
         VERSION:     '3.1.23',
@@ -20,52 +16,28 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="copyright" title="Copyright" href="../copyright.html" />
-    <link rel="top" title="Celery 3.1.23 documentation" href="../index.html" />
-    <link rel="up" title="Internals" href="index.html" />
-    <link rel="next" title="“The Big Instance” Refactor" href="app-overview.html" />
-    <link rel="prev" title="Task Messages" href="protocol.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="app-overview.html" title="“The Big Instance” Refactor"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="protocol.html" title="Task Messages"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Internals</a> &raquo;</li> 
-      </ul>
-    </div>  
+<script src="../_static/jquery.js" type="text/javascript"></script>
+<script src="../_static/underscore.js" type="text/javascript"></script>
+<script src="../_static/doctools.js" type="text/javascript"></script>
+<link href="../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="index.html" rel="up" title="Internals"/>
+<link href="app-overview.html" rel="next" title="“The Big Instance” Refactor"/>
+<link href="protocol.html" rel="prev" title="Task Messages"/>
+</head>
+<body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
 <div class="deck">
-
-    
-        <p>
+<p>
         This document describes the current stable version of Celery (3.1). For development docs,
         <a href="http://docs.celeryproject.org/en/master/internals/protov2.html">go here</a>.
         </p>
-    
-
 </div>
-    <div class="section" id="task-message-protocol-v2-draft-spec">
+<div class="section" id="task-message-protocol-v2-draft-spec">
 <span id="protov2draft"></span><h1>Task Message Protocol v2 (Draft Spec.)<a class="headerlink" href="#task-message-protocol-v2-draft-spec" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="notes">
 <h2>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
@@ -108,7 +80,7 @@ causes problems when the recursion limit is exceeded.</p>
 a list of signatures, each task will then pop a task off the list
 when sending the next message:</p>
 <div class="highlight-python3"><div class="highlight"><pre><span></span><span class="n">execute_task</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-<span class="n">chain</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;chain&#39;</span><span class="p">]</span>
+<span class="n">chain</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">'chain'</span><span class="p">]</span>
 <span class="k">if</span> <span class="n">chain</span><span class="p">:</span>
     <span class="n">sig</span> <span class="o">=</span> <span class="n">maybe_signature</span><span class="p">(</span><span class="n">chain</span><span class="o">.</span><span class="n">pop</span><span class="p">())</span>
     <span class="n">sig</span><span class="o">.</span><span class="n">apply_async</span><span class="p">(</span><span class="n">chain</span><span class="o">=</span><span class="n">chain</span><span class="p">)</span>
@@ -148,7 +120,7 @@ can be used for e.g. meta tasks that calls any function:</p>
 <blockquote>
 <div><p>Will huge lists in headers cause overhead?
 The downside of keeping them in the body is that intermediates
-won&#8217;t be able to introspect these values.</p>
+won’t be able to introspect these values.</p>
 </div></blockquote>
 </li>
 </ul>
@@ -157,32 +129,32 @@ won&#8217;t be able to introspect these values.</p>
 <div class="section" id="definition">
 <h2>Definition<a class="headerlink" href="#definition" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># protocol v2 implies UTC=True</span>
-<span class="c1"># &#39;class&#39; header existing means protocol is v2</span>
+<span class="c1"># 'class' header existing means protocol is v2</span>
 
 <span class="n">properties</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;correlation_id&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">uuid</span><span class="p">)</span><span class="n">task_id</span><span class="p">,</span>
-    <span class="s1">&#39;content_type&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">string</span><span class="p">)</span><span class="n">mime</span><span class="p">,</span>
-    <span class="s1">&#39;content_encoding&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">string</span><span class="p">)</span><span class="n">encoding</span><span class="p">,</span>
+    <span class="s1">'correlation_id'</span><span class="p">:</span> <span class="p">(</span><span class="n">uuid</span><span class="p">)</span><span class="n">task_id</span><span class="p">,</span>
+    <span class="s1">'content_type'</span><span class="p">:</span> <span class="p">(</span><span class="n">string</span><span class="p">)</span><span class="n">mime</span><span class="p">,</span>
+    <span class="s1">'content_encoding'</span><span class="p">:</span> <span class="p">(</span><span class="n">string</span><span class="p">)</span><span class="n">encoding</span><span class="p">,</span>
 
     <span class="c1"># optional</span>
-    <span class="s1">&#39;reply_to&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">string</span><span class="p">)</span><span class="n">queue_or_url</span><span class="p">,</span>
+    <span class="s1">'reply_to'</span><span class="p">:</span> <span class="p">(</span><span class="n">string</span><span class="p">)</span><span class="n">queue_or_url</span><span class="p">,</span>
 <span class="p">}</span>
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;lang&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">string</span><span class="p">)</span><span class="s1">&#39;py&#39;</span>
-    <span class="s1">&#39;c_type&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">string</span><span class="p">)</span><span class="n">task</span><span class="p">,</span>
+    <span class="s1">'lang'</span><span class="p">:</span> <span class="p">(</span><span class="n">string</span><span class="p">)</span><span class="s1">'py'</span>
+    <span class="s1">'c_type'</span><span class="p">:</span> <span class="p">(</span><span class="n">string</span><span class="p">)</span><span class="n">task</span><span class="p">,</span>
 
     <span class="c1"># optional</span>
-    <span class="s1">&#39;c_meth&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">string</span><span class="p">)</span><span class="n">unused</span><span class="p">,</span>
-    <span class="s1">&#39;c_shadow&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">string</span><span class="p">)</span><span class="n">replace_name</span><span class="p">,</span>
-    <span class="s1">&#39;eta&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">iso8601</span><span class="p">)</span><span class="n">eta</span><span class="p">,</span>
-    <span class="s1">&#39;expires&#39;</span><span class="p">;</span> <span class="p">(</span><span class="n">iso8601</span><span class="p">)</span><span class="n">expires</span><span class="p">,</span>
-    <span class="s1">&#39;callbacks&#39;</span><span class="p">:</span> <span class="p">(</span><span class="nb">list</span><span class="p">)</span><span class="n">Signature</span><span class="p">,</span>
-    <span class="s1">&#39;errbacks&#39;</span><span class="p">:</span> <span class="p">(</span><span class="nb">list</span><span class="p">)</span><span class="n">Signature</span><span class="p">,</span>
-    <span class="s1">&#39;chain&#39;</span><span class="p">:</span> <span class="p">(</span><span class="nb">list</span><span class="p">)</span><span class="n">Signature</span><span class="p">,</span>  <span class="c1"># non-recursive, reversed list of signatures</span>
-    <span class="s1">&#39;group&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">uuid</span><span class="p">)</span><span class="n">group_id</span><span class="p">,</span>
-    <span class="s1">&#39;chord&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">uuid</span><span class="p">)</span><span class="n">chord_id</span><span class="p">,</span>
-    <span class="s1">&#39;retries&#39;</span><span class="p">:</span> <span class="p">(</span><span class="nb">int</span><span class="p">)</span><span class="n">retries</span><span class="p">,</span>
-    <span class="s1">&#39;timelimit&#39;</span><span class="p">:</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">)(</span><span class="n">soft</span><span class="p">,</span> <span class="n">hard</span><span class="p">),</span>
+    <span class="s1">'c_meth'</span><span class="p">:</span> <span class="p">(</span><span class="n">string</span><span class="p">)</span><span class="n">unused</span><span class="p">,</span>
+    <span class="s1">'c_shadow'</span><span class="p">:</span> <span class="p">(</span><span class="n">string</span><span class="p">)</span><span class="n">replace_name</span><span class="p">,</span>
+    <span class="s1">'eta'</span><span class="p">:</span> <span class="p">(</span><span class="n">iso8601</span><span class="p">)</span><span class="n">eta</span><span class="p">,</span>
+    <span class="s1">'expires'</span><span class="p">;</span> <span class="p">(</span><span class="n">iso8601</span><span class="p">)</span><span class="n">expires</span><span class="p">,</span>
+    <span class="s1">'callbacks'</span><span class="p">:</span> <span class="p">(</span><span class="nb">list</span><span class="p">)</span><span class="n">Signature</span><span class="p">,</span>
+    <span class="s1">'errbacks'</span><span class="p">:</span> <span class="p">(</span><span class="nb">list</span><span class="p">)</span><span class="n">Signature</span><span class="p">,</span>
+    <span class="s1">'chain'</span><span class="p">:</span> <span class="p">(</span><span class="nb">list</span><span class="p">)</span><span class="n">Signature</span><span class="p">,</span>  <span class="c1"># non-recursive, reversed list of signatures</span>
+    <span class="s1">'group'</span><span class="p">:</span> <span class="p">(</span><span class="n">uuid</span><span class="p">)</span><span class="n">group_id</span><span class="p">,</span>
+    <span class="s1">'chord'</span><span class="p">:</span> <span class="p">(</span><span class="n">uuid</span><span class="p">)</span><span class="n">chord_id</span><span class="p">,</span>
+    <span class="s1">'retries'</span><span class="p">:</span> <span class="p">(</span><span class="nb">int</span><span class="p">)</span><span class="n">retries</span><span class="p">,</span>
+    <span class="s1">'timelimit'</span><span class="p">:</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">)(</span><span class="n">soft</span><span class="p">,</span> <span class="n">hard</span><span class="p">),</span>
 <span class="p">}</span>
 
 <span class="n">body</span> <span class="o">=</span> <span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
@@ -197,51 +169,33 @@ won&#8217;t be able to introspect these values.</p>
 <span class="n">basic_publish</span><span class="p">(</span>
     <span class="n">message</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">{}]),</span>
     <span class="n">application_headers</span><span class="o">=</span><span class="p">{</span>
-        <span class="s1">&#39;lang&#39;</span><span class="p">:</span> <span class="s1">&#39;py&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;c_type&#39;</span><span class="p">:</span> <span class="s1">&#39;proj.tasks.add&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;chain&#39;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s1">'lang'</span><span class="p">:</span> <span class="s1">'py'</span><span class="p">,</span>
+        <span class="s1">'c_type'</span><span class="p">:</span> <span class="s1">'proj.tasks.add'</span><span class="p">,</span>
+        <span class="s1">'chain'</span><span class="p">:</span> <span class="p">[</span>
             <span class="c1"># reversed chain list</span>
-            <span class="p">{</span><span class="s1">&#39;task&#39;</span><span class="p">:</span> <span class="s1">&#39;proj.tasks.add&#39;</span><span class="p">,</span> <span class="s1">&#39;args&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="p">)},</span>
-            <span class="p">{</span><span class="s1">&#39;task&#39;</span><span class="p">:</span> <span class="s1">&#39;proj.tasks.add&#39;</span><span class="p">,</span> <span class="s1">&#39;args&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="p">)},</span>
+            <span class="p">{</span><span class="s1">'task'</span><span class="p">:</span> <span class="s1">'proj.tasks.add'</span><span class="p">,</span> <span class="s1">'args'</span><span class="p">:</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="p">)},</span>
+            <span class="p">{</span><span class="s1">'task'</span><span class="p">:</span> <span class="s1">'proj.tasks.add'</span><span class="p">,</span> <span class="s1">'args'</span><span class="p">:</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="p">)},</span>
         <span class="p">]</span>
     <span class="p">}</span>
     <span class="n">properties</span><span class="o">=</span><span class="p">{</span>
-        <span class="s1">&#39;correlation_id&#39;</span><span class="p">:</span> <span class="n">task_id</span><span class="p">,</span>
-        <span class="s1">&#39;content_type&#39;</span><span class="p">:</span> <span class="s1">&#39;application/json&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;content_encoding&#39;</span><span class="p">:</span> <span class="s1">&#39;utf-8&#39;</span><span class="p">,</span>
+        <span class="s1">'correlation_id'</span><span class="p">:</span> <span class="n">task_id</span><span class="p">,</span>
+        <span class="s1">'content_type'</span><span class="p">:</span> <span class="s1">'application/json'</span><span class="p">,</span>
+        <span class="s1">'content_encoding'</span><span class="p">:</span> <span class="s1">'utf-8'</span><span class="p">,</span>
     <span class="p">}</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
+</div>
+</div>
+</div>
 
+<div class="clearer"></div>
+</div>
 
-          </div>
-        </div>
-      </div>
+<div class="footer" role="contentinfo">
+        © <a href="../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="app-overview.html" title="“The Big Instance” Refactor"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="protocol.html" title="Task Messages"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" >Internals</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &copy; <a href="../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
-    </div>
-  </body>
+</body>
 </html>

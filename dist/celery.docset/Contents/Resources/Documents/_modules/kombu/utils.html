@@ -1,17 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>kombu.utils &mdash; Celery 3.1.23 documentation</title>
-    
-    <link rel="stylesheet" href="../../_static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>kombu.utils — Celery 3.1.23 documentation</title>
+<link href="../../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
         VERSION:     '3.1.23',
@@ -20,51 +16,33 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="copyright" title="Copyright" href="../../copyright.html" />
-    <link rel="top" title="Celery 3.1.23 documentation" href="../../index.html" />
-    <link rel="up" title="Module code" href="../index.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
-      </ul>
-    </div>  
+<script src="../../_static/jquery.js" type="text/javascript"></script>
+<script src="../../_static/underscore.js" type="text/javascript"></script>
+<script src="../../_static/doctools.js" type="text/javascript"></script>
+<link href="../../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="../index.html" rel="up" title="Module code"/>
+</head>
+<body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
 <div class="deck">
-
-    
-        <p>
+<p>
         This document describes the current stable version of Celery (3.1). For development docs,
         <a href="http://docs.celeryproject.org/en/master/_modules/kombu/utils.html">go here</a>.
         </p>
-    
-
 </div>
-    <h1>Source code for kombu.utils</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;</span>
+<h1>Source code for kombu.utils</h1><div class="highlight"><pre>
+<span></span><span class="sd">"""</span>
 <span class="sd">kombu.utils</span>
 <span class="sd">===========</span>
 
 <span class="sd">Internal utilities.</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">print_function</span>
 
 <span class="kn">import</span> <span class="nn">importlib</span>
@@ -99,15 +77,15 @@
     <span class="n">FILENO_ERRORS</span> <span class="o">=</span> <span class="p">(</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">)</span>  <span class="c1"># noqa</span>
 
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;EqualityDict&#39;</span><span class="p">,</span> <span class="s1">&#39;say&#39;</span><span class="p">,</span> <span class="s1">&#39;uuid&#39;</span><span class="p">,</span> <span class="s1">&#39;kwdict&#39;</span><span class="p">,</span> <span class="s1">&#39;maybe_list&#39;</span><span class="p">,</span>
-           <span class="s1">&#39;fxrange&#39;</span><span class="p">,</span> <span class="s1">&#39;fxrangemax&#39;</span><span class="p">,</span> <span class="s1">&#39;retry_over_time&#39;</span><span class="p">,</span>
-           <span class="s1">&#39;emergency_dump_state&#39;</span><span class="p">,</span> <span class="s1">&#39;cached_property&#39;</span><span class="p">,</span>
-           <span class="s1">&#39;reprkwargs&#39;</span><span class="p">,</span> <span class="s1">&#39;reprcall&#39;</span><span class="p">,</span> <span class="s1">&#39;nested&#39;</span><span class="p">,</span> <span class="s1">&#39;fileno&#39;</span><span class="p">,</span> <span class="s1">&#39;maybe_fileno&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'EqualityDict'</span><span class="p">,</span> <span class="s1">'say'</span><span class="p">,</span> <span class="s1">'uuid'</span><span class="p">,</span> <span class="s1">'kwdict'</span><span class="p">,</span> <span class="s1">'maybe_list'</span><span class="p">,</span>
+           <span class="s1">'fxrange'</span><span class="p">,</span> <span class="s1">'fxrangemax'</span><span class="p">,</span> <span class="s1">'retry_over_time'</span><span class="p">,</span>
+           <span class="s1">'emergency_dump_state'</span><span class="p">,</span> <span class="s1">'cached_property'</span><span class="p">,</span>
+           <span class="s1">'reprkwargs'</span><span class="p">,</span> <span class="s1">'reprcall'</span><span class="p">,</span> <span class="s1">'nested'</span><span class="p">,</span> <span class="s1">'fileno'</span><span class="p">,</span> <span class="s1">'maybe_fileno'</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="symbol_by_name"><a class="viewcode-back" href="../../internals/reference/celery.utils.imports.html#celery.utils.symbol_by_name">[docs]</a><span class="k">def</span> <span class="nf">symbol_by_name</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">aliases</span><span class="o">=</span><span class="p">{},</span> <span class="n">imp</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">package</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
-                   <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Get symbol by qualified name.</span>
+                   <span class="n">sep</span><span class="o">=</span><span class="s1">'.'</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">"""Get symbol by qualified name.</span>
 
 <span class="sd">    The name should be the full dot-separated path to the class::</span>
 
@@ -118,7 +96,7 @@
 <span class="sd">        celery.concurrency.processes.TaskPool</span>
 <span class="sd">                                    ^- class name</span>
 
-<span class="sd">    or using &#39;:&#39; to separate module and symbol::</span>
+<span class="sd">    or using ':' to separate module and symbol::</span>
 
 <span class="sd">        celery.concurrency.processes:TaskPool</span>
 
@@ -127,19 +105,19 @@
 
 <span class="sd">    Examples:</span>
 
-<span class="sd">        &gt;&gt;&gt; symbol_by_name(&#39;celery.concurrency.processes.TaskPool&#39;)</span>
-<span class="sd">        &lt;class &#39;celery.concurrency.processes.TaskPool&#39;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; symbol_by_name('celery.concurrency.processes.TaskPool')</span>
+<span class="sd">        &lt;class 'celery.concurrency.processes.TaskPool'&gt;</span>
 
-<span class="sd">        &gt;&gt;&gt; symbol_by_name(&#39;default&#39;, {</span>
-<span class="sd">        ...     &#39;default&#39;: &#39;celery.concurrency.processes.TaskPool&#39;})</span>
-<span class="sd">        &lt;class &#39;celery.concurrency.processes.TaskPool&#39;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; symbol_by_name('default', {</span>
+<span class="sd">        ...     'default': 'celery.concurrency.processes.TaskPool'})</span>
+<span class="sd">        &lt;class 'celery.concurrency.processes.TaskPool'&gt;</span>
 
 <span class="sd">        # Does not try to look up non-string names.</span>
 <span class="sd">        &gt;&gt;&gt; from celery.concurrency.processes import TaskPool</span>
 <span class="sd">        &gt;&gt;&gt; symbol_by_name(TaskPool) is TaskPool</span>
 <span class="sd">        True</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">imp</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
         <span class="n">imp</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span>
 
@@ -147,7 +125,7 @@
         <span class="k">return</span> <span class="n">name</span>                                 <span class="c1"># already a class</span>
 
     <span class="n">name</span> <span class="o">=</span> <span class="n">aliases</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="ow">or</span> <span class="n">name</span>
-    <span class="n">sep</span> <span class="o">=</span> <span class="s1">&#39;:&#39;</span> <span class="k">if</span> <span class="s1">&#39;:&#39;</span> <span class="ow">in</span> <span class="n">name</span> <span class="k">else</span> <span class="n">sep</span>
+    <span class="n">sep</span> <span class="o">=</span> <span class="s1">':'</span> <span class="k">if</span> <span class="s1">':'</span> <span class="ow">in</span> <span class="n">name</span> <span class="k">else</span> <span class="n">sep</span>
     <span class="n">module_name</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">cls_name</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">rpartition</span><span class="p">(</span><span class="n">sep</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">module_name</span><span class="p">:</span>
         <span class="n">cls_name</span><span class="p">,</span> <span class="n">module_name</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">package</span> <span class="k">if</span> <span class="n">package</span> <span class="k">else</span> <span class="n">cls_name</span>
@@ -156,7 +134,7 @@
             <span class="n">module</span> <span class="o">=</span> <span class="n">imp</span><span class="p">(</span><span class="n">module_name</span><span class="p">,</span> <span class="n">package</span><span class="o">=</span><span class="n">package</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
             <span class="n">reraise</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span>
-                    <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Couldn&#39;t import {0!r}: {1}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">exc</span><span class="p">)),</span>
+                    <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Couldn't import {0!r}: {1}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">exc</span><span class="p">)),</span>
                     <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">2</span><span class="p">])</span>
         <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">cls_name</span><span class="p">)</span> <span class="k">if</span> <span class="n">cls_name</span> <span class="k">else</span> <span class="n">module</span>
     <span class="k">except</span> <span class="p">(</span><span class="ne">ImportError</span><span class="p">,</span> <span class="ne">AttributeError</span><span class="p">):</span>
@@ -166,9 +144,9 @@
 
 
 <span class="k">class</span> <span class="nc">HashedSeq</span><span class="p">(</span><span class="nb">list</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;type used for hash() to make sure the hash is not generated</span>
-<span class="sd">    multiple times.&quot;&quot;&quot;</span>
-    <span class="n">__slots__</span> <span class="o">=</span> <span class="s1">&#39;hashvalue&#39;</span>
+    <span class="sd">"""type used for hash() to make sure the hash is not generated</span>
+<span class="sd">    multiple times."""</span>
+    <span class="n">__slots__</span> <span class="o">=</span> <span class="s1">'hashvalue'</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">seq</span><span class="p">):</span>
         <span class="bp">self</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">seq</span>
@@ -213,11 +191,11 @@
 
 
 <span class="k">def</span> <span class="nf">uuid</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;Generate a unique id, having - hopefully - a very small chance of</span>
+    <span class="sd">"""Generate a unique id, having - hopefully - a very small chance of</span>
 <span class="sd">    collision.</span>
 
 <span class="sd">    For now this is provided by :func:`uuid.uuid4`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid4</span><span class="p">())</span>
 <span class="n">gen_unique_id</span> <span class="o">=</span> <span class="n">uuid</span>
 
@@ -228,20 +206,20 @@
         <span class="k">return</span> <span class="n">kwargs</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">kwdict</span><span class="p">(</span><span class="n">kwargs</span><span class="p">):</span>  <span class="c1"># pragma: no cover  # noqa</span>
-        <span class="sd">&quot;&quot;&quot;Make sure keyword arguments are not in Unicode.</span>
+        <span class="sd">"""Make sure keyword arguments are not in Unicode.</span>
 
 <span class="sd">        This should be fixed in newer Python versions,</span>
 <span class="sd">        see: http://bugs.python.org/issue4978.</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="nb">dict</span><span class="p">((</span><span class="n">key</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">),</span> <span class="n">value</span><span class="p">)</span>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">((</span><span class="n">key</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">'utf-8'</span><span class="p">),</span> <span class="n">value</span><span class="p">)</span>
                     <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">items</span><span class="p">(</span><span class="n">kwargs</span><span class="p">))</span>
 
 
 <span class="k">def</span> <span class="nf">maybe_list</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">[]</span>
-    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="s1">&#39;__iter__&#39;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="s1">'__iter__'</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">v</span>
     <span class="k">return</span> <span class="p">[</span><span class="n">v</span><span class="p">]</span>
 
@@ -274,7 +252,7 @@
 <span class="k">def</span> <span class="nf">retry_over_time</span><span class="p">(</span><span class="n">fun</span><span class="p">,</span> <span class="n">catch</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[],</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{},</span> <span class="n">errback</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
                     <span class="n">max_retries</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">interval_start</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">interval_step</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
                     <span class="n">interval_max</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Retry the function over and over until max retries is exceeded.</span>
+    <span class="sd">"""Retry the function over and over until max retries is exceeded.</span>
 
 <span class="sd">    For each retry we sleep a for a while before we try again, this interval</span>
 <span class="sd">    is increased for every retry until the max seconds is reached.</span>
@@ -296,7 +274,7 @@
 <span class="sd">        retry.</span>
 <span class="sd">    :keyword interval_max: Maximum number of seconds to sleep between retries.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">retries</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">interval_range</span> <span class="o">=</span> <span class="n">fxrange</span><span class="p">(</span><span class="n">interval_start</span><span class="p">,</span>
                              <span class="n">interval_max</span> <span class="o">+</span> <span class="n">interval_start</span><span class="p">,</span>
@@ -328,13 +306,13 @@
         <span class="kn">import</span> <span class="nn">pickle</span>
         <span class="n">dump</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span>
     <span class="n">persist</span> <span class="o">=</span> <span class="n">mktemp</span><span class="p">()</span>
-    <span class="n">say</span><span class="p">(</span><span class="s1">&#39;EMERGENCY DUMP STATE TO FILE -&gt; {0} &lt;-&#39;</span><span class="p">,</span> <span class="n">persist</span><span class="p">)</span>
-    <span class="n">fh</span> <span class="o">=</span> <span class="n">open_file</span><span class="p">(</span><span class="n">persist</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+    <span class="n">say</span><span class="p">(</span><span class="s1">'EMERGENCY DUMP STATE TO FILE -&gt; {0} &lt;-'</span><span class="p">,</span> <span class="n">persist</span><span class="p">)</span>
+    <span class="n">fh</span> <span class="o">=</span> <span class="n">open_file</span><span class="p">(</span><span class="n">persist</span><span class="p">,</span> <span class="s1">'w'</span><span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">dump</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">fh</span><span class="p">,</span> <span class="n">protocol</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-            <span class="n">say</span><span class="p">(</span><span class="s1">&#39;Cannot pickle state: {0!r}. Fallback to pformat.&#39;</span><span class="p">,</span> <span class="n">exc</span><span class="p">)</span>
+            <span class="n">say</span><span class="p">(</span><span class="s1">'Cannot pickle state: {0!r}. Fallback to pformat.'</span><span class="p">,</span> <span class="n">exc</span><span class="p">)</span>
             <span class="n">fh</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">default_encode</span><span class="p">(</span><span class="n">pformat</span><span class="p">(</span><span class="n">state</span><span class="p">)))</span>
     <span class="k">finally</span><span class="p">:</span>
         <span class="n">fh</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
@@ -343,7 +321,7 @@
 
 
 <div class="viewcode-block" id="cached_property"><a class="viewcode-back" href="../../internals/reference/celery.utils.html#celery.utils.cached_property">[docs]</a><span class="k">class</span> <span class="nc">cached_property</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Property descriptor that caches the return value</span>
+    <span class="sd">"""Property descriptor that caches the return value</span>
 <span class="sd">    of the get function.</span>
 
 <span class="sd">    *Examples*</span>
@@ -357,16 +335,16 @@
 <span class="sd">        @connection.setter  # Prepares stored value</span>
 <span class="sd">        def connection(self, value):</span>
 <span class="sd">            if value is None:</span>
-<span class="sd">                raise TypeError(&#39;Connection must be a connection&#39;)</span>
+<span class="sd">                raise TypeError('Connection must be a connection')</span>
 <span class="sd">            return value</span>
 
 <span class="sd">        @connection.deleter</span>
 <span class="sd">        def connection(self, value):</span>
 <span class="sd">            # Additional action to do at del(self.attr)</span>
 <span class="sd">            if value is not None:</span>
-<span class="sd">                print(&#39;Connection {0!r} deleted&#39;.format(value)</span>
+<span class="sd">                print('Connection {0!r} deleted'.format(value)</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fget</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">fset</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">fdel</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__get</span> <span class="o">=</span> <span class="n">fget</span>
@@ -410,14 +388,14 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__get</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__set</span><span class="p">,</span> <span class="n">fdel</span><span class="p">)</span></div></div>
 
 
-<span class="k">def</span> <span class="nf">reprkwargs</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;, &#39;</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;{0}={1}&#39;</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">reprkwargs</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">', '</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">'{0}={1}'</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">fmt</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">_safe_repr</span><span class="p">(</span><span class="n">v</span><span class="p">))</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">items</span><span class="p">(</span><span class="n">kwargs</span><span class="p">))</span>
 
 
-<span class="k">def</span> <span class="nf">reprcall</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(),</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{},</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;, &#39;</span><span class="p">):</span>
-    <span class="k">return</span> <span class="s1">&#39;{0}({1}{2}{3})&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+<span class="k">def</span> <span class="nf">reprcall</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(),</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{},</span> <span class="n">sep</span><span class="o">=</span><span class="s1">', '</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s1">'{0}({1}{2}{3})'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
         <span class="n">name</span><span class="p">,</span> <span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">_safe_repr</span><span class="p">,</span> <span class="n">args</span> <span class="ow">or</span> <span class="p">())),</span>
-        <span class="p">(</span><span class="n">args</span> <span class="ow">and</span> <span class="n">kwargs</span><span class="p">)</span> <span class="ow">and</span> <span class="n">sep</span> <span class="ow">or</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="p">(</span><span class="n">args</span> <span class="ow">and</span> <span class="n">kwargs</span><span class="p">)</span> <span class="ow">and</span> <span class="n">sep</span> <span class="ow">or</span> <span class="s1">''</span><span class="p">,</span>
         <span class="n">reprkwargs</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">sep</span><span class="p">),</span>
     <span class="p">)</span>
 
@@ -425,8 +403,8 @@
 <span class="nd">@contextmanager</span>
 <span class="k">def</span> <span class="nf">nested</span><span class="p">(</span><span class="o">*</span><span class="n">managers</span><span class="p">):</span>  <span class="c1"># pragma: no cover</span>
     <span class="c1"># flake8: noqa</span>
-    <span class="sd">&quot;&quot;&quot;Combine multiple context managers into a single nested</span>
-<span class="sd">    context manager.&quot;&quot;&quot;</span>
+    <span class="sd">"""Combine multiple context managers into a single nested</span>
+<span class="sd">    context manager."""</span>
     <span class="n">exits</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="nb">vars</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">exc</span> <span class="o">=</span> <span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
@@ -449,7 +427,7 @@
                 <span class="k">except</span><span class="p">:</span>
                     <span class="n">exc</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()</span>
             <span class="k">if</span> <span class="n">exc</span> <span class="o">!=</span> <span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">):</span>
-                <span class="c1"># Don&#39;t rely on sys.exc_info() still containing</span>
+                <span class="c1"># Don't rely on sys.exc_info() still containing</span>
                 <span class="c1"># the right information. Another exception may</span>
                 <span class="c1"># have been raised and caught by an exit method</span>
                 <span class="n">reraise</span><span class="p">(</span><span class="n">exc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">exc</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">exc</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
@@ -458,7 +436,7 @@
 
 
 <span class="k">def</span> <span class="nf">shufflecycle</span><span class="p">(</span><span class="n">it</span><span class="p">):</span>
-    <span class="n">it</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">it</span><span class="p">)</span>  <span class="c1"># don&#39;t modify callers list</span>
+    <span class="n">it</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">it</span><span class="p">)</span>  <span class="c1"># don't modify callers list</span>
     <span class="n">shuffle</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span>
     <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">repeat</span><span class="p">(</span><span class="bp">None</span><span class="p">):</span>
         <span class="n">shuffle</span><span class="p">(</span><span class="n">it</span><span class="p">)</span>
@@ -489,13 +467,13 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">repr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__value__</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s1">&#39;&lt;promise: 0x{0:x}&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__contract__</span><span class="p">))</span>
+            <span class="k">return</span> <span class="s1">'&lt;promise: 0x{0:x}&gt;'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__contract__</span><span class="p">))</span>
 
 
-<span class="k">def</span> <span class="nf">escape_regex</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">white</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
-    <span class="c1"># what&#39;s up with re.escape? that code must be neglected or someting</span>
-    <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">c</span> <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">isalnum</span><span class="p">()</span> <span class="ow">or</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">white</span>
-                   <span class="k">else</span> <span class="p">(</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">000&#39;</span> <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="s1">&#39;</span><span class="se">\000</span><span class="s1">&#39;</span> <span class="k">else</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">c</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">escape_regex</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">white</span><span class="o">=</span><span class="s1">''</span><span class="p">):</span>
+    <span class="c1"># what's up with re.escape? that code must be neglected or someting</span>
+    <span class="k">return</span> <span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">c</span> <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">isalnum</span><span class="p">()</span> <span class="ow">or</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">white</span>
+                   <span class="k">else</span> <span class="p">(</span><span class="s1">'</span><span class="se">\\</span><span class="s1">000'</span> <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="s1">'</span><span class="se">\000</span><span class="s1">'</span> <span class="k">else</span> <span class="s1">'</span><span class="se">\\</span><span class="s1">'</span> <span class="o">+</span> <span class="n">c</span><span class="p">)</span>
                    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">p</span><span class="p">)</span>
 
 
@@ -506,32 +484,21 @@
 
 
 <span class="k">def</span> <span class="nf">maybe_fileno</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Get object fileno, or :const:`None` if not defined.&quot;&quot;&quot;</span>
+    <span class="sd">"""Get object fileno, or :const:`None` if not defined."""</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">fileno</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
     <span class="k">except</span> <span class="n">FILENO_ERRORS</span><span class="p">:</span>
         <span class="k">pass</span>
 </pre></div>
+</div>
+</div>
+</div>
 
-          </div>
-        </div>
-      </div>
+<div class="clearer"></div>
+</div>
+
+<div class="footer" role="contentinfo">
+        © <a href="../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &copy; <a href="../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
-    </div>
-  </body>
+</body>
 </html>

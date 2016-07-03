@@ -1,17 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>celery.beat &mdash; Celery 3.1.23 documentation</title>
-    
-    <link rel="stylesheet" href="../../_static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>celery.beat — Celery 3.1.23 documentation</title>
+<link href="../../_static/celery.css" rel="stylesheet" type="text/css"/>
+<link href="../../_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
         VERSION:     '3.1.23',
@@ -20,52 +16,34 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="copyright" title="Copyright" href="../../copyright.html" />
-    <link rel="top" title="Celery 3.1.23 documentation" href="../../index.html" />
-    <link rel="up" title="Module code" href="../index.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
-      </ul>
-    </div>  
+<script src="../../_static/jquery.js" type="text/javascript"></script>
+<script src="../../_static/underscore.js" type="text/javascript"></script>
+<script src="../../_static/doctools.js" type="text/javascript"></script>
+<link href="../../copyright.html" rel="copyright" title="Copyright"/>
+<link href="../../index.html" rel="top" title="Celery 3.1.23 documentation"/>
+<link href="../index.html" rel="up" title="Module code"/>
+</head>
+<body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body" role="main">
 <div class="deck">
-
-    
-        <p>
+<p>
         This document describes the current stable version of Celery (3.1). For development docs,
         <a href="http://docs.celeryproject.org/en/master/_modules/celery/beat.html">go here</a>.
         </p>
-    
-
 </div>
-    <h1>Source code for celery.beat</h1><div class="highlight"><pre>
+<h1>Source code for celery.beat</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="sd">    celery.beat</span>
 <span class="sd">    ~~~~~~~~~~~</span>
 
 <span class="sd">    The periodic task scheduler.</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
 
 <span class="kn">import</span> <span class="nn">errno</span>
@@ -92,8 +70,8 @@
 <span class="kn">from</span> <span class="nn">.utils.timeutils</span> <span class="kn">import</span> <span class="n">humanize_seconds</span>
 <span class="kn">from</span> <span class="nn">.utils.log</span> <span class="kn">import</span> <span class="n">get_logger</span><span class="p">,</span> <span class="n">iter_open_logger_fds</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SchedulingError&#39;</span><span class="p">,</span> <span class="s1">&#39;ScheduleEntry&#39;</span><span class="p">,</span> <span class="s1">&#39;Scheduler&#39;</span><span class="p">,</span>
-           <span class="s1">&#39;PersistentScheduler&#39;</span><span class="p">,</span> <span class="s1">&#39;Service&#39;</span><span class="p">,</span> <span class="s1">&#39;EmbeddedService&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'SchedulingError'</span><span class="p">,</span> <span class="s1">'ScheduleEntry'</span><span class="p">,</span> <span class="s1">'Scheduler'</span><span class="p">,</span>
+           <span class="s1">'PersistentScheduler'</span><span class="p">,</span> <span class="s1">'Service'</span><span class="p">,</span> <span class="s1">'EmbeddedService'</span><span class="p">]</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
 <span class="n">debug</span><span class="p">,</span> <span class="n">info</span><span class="p">,</span> <span class="n">error</span><span class="p">,</span> <span class="n">warning</span> <span class="o">=</span> <span class="p">(</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">,</span> <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">,</span>
@@ -103,11 +81,11 @@
 
 
 <div class="viewcode-block" id="SchedulingError"><a class="viewcode-back" href="../../reference/celery.beat.html#celery.apps.beat.SchedulingError">[docs]</a><span class="k">class</span> <span class="nc">SchedulingError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;An error occured while scheduling a task.&quot;&quot;&quot;</span></div>
+    <span class="sd">"""An error occured while scheduling a task."""</span></div>
 
 
 <div class="viewcode-block" id="ScheduleEntry"><a class="viewcode-back" href="../../reference/celery.beat.html#celery.apps.beat.ScheduleEntry">[docs]</a><span class="k">class</span> <span class="nc">ScheduleEntry</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;An entry in the scheduler.</span>
+    <span class="sd">"""An entry in the scheduler.</span>
 
 <span class="sd">    :keyword name: see :attr:`name`.</span>
 <span class="sd">    :keyword schedule: see :attr:`schedule`.</span>
@@ -118,7 +96,7 @@
 <span class="sd">    :keyword total_run_count: see :attr:`total_run_count`.</span>
 <span class="sd">    :keyword relative: Is the time relative to when the server starts?</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="c1">#: The task name</span>
     <span class="n">name</span> <span class="o">=</span> <span class="bp">None</span>
@@ -158,8 +136,8 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">schedule</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">schedule</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">_next_instance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">last_run_at</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return a new instance of the same class, but with</span>
-<span class="sd">        its date and count fields updated.&quot;&quot;&quot;</span>
+        <span class="sd">"""Return a new instance of the same class, but with</span>
+<span class="sd">        its date and count fields updated."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="p">(</span><span class="o">**</span><span class="nb">dict</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>
             <span class="n">last_run_at</span><span class="o">=</span><span class="n">last_run_at</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_default_now</span><span class="p">(),</span>
@@ -174,32 +152,32 @@
         <span class="p">)</span>
 
 <div class="viewcode-block" id="ScheduleEntry.update"><a class="viewcode-back" href="../../reference/celery.beat.html#celery.apps.beat.ScheduleEntry.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Update values from another entry.</span>
+        <span class="sd">"""Update values from another entry.</span>
 
-<span class="sd">        Does only update &quot;editable&quot; fields (task, schedule, args, kwargs,</span>
+<span class="sd">        Does only update "editable" fields (task, schedule, args, kwargs,</span>
 <span class="sd">        options).</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;task&#39;</span><span class="p">:</span> <span class="n">other</span><span class="o">.</span><span class="n">task</span><span class="p">,</span> <span class="s1">&#39;schedule&#39;</span><span class="p">:</span> <span class="n">other</span><span class="o">.</span><span class="n">schedule</span><span class="p">,</span>
-                              <span class="s1">&#39;args&#39;</span><span class="p">:</span> <span class="n">other</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="s1">&#39;kwargs&#39;</span><span class="p">:</span> <span class="n">other</span><span class="o">.</span><span class="n">kwargs</span><span class="p">,</span>
-                              <span class="s1">&#39;options&#39;</span><span class="p">:</span> <span class="n">other</span><span class="o">.</span><span class="n">options</span><span class="p">})</span></div>
+<span class="sd">        """</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">'task'</span><span class="p">:</span> <span class="n">other</span><span class="o">.</span><span class="n">task</span><span class="p">,</span> <span class="s1">'schedule'</span><span class="p">:</span> <span class="n">other</span><span class="o">.</span><span class="n">schedule</span><span class="p">,</span>
+                              <span class="s1">'args'</span><span class="p">:</span> <span class="n">other</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="s1">'kwargs'</span><span class="p">:</span> <span class="n">other</span><span class="o">.</span><span class="n">kwargs</span><span class="p">,</span>
+                              <span class="s1">'options'</span><span class="p">:</span> <span class="n">other</span><span class="o">.</span><span class="n">options</span><span class="p">})</span></div>
 
 <div class="viewcode-block" id="ScheduleEntry.is_due"><a class="viewcode-back" href="../../reference/celery.beat.html#celery.apps.beat.ScheduleEntry.is_due">[docs]</a>    <span class="k">def</span> <span class="nf">is_due</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;See :meth:`~celery.schedule.schedule.is_due`.&quot;&quot;&quot;</span>
+        <span class="sd">"""See :meth:`~celery.schedule.schedule.is_due`."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">schedule</span><span class="o">.</span><span class="n">is_due</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">last_run_at</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="n">items</span><span class="p">(</span><span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">)))</span>
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s1">&#39;&lt;Entry: {0.name} {call} {0.schedule}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="k">return</span> <span class="s1">'&lt;Entry: {0.name} {call} {0.schedule}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>
             <span class="n">call</span><span class="o">=</span><span class="n">reprcall</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">task</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span> <span class="ow">or</span> <span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span> <span class="ow">or</span> <span class="p">{}),</span>
         <span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Scheduler"><a class="viewcode-back" href="../../reference/celery.beat.html#celery.apps.beat.Scheduler">[docs]</a><span class="k">class</span> <span class="nc">Scheduler</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Scheduler for periodic tasks.</span>
+    <span class="sd">"""Scheduler for periodic tasks.</span>
 
 <span class="sd">    The :program:`celery beat` program may instantiate this class</span>
 <span class="sd">    multiple times for introspection purposes, but then with the</span>
@@ -210,7 +188,7 @@
 <span class="sd">    :keyword max_interval: see :attr:`max_interval`.</span>
 <span class="sd">    :keyword lazy: Do not set up the schedule.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">Entry</span> <span class="o">=</span> <span class="n">ScheduleEntry</span>
 
     <span class="c1">#: The schedule dict/shelve.</span>
@@ -248,33 +226,33 @@
         <span class="n">entries</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">CELERY_TASK_RESULT_EXPIRES</span> <span class="ow">and</span> \
                 <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">supports_autoexpire</span><span class="p">:</span>
-            <span class="k">if</span> <span class="s1">&#39;celery.backend_cleanup&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
-                <span class="n">entries</span><span class="p">[</span><span class="s1">&#39;celery.backend_cleanup&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-                    <span class="s1">&#39;task&#39;</span><span class="p">:</span> <span class="s1">&#39;celery.backend_cleanup&#39;</span><span class="p">,</span>
-                    <span class="s1">&#39;schedule&#39;</span><span class="p">:</span> <span class="n">crontab</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">,</span> <span class="s1">&#39;4&#39;</span><span class="p">,</span> <span class="s1">&#39;*&#39;</span><span class="p">),</span>
-                    <span class="s1">&#39;options&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;expires&#39;</span><span class="p">:</span> <span class="mi">12</span> <span class="o">*</span> <span class="mi">3600</span><span class="p">}}</span>
+            <span class="k">if</span> <span class="s1">'celery.backend_cleanup'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+                <span class="n">entries</span><span class="p">[</span><span class="s1">'celery.backend_cleanup'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="s1">'task'</span><span class="p">:</span> <span class="s1">'celery.backend_cleanup'</span><span class="p">,</span>
+                    <span class="s1">'schedule'</span><span class="p">:</span> <span class="n">crontab</span><span class="p">(</span><span class="s1">'0'</span><span class="p">,</span> <span class="s1">'4'</span><span class="p">,</span> <span class="s1">'*'</span><span class="p">),</span>
+                    <span class="s1">'options'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'expires'</span><span class="p">:</span> <span class="mi">12</span> <span class="o">*</span> <span class="mi">3600</span><span class="p">}}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">update_from_dict</span><span class="p">(</span><span class="n">entries</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Scheduler.maybe_due"><a class="viewcode-back" href="../../reference/celery.beat.html#celery.apps.beat.Scheduler.maybe_due">[docs]</a>    <span class="k">def</span> <span class="nf">maybe_due</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entry</span><span class="p">,</span> <span class="n">publisher</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="n">is_due</span><span class="p">,</span> <span class="n">next_time_to_run</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">is_due</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="n">is_due</span><span class="p">:</span>
-            <span class="n">info</span><span class="p">(</span><span class="s1">&#39;Scheduler: Sending due task </span><span class="si">%s</span><span class="s1"> (</span><span class="si">%s</span><span class="s1">)&#39;</span><span class="p">,</span> <span class="n">entry</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">entry</span><span class="o">.</span><span class="n">task</span><span class="p">)</span>
+            <span class="n">info</span><span class="p">(</span><span class="s1">'Scheduler: Sending due task </span><span class="si">%s</span><span class="s1"> (</span><span class="si">%s</span><span class="s1">)'</span><span class="p">,</span> <span class="n">entry</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">entry</span><span class="o">.</span><span class="n">task</span><span class="p">)</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply_async</span><span class="p">(</span><span class="n">entry</span><span class="p">,</span> <span class="n">publisher</span><span class="o">=</span><span class="n">publisher</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-                <span class="n">error</span><span class="p">(</span><span class="s1">&#39;Message Error: </span><span class="si">%s</span><span class="se">\n</span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span>
+                <span class="n">error</span><span class="p">(</span><span class="s1">'Message Error: </span><span class="si">%s</span><span class="se">\n</span><span class="si">%s</span><span class="s1">'</span><span class="p">,</span>
                       <span class="n">exc</span><span class="p">,</span> <span class="n">traceback</span><span class="o">.</span><span class="n">format_stack</span><span class="p">(),</span> <span class="n">exc_info</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> sent. id-&gt;</span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">entry</span><span class="o">.</span><span class="n">task</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+                <span class="n">debug</span><span class="p">(</span><span class="s1">'</span><span class="si">%s</span><span class="s1"> sent. id-&gt;</span><span class="si">%s</span><span class="s1">'</span><span class="p">,</span> <span class="n">entry</span><span class="o">.</span><span class="n">task</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">next_time_to_run</span></div>
 
 <div class="viewcode-block" id="Scheduler.tick"><a class="viewcode-back" href="../../reference/celery.beat.html#celery.apps.beat.Scheduler.tick">[docs]</a>    <span class="k">def</span> <span class="nf">tick</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Run a tick, that is one iteration of the scheduler.</span>
+        <span class="sd">"""Run a tick, that is one iteration of the scheduler.</span>
 
 <span class="sd">        Executes all due tasks.</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">remaining_times</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">values</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">schedule</span><span class="p">):</span>
@@ -300,7 +278,7 @@
 
 <div class="viewcode-block" id="Scheduler.apply_async"><a class="viewcode-back" href="../../reference/celery.beat.html#celery.apps.beat.Scheduler.apply_async">[docs]</a>    <span class="k">def</span> <span class="nf">apply_async</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entry</span><span class="p">,</span> <span class="n">publisher</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># Update timestamps and run counts before we actually execute,</span>
-        <span class="c1"># so we have that done if an exception is raised (doesn&#39;t schedule</span>
+        <span class="c1"># so we have that done if an exception is raised (doesn't schedule</span>
         <span class="c1"># forever.)</span>
         <span class="n">entry</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span>
         <span class="n">task</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tasks</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">entry</span><span class="o">.</span><span class="n">task</span><span class="p">)</span>
@@ -316,7 +294,7 @@
                                         <span class="o">**</span><span class="n">entry</span><span class="o">.</span><span class="n">options</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
             <span class="n">reraise</span><span class="p">(</span><span class="n">SchedulingError</span><span class="p">,</span> <span class="n">SchedulingError</span><span class="p">(</span>
-                <span class="s2">&quot;Couldn&#39;t apply scheduled task {0.name}: {exc}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="s2">"Couldn't apply scheduled task {0.name}: {exc}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                     <span class="n">entry</span><span class="p">,</span> <span class="n">exc</span><span class="o">=</span><span class="n">exc</span><span class="p">)),</span> <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">2</span><span class="p">])</span>
         <span class="k">finally</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_tasks_since_sync</span> <span class="o">+=</span> <span class="mi">1</span>
@@ -332,7 +310,7 @@
 
     <span class="k">def</span> <span class="nf">_do_sync</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;beat: Synchronizing schedule...&#39;</span><span class="p">)</span>
+            <span class="n">debug</span><span class="p">(</span><span class="s1">'beat: Synchronizing schedule...'</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">sync</span><span class="p">()</span>
         <span class="k">finally</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_last_sync</span> <span class="o">=</span> <span class="n">monotonic</span><span class="p">()</span>
@@ -378,10 +356,10 @@
 
     <span class="k">def</span> <span class="nf">_ensure_connected</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># callback called for each retry while the connection</span>
-        <span class="c1"># can&#39;t be established.</span>
+        <span class="c1"># can't be established.</span>
         <span class="k">def</span> <span class="nf">_error_handler</span><span class="p">(</span><span class="n">exc</span><span class="p">,</span> <span class="n">interval</span><span class="p">):</span>
-            <span class="n">error</span><span class="p">(</span><span class="s1">&#39;beat: Connection error: </span><span class="si">%s</span><span class="s1">. &#39;</span>
-                  <span class="s1">&#39;Trying again in </span><span class="si">%s</span><span class="s1"> seconds...&#39;</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span> <span class="n">interval</span><span class="p">)</span>
+            <span class="n">error</span><span class="p">(</span><span class="s1">'beat: Connection error: </span><span class="si">%s</span><span class="s1">. '</span>
+                  <span class="s1">'Trying again in </span><span class="si">%s</span><span class="s1"> seconds...'</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span> <span class="n">interval</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">ensure_connection</span><span class="p">(</span>
             <span class="n">_error_handler</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">BROKER_CONNECTION_MAX_RETRIES</span>
@@ -404,17 +382,17 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s1">&#39;&#39;</span></div>
+        <span class="k">return</span> <span class="s1">''</span></div>
 
 
 <div class="viewcode-block" id="PersistentScheduler"><a class="viewcode-back" href="../../reference/celery.beat.html#celery.apps.beat.PersistentScheduler">[docs]</a><span class="k">class</span> <span class="nc">PersistentScheduler</span><span class="p">(</span><span class="n">Scheduler</span><span class="p">):</span>
     <span class="n">persistence</span> <span class="o">=</span> <span class="n">shelve</span>
-    <span class="n">known_suffixes</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;.db&#39;</span><span class="p">,</span> <span class="s1">&#39;.dat&#39;</span><span class="p">,</span> <span class="s1">&#39;.bak&#39;</span><span class="p">,</span> <span class="s1">&#39;.dir&#39;</span><span class="p">)</span>
+    <span class="n">known_suffixes</span> <span class="o">=</span> <span class="p">(</span><span class="s1">''</span><span class="p">,</span> <span class="s1">'.db'</span><span class="p">,</span> <span class="s1">'.dat'</span><span class="p">,</span> <span class="s1">'.bak'</span><span class="p">,</span> <span class="s1">'.dir'</span><span class="p">)</span>
 
     <span class="n">_store</span> <span class="o">=</span> <span class="bp">None</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">schedule_filename</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;schedule_filename&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">schedule_filename</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'schedule_filename'</span><span class="p">)</span>
         <span class="n">Scheduler</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_remove_db</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -426,7 +404,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">persistence</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">schedule_filename</span><span class="p">,</span> <span class="n">writeback</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_destroy_open_corrupted_schedule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc</span><span class="p">):</span>
-        <span class="n">error</span><span class="p">(</span><span class="s1">&#39;Removing corrupted schedule file </span><span class="si">%r</span><span class="s1">: </span><span class="si">%r</span><span class="s1">&#39;</span><span class="p">,</span>
+        <span class="n">error</span><span class="p">(</span><span class="s1">'Removing corrupted schedule file </span><span class="si">%r</span><span class="s1">: </span><span class="si">%r</span><span class="s1">'</span><span class="p">,</span>
               <span class="bp">self</span><span class="o">.</span><span class="n">schedule_filename</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_remove_db</span><span class="p">()</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_open_schedule</span><span class="p">()</span>
@@ -445,51 +423,51 @@
 
         <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_store</span><span class="p">[</span><span class="s1">&#39;entries&#39;</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_store</span><span class="p">[</span><span class="s1">'entries'</span><span class="p">]</span>
             <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
                 <span class="c1"># new schedule db</span>
                 <span class="k">try</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">_store</span><span class="p">[</span><span class="s1">&#39;entries&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_store</span><span class="p">[</span><span class="s1">'entries'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
                 <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_store</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_destroy_open_corrupted_schedule</span><span class="p">(</span><span class="n">exc</span><span class="p">)</span>
                     <span class="k">continue</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">if</span> <span class="s1">&#39;__version__&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_store</span><span class="p">:</span>
-                    <span class="n">warning</span><span class="p">(</span><span class="s1">&#39;DB Reset: Account for new __version__ field&#39;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="s1">'__version__'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_store</span><span class="p">:</span>
+                    <span class="n">warning</span><span class="p">(</span><span class="s1">'DB Reset: Account for new __version__ field'</span><span class="p">)</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_store</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>   <span class="c1"># remove schedule at 2.2.2 upgrade.</span>
-                <span class="k">elif</span> <span class="s1">&#39;tz&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_store</span><span class="p">:</span>
-                    <span class="n">warning</span><span class="p">(</span><span class="s1">&#39;DB Reset: Account for new tz field&#39;</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="s1">'tz'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_store</span><span class="p">:</span>
+                    <span class="n">warning</span><span class="p">(</span><span class="s1">'DB Reset: Account for new tz field'</span><span class="p">)</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_store</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>   <span class="c1"># remove schedule at 3.0.8 upgrade</span>
-                <span class="k">elif</span> <span class="s1">&#39;utc_enabled&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_store</span><span class="p">:</span>
-                    <span class="n">warning</span><span class="p">(</span><span class="s1">&#39;DB Reset: Account for new utc_enabled field&#39;</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="s1">'utc_enabled'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_store</span><span class="p">:</span>
+                    <span class="n">warning</span><span class="p">(</span><span class="s1">'DB Reset: Account for new utc_enabled field'</span><span class="p">)</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_store</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>   <span class="c1"># remove schedule at 3.0.9 upgrade</span>
             <span class="k">break</span>
 
         <span class="n">tz</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">CELERY_TIMEZONE</span>
-        <span class="n">stored_tz</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_store</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;tz&#39;</span><span class="p">)</span>
+        <span class="n">stored_tz</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_store</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'tz'</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">stored_tz</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">stored_tz</span> <span class="o">!=</span> <span class="n">tz</span><span class="p">:</span>
-            <span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Reset: Timezone changed from </span><span class="si">%r</span><span class="s1"> to </span><span class="si">%r</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">stored_tz</span><span class="p">,</span> <span class="n">tz</span><span class="p">)</span>
+            <span class="n">warning</span><span class="p">(</span><span class="s1">'Reset: Timezone changed from </span><span class="si">%r</span><span class="s1"> to </span><span class="si">%r</span><span class="s1">'</span><span class="p">,</span> <span class="n">stored_tz</span><span class="p">,</span> <span class="n">tz</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_store</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>   <span class="c1"># Timezone changed, reset db!</span>
         <span class="n">utc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">CELERY_ENABLE_UTC</span>
-        <span class="n">stored_utc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_store</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;utc_enabled&#39;</span><span class="p">)</span>
+        <span class="n">stored_utc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_store</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'utc_enabled'</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">stored_utc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">stored_utc</span> <span class="o">!=</span> <span class="n">utc</span><span class="p">:</span>
-            <span class="n">choices</span> <span class="o">=</span> <span class="p">{</span><span class="bp">True</span><span class="p">:</span> <span class="s1">&#39;enabled&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">:</span> <span class="s1">&#39;disabled&#39;</span><span class="p">}</span>
-            <span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Reset: UTC changed from </span><span class="si">%s</span><span class="s1"> to </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="n">choices</span> <span class="o">=</span> <span class="p">{</span><span class="bp">True</span><span class="p">:</span> <span class="s1">'enabled'</span><span class="p">,</span> <span class="bp">False</span><span class="p">:</span> <span class="s1">'disabled'</span><span class="p">}</span>
+            <span class="n">warning</span><span class="p">(</span><span class="s1">'Reset: UTC changed from </span><span class="si">%s</span><span class="s1"> to </span><span class="si">%s</span><span class="s1">'</span><span class="p">,</span>
                     <span class="n">choices</span><span class="p">[</span><span class="n">stored_utc</span><span class="p">],</span> <span class="n">choices</span><span class="p">[</span><span class="n">utc</span><span class="p">])</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_store</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>   <span class="c1"># UTC setting changed, reset db!</span>
-        <span class="n">entries</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_store</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;entries&#39;</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="n">entries</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_store</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">'entries'</span><span class="p">,</span> <span class="p">{})</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">merge_inplace</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">CELERYBEAT_SCHEDULE</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">install_default_entries</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">schedule</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_store</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">__version__</span><span class="o">=</span><span class="n">__version__</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="n">tz</span><span class="p">,</span> <span class="n">utc_enabled</span><span class="o">=</span><span class="n">utc</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sync</span><span class="p">()</span>
-        <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Current schedule:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="n">debug</span><span class="p">(</span><span class="s1">'Current schedule:</span><span class="se">\n</span><span class="s1">'</span> <span class="o">+</span> <span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
             <span class="nb">repr</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span> <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">values</span><span class="p">(</span><span class="n">entries</span><span class="p">)))</span></div>
 
 <div class="viewcode-block" id="PersistentScheduler.get_schedule"><a class="viewcode-back" href="../../reference/celery.beat.html#celery.apps.beat.PersistentScheduler.get_schedule">[docs]</a>    <span class="k">def</span> <span class="nf">get_schedule</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_store</span><span class="p">[</span><span class="s1">&#39;entries&#39;</span><span class="p">]</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_store</span><span class="p">[</span><span class="s1">'entries'</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="PersistentScheduler.set_schedule"><a class="viewcode-back" href="../../reference/celery.beat.html#celery.apps.beat.PersistentScheduler.set_schedule">[docs]</a>    <span class="k">def</span> <span class="nf">set_schedule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">schedule</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_store</span><span class="p">[</span><span class="s1">&#39;entries&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">schedule</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_store</span><span class="p">[</span><span class="s1">'entries'</span><span class="p">]</span> <span class="o">=</span> <span class="n">schedule</span></div>
     <span class="n">schedule</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_schedule</span><span class="p">,</span> <span class="n">set_schedule</span><span class="p">)</span>
 
 <div class="viewcode-block" id="PersistentScheduler.sync"><a class="viewcode-back" href="../../reference/celery.beat.html#celery.apps.beat.PersistentScheduler.sync">[docs]</a>    <span class="k">def</span> <span class="nf">sync</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -502,7 +480,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s1">&#39;    . db -&gt; {self.schedule_filename}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="s1">'    . db -&gt; {self.schedule_filename}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Service"><a class="viewcode-back" href="../../reference/celery.beat.html#celery.apps.beat.Service">[docs]</a><span class="k">class</span> <span class="nc">Service</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -525,22 +503,22 @@
                                 <span class="bp">self</span><span class="o">.</span><span class="n">scheduler_cls</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Service.start"><a class="viewcode-back" href="../../reference/celery.beat.html#celery.apps.beat.Service.start">[docs]</a>    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">embedded_process</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">drift</span><span class="o">=-</span><span class="mf">0.010</span><span class="p">):</span>
-        <span class="n">info</span><span class="p">(</span><span class="s1">&#39;beat: Starting...&#39;</span><span class="p">)</span>
-        <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;beat: Ticking with max interval-&gt;</span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span>
+        <span class="n">info</span><span class="p">(</span><span class="s1">'beat: Starting...'</span><span class="p">)</span>
+        <span class="n">debug</span><span class="p">(</span><span class="s1">'beat: Ticking with max interval-&gt;</span><span class="si">%s</span><span class="s1">'</span><span class="p">,</span>
               <span class="n">humanize_seconds</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scheduler</span><span class="o">.</span><span class="n">max_interval</span><span class="p">))</span>
 
         <span class="n">signals</span><span class="o">.</span><span class="n">beat_init</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">sender</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">embedded_process</span><span class="p">:</span>
             <span class="n">signals</span><span class="o">.</span><span class="n">beat_embedded_init</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">sender</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
-            <span class="n">platforms</span><span class="o">.</span><span class="n">set_process_title</span><span class="p">(</span><span class="s1">&#39;celery beat&#39;</span><span class="p">)</span>
+            <span class="n">platforms</span><span class="o">.</span><span class="n">set_process_title</span><span class="p">(</span><span class="s1">'celery beat'</span><span class="p">)</span>
 
         <span class="k">try</span><span class="p">:</span>
             <span class="k">while</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_shutdown</span><span class="o">.</span><span class="n">is_set</span><span class="p">():</span>
                 <span class="n">interval</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scheduler</span><span class="o">.</span><span class="n">tick</span><span class="p">()</span>
                 <span class="n">interval</span> <span class="o">=</span> <span class="n">interval</span> <span class="o">+</span> <span class="n">drift</span> <span class="k">if</span> <span class="n">interval</span> <span class="k">else</span> <span class="n">interval</span>
                 <span class="k">if</span> <span class="n">interval</span> <span class="ow">and</span> <span class="n">interval</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                    <span class="n">debug</span><span class="p">(</span><span class="s1">&#39;beat: Waking up </span><span class="si">%s</span><span class="s1">.&#39;</span><span class="p">,</span>
-                          <span class="n">humanize_seconds</span><span class="p">(</span><span class="n">interval</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;in &#39;</span><span class="p">))</span>
+                    <span class="n">debug</span><span class="p">(</span><span class="s1">'beat: Waking up </span><span class="si">%s</span><span class="s1">.'</span><span class="p">,</span>
+                          <span class="n">humanize_seconds</span><span class="p">(</span><span class="n">interval</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s1">'in '</span><span class="p">))</span>
                     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">interval</span><span class="p">)</span>
                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">scheduler</span><span class="o">.</span><span class="n">should_sync</span><span class="p">():</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">scheduler</span><span class="o">.</span><span class="n">_do_sync</span><span class="p">()</span>
@@ -554,7 +532,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_is_stopped</span><span class="o">.</span><span class="n">set</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="Service.stop"><a class="viewcode-back" href="../../reference/celery.beat.html#celery.apps.beat.Service.stop">[docs]</a>    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
-        <span class="n">info</span><span class="p">(</span><span class="s1">&#39;beat: Shutting down...&#39;</span><span class="p">)</span>
+        <span class="n">info</span><span class="p">(</span><span class="s1">'beat: Shutting down...'</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_is_shutdown</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
         <span class="n">wait</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_stopped</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>  <span class="c1"># block until shutdown done.</span></div>
 
@@ -573,14 +551,14 @@
 
 
 <span class="k">class</span> <span class="nc">_Threaded</span><span class="p">(</span><span class="n">Thread</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Embedded task scheduler using threading.&quot;&quot;&quot;</span>
+    <span class="sd">"""Embedded task scheduler using threading."""</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">_Threaded</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="n">app</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">service</span> <span class="o">=</span> <span class="n">Service</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">daemon</span> <span class="o">=</span> <span class="bp">True</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Beat&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">'Beat'</span>
 
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">set_current</span><span class="p">()</span>
@@ -601,7 +579,7 @@
             <span class="nb">super</span><span class="p">(</span><span class="n">_Process</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="n">app</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">service</span> <span class="o">=</span> <span class="n">Service</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Beat&#39;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">'Beat'</span>
 
         <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
             <span class="n">reset_signals</span><span class="p">(</span><span class="n">full</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
@@ -618,38 +596,27 @@
 
 
 <div class="viewcode-block" id="EmbeddedService"><a class="viewcode-back" href="../../reference/celery.beat.html#celery.apps.beat.EmbeddedService">[docs]</a><span class="k">def</span> <span class="nf">EmbeddedService</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">max_interval</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return embedded clock service.</span>
+    <span class="sd">"""Return embedded clock service.</span>
 
 <span class="sd">    :keyword thread: Run threaded instead of as a separate process.</span>
 <span class="sd">        Uses :mod:`multiprocessing` by default, if available.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;thread&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span> <span class="ow">or</span> <span class="n">_Process</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">'thread'</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span> <span class="ow">or</span> <span class="n">_Process</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
         <span class="c1"># Need short max interval to be able to stop thread</span>
         <span class="c1"># in reasonable time.</span>
         <span class="k">return</span> <span class="n">_Threaded</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">max_interval</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">_Process</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">max_interval</span><span class="o">=</span><span class="n">max_interval</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 </pre></div>
+</div>
+</div>
+</div>
 
-          </div>
-        </div>
-      </div>
+<div class="clearer"></div>
+</div>
+
+<div class="footer" role="contentinfo">
+        © <a href="../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Celery 3.1.23 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &copy; <a href="../../copyright.html">Copyright</a> 2009-2015, Ask Solem &amp; Contributors.
-    </div>
-  </body>
+</body>
 </html>
