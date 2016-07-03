@@ -4,11 +4,6 @@ Documentation for the [Celery](http://www.celeryproject.org/) Distributed Task Q
 
 ## How to generate the docset
 
-Install [doc2dash](https://github.com/hynek/doc2dash):
-```bash
-$ pip install doc2dash
-```
-
 Move to a directory of choice and execute the following commands:
 ```bash
 $ git clone https://github.com/cwill747/celery-docset.git
